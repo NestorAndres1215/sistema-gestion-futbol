@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="D:/Proyectos/dev-projects/portafolio/Sistema de gestión de fútbol/backend/Api/Api.csproj" />
+  <Project Path="D:/Proyectos/dev-projects/portafolio/Sistema de gestión de fútbol/backend/Application/Application.csproj" />
+  <Project Path="D:/Proyectos/dev-projects/portafolio/Sistema de gestión de fútbol/backend/Domain/Domain.csproj" />
+  <Project Path="D:/Proyectos/dev-projects/portafolio/Sistema de gestión de fútbol/backend/Infrastructure/Infrastructure.csproj" />
+</Solution>
