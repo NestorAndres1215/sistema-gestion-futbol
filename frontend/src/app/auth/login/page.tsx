@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLogin } from "@/hooks/useLogin";
 import { useAuthRedirect } from "@/hooks/useAuthRedirect";
+import "@/styles/login.css";
+
 
 export default function LoginPage() {
     const router = useRouter();
@@ -20,14 +22,14 @@ export default function LoginPage() {
 
         try {
             const data = await submitLogin(email, password);
-            console.log(data)
+
             const role = data.rol;
             const user = data.username;
-            console.log(user)
+
             document.cookie = `token=${data.token}; path=/`;
             document.cookie = `role=${role}; path=/`;
             document.cookie = `user=${user}; path=/`;
-            console.log(role)
+
             if (role === "admin") {
                 console.log("ingreso")
                 router.replace("/admin/dashboard");
@@ -39,30 +41,49 @@ export default function LoginPage() {
         }
     };
 
+
     return (
-        <div className="container mt-5" style={{ maxWidth: "400px" }}>
-            <h2>Login</h2>
+        <div className="page">
+            <div className="logoRow">
+                <div className="logoMark">
+                    <i className="fa-solid fa-check"></i>
+                </div>
+                <div>
+                    <div className="logoName">Football <br />Manager</div>
+                </div>
+            </div>
+            <div className="card">
+                <div className="cardTittle">Bienvenidos</div>
+                <div className="cardSub">Ingresa tus credenciales para continuar</div>
 
-            <form onSubmit={handleSubmit}>
-                <input
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="email"
-                    className="form-control mb-2"
-                />
+                <form onSubmit={handleSubmit}>
+                    <div className="field">
+                        <input
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="email"
+                            className="form-control mb-2"
+                        />
+                    </div>
+                    <div className="field">
 
-                <input
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="password"
-                    type="password"
-                    className="form-control mb-3"
-                />
+                        <input
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="password"
+                            type="password"
+                            className="form-control mb-3"
+                        />
+                    </div>
 
-                <button disabled={loading} className="btn btn-primary w-100">
-                    {loading ? "Cargando..." : "Login"}
-                </button>
-            </form>
+
+
+                    <button disabled={loading} className="btn btn-primary w-100">
+                        {loading ? "Cargando..." : "Login"}
+                    </button>
+                </form>
+            </div>
         </div>
+
     );
 }

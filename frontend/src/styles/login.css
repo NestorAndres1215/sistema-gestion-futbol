@@ -1,0 +1,233 @@
+   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+   .page {
+     min-height: 100vh;
+     background: #0d0f14;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     padding: 24px;
+     font-family: 'DM Sans', sans-serif;
+   }
+
+   .page {
+     min-height: 100vh;
+     background: #0d0f14;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     padding: 24px;
+     font-family: 'DM Sans', sans-serif;
+   }
+
+   .logoRow {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     margin-bottom: 32px;
+   }
+
+   .logoMark {
+     width: 36px;
+     height: 36px;
+     background: #6ee7b7;
+     border-radius: 10px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-shrink: 0;
+   }
+
+   .logoMark svg {
+     width: 18px;
+     height: 18px;
+   }
+
+   .logoName {
+     font-family: 'Syne', sans-serif;
+     font-weight: 800;
+     font-size: 20px;
+     color: #f0f4f8;
+     letter-spacing: -0.03em;
+     line-height: 1;
+   }
+
+   .logoVersion {
+     font-family: 'DM Mono', monospace;
+     font-size: 10px;
+     color: #4a5568;
+     letter-spacing: 0.08em;
+     text-transform: uppercase;
+     margin-top: 3px;
+   }
+
+   /* ── Card ───────────────────────────────────── */
+   .card {
+     width: 100%;
+     max-width: 400px;
+     background: #13161e;
+     border: 1px solid #ffffff0f;
+     border-radius: 16px;
+     padding: 32px;
+   }
+
+   .cardTitle {
+     font-family: 'Syne', sans-serif;
+     font-weight: 800;
+     font-size: 22px;
+     color: #f0f4f8;
+     letter-spacing: -0.03em;
+     margin: 0 0 4px;
+   }
+
+   .cardSub {
+     font-family: 'DM Mono', monospace;
+     font-size: 12px;
+     color: #4a5568;
+     margin: 0 0 28px;
+   }
+
+   /* ── Campos ─────────────────────────────────── */
+   .field {
+     margin-bottom: 16px;
+   }
+
+   .labelRow {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     margin-bottom: 8px;
+   }
+
+   .label {
+     display: block;
+     font-family: 'DM Mono', monospace;
+     font-size: 11px;
+     text-transform: uppercase;
+     letter-spacing: 0.1em;
+     color: #8892a4;
+     font-weight: 500;
+     margin-bottom: 8px;
+   }
+
+   /* Cuando está en labelRow el margin lo maneja el padre */
+   .labelRow .label {
+     margin-bottom: 0;
+   }
+
+   .input {
+     width: 100%;
+     background: #1a1e28;
+     border: 1px solid #ffffff10;
+     border-radius: 9px;
+     padding: 11px 14px;
+     color: #f0f4f8;
+     font-size: 14px;
+     font-family: 'DM Sans', sans-serif;
+     outline: none;
+     transition: border-color 0.15s;
+   }
+
+   .input::placeholder {
+     color: #4a5568;
+   }
+
+   .input:focus {
+     border-color: #6ee7b760;
+   }
+
+   .forgot {
+     font-family: 'DM Mono', monospace;
+     font-size: 11px;
+     color: #6ee7b7;
+     text-decoration: none;
+     opacity: 0.7;
+     transition: opacity 0.15s;
+     white-space: nowrap;
+   }
+
+   .forgot:hover {
+     opacity: 1;
+   }
+
+   /* ── Error ──────────────────────────────────── */
+   .errorBox {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     background: #f8717115;
+     border: 1px solid #f8717130;
+     border-radius: 8px;
+     padding: 10px 14px;
+     color: #f87171;
+     font-size: 13px;
+     margin-bottom: 16px;
+   }
+
+   .errorBox svg {
+     flex-shrink: 0;
+   }
+
+   /* ── Botón ──────────────────────────────────── */
+   .btnLogin {
+     width: 100%;
+     margin-top: 8px;
+     background: #6ee7b7;
+     color: #0d0f14;
+     border: none;
+     border-radius: 9px;
+     padding: 12px;
+     font-family: 'Syne', sans-serif;
+     font-weight: 700;
+     font-size: 14px;
+     letter-spacing: -0.01em;
+     cursor: pointer;
+     transition: background 0.15s, transform 0.1s;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 8px;
+   }
+
+   .btnLogin:hover:not(:disabled) {
+     background: #34d399;
+   }
+
+   .btnLogin:active:not(:disabled) {
+     transform: scale(0.99);
+   }
+
+   .btnLogin:disabled {
+     opacity: 0.6;
+     cursor: not-allowed;
+   }
+
+   /* ── Spinner ────────────────────────────────── */
+   .spinner {
+     width: 14px;
+     height: 14px;
+     border: 2px solid #0d0f1440;
+     border-top-color: #0d0f14;
+     border-radius: 50%;
+     animation: spin 0.6s linear infinite;
+     flex-shrink: 0;
+   }
+
+   @keyframes spin {
+     to {
+       transform: rotate(360deg);
+     }
+   }
+
+   /* ── Responsive ─────────────────────────────── */
+   @media (max-width: 480px) {
+     .card {
+       padding: 24px 20px;
+     }
+
+     .cardTitle {
+       font-size: 20px;
+     }
+   }

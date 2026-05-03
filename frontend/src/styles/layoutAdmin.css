@@ -8,10 +8,6 @@
     --accent2: #34d399;
     --accent-dim: #6ee7b715;
     --red: #f87171;
-    --red-dim: #f8717115;
-    --amber: #fbbf24;
-    --blue: #60a5fa;
-    --blue-dim: #60a5fa15;
     --green-dim: #6ee7b720;
     --text: #f0f4f8;
     --text2: #8892a4;
@@ -20,7 +16,7 @@
     --font-body: 'DM Sans', sans-serif;
     --font-mono: 'DM Mono', monospace;
     --sidebar-w: 220px;
-    --topbar-h: 60px;
+    --topbar-h: 77px;
     --radius: 12px;
     --trans: 0.15s ease;
     display: grid;
@@ -34,7 +30,7 @@
 }
 
 .sidebar {
-    background: var(--surface);
+    background: #13161e;
     border-right: 1px solid var(--border);
     display: flex;
     flex-direction: column;
@@ -61,7 +57,8 @@
 .logoMark {
     width: 30px;
     height: 30px;
-    background: var(--accent);
+    background: var(--accent2);
+    color: #13161e;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -69,10 +66,6 @@
     flex-shrink: 0;
 }
 
-.logoMark svg {
-    width: 16px;
-    height: 16px;
-}
 
 .logoText {
     font-family: var(--font-head);
@@ -93,7 +86,7 @@
 }
 
 .nav {
-    padding: 16px 0;
+    padding: 20px 0;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -176,58 +169,6 @@
     line-height: 1.4;
 }
 
-.badgeRed {
-    background: var(--red-dim);
-    color: var(--red);
-}
-
-.badgeGreen {
-    background: var(--green-dim);
-    color: var(--accent);
-}
-
-.badgeBlue {
-    background: var(--blue-dim);
-    color: var(--blue);
-}
-
-.sidebarFooter {
-    padding: 16px 20px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-}
-
-.avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, var(--accent), #3b82f6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-head);
-    font-weight: 700;
-    font-size: 12px;
-    color: #0d0f14;
-    flex-shrink: 0;
-    letter-spacing: -0.01em;
-}
-
-.userName {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text);
-}
-
-.userRole {
-    font-size: 11px;
-    color: var(--text3);
-    font-family: var(--font-mono);
-}
-
 .main {
     display: flex;
     flex-direction: column;
@@ -237,7 +178,7 @@
 
 .topbar {
     height: var(--topbar-h);
-    background: var(--surface);
+    background: #13161e;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
@@ -341,16 +282,7 @@
     height: 15px;
 }
 
-.notifDot {
-    position: absolute;
-    top: 7px;
-    right: 7px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--red);
-    border: 1.5px solid var(--surface);
-}
+
 
 .content {
     padding: 28px;
