@@ -15,13 +15,13 @@ export default function Sidebar() {
 
       <ul style={{ listStyle: "none", padding: 0 }}>
         <li style={{ marginBottom: "10px" }}>
-          <Link href="/dashboard" style={{ color: "white", textDecoration: "none" }}>
+          <Link href="/admin/dashboard" style={{ color: "white", textDecoration: "none" }}>
             Dashboard
           </Link>
         </li>
 
         <li style={{ marginBottom: "10px" }}>
-          <Link href="/usuario" style={{ color: "white", textDecoration: "none" }}>
+          <Link href="/admin/usuario" style={{ color: "white", textDecoration: "none" }}>
             Usuarios
           </Link>
         </li>

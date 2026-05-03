@@ -1,41 +1,43 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { login } from "@/services/auth.service";
+import { useLogin } from "@/hooks/useLogin";
+import { useAuthRedirect } from "@/hooks/useAuthRedirect";
 
 export default function LoginPage() {
     const router = useRouter();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [checking, setChecking] = useState(true);
 
-    // 🔐 evitar entrar si ya está logueado (middleware también lo refuerza)
-    useEffect(() => {
-        const hasCookie = document.cookie.includes("token=");
+    const { submitLogin, loading } = useLogin();
 
-        if (hasCookie) {
-            router.replace("/dashboard");
-        } else {
-            setChecking(false);
-        }
-    }, []);
+    useAuthRedirect();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         try {
-            const data = await login(email, password);
+            const data = await submitLogin(email, password);
+            console.log(data)
+            const role = data.rol;
+            const user =data.user;
+
             document.cookie = `token=${data.token}; path=/`;
-
-            router.replace("/dashboard");
-
-        } catch (error) {
+            document.cookie = `role=${role}; path=/`;
+            document.cookie = `role=${user}; path=/`;
+            console.log(role)
+            if (role === "admin") {
+                console.log("ingreso")
+                router.replace("/admin/dashboard");
+            } else {
+                router.replace("/user/dashboard");
+            }
+        } catch {
             alert("Credenciales incorrectas ❌");
         }
     };
-
 
     return (
         <div className="container mt-5" style={{ maxWidth: "400px" }}>
@@ -57,8 +59,8 @@ export default function LoginPage() {
                     className="form-control mb-3"
                 />
 
-                <button className="btn btn-primary w-100">
-                    Login
+                <button disabled={loading} className="btn btn-primary w-100">
+                    {loading ? "Cargando..." : "Login"}
                 </button>
             </form>
         </div>
