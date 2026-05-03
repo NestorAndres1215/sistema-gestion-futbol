@@ -1,8 +1,8 @@
 ﻿namespace Domain.Enums;
 
-public enum Estado
+public static class Estado
 {
-    Activo ,
-    Inactivo ,
-    Bloqueado 
+    public const string Activo = "Activo";
+    public const string Inactivo = "Inactivo";
+    public const string Bloqueado = "Bloqueado";
 }

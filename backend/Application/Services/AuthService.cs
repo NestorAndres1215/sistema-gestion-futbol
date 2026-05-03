@@ -61,7 +61,8 @@ public class AuthService : IAuthService
         return new AuthResponseDto
         {
             Username = user.Username,
-            Token = _jwt.GenerateToken(user.Id, user.Email, user.Rol.Nombre)
+            Token = _jwt.GenerateToken(user.Id, user.Email, user.Rol.Nombre),
+            Rol= user.Rol.Nombre
         };
     }
 }

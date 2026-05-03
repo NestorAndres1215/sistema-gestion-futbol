@@ -25,10 +25,19 @@ public class UsuarioService : IUsuarioService
     {
         return await _repo.GetByIdAsync(id);
     }
-
+    /*
     public async Task<List<Usuario>> GetAllAsync()
     {
         return await _repo.GetAllAsync();
+    }*/
+    public async Task<PagedResult<Usuario>> GetAllAsync(
+       int page,
+       int pageSize,
+       string? search
+   )
+    {
+   
+        return await _repo.GetAllAsync(page, pageSize, search);
     }
 
     public async Task<Usuario> GetByEmailAsync(string email)
@@ -47,7 +56,7 @@ public class UsuarioService : IUsuarioService
         await _repo.UpdateAsync(entity);
     }
 
-    public async Task UpdateEstadoAsync(int id, Estado estado)
+    public async Task UpdateEstadoAsync(int id, string estado)
     {
         await _repo.UpdateEstadoAsync(id, estado);
     }

@@ -1,5 +1,6 @@
 ﻿using Application.Dto;
 using Application.Interfaces.Services;
+using Application.Services;
 using Domain.Entities;
 using Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
@@ -19,12 +20,21 @@ public class UsuarioController : ControllerBase
         _service = service;
     }
 
+    [HttpGet("hola")]
+    public IActionResult Hola()
+    {
+        return Ok("Hola mundo");
+    }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10,
+        [FromQuery] string? search = null
+    )
     {
-        var users = await _service.GetAllAsync();
-        return Ok(users);
+        var result = await _service.GetAllAsync(page, pageSize, search);
+        return Ok(result);
     }
 
     [HttpGet("{id}")]
@@ -59,7 +69,7 @@ public class UsuarioController : ControllerBase
 
 
     [HttpPatch("estado/{id}")]
-    public async Task<IActionResult> UpdateEstado(int id, [FromQuery] Estado estado)
+    public async Task<IActionResult> UpdateEstado(int id, [FromQuery] string estado)
     {
         await _service.UpdateEstadoAsync(id, estado);
         return Ok("Estado actualizado");
