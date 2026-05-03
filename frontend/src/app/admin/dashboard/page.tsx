@@ -3,7 +3,8 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { authGuard } from "@/utils/guard";
-import MainLayout from "../../layout/MainLayout";
+
+import AdminLayout from "../layout/AdminLayout";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -15,8 +16,8 @@ export default function Dashboard() {
   }, []);
 
 return (
-    <MainLayout>
+    <AdminLayout>
       <h1>Dashboard</h1>
-    </MainLayout>
+    </AdminLayout>
   );
 }

@@ -1,0 +1,354 @@
+/* ═══════════════════════════════════════════════
+   AdminLayout.module.css — Nexus Admin
+   Dark theme · Syne + DM Sans + DM Mono
+   Next.js CSS Modules
+═══════════════════════════════════════════════ */
+
+/* ── Variables ──────────────────────────────── */
+.shell {
+  --bg: #0d0f14;
+  --surface: #13161e;
+  --surface2: #1a1e28;
+  --border: #ffffff0f;
+  --border2: #ffffff16;
+  --accent: #6ee7b7;
+  --accent2: #34d399;
+  --accent-dim: #6ee7b715;
+  --red: #f87171;
+  --red-dim: #f8717115;
+  --amber: #fbbf24;
+  --blue: #60a5fa;
+  --blue-dim: #60a5fa15;
+  --green-dim: #6ee7b720;
+  --text: #f0f4f8;
+  --text2: #8892a4;
+  --text3: #4a5568;
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --sidebar-w: 220px;
+  --topbar-h: 60px;
+  --radius: 12px;
+  --trans: 0.15s ease;
+
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ── Sidebar ────────────────────────────────── */
+.sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.sidebar::-webkit-scrollbar { display: none; }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.logoMark {
+  width: 30px;
+  height: 30px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.logoMark svg {
+  width: 16px;
+  height: 16px;
+}
+
+.logoText {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  line-height: 1;
+}
+
+.logoSub {
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 2px;
+  font-family: var(--font-mono);
+}
+
+.nav {
+  padding: 16px 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.navSection {
+  padding: 12px 20px 4px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 500;
+  font-family: var(--font-mono);
+}
+.navSection:first-child { padding-top: 6px; }
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  position: relative;
+  transition: color var(--trans), background var(--trans);
+}
+.navItem:hover {
+  color: var(--text);
+  background: var(--border);
+}
+
+.navItemActive {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+.navItemActive::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--accent);
+  border-radius: 0 2px 2px 0;
+}
+
+.navIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navIcon svg {
+  width: 16px;
+  height: 16px;
+}
+.navItemActive .navIcon {
+  opacity: 1;
+}
+
+.navBadge {
+  margin-left: auto;
+  font-size: 10px;
+  font-family: var(--font-mono);
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.badgeRed   { background: var(--red-dim);   color: var(--red); }
+.badgeGreen { background: var(--green-dim);  color: var(--accent); }
+.badgeBlue  { background: var(--blue-dim);   color: var(--blue); }
+
+.sidebarFooter {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), #3b82f6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 12px;
+  color: #0d0f14;
+  flex-shrink: 0;
+  letter-spacing: -0.01em;
+}
+
+.userName {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.userRole {
+  font-size: 11px;
+  color: var(--text3);
+  font-family: var(--font-mono);
+}
+
+/* ── Main ───────────────────────────────────── */
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Topbar ─────────────────────────────────── */
+.topbar {
+  height: var(--topbar-h);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  flex-shrink: 0;
+}
+
+.pageTitle {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  line-height: 1;
+}
+
+.pageSub {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 3px;
+  font-family: var(--font-mono);
+}
+
+.topbarRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 0 12px;
+  height: 34px;
+  width: 200px;
+  transition: border-color var(--trans);
+}
+.searchBox:focus-within {
+  border-color: var(--accent);
+}
+
+.searchIcon {
+  display: flex;
+  align-items: center;
+  opacity: 0.4;
+  flex-shrink: 0;
+}
+.searchIcon svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--text2);
+}
+
+.searchInput {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: 13px;
+  font-family: var(--font-body);
+  width: 100%;
+}
+.searchInput::placeholder {
+  color: var(--text3);
+}
+
+.iconBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text2);
+  transition: background var(--trans), color var(--trans);
+  position: relative;
+}
+.iconBtn:hover {
+  background: var(--border2);
+  color: var(--text);
+}
+.iconBtn svg {
+  width: 15px;
+  height: 15px;
+}
+
+.notifBtn { /* Extends iconBtn */ }
+
+.notifDot {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 1.5px solid var(--surface);
+}
+
+/* ── Content ────────────────────────────────── */
+.content {
+  padding: 28px;
+  flex: 1;
+}
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 900px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    display: none;
+  }
+}

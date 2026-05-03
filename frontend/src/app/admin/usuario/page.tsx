@@ -1,9 +1,10 @@
-import MainLayout from "@/app/layout/MainLayout";
+
+import AdminLayout from "../layout/AdminLayout";
 
 export default function UsersPage() {
   return (
-    <MainLayout>
+    <AdminLayout>
       <h1>Usuarios</h1>
-    </MainLayout>
+    </AdminLayout>
   );
 }
