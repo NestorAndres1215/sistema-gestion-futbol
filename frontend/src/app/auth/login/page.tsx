@@ -22,11 +22,11 @@ export default function LoginPage() {
             const data = await submitLogin(email, password);
             console.log(data)
             const role = data.rol;
-            const user =data.user;
-
+            const user = data.username;
+            console.log(user)
             document.cookie = `token=${data.token}; path=/`;
             document.cookie = `role=${role}; path=/`;
-            document.cookie = `role=${user}; path=/`;
+            document.cookie = `user=${user}; path=/`;
             console.log(role)
             if (role === "admin") {
                 console.log("ingreso")

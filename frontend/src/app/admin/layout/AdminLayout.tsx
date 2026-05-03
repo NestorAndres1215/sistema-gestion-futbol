@@ -20,20 +20,20 @@ const Icon = {
   users: (
     <i className="fa-solid fa-users"></i>
   ),
-  folder: (
-    <i className="fa-solid fa-folder"></i>
+  clubs: (
+    <i className="fa-solid fa-shield"></i>
   ),
-  invoice: (
-    <i className="fa-solid fa-file-invoice"></i>
+  selections: (
+    <i className="fa-solid fa-flag"></i>
   ),
   settings: (
     <i className="fa-solid fa-gear"></i>
   ),
-  info: (
-    <i className="fa-solid fa-circle-info"></i>
+  tournament: (
+    <i className="fa-solid fa-trophy"></i>
   ),
-  bell: (
-    <i className="fa-regular fa-bell"></i>
+  logout: (
+    <i className="fa-solid fa-right-from-bracket"></i>
   ),
   user: (
     <i className="fa-regular fa-user"></i>
@@ -44,51 +44,72 @@ const Icon = {
   logo: (
     <i className="fa-solid fa-futbol"></i>
   ),
+  referees: (
+    <i className="fa-solid fa-gavel"></i>
+  ),
+  coaches: (
+    <i className="fa-solid fa-chalkboard-user"></i>
+  ),
+  players: (
+    <i className="fa-solid fa-people-group"></i>
+  ),
+  stadiums: (
+    <i className="fa-solid fa-location-dot"></i>
+  ),
 };
 
-// ─── Navegación ───────────────────────────────────────────────────────────────
 
 const NAV_SECTIONS: NavSection[] = [
   {
     title: "Principal",
     items: [
       { id: "dashboard", label: "Dashboard", href: "/admin/dashboard", icon: Icon.grid },
-      { id: "analytics", label: "Analítica", href: "/admin/usuario", icon: Icon.chart },
-      { id: "reports", label: "Reportes", href: "/reports", icon: Icon.clock },
     ],
   },
+
   {
-    title: "Gestión",
+    title: "Personas",
     items: [
-      { id: "users", label: "Usuarios", href: "/users", icon: Icon.users},
-      { id: "projects", label: "Proyectos", href: "/projects", icon: Icon.folder },
-      { id: "invoices", label: "Facturas", href: "/invoices", icon: Icon.invoice },
+      { id: "users", label: "Usuarios", href: "/admin/usuario", icon: Icon.users },
+      { id: "players", label: "Jugadores", href: "/admin/jugadores", icon: Icon.players },
+      { id: "coaches", label: "Entrenadores", href: "/admin/entrenadores", icon: Icon.coaches },
+      { id: "referees", label: "Árbitros", href: "/admin/arbitros", icon: Icon.referees },
     ],
   },
+
+  {
+    title: "Competición",
+    items: [
+      { id: "tournament", label: "Torneos", href: "/admin/torneos", icon: Icon.tournament },
+      { id: "clubs", label: "Clubes", href: "/admin/clubes", icon: Icon.clubs },
+      { id: "selections", label: "Selecciones", href: "/admin/selecciones", icon: Icon.selections },
+    ],
+  },
+
+  {
+    title: "Infraestructura",
+    items: [
+      { id: "stadiums", label: "Estadios", href: "/admin/estadios", icon: Icon.stadiums },
+    ],
+  },
+
   {
     title: "Sistema",
     items: [
       { id: "settings", label: "Configuración", href: "/settings", icon: Icon.settings },
-      { id: "support", label: "Soporte", href: "/support", icon: Icon.info },
     ],
   },
 ];
 
-const DEFAULT_USER: User = {
-  name: "Ana Ríos",
-  initials: "AR",
-  role: "Super Admin",
-};
 
-
-function Sidebar({ user, pathname }: { user: User; pathname: string }) {
+function Sidebar({ pathname }: { pathname: string }) {
   return (
     <aside className={styles.sidebar}>
       <div className={styles.brand}>
         <div className={styles.logoMark}>{Icon.logo}</div>
         <div>
-          <div className={styles.logoText}>Nexus</div>
-          <div className={styles.logoSub}>Admin v2.0</div>
+          <div className={styles.logoText}>Football Manager</div>
+
         </div>
       </div>
 
@@ -121,13 +142,7 @@ function Sidebar({ user, pathname }: { user: User; pathname: string }) {
         ))}
       </nav>
 
-      <div className={styles.sidebarFooter}>
-        <div className={styles.avatar}>{user.initials}</div>
-        <div>
-          <div className={styles.userName}>{user.name}</div>
-          <div className={styles.userRole}>{user.role}</div>
-        </div>
-      </div>
+
     </aside>
   );
 }
@@ -145,12 +160,8 @@ function Topbar({ title, subtitle }: { title: string; subtitle: string }) {
           <span className={styles.searchIcon}>{Icon.search}</span>
           <input type="text" placeholder="Buscar..." className={styles.searchInput} />
         </div>
-        <button className={`${styles.iconBtn} ${styles.notifBtn}`} aria-label="Notificaciones">
-          {Icon.bell}
-          <span className={styles.notifDot} />
-        </button>
-        <button className={styles.iconBtn} aria-label="Perfil">
-          {Icon.user}
+        <button className={`${styles.iconBtn} ${styles.notifBtn}`} aria-label="Cerrar Sesion">
+          {Icon.logout}
         </button>
       </div>
     </header>
@@ -160,7 +171,6 @@ function Topbar({ title, subtitle }: { title: string; subtitle: string }) {
 
 export default function AdminLayout({
   children,
-  user = DEFAULT_USER,
   pageTitle = "Dashboard",
   pageSubtitle = "Bienvenido de nuevo",
 }: Props) {
@@ -168,7 +178,7 @@ export default function AdminLayout({
 
   return (
     <div className={styles.shell}>
-      <Sidebar user={user} pathname={pathname} />
+      <Sidebar pathname={pathname} />
       <div className={styles.main}>
         <Topbar title={pageTitle} subtitle={pageSubtitle} />
         <main className={styles.content}>{children}</main>
