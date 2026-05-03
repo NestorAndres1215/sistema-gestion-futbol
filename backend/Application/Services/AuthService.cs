@@ -50,13 +50,13 @@ public class AuthService : IAuthService
         var user = await _repo.GetByEmailAsync(dto.Email);
 
         if (user == null)
-            throw new Exception("Usuario no existe");
+            throw new NotFoundException("Usuario no existe");
 
         if (!_hasher.Verify(dto.Password, user.Password))
-            throw new Exception("Password incorrecta");
+            throw new BadRequestException("Password incorrecta");
 
         if (user.Estado != Estado.Activo)
-            throw new Exception("Usuario bloqueado o Inactivo");
+            throw new UnauthorizedException("Usuario bloqueado o Inactivo");
 
         return new AuthResponseDto
         {

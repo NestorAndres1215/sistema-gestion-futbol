@@ -6,15 +6,19 @@ export const login = async (email: string, password: string) => {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-            email,
-            password
-        })
+        body: JSON.stringify({ email, password })
     });
 
+    const data = await res.json().catch(() => null);
+
+
     if (!res.ok) {
-        throw new Error("Credenciales incorrectas");
+        const message =
+            data?.message || data?.Message || "Error al iniciar sesión";
+
+        alert(message); // 👈 aquí el alert
+        throw new Error(message);
     }
 
-    return await res.json();
+    return data;
 };

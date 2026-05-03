@@ -188,11 +188,7 @@ body:has(.lp-page) {
 }
 
 /* ── ¿Olvidaste contraseña? ───────────────────────── */
-.lp-forgot-row {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 8px;
-}
+
 
 .lp-forgot {
   font-family: 'DM Mono', monospace;

@@ -20,25 +20,23 @@ export default function LoginPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        try {
-            const data = await submitLogin(email, password);
 
-            const role = data.rol;
-            const user = data.username;
+        const data = await submitLogin(email, password);
+console.log(data)
+        const role = data.rol;
+        const user = data.username;
 
-            document.cookie = `token=${data.token}; path=/`;
-            document.cookie = `role=${role}; path=/`;
-            document.cookie = `user=${user}; path=/`;
+        document.cookie = `token=${data.token}; path=/`;
+        document.cookie = `role=${role}; path=/`;
+        document.cookie = `user=${user}; path=/`;
 
-            if (role === "admin") {
-                console.log("ingreso")
-                router.replace("/admin/dashboard");
-            } else {
-                router.replace("/user/dashboard");
-            }
-        } catch {
-            alert("Credenciales incorrectas ❌");
+        if (role === "admin") {
+            console.log("ingreso")
+            router.replace("/admin/dashboard");
+        } else {
+            router.replace("/user/dashboard");
         }
+
     };
 
 
@@ -104,7 +102,7 @@ export default function LoginPage() {
                                     <i className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"} />
                                 </button>
                             </div>
-                            <div className="lp-forgot-row">
+                            <div className="d-flex justify-content-end mt-3">
                                 <a href="/forgot-password" className="lp-forgot">
                                     ¿Olvidaste tu contraseña?
                                 </a>

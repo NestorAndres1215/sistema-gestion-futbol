@@ -10,6 +10,7 @@ export const useLogin = () => {
         setLoading(true);
 
         try {
+            console.log(email , password)
             const data = await login(email, password);
 
             document.cookie = `token=${data.token}; path=/`;
