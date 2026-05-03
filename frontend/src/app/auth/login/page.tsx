@@ -12,7 +12,7 @@ export default function LoginPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const [showPassword, setShowPassword] = useState(false);
     const { submitLogin, loading } = useLogin();
 
     useAuthRedirect();
@@ -43,47 +43,85 @@ export default function LoginPage() {
 
 
     return (
-        <div className="page">
-            <div className="logoRow">
-                <div className="logoMark">
-                    <i className="fa-solid fa-check"></i>
-                </div>
-                <div>
-                    <div className="logoName">Football <br />Manager</div>
-                </div>
+        <>
+            <div className="lp-bg-blobs" aria-hidden="true">
+                <div className="lp-blob lp-blob-1" />
+                <div className="lp-blob lp-blob-2" />
             </div>
-            <div className="card">
-                <div className="cardTittle">Bienvenidos</div>
-                <div className="cardSub">Ingresa tus credenciales para continuar</div>
-
-                <form onSubmit={handleSubmit}>
-                    <div className="field">
-                        <input
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="email"
-                            className="form-control mb-2"
-                        />
+            <div className="lp-page">
+                <div className="d-flex align-items-center gap-3 mb-4 ">
+                    <div className="lp-logo-mark">
+                        <i className="fa-solid fa-futbol"></i>
                     </div>
-                    <div className="field">
-
-                        <input
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="password"
-                            type="password"
-                            className="form-control mb-3"
-                        />
+                    <div>
+                        <div className="lp-logo-name">Football <br />Manager</div>
                     </div>
+                </div>
+                <div className="lp-card">
+                    <div className="mb-4">
+                        <div className="lp-card-title">Bienvenidos</div>
+                        <div className="lp-card-sub">Ingresa tus credenciales para continuar</div>
+                    </div>
+                    <form onSubmit={handleSubmit}>
 
 
+                        <div className="mb-3">
 
-                    <button disabled={loading} className="btn btn-primary w-100">
-                        {loading ? "Cargando..." : "Login"}
-                    </button>
-                </form>
-            </div>
-        </div>
+                            <label htmlFor="lp-email" className="lp-label">
+                                Correo electrónico
+                            </label>
 
+                            <div className="lp-input-wrap">
+                                <input
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="Ingrese correo"
+                                    className="lp-input"
+                                />
+                            </div>
+
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="lp-password" className="lp-label">
+                                Contraseña
+                            </label>
+
+                            <div className="lp-input-wrap">
+
+                                <input
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder="Ingrese contraseña"
+                                    type={showPassword ? "text" : "password"}
+                                    className="lp-input"
+                                />
+
+                                <button
+                                    type="button"
+                                    className="lp-toggle-btn"
+                                    onClick={() => setShowPassword((prev) => !prev)}
+                                >
+                                    <i className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"} />
+                                </button>
+                            </div>
+                            <div className="lp-forgot-row">
+                                <a href="/forgot-password" className="lp-forgot">
+                                    ¿Olvidaste tu contraseña?
+                                </a>
+                            </div>
+                        </div>
+
+                        <button type="submit" disabled={loading} className="lp-btn-submit">
+                            {loading
+                                ? <i className="fa-solid fa-circle-notch lp-spin" />
+                                : <i className="fa-solid fa-right-to-bracket" />
+                            }
+                            {loading ? "Verificando..." : "Iniciar sesión"}
+                        </button>
+
+                    </form>
+                </div >
+            </div >
+        </>
     );
 }

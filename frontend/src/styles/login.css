@@ -1,233 +1,274 @@
-   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap');
 
-   .page {
-     min-height: 100vh;
-     background: #0d0f14;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     padding: 24px;
-     font-family: 'DM Sans', sans-serif;
-   }
 
-   .page {
-     min-height: 100vh;
-     background: #0d0f14;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: center;
-     padding: 24px;
-     font-family: 'DM Sans', sans-serif;
-   }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-   .logoRow {
-     display: flex;
-     align-items: center;
-     gap: 10px;
-     margin-bottom: 32px;
-   }
+body:has(.lp-page) {
+  background: #0a0d13;
+  margin: 0;
+}
 
-   .logoMark {
-     width: 36px;
-     height: 36px;
-     background: #6ee7b7;
-     border-radius: 10px;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     flex-shrink: 0;
-   }
+.lp-bg-blobs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
 
-   .logoMark svg {
-     width: 18px;
-     height: 18px;
-   }
+.lp-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.1;
+}
 
-   .logoName {
-     font-family: 'Syne', sans-serif;
-     font-weight: 800;
-     font-size: 20px;
-     color: #f0f4f8;
-     letter-spacing: -0.03em;
-     line-height: 1;
-   }
+.lp-blob-1 {
+  width: 500px;
+  height: 500px;
+  background: #6ee7b7;
+  top: -120px;
+  right: -120px;
+}
 
-   .logoVersion {
-     font-family: 'DM Mono', monospace;
-     font-size: 10px;
-     color: #4a5568;
-     letter-spacing: 0.08em;
-     text-transform: uppercase;
-     margin-top: 3px;
-   }
+.lp-blob-2 {
+  width: 380px;
+  height: 380px;
+  background: #3b82f6;
+  bottom: -80px;
+  left: -100px;
+}
 
-   /* ── Card ───────────────────────────────────── */
-   .card {
-     width: 100%;
-     max-width: 400px;
-     background: #13161e;
-     border: 1px solid #ffffff0f;
-     border-radius: 16px;
-     padding: 32px;
-   }
+/* ── Página ───────────────────────────────────────── */
+.lp-page {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  font-family: 'DM Sans', sans-serif;
+}
 
-   .cardTitle {
-     font-family: 'Syne', sans-serif;
-     font-weight: 800;
-     font-size: 22px;
-     color: #f0f4f8;
-     letter-spacing: -0.03em;
-     margin: 0 0 4px;
-   }
 
-   .cardSub {
-     font-family: 'DM Mono', monospace;
-     font-size: 12px;
-     color: #4a5568;
-     margin: 0 0 28px;
-   }
+.lp-logo-mark {
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #6ee7b7 0%, #34d399 100%);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #0a0d13;
+  flex-shrink: 0;
+  box-shadow: 0 8px 28px #6ee7b740;
+}
 
-   /* ── Campos ─────────────────────────────────── */
-   .field {
-     margin-bottom: 16px;
-   }
+.lp-logo-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  color: #f0f4f8;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
 
-   .labelRow {
-     display: flex;
-     align-items: center;
-     justify-content: space-between;
-     margin-bottom: 8px;
-   }
+.lp-logo-name span {
+  color: #6ee7b7;
+}
 
-   .label {
-     display: block;
-     font-family: 'DM Mono', monospace;
-     font-size: 11px;
-     text-transform: uppercase;
-     letter-spacing: 0.1em;
-     color: #8892a4;
-     font-weight: 500;
-     margin-bottom: 8px;
-   }
+/* ── Card ─────────────────────────────────────────── */
+.lp-card {
+  width: 100%;
+  max-width: 420px;
+  background: #13161e;
+  border: 1px solid #ffffff0d;
+  border-radius: 20px;
+  padding: 36px 32px;
+  box-shadow: 0 24px 64px #00000055;
+}
 
-   /* Cuando está en labelRow el margin lo maneja el padre */
-   .labelRow .label {
-     margin-bottom: 0;
-   }
+.lp-card-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  color: #f0f4f8;
+  letter-spacing: -0.03em;
+  margin: 0 0 6px;
+}
 
-   .input {
-     width: 100%;
-     background: #1a1e28;
-     border: 1px solid #ffffff10;
-     border-radius: 9px;
-     padding: 11px 14px;
-     color: #f0f4f8;
-     font-size: 14px;
-     font-family: 'DM Sans', sans-serif;
-     outline: none;
-     transition: border-color 0.15s;
-   }
+.lp-card-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: #4a5568;
+  margin: 0;
+}
 
-   .input::placeholder {
-     color: #4a5568;
-   }
+.lp-label {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
 
-   .input:focus {
-     border-color: #6ee7b760;
-   }
+.lp-input-wrap {
+  display: flex;
+  align-items: center;
+  background: #1a1e28;
+  border: 1.5px solid #ffffff0f;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
-   .forgot {
-     font-family: 'DM Mono', monospace;
-     font-size: 11px;
-     color: #6ee7b7;
-     text-decoration: none;
-     opacity: 0.7;
-     transition: opacity 0.15s;
-     white-space: nowrap;
-   }
+.lp-input-wrap:focus-within {
+  border-color: #6ee7b750;
+  box-shadow: 0 0 0 3px #6ee7b712;
+}
 
-   .forgot:hover {
-     opacity: 1;
-   }
+.lp-input-icon {
+  padding: 0 0 0 14px;
+  color: #374151;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
 
-   /* ── Error ──────────────────────────────────── */
-   .errorBox {
-     display: flex;
-     align-items: center;
-     gap: 8px;
-     background: #f8717115;
-     border: 1px solid #f8717130;
-     border-radius: 8px;
-     padding: 10px 14px;
-     color: #f87171;
-     font-size: 13px;
-     margin-bottom: 16px;
-   }
+.lp-input-wrap:focus-within .lp-input-icon {
+  color: #6ee7b7;
+}
 
-   .errorBox svg {
-     flex-shrink: 0;
-   }
+.lp-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 12px 14px;
+  color: #f0f4f8;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  min-width: 0;
+}
 
-   /* ── Botón ──────────────────────────────────── */
-   .btnLogin {
-     width: 100%;
-     margin-top: 8px;
-     background: #6ee7b7;
-     color: #0d0f14;
-     border: none;
-     border-radius: 9px;
-     padding: 12px;
-     font-family: 'Syne', sans-serif;
-     font-weight: 700;
-     font-size: 14px;
-     letter-spacing: -0.01em;
-     cursor: pointer;
-     transition: background 0.15s, transform 0.1s;
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     gap: 8px;
-   }
+.lp-input::placeholder {
+  color: #2d3748;
+}
 
-   .btnLogin:hover:not(:disabled) {
-     background: #34d399;
-   }
+/* Botón mostrar/ocultar contraseña */
+.lp-toggle-btn {
+  padding: 0 14px;
+  height: 100%;
+  min-height: 44px;
+  background: none;
+  border: none;
+  color: #374151;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
 
-   .btnLogin:active:not(:disabled) {
-     transform: scale(0.99);
-   }
+.lp-toggle-btn:hover {
+  color: #6ee7b7;
+}
 
-   .btnLogin:disabled {
-     opacity: 0.6;
-     cursor: not-allowed;
-   }
+/* ── ¿Olvidaste contraseña? ───────────────────────── */
+.lp-forgot-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
 
-   /* ── Spinner ────────────────────────────────── */
-   .spinner {
-     width: 14px;
-     height: 14px;
-     border: 2px solid #0d0f1440;
-     border-top-color: #0d0f14;
-     border-radius: 50%;
-     animation: spin 0.6s linear infinite;
-     flex-shrink: 0;
-   }
+.lp-forgot {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: #6ee7b7;
+  text-decoration: none;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
 
-   @keyframes spin {
-     to {
-       transform: rotate(360deg);
-     }
-   }
+.lp-forgot:hover {
+  opacity: 1;
+}
 
-   /* ── Responsive ─────────────────────────────── */
-   @media (max-width: 480px) {
-     .card {
-       padding: 24px 20px;
-     }
+.lp-btn-submit {
+  width: 100%;
+  margin-top: 8px;
+  background: linear-gradient(135deg, #6ee7b7 0%, #34d399 100%);
+  color: #0a0d13;
+  border: none;
+  border-radius: 10px;
+  padding: 13px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 20px #6ee7b728;
+  transition: filter 0.15s, box-shadow 0.15s, transform 0.1s;
+}
 
-     .cardTitle {
-       font-size: 20px;
-     }
-   }
+.lp-btn-submit:hover:not(:disabled) {
+  filter: brightness(1.06);
+  box-shadow: 0 6px 28px #6ee7b740;
+}
+
+.lp-btn-submit:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.lp-btn-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.lp-spin {
+  animation: lp-spin 0.7s linear infinite;
+}
+
+@keyframes lp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .lp-card {
+    padding: 28px 20px;
+    border-radius: 16px;
+  }
+
+  .lp-card-title {
+    font-size: 21px;
+  }
+
+  .lp-logo-mark {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  .lp-logo-name {
+    font-size: 19px;
+  }
+}

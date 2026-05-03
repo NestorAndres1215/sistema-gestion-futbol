@@ -15,7 +15,7 @@ export default function Dashboard() {
     }
   }, []);
 
-return (
+  return (
     <AdminLayout>
       <h1>Dashboard</h1>
     </AdminLayout>
