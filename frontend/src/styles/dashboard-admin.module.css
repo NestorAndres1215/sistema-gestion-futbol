@@ -1,0 +1,524 @@
+/* ═══════════════════════════════════════════════
+   Dashboard.module.css — Nexus Admin
+═══════════════════════════════════════════════ */
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Métricas ───────────────────────────────── */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.metricCard {
+  background: #13161e;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.metricCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.metricTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.metricLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #4a5568;
+  font-family: 'DM Mono', monospace;
+  font-weight: 500;
+}
+
+.metricIconWrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* colores por variante */
+.green  .metricIconWrap { background: rgba(110,231,183,0.12); color: #6ee7b7; }
+.blue   .metricIconWrap { background: rgba(96,165,250,0.12);  color: #60a5fa; }
+.amber  .metricIconWrap { background: rgba(251,191,36,0.12);  color: #fbbf24; }
+.red    .metricIconWrap { background: rgba(248,113,113,0.12); color: #f87171; }
+.purple .metricIconWrap { background: rgba(167,139,250,0.12); color: #a78bfa; }
+
+.metricValue {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: #f0f4f8;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.metricDelta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.deltaUp   { color: #6ee7b7; background: rgba(110,231,183,0.1); }
+.deltaDown { color: #f87171; background: rgba(248,113,113,0.1); }
+
+/* ── Fila principal ─────────────────────────── */
+.mainRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* ── Fila inferior ──────────────────────────── */
+.bottomRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+}
+
+/* ── Card base ──────────────────────────────── */
+.card {
+  background: #13161e;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.cardHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 18px 20px 0;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #f0f4f8;
+  letter-spacing: -0.01em;
+}
+
+.cardTitle i {
+  color: #6ee7b7;
+  font-size: 13px;
+}
+
+.cardSub {
+  font-size: 11px;
+  color: #4a5568;
+  font-family: 'DM Mono', monospace;
+  margin-top: 4px;
+}
+
+/* ── Top goleadores ─────────────────────────── */
+.goleadoresList {
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.goleadorRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rank {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: #2d3748;
+  width: 22px;
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(110,231,183,0.1);
+  color: #6ee7b7;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(110,231,183,0.15);
+}
+
+.jugadorInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.jugadorNombre {
+  display: block;
+  font-size: 13px;
+  color: #cbd5e1;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.barWrap {
+  height: 4px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  background: linear-gradient(90deg, #6ee7b7, #34d399);
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.jugadorStats {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.jugadorStats span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.jugadorStats i {
+  font-size: 10px;
+  color: #4a5568;
+}
+
+.posBadge {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 5px;
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+}
+
+.posDEL { background: rgba(248,113,113,0.12); color: #f87171; }
+.posMED { background: rgba(96,165,250,0.12);  color: #60a5fa; }
+.posDEF { background: rgba(251,191,36,0.12);  color: #fbbf24; }
+
+/* ── Últimos resultados ─────────────────────── */
+.forma {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.formaDot {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-family: 'DM Mono', monospace;
+  font-weight: 700;
+}
+
+.win  { background: rgba(110,231,183,0.15); color: #6ee7b7; }
+.draw { background: rgba(251,191,36,0.15);  color: #fbbf24; }
+.loss { background: rgba(248,113,113,0.15); color: #f87171; }
+
+.resultsList {
+  padding: 14px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.resultRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.resultRow:last-child {
+  border-bottom: none;
+}
+
+.resultBadge {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-family: 'DM Mono', monospace;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.resultRival {
+  flex: 1;
+  font-size: 13px;
+  color: #8892a4;
+}
+
+.resultScore {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  color: #f0f4f8;
+  font-weight: 600;
+}
+
+.scoreSep {
+  color: #2d3748;
+  margin: 0 3px;
+}
+
+/* ── Próximos partidos ──────────────────────── */
+.partidosList {
+  padding: 14px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.partidoRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.partidoRow:last-child {
+  border-bottom: none;
+}
+
+.partidoIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(110,231,183,0.08);
+  color: #6ee7b7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.partidoInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.partidoRival {
+  display: block;
+  font-size: 13px;
+  color: #cbd5e1;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.partidoMeta {
+  display: block;
+  font-size: 11px;
+  color: #4a5568;
+  font-family: 'DM Mono', monospace;
+}
+
+.localBadge {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+}
+
+.home { background: rgba(110,231,183,0.12); color: #6ee7b7; }
+.away { background: rgba(96,165,250,0.12);  color: #60a5fa; }
+
+/* ── Clasificación ──────────────────────────── */
+.tablaWrap {
+  padding: 14px 20px 20px;
+  overflow-x: auto;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tabla thead th {
+  text-align: left;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #2d3748;
+  padding: 0 8px 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.tabla tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.1s;
+}
+
+.tabla tbody tr:last-child {
+  border-bottom: none;
+}
+
+.tabla tbody tr:hover {
+  background: rgba(255,255,255,0.02);
+}
+
+.tabla tbody td {
+  padding: 9px 8px 9px 0;
+  color: #8892a4;
+}
+
+.propioEquipo td {
+  color: #f0f4f8;
+}
+
+.propioEquipo {
+  background: rgba(110,231,183,0.04);
+}
+
+.tablaPos {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: #2d3748 !important;
+  width: 20px;
+}
+
+.tablaEquipo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.tablaEquipo i {
+  color: #6ee7b7;
+  font-size: 11px;
+}
+
+.tablaPts {
+  font-family: 'DM Mono', monospace;
+  font-weight: 600;
+  color: #f0f4f8 !important;
+}
+
+.tablaDif {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: #6ee7b7 !important;
+}
+
+
+.estadoList {
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.estadoRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 9px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+.estadoIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.icon_green  { background: rgba(110,231,183,0.1); color: #6ee7b7; }
+.icon_blue   { background: rgba(96,165,250,0.1);  color: #60a5fa; }
+.icon_amber  { background: rgba(251,191,36,0.1);  color: #fbbf24; }
+.icon_red    { background: rgba(248,113,113,0.1); color: #f87171; }
+
+.estadoLabel {
+  flex: 1;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.estadoValue {
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: #f0f4f8;
+}
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 1200px) {
+  .metrics    { grid-template-columns: repeat(2, 1fr); }
+  .bottomRow  { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .metrics   { grid-template-columns: 1fr 1fr; }
+  .mainRow   { grid-template-columns: 1fr; }
+  .bottomRow { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .metrics { grid-template-columns: 1fr; }
+}

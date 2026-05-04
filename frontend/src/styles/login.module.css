@@ -1,41 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap');
 
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-body:has(.lp-page) {
-  background: #0a0d13;
-  margin: 0;
-}
-
-.lp-bg-blobs {
+.bgBlobs {
   position: fixed;
   inset: 0;
   pointer-events: none;
   overflow: hidden;
   z-index: 0;
 }
-
-.lp-blob {
+ 
+.blob1,
+.blob2 {
   position: absolute;
   border-radius: 50%;
   filter: blur(90px);
   opacity: 0.1;
 }
-
-.lp-blob-1 {
+ 
+.blob1 {
   width: 500px;
   height: 500px;
   background: #6ee7b7;
   top: -120px;
   right: -120px;
 }
-
-.lp-blob-2 {
+ 
+.blob2 {
   width: 380px;
   height: 380px;
   background: #3b82f6;
@@ -43,8 +32,9 @@ body:has(.lp-page) {
   left: -100px;
 }
 
-/* ── Página ───────────────────────────────────────── */
-.lp-page {
+
+
+.page {
   position: relative;
   z-index: 1;
   min-height: 100vh;
@@ -57,7 +47,7 @@ body:has(.lp-page) {
 }
 
 
-.lp-logo-mark {
+.logoMark {
   width: 52px;
   height: 52px;
   background: linear-gradient(135deg, #6ee7b7 0%, #34d399 100%);
@@ -71,7 +61,7 @@ body:has(.lp-page) {
   box-shadow: 0 8px 28px #6ee7b740;
 }
 
-.lp-logo-name {
+.logoName {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
   font-size: 22px;
@@ -80,130 +70,154 @@ body:has(.lp-page) {
   line-height: 1.15;
 }
 
-.lp-logo-name span {
+.logoName span {
   color: #6ee7b7;
 }
 
-/* ── Card ─────────────────────────────────────────── */
-.lp-card {
+
+/* ── Card ───────────────────────────────────────── */
+.card {
   width: 100%;
   max-width: 420px;
   background: #13161e;
-  border: 1px solid #ffffff0d;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 20px;
   padding: 36px 32px;
-  box-shadow: 0 24px 64px #00000055;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
 }
-
-.lp-card-title {
-  font-family: 'Syne', sans-serif;
+ 
+.cardTitle {
+  font-family: 'Syne', 'Segoe UI', sans-serif;
   font-weight: 800;
   font-size: 24px;
   color: #f0f4f8;
   letter-spacing: -0.03em;
   margin: 0 0 6px;
 }
-
-.lp-card-sub {
-  font-family: 'DM Mono', monospace;
+ 
+.cardSub {
   font-size: 12px;
   color: #4a5568;
-  margin: 0;
+  margin: 0 0 28px;
+  font-family: 'DM Mono', 'Courier New', monospace;
 }
-
-.lp-label {
+ 
+/* ── Campos ─────────────────────────────────────── */
+.field {
+  margin-bottom: 18px;
+}
+ 
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+ 
+.label {
   display: block;
-  font-family: 'DM Mono', monospace;
   font-size: 10.5px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #6b7280;
   margin-bottom: 8px;
+  font-family: 'DM Mono', 'Courier New', monospace;
 }
-
-.lp-input-wrap {
+ 
+/* Cuando está dentro de labelRow no necesita margin-bottom */
+.labelRow .label {
+  margin-bottom: 0;
+}
+ 
+.inputWrap {
   display: flex;
   align-items: center;
   background: #1a1e28;
-  border: 1.5px solid #ffffff0f;
+  border: 1.5px solid rgba(255, 255, 255, 0.06);
   border-radius: 10px;
   overflow: hidden;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-
-.lp-input-wrap:focus-within {
-  border-color: #6ee7b750;
-  box-shadow: 0 0 0 3px #6ee7b712;
+ 
+.inputWrap:focus-within {
+  border-color: rgba(110, 231, 183, 0.4);
+  box-shadow: 0 0 0 3px rgba(110, 231, 183, 0.08);
 }
-
-.lp-input-icon {
+ 
+.inputIcon {
   padding: 0 0 0 14px;
   color: #374151;
   font-size: 14px;
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  transition: color 0.2s;
+  transition: color 0.2s ease;
 }
-
-.lp-input-wrap:focus-within .lp-input-icon {
+ 
+.inputWrap:focus-within .inputIcon {
   color: #6ee7b7;
 }
-
-.lp-input {
+ 
+/* 
+  IMPORTANTE: esta clase NO se llama "input" para evitar
+  cualquier colisión con estilos globales de Bootstrap.
+  Si tienes Bootstrap en globals.css, sus reglas de .form-control
+  no afectan a .input del módulo porque Next.js los scopes.
+*/
+.input {
   flex: 1;
-  background: none;
+  background: transparent;
   border: none;
   outline: none;
   padding: 12px 14px;
   color: #f0f4f8;
   font-size: 14px;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
   min-width: 0;
 }
-
-.lp-input::placeholder {
+ 
+.input::placeholder {
   color: #2d3748;
 }
-
-/* Botón mostrar/ocultar contraseña */
-.lp-toggle-btn {
+ 
+.toggleBtn {
   padding: 0 14px;
-  height: 100%;
   min-height: 44px;
-  background: none;
+  background: transparent;
   border: none;
   color: #374151;
   font-size: 14px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  transition: color 0.15s;
+  transition: color 0.15s ease;
   flex-shrink: 0;
 }
-
-.lp-toggle-btn:hover {
+ 
+.toggleBtn:hover {
   color: #6ee7b7;
 }
-
-/* ── ¿Olvidaste contraseña? ───────────────────────── */
-
-
-.lp-forgot {
-  font-family: 'DM Mono', monospace;
+ 
+/* ── ¿Olvidaste contraseña? ─────────────────────── */
+.forgot {
   font-size: 11px;
   color: #6ee7b7;
   text-decoration: none;
   opacity: 0.6;
-  transition: opacity 0.15s;
+  transition: opacity 0.15s ease;
+  font-family: 'DM Mono', 'Courier New', monospace;
+  white-space: nowrap;
 }
-
-.lp-forgot:hover {
+ 
+.forgot:hover {
   opacity: 1;
 }
+ 
 
-.lp-btn-submit {
+ 
+/* ── Botón submit ───────────────────────────────── */
+.btnSubmit {
   width: 100%;
   margin-top: 8px;
   background: linear-gradient(135deg, #6ee7b7 0%, #34d399 100%);
@@ -211,7 +225,7 @@ body:has(.lp-page) {
   border: none;
   border-radius: 10px;
   padding: 13px;
-  font-family: 'Syne', sans-serif;
+  font-family: 'Syne', 'Segoe UI', sans-serif;
   font-weight: 800;
   font-size: 15px;
   letter-spacing: -0.01em;
@@ -220,51 +234,53 @@ body:has(.lp-page) {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 20px #6ee7b728;
-  transition: filter 0.15s, box-shadow 0.15s, transform 0.1s;
+  box-shadow: 0 4px 20px rgba(110, 231, 183, 0.2);
+  transition: filter 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
 }
-
-.lp-btn-submit:hover:not(:disabled) {
+ 
+.btnSubmit:hover:not(:disabled) {
   filter: brightness(1.06);
-  box-shadow: 0 6px 28px #6ee7b740;
+  box-shadow: 0 6px 28px rgba(110, 231, 183, 0.35);
 }
-
-.lp-btn-submit:active:not(:disabled) {
+ 
+.btnSubmit:active:not(:disabled) {
   transform: scale(0.99);
 }
-
-.lp-btn-submit:disabled {
-  opacity: 0.55;
+ 
+.btnSubmit:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
 }
-
-.lp-spin {
-  animation: lp-spin 0.7s linear infinite;
+ 
+/* ── Spinner ────────────────────────────────────── */
+.spin {
+  animation: spin 0.7s linear infinite;
 }
-
-@keyframes lp-spin {
+ 
+@keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
-
+ 
+/* ── Responsive ─────────────────────────────────── */
 @media (max-width: 480px) {
-  .lp-card {
+  .card {
     padding: 28px 20px;
     border-radius: 16px;
   }
-
-  .lp-card-title {
+ 
+  .cardTitle {
     font-size: 21px;
   }
-
-  .lp-logo-mark {
+ 
+  .logoMark {
     width: 44px;
     height: 44px;
     font-size: 18px;
   }
-
-  .lp-logo-name {
+ 
+  .logoName {
     font-size: 19px;
   }
 }

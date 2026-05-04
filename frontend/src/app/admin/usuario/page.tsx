@@ -1,12 +1,14 @@
 
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import AdminLayout from "../layout/AdminLayout";
 import { getUsers } from "@/services/user.service";
-import SearchBar from "@/components/SearchBar";
-import Table from "@/components/Table";
-import Pagination from "@/components/Pagination";
+import SearchBar from "@/components/search-bar/search-bar";
+import Table from "@/components/table/table";
+import Pagination from "@/components/pagination/pagination";
+import Breadcrumb from "@/components/bread-crumb/bread-cumb";
 export const userColumns = [
   { header: "ID", accessor: "id" },
   { header: "Usuario", accessor: "username" },
@@ -18,6 +20,7 @@ export const userColumns = [
 ];
 
 export default function UsersPage() {
+  const router = useRouter();
   const [data, setData] = useState<any>(null);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
@@ -26,7 +29,6 @@ export default function UsersPage() {
 
   const fetchUsers = async () => {
     const res = await getUsers({ page, pageSize, search });
-    console.log(res)
     setData(res);
   };
 
@@ -35,9 +37,11 @@ export default function UsersPage() {
   }, [page, search]);
 
   return (
-    <AdminLayout>
-      <h1>Usuarios</h1>
+    <AdminLayout pageTitle="Usuario" pageSubtitle="Mantenimiento">
+      <Breadcrumb items={[
 
+        { label: "Usuario" },
+      ]} />
       <SearchBar onSearch={setSearch} />
 
       <Table
@@ -45,8 +49,8 @@ export default function UsersPage() {
         columns={userColumns}
         showActions
         actions={{
-          onView: (u) => console.log("ver", u),
-          onEdit: (u) => console.log("editar", u),
+          onView: (u) => router.push(`/admin/usuario/${u.id}`),
+          onEdit: (u) => router.push(`/admin/usuario/${u.id}/editar`),
           onDelete: (u) => console.log("eliminar", u),
         }}
       />

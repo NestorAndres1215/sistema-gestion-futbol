@@ -1,4 +1,6 @@
+import { SwalService } from "@/services/swal/swal.service";
 import { API_URL } from "./api.service";
+
 
 export const login = async (email: string, password: string) => {
     const res = await fetch(`${API_URL}/auth/login`, {
@@ -13,11 +15,11 @@ export const login = async (email: string, password: string) => {
 
 
     if (!res.ok) {
-        const message =
-            data?.message || data?.Message || "Error al iniciar sesión";
+        const message = data?.message || data?.Message || "Error";
 
-        alert(message); // 👈 aquí el alert
-        throw new Error(message);
+        SwalService.error(message);
+
+        return;
     }
 
     return data;

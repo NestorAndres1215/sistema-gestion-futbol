@@ -4,8 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLogin } from "@/hooks/useLogin";
 import { useAuthRedirect } from "@/hooks/useAuthRedirect";
-import "@/styles/login.css";
-
+import styles from "@/styles/login.module.css";
 
 export default function LoginPage() {
     const router = useRouter();
@@ -20,9 +19,8 @@ export default function LoginPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-
         const data = await submitLogin(email, password);
-console.log(data)
+
         const role = data.rol;
         const user = data.username;
 
@@ -31,95 +29,119 @@ console.log(data)
         document.cookie = `user=${user}; path=/`;
 
         if (role === "admin") {
-            console.log("ingreso")
             router.replace("/admin/dashboard");
         } else {
             router.replace("/user/dashboard");
         }
-
     };
-
 
     return (
         <>
-            <div className="lp-bg-blobs" aria-hidden="true">
-                <div className="lp-blob lp-blob-1" />
-                <div className="lp-blob lp-blob-2" />
+            {/* BACKGROUND BLOBS */}
+            <div className={styles.bgBlobs} aria-hidden="true">
+                <div className={styles.blob1} />
+                <div className={styles.blob2} />
             </div>
-            <div className="lp-page">
-                <div className="d-flex align-items-center gap-3 mb-4 ">
-                    <div className="lp-logo-mark">
-                        <i className="fa-solid fa-futbol"></i>
+
+            {/* PAGE */}
+            <div className={styles.page}>
+
+                {/* LOGO */}
+                <div className="d-flex align-items-center gap-3 mb-4">
+                    <div className={styles.logoMark}>
+                        <i className="fa-solid fa-futbol" />
                     </div>
-                    <div>
-                        <div className="lp-logo-name">Football <br />Manager</div>
+
+                    <div className={styles.logoName}>
+                        Football <br />Manager
                     </div>
                 </div>
-                <div className="lp-card">
+
+                {/* CARD */}
+                <div className={styles.card}>
+
                     <div className="mb-4">
-                        <div className="lp-card-title">Bienvenidos</div>
-                        <div className="lp-card-sub">Ingresa tus credenciales para continuar</div>
+                        <div className={styles.cardTitle}>Bienvenidos</div>
+                        <div className={styles.cardSub}>
+                            Ingresa tus credenciales para continuar
+                        </div>
                     </div>
+
                     <form onSubmit={handleSubmit}>
 
-
+                        {/* EMAIL */}
                         <div className="mb-3">
-
-                            <label htmlFor="lp-email" className="lp-label">
+                            <label className={styles.label}>
                                 Correo electrónico
                             </label>
 
-                            <div className="lp-input-wrap">
+                            <div className={styles.inputWrap}>
                                 <input
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     placeholder="Ingrese correo"
-                                    className="lp-input"
+                                    className={styles.input}
                                 />
                             </div>
-
                         </div>
+
+                        {/* PASSWORD */}
                         <div className="mb-3">
-                            <label htmlFor="lp-password" className="lp-label">
+                            <label className={styles.label}>
                                 Contraseña
                             </label>
 
-                            <div className="lp-input-wrap">
-
+                            <div className={styles.inputWrap}>
                                 <input
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     placeholder="Ingrese contraseña"
                                     type={showPassword ? "text" : "password"}
-                                    className="lp-input"
+                                    className={styles.input}
                                 />
 
                                 <button
                                     type="button"
-                                    className="lp-toggle-btn"
-                                    onClick={() => setShowPassword((prev) => !prev)}
+                                    className={styles.toggleBtn}
+                                    onClick={() => setShowPassword((p) => !p)}
                                 >
-                                    <i className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"} />
+                                    <i
+                                        className={
+                                            showPassword
+                                                ? "fa fa-eye-slash"
+                                                : "fa fa-eye"
+                                        }
+                                    />
                                 </button>
                             </div>
+
                             <div className="d-flex justify-content-end mt-3">
-                                <a href="/forgot-password" className="lp-forgot">
+                                <a
+                                    href="/forgot-password"
+                                    className={styles.forgot}
+                                >
                                     ¿Olvidaste tu contraseña?
                                 </a>
                             </div>
                         </div>
 
-                        <button type="submit" disabled={loading} className="lp-btn-submit">
-                            {loading
-                                ? <i className="fa-solid fa-circle-notch lp-spin" />
-                                : <i className="fa-solid fa-right-to-bracket" />
-                            }
+                        {/* BUTTON */}
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className={styles.btnSubmit}
+                        >
+                            {loading ? (
+                                <i className="fa-solid fa-circle-notch fa-spin" />
+                            ) : (
+                                <i className="fa-solid fa-right-to-bracket" />
+                            )}
+
                             {loading ? "Verificando..." : "Iniciar sesión"}
                         </button>
-
                     </form>
-                </div >
-            </div >
+                </div>
+            </div>
         </>
     );
 }

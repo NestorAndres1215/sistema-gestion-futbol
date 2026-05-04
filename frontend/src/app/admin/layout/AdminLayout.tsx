@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import "@/styles/layoutAdmin.css";
+import styles from "@/styles/layout-admin.module.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { NavSection, Props } from "@/interfaces/layout.interface";
 
@@ -98,20 +98,20 @@ const NAV_SECTIONS: NavSection[] = [
 
 function Sidebar({ pathname }: { pathname: string }) {
   return (
-    <aside className="sidebar">
-      <div className="brand">
-        <div className="logoMark">
+    <aside className={styles.sidebar}>
+      <div className={styles.brand}>
+        <div className={styles.logoMark}>
           <i className="fa-solid fa-futbol"></i>
         </div>
         <div>
-          <div className="logoText">Football Manager</div>
+          <div className={styles.logoText}>Football Manager</div>
         </div>
       </div>
 
-      <nav className="nav">
+      <nav className={styles.nav}>
         {NAV_SECTIONS.map((section) => (
           <React.Fragment key={section.title}>
-            <div className="navSection">{section.title}</div>
+            <div className={styles.navSection}>{section.title}</div>
             {section.items.map((item) => {
               const isActive =
                 item.href === "/"
@@ -121,12 +121,12 @@ function Sidebar({ pathname }: { pathname: string }) {
                 <Link
                   key={item.id}
                   href={item.href}
-                  className={`${"navItem"} ${isActive ? "navItemActive" : ""}`}
+                  className={`${styles.navItem} ${isActive ? styles.navItemActive : ""}`}
                 >
-                  <span className="navIcon">{item.icon}</span>
+                  <span className={styles.navIcon}>{item.icon}</span>
                   {item.label}
                   {item.badge && (
-                    <span className={`${"navBadge"} ${[`badge${item.badge.variant.charAt(0).toUpperCase() + item.badge.variant.slice(1)}`]}`}>
+                    <span className={`${styles.navBadge} ${[`badge${item.badge.variant.charAt(0).toUpperCase() + item.badge.variant.slice(1)}`]}`}>
                       {item.badge.text}
                     </span>
                   )}
@@ -143,19 +143,27 @@ function Sidebar({ pathname }: { pathname: string }) {
 
 function Topbar({ title, subtitle }: { title: string; subtitle: string }) {
   return (
-    <header className="topbar">
+    <header className={styles.topbar}>
       <div>
-        <div className="pageTitle">{title}</div>
-        <div className="pageSub">{subtitle}</div>
+        <div className={styles.pageTitle}>{title}</div>
+        <div className={styles.pageSub}>{subtitle}</div>
       </div>
-      <div className="topbarRight">
-        <div className="searchBox">
-          <span className="searchIcon">
+      <div className={styles.topbarRight}>
+        <div className={styles.searchBox}>
+          <span className={styles.searchIcon}>
             <i className="fas fa-search"></i>
           </span>
-          <input type="text" placeholder="Buscar..." className={"searchInput"} />
+          <input
+            type="text"
+            placeholder="Buscar..."
+            className={styles.searchInput}
+          />
         </div>
-        <button className={`iconBtn notifBtn`} aria-label="Cerrar Sesion" onClick={handleLogout}>
+        <button
+          className={styles.iconBtn}
+          onClick={handleLogout}
+          aria-label="Cerrar sesión"
+        >
           <i className="fa-solid fa-right-from-bracket"></i>
         </button>
       </div>
@@ -172,11 +180,11 @@ export default function AdminLayout({
   const pathname = usePathname();
 
   return (
-    <div className="shell">
+    <div className={styles.shell}>
       <Sidebar pathname={pathname} />
-      <div className="main">
+      <div className={styles.main}>
         <Topbar title={pageTitle} subtitle={pageSubtitle} />
-        <main className={"content"}>{children}</main>
+        <main className={styles.content}>{children}</main>
       </div>
     </div>
   );

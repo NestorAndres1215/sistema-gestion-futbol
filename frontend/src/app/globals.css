@@ -1,0 +1,12 @@
+/* GLOBAL RESET */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #0a0d13;
+  margin: 0;
+}
