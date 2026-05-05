@@ -1,9 +1,6 @@
 ﻿
-using Application.Common.Exceptions;
 using Application.Dto;
 using Application.Interfaces.Repositories;
-using Domain.Entities;
-using Domain.Enums;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,14 +16,14 @@ public class UsuarioRepository : IUsuarioRepository
         _context = context;
     }
 
-    public async Task<Usuario> GetByEmailAsync(string email)
+    public async Task<Usuario?> GetByEmailAsync(string email)
     {
         return await _context.Usuarios
             .Include(x => x.Rol)
             .FirstOrDefaultAsync(x => x.Email == email);
     }
 
-    public async Task<Usuario> GetByIdAsync(int id)
+    public async Task<Usuario?> GetByIdAsync(int id)
     {
         return await _context.Usuarios
             .Include(x => x.Rol)
@@ -46,7 +43,6 @@ public class UsuarioRepository : IUsuarioRepository
             .AsNoTracking()
             .AsQueryable();
 
-        // 🔎 SEARCH
         if (!string.IsNullOrWhiteSpace(search))
         {
             search = search.Trim();
@@ -57,7 +53,6 @@ public class UsuarioRepository : IUsuarioRepository
             );
         }
 
-        // 🟢 ESTADO
         if (!string.IsNullOrWhiteSpace(estado))
         {
             estado = estado.Trim().ToUpper();
@@ -68,7 +63,6 @@ public class UsuarioRepository : IUsuarioRepository
             );
         }
 
-        // 🟣 FILTRO POR NOMBRE DE ROL (NUEVO)
         if (!string.IsNullOrWhiteSpace(rol))
         {
             rol = rol.Trim().ToLower();
@@ -79,10 +73,8 @@ public class UsuarioRepository : IUsuarioRepository
             );
         }
 
-        // 📊 TOTAL
         var total = await query.CountAsync();
 
-        // 📄 PAGINACIÓN
         var items = await query
             .OrderBy(x => x.Id)
             .Take(pageSize)

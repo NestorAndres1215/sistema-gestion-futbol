@@ -6,9 +6,9 @@ namespace Application.Interfaces.Repositories;
 
 public interface IUsuarioRepository
 {
-    Task<Usuario> GetByEmailAsync(string email);
+    Task<Usuario?> GetByEmailAsync(string email);
 
-    Task<Usuario> GetByIdAsync(int id);
+    Task<Usuario?> GetByIdAsync(int id);
 
     Task<PagedResult<Usuario>> GetAllAsync(int page,
       int pageSize,

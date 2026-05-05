@@ -12,5 +12,6 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Categoria> Categorias { get; set; }
     public DbSet<Rol> Roles { get; set; }
 }
