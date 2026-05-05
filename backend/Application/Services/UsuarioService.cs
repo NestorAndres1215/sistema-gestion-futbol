@@ -3,9 +3,6 @@ using Application.Dto;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Enums;
-using System;
-using System.Collections.Generic;
-
 
 namespace Application.Services;
 
@@ -69,10 +66,13 @@ public class UsuarioService : IUsuarioService
 
     public async Task<Usuario> UpdateEstadoAsync(int id)
     {
-
         var entity = await _repo.GetByIdAsync(id)
-           ?? throw new NotFoundException("Usuario no encontrado");
-        entity .Estado = Estado.Inactivo;
-        return  await _repo.UpdateAsync(entity);
+            ?? throw new NotFoundException("Usuario no encontrado");
+
+        entity.Estado = entity.Estado == Estado.Inactivo
+            ? Estado.Activo
+            : Estado.Inactivo;
+
+        return await _repo.UpdateAsync(entity);
     }
-}
+}   
