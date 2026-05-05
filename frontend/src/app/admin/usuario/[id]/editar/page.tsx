@@ -59,17 +59,14 @@ export default function EditUserPage() {
     ? form.username.slice(0, 2).toUpperCase()
     : "??";
 
-
-
   return (
     <AdminLayout pageTitle="Editar Usuario" pageSubtitle="Modificar datos">
-<Breadcrumb items={[
-  { label: "Usuario", href: "/admin/usuario" },
-  { label: "Editar Usuario" },
-]} />
-      <div className={styles.card}>
+      <Breadcrumb items={[
+        { label: "Usuario", href: "/admin/usuario" },
+        { label: "Editar Usuario" },
+      ]} />
 
-        {/* Encabezado del card */}
+      <div className={styles.card}>
         <div className={styles.cardHead}>
           <div className={styles.avatar}>{initials}</div>
           <div>
@@ -78,7 +75,6 @@ export default function EditUserPage() {
           </div>
         </div>
 
-        {/* Formulario */}
         <form onSubmit={handleSubmit} noValidate className={styles.form}>
 
           <div className={styles.field}>

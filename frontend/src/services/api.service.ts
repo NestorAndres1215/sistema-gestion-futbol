@@ -1,8 +1,7 @@
-import { getToken } from "@/utils/token";
 
 export const API_URL = "https://localhost:7269/api";
 
-// Wrapper central tipo interceptor
+
 const request = async (url: string, options: RequestInit = {}) => {
   const match = document.cookie.match(/(^| )token=([^;]+)/);
   const token = match ? match[2] : null;
@@ -11,15 +10,14 @@ const request = async (url: string, options: RequestInit = {}) => {
     "Content-Type": "application/json",
     ...(options.headers || {})
   };
-console.log(token)
-  // 🔥 Interceptor: agregar JWT automáticamente
+
+
   if (token) {
     headers.Authorization = `Bearer ${token}`;
   }
-  console.log(headers)
-  console.log(options)
+
   const res = await fetch(`${API_URL}${url}`, {
-    ...options,
+    ...options, 
     headers
   });
 

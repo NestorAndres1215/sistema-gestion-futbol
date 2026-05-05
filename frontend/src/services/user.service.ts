@@ -15,6 +15,7 @@ export const getUserById = async (id: number | string) => {
   const response = await api.get(`/usuarios/${id}`);
   return response;
 };
+
 export const updateUser = async (id: number, data: any) => {
   const response = await api.put(`/usuarios/${id}`, data);
   return response.data;

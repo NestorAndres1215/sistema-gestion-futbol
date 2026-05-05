@@ -76,32 +76,3 @@
   word-break: break-word;
 }
 
-.loadingWrap {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 20px;
-  color: #4a5568;
-}
-
-.loadingSpinner {
-  width: 16px;
-  height: 16px;
-  border: 2px solid rgba(110,231,183,0.15);
-  border-top-color: #6ee7b7;
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-  flex-shrink: 0;
-}
-
-.loadingText {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #4a5568;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}

@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import styles from "@/styles/layout-admin.module.css";
+import styles from "./layout-admin.module.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { NavSection, Props } from "@/interfaces/layout.interface";
 

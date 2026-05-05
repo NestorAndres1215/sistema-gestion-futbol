@@ -12,7 +12,7 @@ export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const { submitLogin, loading } = useLogin();
+    const { submitLogin } = useLogin();
 
     useAuthRedirect();
 
@@ -37,16 +37,13 @@ export default function LoginPage() {
 
     return (
         <>
-            {/* BACKGROUND BLOBS */}
             <div className={styles.bgBlobs} aria-hidden="true">
                 <div className={styles.blob1} />
                 <div className={styles.blob2} />
             </div>
 
-            {/* PAGE */}
             <div className={styles.page}>
 
-                {/* LOGO */}
                 <div className="d-flex align-items-center gap-3 mb-4">
                     <div className={styles.logoMark}>
                         <i className="fa-solid fa-futbol" />
@@ -57,7 +54,6 @@ export default function LoginPage() {
                     </div>
                 </div>
 
-                {/* CARD */}
                 <div className={styles.card}>
 
                     <div className="mb-4">
@@ -69,7 +65,6 @@ export default function LoginPage() {
 
                     <form onSubmit={handleSubmit}>
 
-                        {/* EMAIL */}
                         <div className="mb-3">
                             <label className={styles.label}>
                                 Correo electrónico
@@ -84,8 +79,6 @@ export default function LoginPage() {
                                 />
                             </div>
                         </div>
-
-                        {/* PASSWORD */}
                         <div className="mb-3">
                             <label className={styles.label}>
                                 Contraseña
@@ -116,28 +109,19 @@ export default function LoginPage() {
                             </div>
 
                             <div className="d-flex justify-content-end mt-3">
-                                <a
-                                    href="/forgot-password"
-                                    className={styles.forgot}
-                                >
+                                <a href="/forgot-password"
+                                    className={styles.forgot}>
                                     ¿Olvidaste tu contraseña?
                                 </a>
                             </div>
                         </div>
 
-                        {/* BUTTON */}
                         <button
                             type="submit"
-                            disabled={loading}
                             className={styles.btnSubmit}
                         >
-                            {loading ? (
-                                <i className="fa-solid fa-circle-notch fa-spin" />
-                            ) : (
-                                <i className="fa-solid fa-right-to-bracket" />
-                            )}
-
-                            {loading ? "Verificando..." : "Iniciar sesión"}
+                            <i className="fa-solid fa-right-to-bracket" />
+                            "Iniciar sesión"
                         </button>
                     </form>
                 </div>
