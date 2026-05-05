@@ -30,13 +30,7 @@ public class UsuarioRepository : IUsuarioRepository
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<PagedResult<Usuario>> GetAllAsync(
-      int page,
-      int pageSize,
-      string? search,
-      string? estado,
-      string? rol
-  )
+    public async Task<PagedResult<Usuario>> GetAllAsync(int page,int pageSize,string? search,string? estado,string? rol)
     {
         var query = _context.Usuarios
             .Include(x => x.Rol)

@@ -8,11 +8,8 @@ namespace Application.Interfaces.Repositories
 {
     public  interface ICategoriaRepository
     {
-        Task<PagedResult<Categoria>> GetAllAsync(int page,
-          int pageSize,
-          string? search
-        );
-        Task AddAsync(Categoria categoria);
+        Task<PagedResult<Categoria>> GetAllAsync(int page,int pageSize,string? search);
+        Task<Categoria?> AddAsync(Categoria categoria);
         Task<Categoria?> GetByIdAsync(int id);
         Task<Categoria?> GetByNombreAsync(string nombre);
     }

@@ -18,7 +18,7 @@ public class UsuarioService : IUsuarioService
     }
 
 
-    public async Task<Usuario> GetByIdAsync(int id)
+    public async Task<Usuario?> GetByIdAsync(int id)
     {
         return await _repo.GetByIdAsync(id);
     }
@@ -47,7 +47,7 @@ public class UsuarioService : IUsuarioService
         return await _repo.GetAllAsync(page, pageSize, search, estado,rol);
     }
 
-    public async Task<Usuario> GetByEmailAsync(string email)
+    public async Task<Usuario?> GetByEmailAsync(string email)
     {
         return await _repo.GetByEmailAsync(email);
     }
@@ -75,4 +75,6 @@ public class UsuarioService : IUsuarioService
 
         return await _repo.UpdateAsync(entity);
     }
+
+
 }   

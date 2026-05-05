@@ -16,10 +16,11 @@ namespace Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task AddAsync(Categoria categoria)
+        public async Task<Categoria?> AddAsync(Categoria categoria)
         {
             await _context.Categorias.AddAsync(categoria);
             await _context.SaveChangesAsync();
+            return categoria;
         }
 
         public async Task<PagedResult<Categoria>> GetAllAsync(int page, int pageSize, string? search)

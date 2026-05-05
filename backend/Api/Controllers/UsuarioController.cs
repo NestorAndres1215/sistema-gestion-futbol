@@ -20,11 +20,6 @@ public class UsuarioController : ControllerBase
         _service = service;
     }
 
-    [HttpGet("hola")]
-    public IActionResult Hola()
-    {
-        return Ok("Hola mundo");
-    }
 
     [HttpGet]
     public async Task<IActionResult> GetAll(
@@ -43,39 +38,25 @@ public class UsuarioController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var user = await _service.GetByIdAsync(id);
-
-        if (user == null)
-            return NotFound("Usuario no encontrado");
-
-        return Ok(user);
+        return Ok(await _service.GetByIdAsync(id));
     }
 
     [HttpGet("email/{email}")]
     public async Task<IActionResult> GetByEmail(string email)
     {
-        var user = await _service.GetByEmailAsync(email);
-
-        if (user == null)
-            return NotFound("Usuario no encontrado");
-
-        return Ok(user);
+        return Ok(await _service.GetByEmailAsync(email));
     }
 
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] UsuarioDto user)
     {
-        var updatedUser = await _service.UpdateAsync(id, user);
-
-        return Ok(updatedUser);
+        return Ok(await _service.UpdateAsync(id, user));
     }
 
     [HttpPut("estado/{id}")]
     public async Task<IActionResult> UpdateEstado(int id)
     {
-      
-        var updatedUser = await _service.UpdateEstadoAsync(id);
-        return Ok(updatedUser);
+        return Ok(await _service.UpdateEstadoAsync(id));
     }
 }
