@@ -32,9 +32,7 @@ export default function UserDetailPage() {
       ]} />
 
       <EntityDetail
-        loading={loading}
-        title="Detalle "
-        subtitle={user?.username}
+
         fields={[
           { label: "ID", value: user?.id },
           { label: "Usuario", value: user?.username },

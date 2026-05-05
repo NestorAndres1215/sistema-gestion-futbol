@@ -10,22 +10,19 @@ export function middleware(req: NextRequest) {
     const isAdminRoute = path.startsWith("/admin");
     const isUserRoute = path.startsWith("/user");
 
-    // 🔐 si no está logueado
     if ((isAdminRoute || isUserRoute) && !token) {
         return NextResponse.redirect(new URL("/auth/login", req.url));
     }
 
-    // 🚫 si ya está logueado no entra a login
+
     if (isLogin && token) {
         return NextResponse.redirect(new URL(role === "admin" ? "/admin/dashboard" : "/user/dashboard", req.url));
     }
 
-    // 🔥 ADMIN SOLO ADMIN
     if (isAdminRoute && role !== "admin") {
         return NextResponse.redirect(new URL("/403", req.url));
     }
 
-    // 🔥 USER SOLO USER (opcional pero recomendado)
     if (isUserRoute && role !== "user") {
         return NextResponse.redirect(new URL("/403", req.url));
     }

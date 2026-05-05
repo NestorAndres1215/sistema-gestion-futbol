@@ -6,8 +6,6 @@ import { authGuard } from "@/utils/guard";
 import AdminLayout from "@/app/admin/layout/AdminLayout";
 import styles from "@/styles/dashboard-admin.module.css";
 
-// ─── Datos mock ───────────────────────────────────────────────────────────────
-
 const METRICS = [
   { label: "Jugadores registrados", value: "247",  delta: "+12 este mes",        up: true,  icon: "fa-solid fa-futbol",        color: "green"  },
   { label: "Partidos jugados",       value: "38",   delta: "Temporada 2025/26",   up: true,  icon: "fa-solid fa-whistle",       color: "blue"   },
