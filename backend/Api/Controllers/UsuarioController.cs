@@ -30,10 +30,13 @@ public class UsuarioController : ControllerBase
     public async Task<IActionResult> GetAll(
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 10,
-        [FromQuery] string? search = null
+        [FromQuery] string? search = null,
+        [FromQuery] string? estado = null,
+         [FromQuery] string? rol = null
+
     )
     {
-        var result = await _service.GetAllAsync(page, pageSize, search);
+        var result = await _service.GetAllAsync(page, pageSize, search,estado, rol);
         return Ok(result);
     }
 
@@ -63,15 +66,16 @@ public class UsuarioController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] UsuarioDto user)
     {
-        await _service.UpdateAsync(id, user);
-        return Ok("Usuario actualizado");
+        var updatedUser = await _service.UpdateAsync(id, user);
+
+        return Ok(updatedUser);
     }
 
-
-    [HttpPatch("estado/{id}")]
-    public async Task<IActionResult> UpdateEstado(int id, [FromQuery] string estado)
+    [HttpPut("estado/{id}")]
+    public async Task<IActionResult> UpdateEstado(int id)
     {
-        await _service.UpdateEstadoAsync(id, estado);
-        return Ok("Estado actualizado");
+      
+        var updatedUser = await _service.UpdateEstadoAsync(id);
+        return Ok(updatedUser);
     }
 }

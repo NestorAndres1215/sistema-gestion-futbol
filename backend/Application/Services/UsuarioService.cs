@@ -25,19 +25,29 @@ public class UsuarioService : IUsuarioService
     {
         return await _repo.GetByIdAsync(id);
     }
-    /*
-    public async Task<List<Usuario>> GetAllAsync()
-    {
-        return await _repo.GetAllAsync();
-    }*/
+
     public async Task<PagedResult<Usuario>> GetAllAsync(
-       int page,
-       int pageSize,
-       string? search
-   )
+          int page,
+      int pageSize,
+      string? search,
+      string? estado,
+      string? rol
+    )
     {
-   
-        return await _repo.GetAllAsync(page, pageSize, search);
+
+        page = page < 1 ? 1 : page;
+        pageSize = pageSize < 1 ? 10 : pageSize;
+
+        if (pageSize > 100)
+            pageSize = 100;
+
+        search = search?.Trim();
+        estado = estado?.Trim();
+
+        if (!string.IsNullOrEmpty(estado))
+            estado = estado.ToUpper();
+
+        return await _repo.GetAllAsync(page, pageSize, search, estado,rol);
     }
 
     public async Task<Usuario> GetByEmailAsync(string email)
@@ -45,7 +55,7 @@ public class UsuarioService : IUsuarioService
         return await _repo.GetByEmailAsync(email);
     }
 
-    public async Task UpdateAsync(int id, UsuarioDto user)
+    public async Task<Usuario> UpdateAsync(int id, UsuarioDto user)
     {
         var entity = await _repo.GetByIdAsync(id)
             ?? throw new NotFoundException("Usuario no encontrado");
@@ -53,11 +63,16 @@ public class UsuarioService : IUsuarioService
         entity.Username = user.Username;
         entity.Email = user.Email;
 
-        await _repo.UpdateAsync(entity);
+        return await _repo.UpdateAsync(entity);
+ 
     }
 
-    public async Task UpdateEstadoAsync(int id, string estado)
+    public async Task<Usuario> UpdateEstadoAsync(int id)
     {
-        await _repo.UpdateEstadoAsync(id, estado);
+
+        var entity = await _repo.GetByIdAsync(id)
+           ?? throw new NotFoundException("Usuario no encontrado");
+        entity .Estado = Estado.Inactivo;
+        return  await _repo.UpdateAsync(entity);
     }
 }
