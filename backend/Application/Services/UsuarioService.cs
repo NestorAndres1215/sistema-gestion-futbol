@@ -9,12 +9,11 @@ namespace Application.Services;
 public class UsuarioService : IUsuarioService
 {
     private readonly IUsuarioRepository _repo;
-    private readonly IPasswordHasher _hasher;
+  
 
-    public UsuarioService(IUsuarioRepository repo, IPasswordHasher hasher)
+    public UsuarioService(IUsuarioRepository repo)
     {
         _repo = repo;
-        _hasher = hasher;
     }
 
 
@@ -47,7 +46,7 @@ public class UsuarioService : IUsuarioService
         return await _repo.GetAllAsync(page, pageSize, search, estado,rol);
     }
 
-    public async Task<Usuario?> GetByEmailAsync(string email)
+    public async Task<Usuario> GetByEmailAsync(string email)
     {
         return await _repo.GetByEmailAsync(email);
     }

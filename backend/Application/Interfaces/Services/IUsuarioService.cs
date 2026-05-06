@@ -1,6 +1,4 @@
-﻿
-using Application.Dto;
-
+﻿using Application.Dto;
 namespace Application.Interfaces.Services;
 
 public interface IUsuarioService

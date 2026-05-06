@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
+namespace Domain.Enums;
 
-namespace Domain.Enums
+public enum Genero
 {
-    public enum Genero
-    {
-        Masculino,
-        Femenino,
-        Mixto
-    }
+    Masculino,
+    Femenino,
+    Mixto
 }

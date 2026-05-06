@@ -1,5 +1,4 @@
 ﻿using Application.Interfaces.Services;
-using BCrypt.Net;
 
 namespace Infrastructure.Auth;
 

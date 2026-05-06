@@ -1,8 +1,5 @@
 ﻿using Application.Dto;
 using Application.Interfaces.Services;
-using Application.Services;
-using Domain.Entities;
-using Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,13 +19,9 @@ public class CategoriaController : ControllerBase
 
 
     [HttpGet]
-    public async Task<IActionResult> GetAll(
-        [FromQuery] int page = 1,
-        [FromQuery] int pageSize = 10,
-        [FromQuery] string? search = null
-        )
+    public async Task<IActionResult> GetAll()
     {
-        return Ok(await _service.GetAllAsync(page, pageSize, search));
+        return Ok(await _service.GetAllAsync());
     }
 
     [HttpGet("{id}")]

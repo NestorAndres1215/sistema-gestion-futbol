@@ -1,9 +1,8 @@
-﻿
+﻿using Application.Common.Exceptions;
 using Application.Dto;
 using Application.Interfaces.Repositories;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace Infrastructure.Repositories;
 
@@ -16,18 +15,20 @@ public class UsuarioRepository : IUsuarioRepository
         _context = context;
     }
 
-    public async Task<Usuario?> GetByEmailAsync(string email)
+    public async Task<Usuario> GetByIdAsync(int id)
     {
         return await _context.Usuarios
             .Include(x => x.Rol)
-            .FirstOrDefaultAsync(x => x.Email == email);
+            .SingleOrDefaultAsync(x => x.Id == id)
+            ?? throw new NotFoundException("Usuario no encontrado");
     }
 
-    public async Task<Usuario?> GetByIdAsync(int id)
+    public async Task<Usuario> GetByEmailAsync(string email)
     {
         return await _context.Usuarios
             .Include(x => x.Rol)
-            .FirstOrDefaultAsync(x => x.Id == id);
+            .SingleOrDefaultAsync(x => x.Email == email)
+            ?? throw new NotFoundException("Usuario no encontrado");
     }
 
     public async Task<PagedResult<Usuario>> GetAllAsync(int page,int pageSize,string? search,string? estado,string? rol)
