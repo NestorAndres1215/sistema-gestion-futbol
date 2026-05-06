@@ -7,56 +7,56 @@ import AdminLayout from "@/app/admin/layout/AdminLayout";
 import styles from "@/styles/dashboard-admin.module.css";
 
 const METRICS = [
-  { label: "Jugadores registrados", value: "247",  delta: "+12 este mes",        up: true,  icon: "fa-solid fa-futbol",        color: "green"  },
-  { label: "Partidos jugados",       value: "38",   delta: "Temporada 2025/26",   up: true,  icon: "fa-solid fa-whistle",       color: "blue"   },
-  { label: "Goles anotados",         value: "84",   delta: "+6 vs temporada ant.",up: true,  icon: "fa-solid fa-bullseye",      color: "amber"  },
-  { label: "Lesionados",             value: "3",    delta: "2 en recuperación",   up: false, icon: "fa-solid fa-kit-medical",   color: "red"    },
+  { label: "Jugadores registrados", value: "247", delta: "+12 este mes", up: true, icon: "fa-solid fa-futbol", color: "green" },
+  { label: "Partidos jugados", value: "38", delta: "Temporada 2025/26", up: true, icon: "fa-solid fa-whistle", color: "blue" },
+  { label: "Goles anotados", value: "84", delta: "+6 vs temporada ant.", up: true, icon: "fa-solid fa-bullseye", color: "amber" },
+  { label: "Lesionados", value: "3", delta: "2 en recuperación", up: false, icon: "fa-solid fa-kit-medical", color: "red" },
 ];
 
 const PROXIMOS_PARTIDOS = [
-  { id: 1, rival: "Sporting FC",    fecha: "Sáb 10 May", hora: "15:00", local: true,  liga: "Liga Pro" },
-  { id: 2, rival: "Atlético Norte", fecha: "Mar 13 May", hora: "20:30", local: false, liga: "Copa"     },
-  { id: 3, rival: "Real Oeste",     fecha: "Dom 18 May", hora: "17:00", local: true,  liga: "Liga Pro" },
+  { id: 1, rival: "Sporting FC", fecha: "Sáb 10 May", hora: "15:00", local: true, liga: "Liga Pro" },
+  { id: 2, rival: "Atlético Norte", fecha: "Mar 13 May", hora: "20:30", local: false, liga: "Copa" },
+  { id: 3, rival: "Real Oeste", fecha: "Dom 18 May", hora: "17:00", local: true, liga: "Liga Pro" },
 ];
 
 const ULTIMOS_RESULTADOS = [
-  { id: 1, rival: "Dynamo Sur",    gf: 3, gc: 1 },
-  { id: 2, rival: "FC Montaña",    gf: 0, gc: 0 },
+  { id: 1, rival: "Dynamo Sur", gf: 3, gc: 1 },
+  { id: 2, rival: "FC Montaña", gf: 0, gc: 0 },
   { id: 3, rival: "Unión Central", gf: 2, gc: 3 },
   { id: 4, rival: "Estrella Azul", gf: 1, gc: 0 },
-  { id: 5, rival: "Rápido FC",     gf: 4, gc: 2 },
+  { id: 5, rival: "Rápido FC", gf: 4, gc: 2 },
 ];
 
 const TOP_GOLEADORES = [
-  { id: 1, nombre: "Marcos Delgado", pos: "DEL", goles: 18, asist: 6,  pct: 90 },
-  { id: 2, nombre: "Luis Herrera",   pos: "MED", goles: 11, asist: 9,  pct: 55 },
-  { id: 3, nombre: "Jorge Castillo", pos: "DEL", goles: 9,  asist: 4,  pct: 45 },
-  { id: 4, nombre: "Pablo Ríos",     pos: "MED", goles: 7,  asist: 12, pct: 35 },
-  { id: 5, nombre: "Andrés Mora",    pos: "DEF", goles: 4,  asist: 2,  pct: 20 },
+  { id: 1, nombre: "Marcos Delgado", pos: "DEL", goles: 18, asist: 6, pct: 90 },
+  { id: 2, nombre: "Luis Herrera", pos: "MED", goles: 11, asist: 9, pct: 55 },
+  { id: 3, nombre: "Jorge Castillo", pos: "DEL", goles: 9, asist: 4, pct: 45 },
+  { id: 4, nombre: "Pablo Ríos", pos: "MED", goles: 7, asist: 12, pct: 35 },
+  { id: 5, nombre: "Andrés Mora", pos: "DEF", goles: 4, asist: 2, pct: 20 },
 ];
 
 const CLASIFICACION = [
-  { pos: 1, equipo: "Sporting FC",   pj: 30, pts: 68, dif: "+28", propio: false },
-  { pos: 2, equipo: "FC Montaña",    pj: 30, pts: 61, dif: "+19", propio: false },
-  { pos: 3, equipo: "Mi Equipo",     pj: 30, pts: 58, dif: "+14", propio: true  },
-  { pos: 4, equipo: "Dynamo Sur",    pj: 30, pts: 52, dif: "+8",  propio: false },
-  { pos: 5, equipo: "Unión Central", pj: 30, pts: 47, dif: "+2",  propio: false },
+  { pos: 1, equipo: "Sporting FC", pj: 30, pts: 68, dif: "+28", propio: false },
+  { pos: 2, equipo: "FC Montaña", pj: 30, pts: 61, dif: "+19", propio: false },
+  { pos: 3, equipo: "Mi Equipo", pj: 30, pts: 58, dif: "+14", propio: true },
+  { pos: 4, equipo: "Dynamo Sur", pj: 30, pts: 52, dif: "+8", propio: false },
+  { pos: 5, equipo: "Unión Central", pj: 30, pts: 47, dif: "+2", propio: false },
 ];
 
 const ESTADO_EQUIPO = [
-  { label: "Disponibles",       value: "22", icon: "fa-solid fa-circle-check",    color: "green" },
-  { label: "Lesionados",        value: "3",  icon: "fa-solid fa-kit-medical",      color: "red"   },
-  { label: "Suspendidos",       value: "1",  icon: "fa-solid fa-ban",              color: "amber" },
-  { label: "En duda",           value: "2",  icon: "fa-solid fa-circle-question",  color: "blue"  },
-  { label: "Sub-23 en cantera", value: "14", icon: "fa-solid fa-seedling",         color: "green" },
+  { label: "Disponibles", value: "22", icon: "fa-solid fa-circle-check", color: "green" },
+  { label: "Lesionados", value: "3", icon: "fa-solid fa-kit-medical", color: "red" },
+  { label: "Suspendidos", value: "1", icon: "fa-solid fa-ban", color: "amber" },
+  { label: "En duda", value: "2", icon: "fa-solid fa-circle-question", color: "blue" },
+  { label: "Sub-23 en cantera", value: "14", icon: "fa-solid fa-seedling", color: "green" },
 ];
 
 // ─── Helper resultado ─────────────────────────────────────────────────────────
 
 function resultado(gf: number, gc: number): { label: string; key: string } {
-  if (gf > gc) return { label: "V", key: "win"  };
+  if (gf > gc) return { label: "V", key: "win" };
   if (gf < gc) return { label: "D", key: "loss" };
-  return              { label: "E", key: "draw" };
+  return { label: "E", key: "draw" };
 }
 
 // ─── Componente ───────────────────────────────────────────────────────────────
@@ -72,7 +72,6 @@ export default function Dashboard() {
     <AdminLayout pageTitle="Dashboard" pageSubtitle="Temporada 2025 / 2026">
       <div className={styles.dashboard}>
 
-        {/* ── Métricas ── */}
         <section className={styles.metrics}>
           {METRICS.map((m) => (
             <div key={m.label} className={`${styles.metricCard} ${styles[m.color]}`}>
@@ -91,10 +90,9 @@ export default function Dashboard() {
           ))}
         </section>
 
-        {/* ── Fila principal ── */}
         <section className={styles.mainRow}>
 
-          {/* Top goleadores */}
+
           <div className={styles.card}>
             <div className={styles.cardHead}>
               <div>
@@ -127,7 +125,6 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Últimos resultados */}
           <div className={styles.card}>
             <div className={styles.cardHead}>
               <div>
@@ -165,10 +162,10 @@ export default function Dashboard() {
 
         </section>
 
-        {/* ── Fila inferior ── */}
+
         <section className={styles.bottomRow}>
 
-          {/* Próximos partidos */}
+
           <div className={styles.card}>
             <div className={styles.cardHead}>
               <div className={styles.cardTitle}>
@@ -195,7 +192,6 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Clasificación */}
           <div className={styles.card}>
             <div className={styles.cardHead}>
               <div className={styles.cardTitle}>
@@ -227,7 +223,6 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Estado del equipo */}
           <div className={styles.card}>
             <div className={styles.cardHead}>
               <div className={styles.cardTitle}>

@@ -28,7 +28,7 @@ const request = async (url: string, options: RequestInit = {}) => {
   return res.json();
 };
 
-// Métodos tipo Angular HttpClient
+
 export const api = {
   get: (url: string) => request(url),
   post: (url: string, body: any) =>

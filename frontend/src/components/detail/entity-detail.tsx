@@ -1,6 +1,6 @@
 
 
-import { Field } from "./detail.type";
+import { Field } from "./entity-detail.type";
 import styles from "./entity-detail.module.css";
 
 export default function EntityDetail({ fields }: { fields: Field[]; }) {
