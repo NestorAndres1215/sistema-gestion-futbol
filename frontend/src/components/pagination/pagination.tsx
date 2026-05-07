@@ -5,7 +5,7 @@ import { Props } from "./pagination.types";
 
 export default function Pagination({ currentPage, totalPages, onPageChange }: Props) {
   return (
-    <div className={styles.wrapper}>
+  <div className="d-flex justify-content-center align-items-center gap-1 mt-3">
       {/* Anterior */}
       <button
         className={styles.btn}

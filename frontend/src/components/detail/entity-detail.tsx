@@ -5,7 +5,7 @@ import styles from "./entity-detail.module.css";
 
 export default function EntityDetail({ fields }: { fields: Field[]; }) {
   return (
-    <div className={styles.wrapper}>
+    <div className="d-flex flex-column gap-4">
       <div className={styles.fieldsList}>
         {fields.map((f, i) => (
           <div key={i} className={styles.fieldRow}>

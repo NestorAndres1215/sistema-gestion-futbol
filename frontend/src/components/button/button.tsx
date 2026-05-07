@@ -4,13 +4,11 @@ import styles from "./button.module.css";
 
 type ActionButtonProps = {
   mode?: "create" | "update" | "detail" | "delete";
-  disabled?: boolean;
   onClick?: () => void;
 };
 
 export default function ActionButton({
   mode = "create",
-  disabled = false,
   onClick,
 }: ActionButtonProps) {
   const config = {
@@ -25,7 +23,6 @@ export default function ActionButton({
   return (
     <button
       type="button"
-      disabled={disabled}
       onClick={onClick}
       className={`${styles.btn} ${style}`}
     >
