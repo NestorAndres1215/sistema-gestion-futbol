@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════
-   stats-table.module.css — Nexus Admin
-═══════════════════════════════════════════════ */
-
 .container {
   background: #13161e;
   border: 1px solid rgba(255,255,255,0.06);
@@ -9,7 +5,6 @@
   overflow: hidden;
 }
 
-/* ── Header ─────────────────────────────────── */
 .head {
   display: flex;
   align-items: center;
@@ -32,7 +27,6 @@
   margin: 0;
 }
 
-/* ── Table ──────────────────────────────────── */
 .tableWrap {
   overflow-x: auto;
 }
@@ -79,7 +73,6 @@
   color: #cbd5e1;
 }
 
-/* ── Accent cell (valores destacados) ───────── */
 .accentCell {
   color: #f0f4f8 !important;
   font-weight: 600;
