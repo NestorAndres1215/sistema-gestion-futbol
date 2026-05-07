@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { authGuard } from "@/utils/guard";
 import AdminLayout from "@/app/admin/layout/AdminLayout";
-import styles from "@/styles/dashboard-admin.module.css";
+import styles from "./dashboard-admin.module.css";
 
 const METRICS = [
   { label: "Jugadores registrados", value: "247", delta: "+12 este mes", up: true, icon: "fa-solid fa-futbol", color: "green" },
@@ -59,7 +59,7 @@ function resultado(gf: number, gc: number): { label: string; key: string } {
   return { label: "E", key: "draw" };
 }
 
-// ─── Componente ───────────────────────────────────────────────────────────────
+
 
 export default function Dashboard() {
   const router = useRouter();

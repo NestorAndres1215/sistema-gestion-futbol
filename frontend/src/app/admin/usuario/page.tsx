@@ -40,7 +40,6 @@ export default function UsersPage() {
       options: [
         { label: "Admin", value: "admin" },
         { label: "Usuario", value: "usuario" },
-        { label: "Supervisor", value: "supervisor" },
       ],
     },
   ];
@@ -83,8 +82,7 @@ export default function UsersPage() {
     }));
     setPage(1);
   };
-
-
+  
   const handleFilter = (newFilters: any) => {
     setQuery((prev) => ({
       ...prev,

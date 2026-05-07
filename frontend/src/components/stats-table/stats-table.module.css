@@ -1,0 +1,92 @@
+/* ═══════════════════════════════════════════════
+   stats-table.module.css — Nexus Admin
+═══════════════════════════════════════════════ */
+
+.container {
+  background: #13161e;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* ── Header ─────────────────────────────────── */
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.headIcon {
+  color: #6ee7b7;
+  font-size: 13px;
+}
+
+.headTitle {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #f0f4f8;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* ── Table ──────────────────────────────────── */
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead th {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #2d3748;
+  padding: 10px 12px 10px 20px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  white-space: nowrap;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.1s ease;
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background: rgba(255,255,255,0.02);
+}
+
+.table tbody td {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: #8892a4;
+  padding: 11px 12px 11px 20px;
+  white-space: nowrap;
+}
+
+.table tbody td:first-child {
+  color: #cbd5e1;
+}
+
+/* ── Accent cell (valores destacados) ───────── */
+.accentCell {
+  color: #f0f4f8 !important;
+  font-weight: 600;
+}
+
+.posBadge { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 5px; letter-spacing: 0.05em; }
+.posDEL { background: rgba(248,113,113,0.12); color: #f87171; }
+.posMED { background: rgba(96,165,250,0.12);  color: #60a5fa; }
+.posDEF { background: rgba(251,191,36,0.12);  color: #fbbf24; }
+.posPOR { background: rgba(167,139,250,0.12); color: #a78bfa; }

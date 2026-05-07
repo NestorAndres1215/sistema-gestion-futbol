@@ -1,0 +1,188 @@
+/* ═══════════════════════════════════════════════
+   group-table.module.css — Nexus Admin
+═══════════════════════════════════════════════ */
+
+.container {
+  background: #13161e;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* ── Header ─────────────────────────────────── */
+.head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 20px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.headIcon {
+  color: #6ee7b7;
+  font-size: 13px;
+}
+
+.headTitle {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #f0f4f8;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* ── Table ──────────────────────────────────── */
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead th {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #2d3748;
+  padding: 10px 12px 10px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  white-space: nowrap;
+}
+
+.table thead th:nth-child(2) {
+  text-align: left;
+}
+
+.table thead th:first-child {
+  width: 36px;
+  padding-left: 20px;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  transition: background 0.1s ease;
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table tbody tr:hover {
+  background: rgba(255,255,255,0.02);
+}
+
+.table tbody td {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: #8892a4;
+  padding: 10px 12px 10px 20px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.table tbody td:nth-child(2) {
+  text-align: left;
+}
+
+/* ── Row states ─────────────────────────────── */
+.qualified {
+  border-left: 3px solid #6ee7b7;
+}
+
+.qualified .posCell {
+  padding-left: 17px;
+}
+
+.qualified .teamName {
+  color: #f0f4f8;
+}
+
+.playoff {
+  border-left: 3px solid #fbbf24;
+}
+
+.playoff .posCell {
+  padding-left: 17px;
+}
+
+/* ── Cells ──────────────────────────────────── */
+.posCell {
+  color: #2d3748 !important;
+  font-size: 11px;
+  width: 36px;
+  padding-left: 20px;
+}
+
+.ptsCell {
+  color: #f0f4f8 !important;
+  font-weight: 600;
+}
+
+/* ── Team cell ──────────────────────────────── */
+.teamCell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.teamAvatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #4a5568;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.teamAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.teamName {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+/* ── Legends ────────────────────────────────── */
+.legends {
+  display: flex;
+  gap: 16px;
+  padding: 12px 20px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #4a5568;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.dotQualified { background: #6ee7b7; }
+.dotPlayoff   { background: #fbbf24; }

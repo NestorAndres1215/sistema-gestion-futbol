@@ -74,7 +74,7 @@ const NAV_SECTIONS: NavSection[] = [
   {
     title: "Competición",
     items: [
-      { id: "tournament", label: "Torneos", href: "/admin/torneos", icon: Icon.tournament },
+      { id: "tournament", label: "Torneos", href: "/admin/torneo", icon: Icon.tournament },
       { id: "clubs", label: "Clubes", href: "/admin/clubes", icon: Icon.clubs },
       { id: "selections", label: "Selecciones", href: "/admin/selecciones", icon: Icon.selections },
     ],
