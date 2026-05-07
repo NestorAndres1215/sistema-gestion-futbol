@@ -8,7 +8,7 @@ namespace Application.Interfaces.Repositories
     {
         Task<List<Categoria>> GetAllAsync();
         Task<Categoria> AddAsync(Categoria categoria);
-        Task<Categoria> GetByIdAsync(int id);
-        Task<Categoria> GetByNombreAsync(string nombre);
+        Task<Categoria?> GetByIdAsync(int id);
+        Task<Categoria?> GetByNombreAsync(string nombre);
     }
 }

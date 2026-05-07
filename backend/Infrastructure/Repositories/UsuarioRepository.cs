@@ -15,20 +15,19 @@ public class UsuarioRepository : IUsuarioRepository
         _context = context;
     }
 
-    public async Task<Usuario> GetByIdAsync(int id)
+    public async Task<Usuario?> GetByIdAsync(int id)
     {
         return await _context.Usuarios
+            .AsNoTracking()
             .Include(x => x.Rol)
-            .SingleOrDefaultAsync(x => x.Id == id)
-            ?? throw new NotFoundException("Usuario no encontrado");
+            .SingleOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<Usuario> GetByEmailAsync(string email)
+    public async Task<Usuario?> GetByEmailAsync(string email)
     {
         return await _context.Usuarios
-            .Include(x => x.Rol)
-            .SingleOrDefaultAsync(x => x.Email == email)
-            ?? throw new NotFoundException("Usuario no encontrado");
+                 .Include(x => x.Rol)
+                 .SingleOrDefaultAsync(x => x.Email == email);
     }
 
     public async Task<PagedResult<Usuario>> GetAllAsync(int page,int pageSize,string? search,string? estado,string? rol)
@@ -72,8 +71,8 @@ public class UsuarioRepository : IUsuarioRepository
 
         var items = await query
             .OrderBy(x => x.Id)
-            .Take(pageSize)
             .Skip((page - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
 
         return new PagedResult<Usuario>
@@ -99,4 +98,10 @@ public class UsuarioRepository : IUsuarioRepository
         return user;
     }
 
+    public async Task<Usuario?> GetByUsernameAsync(string username)
+    {
+        return await _context.Usuarios
+          .Include(x => x.Rol)
+          .SingleOrDefaultAsync(x => x.Username == username);
+    }
 }

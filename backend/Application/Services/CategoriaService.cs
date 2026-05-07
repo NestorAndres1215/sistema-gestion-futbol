@@ -38,13 +38,14 @@ public class CategoriaService : ICategoriaService
 
     public async Task<Categoria> GetByIdAsync(int id)
     {
-        return await _repo.GetByIdAsync(id);
+        return await _repo.GetByIdAsync(id)
+            ?? throw new NotFoundException("Categoría no encontrada");
     }
 
     public async Task<Categoria> GetByNombreAsync(string nombre)
     {
-        return await _repo.GetByNombreAsync(nombre);
+        return await _repo.GetByNombreAsync(nombre)
+            ?? throw new NotFoundException("Categoría no encontrada");
     }
-
 }
 

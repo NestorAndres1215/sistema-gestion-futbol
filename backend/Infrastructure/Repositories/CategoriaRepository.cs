@@ -30,18 +30,18 @@ public class CategoriaRepository : ICategoriaRepository
             .ToListAsync();
     }
 
-    public async Task<Categoria> GetByIdAsync(int id)
+    public async Task<Categoria?> GetByIdAsync(int id)
     {
         return await _context.Categorias
-            .SingleOrDefaultAsync(x => x.Id == id)
-            ?? throw new NotFoundException("Categoría no encontrada");
+            .AsNoTracking()
+            .SingleOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<Categoria> GetByNombreAsync(string nombre)
+    public async Task<Categoria?> GetByNombreAsync(string nombre)
     {
         return await _context.Categorias
-            .FirstOrDefaultAsync(x => x.Nombre == nombre)
-            ?? throw new NotFoundException("Categoría no encontrada");
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Nombre == nombre);
     }
 }
 

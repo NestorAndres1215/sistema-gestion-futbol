@@ -1,11 +1,13 @@
 ﻿namespace Domain.Entities;
 
+
 public class Torneo
 {
     public int Id { get; set; }
-    public string Nombre { get; set; } = null!;
-    public string? Tipo { get; set; }
-    public string Genero { get; set; }
+
+    public required string Nombre { get; set; }
+    public string Tipo { get; set; }=string.Empty;
+    public string TipoParticipante { get; set; } = string.Empty;
     public string? Descripcion { get; set; }
     public string Estado { get; set; } = "Activo";
     public DateTime FechaCreacion { get; set; }

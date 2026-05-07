@@ -16,18 +16,18 @@ public class UsuarioService : IUsuarioService
         _repo = repo;
     }
 
-
-    public async Task<Usuario?> GetByIdAsync(int id)
+    public async Task<Usuario> GetByIdAsync(int id)
     {
-        return await _repo.GetByIdAsync(id);
+        return await _repo.GetByIdAsync(id)
+            ?? throw new NotFoundException("Usuario no encontrado");
     }
 
     public async Task<PagedResult<Usuario>> GetAllAsync(
-          int page,
-      int pageSize,
-      string? search,
-      string? estado,
-      string? rol
+        int page,
+        int pageSize,
+        string? search,
+        string? estado,
+        string? rol
     )
     {
 
@@ -48,7 +48,8 @@ public class UsuarioService : IUsuarioService
 
     public async Task<Usuario> GetByEmailAsync(string email)
     {
-        return await _repo.GetByEmailAsync(email);
+        return await _repo.GetByEmailAsync(email)
+            ?? throw new NotFoundException("Usuario no encontrado");
     }
 
     public async Task<Usuario> UpdateAsync(int id, UsuarioDto user)
