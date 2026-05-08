@@ -11,13 +11,11 @@ export default function UserDetailPage() {
   const { id } = useParams();
 
   const [user, setUser] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
       const res = await getUserById(Number(id));
       setUser(res);
-      setLoading(false);
     };
 
     if (id) fetchUser();
@@ -25,7 +23,7 @@ export default function UserDetailPage() {
 
   return (
     <AdminLayout pageTitle="Detalle Usuario" pageSubtitle="Información">
-      
+
       <Breadcrumb items={[
         { label: "Usuario", href: "/admin/usuario" },
         { label: "Detalle Usuario" },
