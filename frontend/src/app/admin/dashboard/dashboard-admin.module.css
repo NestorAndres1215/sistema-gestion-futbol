@@ -1,20 +1,3 @@
-/* ═══════════════════════════════════════════════
-   Dashboard.module.css — Nexus Admin
-═══════════════════════════════════════════════ */
-
-.dashboard {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* ── Métricas ───────────────────────────────── */
-.metrics {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-}
-
 .metricCard {
   background: #13161e;
   border: 1px solid rgba(255,255,255,0.06);
@@ -28,13 +11,6 @@
 .metricCard:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-}
-
-.metricTop {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 14px;
 }
 
 .metricLabel {
@@ -57,7 +33,6 @@
   flex-shrink: 0;
 }
 
-/* colores por variante */
 .green  .metricIconWrap { background: rgba(110,231,183,0.12); color: #6ee7b7; }
 .blue   .metricIconWrap { background: rgba(96,165,250,0.12);  color: #60a5fa; }
 .amber  .metricIconWrap { background: rgba(251,191,36,0.12);  color: #fbbf24; }
@@ -87,21 +62,6 @@
 .deltaUp   { color: #6ee7b7; background: rgba(110,231,183,0.1); }
 .deltaDown { color: #f87171; background: rgba(248,113,113,0.1); }
 
-/* ── Fila principal ─────────────────────────── */
-.mainRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-/* ── Fila inferior ──────────────────────────── */
-.bottomRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 14px;
-}
-
-/* ── Card base ──────────────────────────────── */
 .card {
   background: #13161e;
   border: 1px solid rgba(255,255,255,0.06);
@@ -139,7 +99,6 @@
   margin-top: 4px;
 }
 
-/* ── Top goleadores ─────────────────────────── */
 .goleadoresList {
   padding: 16px 20px 20px;
   display: flex;
@@ -240,7 +199,6 @@
 .posMED { background: rgba(96,165,250,0.12);  color: #60a5fa; }
 .posDEF { background: rgba(251,191,36,0.12);  color: #fbbf24; }
 
-/* ── Últimos resultados ─────────────────────── */
 .forma {
   display: flex;
   gap: 4px;
@@ -314,7 +272,6 @@
   margin: 0 3px;
 }
 
-/* ── Próximos partidos ──────────────────────── */
 .partidosList {
   padding: 14px 20px 20px;
   display: flex;
@@ -380,7 +337,7 @@
 .home { background: rgba(110,231,183,0.12); color: #6ee7b7; }
 .away { background: rgba(96,165,250,0.12);  color: #60a5fa; }
 
-/* ── Clasificación ──────────────────────────── */
+
 .tablaWrap {
   padding: 14px 20px 20px;
   overflow-x: auto;
@@ -505,20 +462,4 @@
   font-size: 14px;
   font-weight: 600;
   color: #f0f4f8;
-}
-
-/* ── Responsive ─────────────────────────────── */
-@media (max-width: 1200px) {
-  .metrics    { grid-template-columns: repeat(2, 1fr); }
-  .bottomRow  { grid-template-columns: 1fr 1fr; }
-}
-
-@media (max-width: 768px) {
-  .metrics   { grid-template-columns: 1fr 1fr; }
-  .mainRow   { grid-template-columns: 1fr; }
-  .bottomRow { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 480px) {
-  .metrics { grid-template-columns: 1fr; }
 }
