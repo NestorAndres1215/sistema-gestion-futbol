@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useLogin } from "@/hooks/useLogin";
 import { useAuthRedirect } from "@/hooks/useAuthRedirect";
 import styles from "./login.module.css";
+import ActionButton from "@/components/button/button";
 
 export default function LoginPage() {
     const router = useRouter();
@@ -116,13 +117,8 @@ export default function LoginPage() {
                             </div>
                         </div>
 
-                        <button
-                            type="submit"
-                            className={styles.btnSubmit}
-                        >
-                            <i className="fa-solid fa-right-to-bracket" />
-                            "Iniciar sesión"
-                        </button>
+
+                        <ActionButton mode="create" type="submit" />
                     </form>
                 </div>
             </div>

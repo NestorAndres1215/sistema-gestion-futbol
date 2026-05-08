@@ -32,8 +32,6 @@
   left: -100px;
 }
 
-
-
 .page {
   position: relative;
   z-index: 1;
@@ -45,7 +43,6 @@
   padding: 24px;
   font-family: 'DM Sans', sans-serif;
 }
-
 
 .logoMark {
   width: 52px;
@@ -75,7 +72,6 @@
 }
 
 
-/* ── Card ───────────────────────────────────────── */
 .card {
   width: 100%;
   max-width: 420px;
@@ -102,7 +98,6 @@
   font-family: 'DM Mono', 'Courier New', monospace;
 }
  
-/* ── Campos ─────────────────────────────────────── */
 .field {
   margin-bottom: 18px;
 }
@@ -125,7 +120,7 @@
   font-family: 'DM Mono', 'Courier New', monospace;
 }
  
-/* Cuando está dentro de labelRow no necesita margin-bottom */
+
 .labelRow .label {
   margin-bottom: 0;
 }
@@ -159,12 +154,7 @@
   color: #6ee7b7;
 }
  
-/* 
-  IMPORTANTE: esta clase NO se llama "input" para evitar
-  cualquier colisión con estilos globales de Bootstrap.
-  Si tienes Bootstrap en globals.css, sus reglas de .form-control
-  no afectan a .input del módulo porque Next.js los scopes.
-*/
+
 .input {
   flex: 1;
   background: transparent;
@@ -199,7 +189,6 @@
   color: #6ee7b7;
 }
  
-/* ── ¿Olvidaste contraseña? ─────────────────────── */
 .forgot {
   font-size: 11px;
   color: #6ee7b7;
@@ -215,55 +204,7 @@
 }
  
 
- 
-/* ── Botón submit ───────────────────────────────── */
-.btnSubmit {
-  width: 100%;
-  margin-top: 8px;
-  background: linear-gradient(135deg, #6ee7b7 0%, #34d399 100%);
-  color: #0a0d13;
-  border: none;
-  border-radius: 10px;
-  padding: 13px;
-  font-family: 'Syne', 'Segoe UI', sans-serif;
-  font-weight: 800;
-  font-size: 15px;
-  letter-spacing: -0.01em;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  box-shadow: 0 4px 20px rgba(110, 231, 183, 0.2);
-  transition: filter 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
-}
- 
-.btnSubmit:hover:not(:disabled) {
-  filter: brightness(1.06);
-  box-shadow: 0 6px 28px rgba(110, 231, 183, 0.35);
-}
- 
-.btnSubmit:active:not(:disabled) {
-  transform: scale(0.99);
-}
- 
-.btnSubmit:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
- 
-/* ── Spinner ────────────────────────────────────── */
-.spin {
-  animation: spin 0.7s linear infinite;
-}
- 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
- 
-/* ── Responsive ─────────────────────────────────── */
+
 @media (max-width: 480px) {
   .card {
     padding: 28px 20px;

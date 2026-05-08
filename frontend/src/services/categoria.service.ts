@@ -1,8 +1,8 @@
 import { api } from "./api.service";
 
 export const getCategories = async () => {
-  const response = await api.get(`/categorias`);
-  return response.data;
+  const response = await api.get("/categorias");
+  return response; // 👈 SIN .data
 };
 
 export const getCategoryById = async (id: number | string) => {

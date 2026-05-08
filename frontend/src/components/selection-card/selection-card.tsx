@@ -13,7 +13,7 @@ type SelectionCardProps = {
 
 export default function SelectionCard({
   title,
-  description,
+
   icon,
   selected = false,
   disabled = false,
@@ -33,11 +33,9 @@ export default function SelectionCard({
         </div>
       )}
 
-      <h3 className={styles.title}>{title}</h3>
+      <h1 className={styles.title}>{title}</h1>
 
-      {description && (
-        <p className={styles.description}>{description}</p>
-      )}
+
     </button>
   );
 }

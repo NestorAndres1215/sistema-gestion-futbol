@@ -1,18 +1,27 @@
-
 .btn {
   font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  font-weight: 600;
+  font-weight: 800;
+  font-size: 15px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 9px 18px;
+
+   padding: 13px;
   border-radius: 9px;
   border: none;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
+
+
   gap: 7px;
-  transition: opacity 0.15s ease;
+
+
+  height: auto;     /* 🔥 no controla alto */
+  flex: 0 0 auto;   /* 🔥 evita que flex lo estire */
+   width: 100%;
+
+     cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn i {

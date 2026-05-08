@@ -39,7 +39,7 @@ export default function UsersPage() {
       placeholder: "Rol",
       options: [
         { label: "Admin", value: "admin" },
-        { label: "Usuario", value: "usuario" },
+        { label: "Usuario", value: "user" },
       ],
     },
   ];
