@@ -207,9 +207,16 @@ export default function FormTorneo() {
                         </div>
                     </div>
 
-                    <div className={styles.actions}>
-                        <ActionButton mode="clear" onClick={limpiarFormulario} />
-                        <ActionButton mode="create" onClick={registrarTorneo} />
+                    <div className="row g-2 mt-3">
+
+                        <div className="col-12 col-sm-6">
+                            <ActionButton mode="clear" onClick={limpiarFormulario} />
+                        </div>
+
+                        <div className="col-12 col-sm-6">
+                            <ActionButton mode="create" onClick={registrarTorneo} />
+                        </div>
+
                     </div>
                 </form>
             </div>

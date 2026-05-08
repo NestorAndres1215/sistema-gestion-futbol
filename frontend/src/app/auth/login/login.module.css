@@ -98,17 +98,6 @@
   font-family: 'DM Mono', 'Courier New', monospace;
 }
  
-.field {
-  margin-bottom: 18px;
-}
- 
-.labelRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
- 
 .label {
   display: block;
   font-size: 10.5px;
@@ -120,10 +109,6 @@
   font-family: 'DM Mono', 'Courier New', monospace;
 }
  
-
-.labelRow .label {
-  margin-bottom: 0;
-}
  
 .inputWrap {
   display: flex;
@@ -154,7 +139,6 @@
   color: #6ee7b7;
 }
  
-
 .input {
   flex: 1;
   background: transparent;
@@ -203,7 +187,6 @@
   opacity: 1;
 }
  
-
 
 @media (max-width: 480px) {
   .card {
