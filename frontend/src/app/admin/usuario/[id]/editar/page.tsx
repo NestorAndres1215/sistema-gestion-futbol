@@ -8,6 +8,7 @@ import { UsuarioModel } from "../../usuario.model";
 import { SwalService } from "@/services/swal/swal.service";
 import styles from "./editar-usuario.module.css";
 import Breadcrumb from "@/components/bread-crumb/bread-cumb";
+import ActionButton from "@/components/button/button";
 export default function EditUserPage() {
   const { id } = useParams();
   const router = useRouter();
@@ -115,22 +116,17 @@ export default function EditUserPage() {
             </div>
           </div>
 
-          <div className={styles.actions}>
-            <button
-              type="button"
-              className={styles.btnCancel}
-              onClick={() => router.push("/admin/usuario")}
-            >
-              <i className="fa-solid fa-xmark" />
-              Cancelar
-            </button>
-            <button type="submit" disabled={saving} className={styles.btnSave}>
-              {saving
-                ? <i className={`fa-solid fa-circle-notch ${styles.spin}`} />
-                : <i className="fa-solid fa-floppy-disk" />
-              }
-              {saving ? "Guardando..." : "Guardar cambios"}
-            </button>
+          <div className="row g-2">
+            <div className="col-12 col-md-6">
+              <ActionButton
+                mode="cancelar"
+                onClick={() => router.push("/admin/usuario")}
+              />
+            </div>
+
+            <div className="col-12 col-md-6">
+              <ActionButton mode="update" type="submit" />
+            </div>
           </div>
 
         </form>
