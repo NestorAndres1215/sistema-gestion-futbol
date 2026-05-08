@@ -13,7 +13,6 @@ type SelectionCardProps = {
 
 export default function SelectionCard({
   title,
-
   icon,
   selected = false,
   disabled = false,
