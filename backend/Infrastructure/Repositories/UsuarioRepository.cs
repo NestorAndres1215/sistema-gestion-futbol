@@ -59,11 +59,11 @@ public class UsuarioRepository : IUsuarioRepository
 
         if (!string.IsNullOrWhiteSpace(rol))
         {
-            rol = rol.Trim().ToLower();
+            rol = rol.Trim().ToUpper();
 
             query = query.Where(x =>
                 x.Rol != null &&
-                x.Rol.Nombre.ToLower().Contains(rol)
+                x.Rol.Nombre.ToUpper() == rol
             );
         }
 

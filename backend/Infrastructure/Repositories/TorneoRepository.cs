@@ -28,6 +28,7 @@ public class TorneoRepository : ITorneoRepository
         int pageSize,
         string? search,
         string? tipo,
+        string? tipoParticipante,
         string? estado)
     {
         var query = _context.Torneos
@@ -51,6 +52,16 @@ public class TorneoRepository : ITorneoRepository
             query = query.Where(x =>
                 x.Tipo != null &&
                 x.Tipo.ToUpper() == tipo
+            );
+        }
+
+        if (!string.IsNullOrWhiteSpace(tipoParticipante))
+        {
+            tipoParticipante = tipoParticipante.Trim().ToUpper();
+
+            query = query.Where(x =>
+                x.TipoParticipante != null &&
+                x.TipoParticipante.ToUpper() == tipoParticipante
             );
         }
 

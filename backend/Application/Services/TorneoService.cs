@@ -4,8 +4,6 @@ using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
 
-
-
 namespace Application.Services;
 
 public class TorneoService : ITorneoService
@@ -51,9 +49,14 @@ public class TorneoService : ITorneoService
         return torneo;
     }
 
-    public async Task<PagedResult<Torneo>> GetAllAsync(int page, int pageSize, string? search, string? tipo, string? estado)
+    public async Task<PagedResult<Torneo>> GetAllAsync(int page,
+        int pageSize,
+        string? search,
+        string? tipo,
+        string? tipoParticipante,
+        string? estado)
     {
-        return await _repo.GetAllAsync(page, pageSize, search, tipo, estado);
+        return await _repo.GetAllAsync(page, pageSize, search, tipo, tipoParticipante,estado);
     }
 
     public async Task<Torneo> GetByIdAsync(int id)
