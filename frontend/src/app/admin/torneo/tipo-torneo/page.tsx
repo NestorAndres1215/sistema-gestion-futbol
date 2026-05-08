@@ -13,17 +13,11 @@ export default function TipoTorneo() {
 
 
   const irATorneo = (categoria: string) => {
-    if (categoria === "copa-mundial") {
-      router.push(`/admin/torneo/categoria?tipo=${tipo}&categoria=${categoria}`);
-    } 
-
-    else {
-      router.push(`/admin/torneo/registro?tipo=${tipo}&categoria=${categoria}`);
-    }
+    router.push(`/admin/torneo/listar?tipo=${tipo}&categoria=${categoria}`);
   };
-   const  irFormulario =()=>{
+  const irFormulario = () => {
     router.push(`/admin/torneo/registro?tipo=${tipo}`);
-   }
+  }
   return (
     <AdminLayout>
       <Breadcrumb
@@ -44,7 +38,7 @@ export default function TipoTorneo() {
           <SelectionCard
             icon="fas fa-trophy"
             title="Copa Nacional"
-            onClick={() => console.log("copa-nacional")}
+            onClick={() => irATorneo("copa_nacional")}
           />
         </div>
 
@@ -53,7 +47,7 @@ export default function TipoTorneo() {
             <SelectionCard
               icon="fas fa-futbol"
               title="Ligas"
-              onClick={() => console.log("ligas")}
+              onClick={() => irATorneo("ligas")}
             />
           </div>
         )}
@@ -61,7 +55,7 @@ export default function TipoTorneo() {
           <SelectionCard
             icon="fas fa-globe"
             title="Copa Internacional"
-            onClick={() => console.log("copa-internacional")}
+            onClick={() => irATorneo("copa_internacional")}
           />
         </div>
 
@@ -69,7 +63,7 @@ export default function TipoTorneo() {
           <SelectionCard
             icon="fas fa-calendar"
             title="Temporada"
-            onClick={() => console.log("temporada")}
+            onClick={() => irATorneo("temporada")}
           />
         </div>
 
@@ -79,7 +73,7 @@ export default function TipoTorneo() {
             <SelectionCard
               icon="fas fa-globe"
               title="Copa Mundial"
-              onClick={() => console.log("copa-mundial")}
+              onClick={() => irATorneo("copa_mundial")}
             />
           </div>
         )}
@@ -89,7 +83,7 @@ export default function TipoTorneo() {
             <SelectionCard
               icon="fas fa-medal"
               title="Olimpiadas"
-              onClick={() => console.log("olimpiadas")}
+              onClick={() => irATorneo("olimpiadas")}
             />
           </div>
         )}
