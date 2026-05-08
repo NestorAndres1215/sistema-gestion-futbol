@@ -14,9 +14,9 @@ export default function FilterBar({ onChange, selectFilters = [] }: Props) {
   };
 
   return (
-    <div className={styles.bar}>
+   <div className="d-flex align-items-center flex-wrap gap-2 mb-3">
       {selectFilters.map((filter) => (
-        <div key={filter.key} className={styles.selectWrap}>
+        <div key={filter.key} className="position-relative d-flex align-items-center flex-grow-1" style={{ minWidth: "160px", flex: 2 }}>
           <i className={`fa-solid fa-chevron-down ${styles.selectIcon}`} />
           <select
             value={values[filter.key] || ""}
