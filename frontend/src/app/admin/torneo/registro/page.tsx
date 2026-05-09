@@ -26,8 +26,6 @@ export default function TorneoFormulario() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const tipo = searchParams.get("tipo");
-
-
     const [categorias, setCategorias] = useState<Categoria[]>([]);
     const formRef = useRef<HTMLFormElement>(null);
     useEffect(() => {

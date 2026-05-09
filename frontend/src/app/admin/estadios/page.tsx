@@ -14,7 +14,7 @@ export default function Estadio() {
   return (
     <AdminLayout pageTitle="Estadios" pageSubtitle="Mantenimiento">
 
-      <Breadcrumb items={[{ label: "Selecciona Tipo de Torneo" }]} />
+      <Breadcrumb items={[{ label: "Selecciona Opciones" }]} />
 
       <div className="row g-3">
 

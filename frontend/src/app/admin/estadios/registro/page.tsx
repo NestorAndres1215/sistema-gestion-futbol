@@ -1,13 +1,10 @@
 "use client";
 
 import { useState } from "react";
-
 import Breadcrumb from "@/components/bread-crumb/bread-cumb";
 import AdminLayout from "../../layout/AdminLayout";
 import styles from "./registro-estadio.module.css";
-
 import ActionButton from "@/components/button/button";
-
 import { addEstadio } from "@/services/estadio.service";
 import { useRouter } from "next/navigation";
 
@@ -15,23 +12,36 @@ export default function EstadioFormulario() {
     const router = useRouter();
     const [nombre, setNombre] = useState("");
     const [descripcion, setDescripcion] = useState("");
-
     const [fechaApertura, setFechaApertura] = useState("");
-
     const [anio, setAnio] = useState("");
-
     const [ciudad, setCiudad] = useState("");
-
     const [pais, setPais] = useState("");
-
     const [latitud, setLatitud] = useState("");
     const [longitud, setLongitud] = useState("");
-
     const [capacidad, setCapacidad] = useState("");
-
     const [tipoCesped, setTipoCesped] = useState("");
-
     const [foto, setFoto] = useState<File | null>(null);
+
+    const limpiarFormulario = () => {
+        setNombre("");
+        setDescripcion("");
+        setFechaApertura("");
+        setAnio("");
+        setCiudad("");
+        setPais("");
+        setLatitud("");
+        setLongitud("");
+        setCapacidad("");
+        setTipoCesped("");
+        setFoto(null);
+    };
+
+    const tiposCesped = [
+        { value: "", label: "Selecciona" },
+        { value: "Natural", label: "Natural" },
+        { value: "Sintetico", label: "Sintético" },
+        { value: "Hibrido", label: "Híbrido" },
+    ];
 
     const registrarEstadio = async () => {
 
@@ -64,32 +74,23 @@ export default function EstadioFormulario() {
             }
 
             await addEstadio(formData);
-            router.push("/admin/estadio");
+            router.push("/admin/estadios");
         } catch (error) {
 
             console.error(error);
 
-                        alert("Error al registrar estadio");
+            alert("Error al registrar estadio");
         }
     };
 
     return (
-        <AdminLayout
-            pageTitle="Estadios"
-            pageSubtitle="Mantenimiento"
-        >
+        <AdminLayout pageTitle="Estadios" pageSubtitle="Mantenimiento">
 
             <Breadcrumb
                 items={[
-                    {
-                        label: "Estadios",
-                        href: "/admin/estadios"
-                    },
-                    {
-                        label: "Formulario"
-                    },
-                ]}
-            />
+                    { label: "Estadios", href: "/admin/estadios" },
+                    { label: "Formulario" },
+                ]} />
 
             <div className={styles.card}>
 
@@ -99,14 +100,8 @@ export default function EstadioFormulario() {
                     </p>
                 </div>
 
-                <form
-                    noValidate
-                    className={styles.form}
-                >
-
-                    {/* NOMBRE */}
+                <form noValidate className={styles.form}>
                     <div className={styles.field}>
-
                         <label className={styles.label}>
                             Nombre
                         </label>
@@ -127,7 +122,6 @@ export default function EstadioFormulario() {
 
                     </div>
 
-                    {/* DESCRIPCIÓN */}
                     <div className={styles.field}>
 
                         <label className={styles.label}>
@@ -150,7 +144,6 @@ export default function EstadioFormulario() {
 
                     </div>
 
-                    {/* FECHA APERTURA */}
                     <div className={styles.field}>
 
                         <label className={styles.label}>
@@ -169,10 +162,8 @@ export default function EstadioFormulario() {
                             />
 
                         </div>
-
                     </div>
 
-                    {/* AÑO */}
                     <div className={styles.field}>
 
                         <label className={styles.label}>
@@ -195,7 +186,6 @@ export default function EstadioFormulario() {
 
                     </div>
 
-                    {/* CIUDAD */}
                     <div className={styles.field}>
 
                         <label className={styles.label}>
@@ -218,7 +208,6 @@ export default function EstadioFormulario() {
 
                     </div>
 
-                    {/* PAÍS */}
                     <div className={styles.field}>
 
                         <label className={styles.label}>
@@ -265,7 +254,6 @@ export default function EstadioFormulario() {
 
                     </div>
 
-                    {/* LATITUD */}
                     <div className={styles.field}>
 
                         <label className={styles.label}>
@@ -289,7 +277,6 @@ export default function EstadioFormulario() {
 
                     </div>
 
-                    {/* LONGITUD */}
                     <div className={styles.field}>
 
                         <label className={styles.label}>
@@ -313,7 +300,6 @@ export default function EstadioFormulario() {
 
                     </div>
 
-                    {/* CAPACIDAD */}
                     <div className={styles.field}>
 
                         <label className={styles.label}>
@@ -336,7 +322,6 @@ export default function EstadioFormulario() {
 
                     </div>
 
-                    {/* TIPO CÉSPED */}
                     <div className={styles.field}>
 
                         <label className={styles.label}>
@@ -348,34 +333,19 @@ export default function EstadioFormulario() {
                             <select
                                 className={styles.input}
                                 value={tipoCesped}
-                                onChange={(e) =>
-                                    setTipoCesped(e.target.value)
-                                }
+                                onChange={(e) => setTipoCesped(e.target.value)}
                             >
-
-                                <option value="">
-                                    Selecciona
-                                </option>
-
-                                <option value="Natural">
-                                    Natural
-                                </option>
-
-                                <option value="Sintetico">
-                                    Sintético
-                                </option>
-
-                                <option value="Hibrido">
-                                    Híbrido
-                                </option>
-
+                                {tiposCesped.map((item) => (
+                                    <option key={item.value} value={item.value}>
+                                        {item.label}
+                                    </option>
+                                ))}
                             </select>
 
                         </div>
 
                     </div>
 
-                    {/* FOTO */}
                     <div className={styles.field}>
 
                         <label className={styles.label}>
@@ -403,15 +373,17 @@ export default function EstadioFormulario() {
 
                     </div>
 
-                    <div className="d-flex justify-content-end mt-4">
+                    <div className="row g-2 mt-3">
 
-                        <ActionButton
-                            mode="create"
-                            onClick={registrarEstadio}
-                        />
+                        <div className="col-12 col-sm-6">
+                            <ActionButton mode="clear" onClick={limpiarFormulario} />
+                        </div>
+
+                        <div className="col-12 col-sm-6">
+                            <ActionButton mode="create" onClick={registrarEstadio} />
+                        </div>
 
                     </div>
-
                 </form>
 
             </div>

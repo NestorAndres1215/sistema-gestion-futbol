@@ -7,14 +7,9 @@ import { getEstadios, getAniosEstadios } from "@/services/estadio.service";
 import SearchBar from "@/components/search-bar/search-bar";
 import FilterBar from "@/components/filter-bar/filter-bar";
 import CardList from "@/components/card-list/card-list";
+import { QueryState } from "./listar.type";
 
-type QueryState = {
-    search: string;
-    tipoCesped: string;
-    pais: string;
-    anio: string;
-    estado: string;
-};
+
 
 export default function ListarEstadios() {
 
@@ -47,7 +42,6 @@ export default function ListarEstadios() {
             const lista = res?.data ?? res?.items ?? res;
             setData(Array.isArray(lista) ? lista : []);
         } catch (error) {
-            console.error("Error cargando estadios:", error);
             setData([]);
         }
     };
@@ -59,7 +53,6 @@ export default function ListarEstadios() {
 
             setAnios(Array.isArray(lista) ? lista : []);
         } catch (error) {
-            console.error("Error cargando años:", error);
             setAnios([]);
         }
     };
@@ -108,7 +101,7 @@ export default function ListarEstadios() {
             placeholder: "Año",
             options: anios.map((a) => ({
                 label: a.toString(),
-                value: a.toString(), // 🔥 FIX IMPORTANTE
+                value: a.toString(),
             })),
         },
         {
@@ -133,10 +126,7 @@ export default function ListarEstadios() {
     };
 
     return (
-        <AdminLayout
-            pageTitle="Estadios"
-            pageSubtitle="Listado"
-        >
+        <AdminLayout pageTitle="Estadios" pageSubtitle="Listado" >
             <Breadcrumb
                 items={[
                     { label: "Estadios", href: "/admin/estadios" },

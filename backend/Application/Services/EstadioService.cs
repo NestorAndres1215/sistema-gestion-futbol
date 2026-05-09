@@ -21,22 +21,6 @@ public class EstadioService : IEstadioService
 
     public async Task<Estadio> AddAsync(EstadioDTo dto)
     {
-        // 🔥 DEBUG COMPLETO
-        Console.WriteLine("========== DTO DEBUG ==========");
-        Console.WriteLine($"Nombre: {dto.Nombre}");
-        Console.WriteLine($"Descripcion: {dto.Descripcion}");
-        Console.WriteLine($"FechaApertura: {dto.FechaApertura}");
-        Console.WriteLine($"Anio: {dto.Anio}");
-        Console.WriteLine($"Ciudad: {dto.Ciudad}");
-        Console.WriteLine($"Pais: {dto.Pais}");
-        Console.WriteLine($"Latitud: {dto.Latitud}");
-        Console.WriteLine($"Longitud: {dto.Longitud}");
-        Console.WriteLine($"Capacidad RAW: '{dto.Capacidad}'");
-        Console.WriteLine($"TipoCesped: {dto.TipoCesped}");
-        Console.WriteLine($"Foto: {(dto.Foto != null ? dto.Foto.FileName : "NULL")}");
-        Console.WriteLine("================================");
-
-
 
         string fotoUrl = "";
 
@@ -95,18 +79,29 @@ public class EstadioService : IEstadioService
             FechaCreacion = DateTime.Now
         };
 
-        try
-        {
             await _repository.AddAsync(estadio);
             return estadio;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("========== ERROR REAL ==========");
-            Console.WriteLine(ex.InnerException?.Message ?? ex.Message);
-            Console.WriteLine("================================");
-            throw;
-        }
+ 
+    }
+
+    public async  Task<PagedResult<Estadio>> GetAllAsync(int page, int pageSize, string? search, string? tipoCesped, string? pais, int? anio, string? estado)
+    {
+        return await _repository.GetAllAsync(page, pageSize, search, tipoCesped, pais, anio, estado);
+    }
+
+    public async Task<List<int>> GetAniosAsync()
+    {
+       return await _repository.GetAniosAsync();
+    }
+
+    public async  Task<Estadio?> GetByIdAsync(int id)
+    {
+        return await _repository.GetByIdAsync(id);
+    }
+
+    public async Task<Estadio?> GetByNombreAsync(string nombre)
+    {
+        return await _repository.GetByNombreAsync(nombre);
     }
 }
 
