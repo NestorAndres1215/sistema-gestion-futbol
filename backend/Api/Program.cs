@@ -12,17 +12,14 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// DB
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
-// JWT SETTINGS
 builder.Services.Configure<JwtSettings>(
     builder.Configuration.GetSection("JwtSettings")
 );
 
-// JWT AUTH
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 .AddJwtBearer(options =>
 {
@@ -43,18 +40,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     };
 });
 
-// AUTH
 builder.Services.AddAuthorization();
 
-// DI
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
-builder.Services.AddScoped<ITorneoRepository, TorneoRepository>(); // 👈 este
+builder.Services.AddScoped<ITorneoRepository, TorneoRepository>(); 
+builder.Services.AddScoped<IEstadioRepository, EstadioRepository>();
+
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
-builder.Services.AddScoped<ITorneoService, TorneoService>(); // 👈 este
+builder.Services.AddScoped<ITorneoService, TorneoService>();
+builder.Services.AddScoped<IEstadioService, EstadioService>();
 
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
@@ -71,7 +69,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// 🔥 ORDEN OBLIGATORIO
+
 app.UseHttpsRedirection();
 
 app.UseCors("AllowAll");
@@ -80,7 +78,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseMiddleware<ExceptionMiddleware>();
-
+app.UseStaticFiles();
 app.MapControllers();
 
 app.Run();
