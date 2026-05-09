@@ -15,4 +15,6 @@ public class AppDbContext : DbContext
     public DbSet<Rol> Roles { get; set; }
     public DbSet<Torneo> Torneos { get; set; }
     public DbSet<Estadio> Estadios { get; set; }
+    public DbSet<Ciudades> Ciudades { get; set; }
+    public DbSet<Paises> Paises { get; set; }
 }

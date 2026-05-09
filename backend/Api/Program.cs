@@ -2,6 +2,7 @@ using API.Middleware;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Application.Services;
+using Domain.Interfaces;
 using Infrastructure.Auth;
 using Infrastructure.Data;
 using Infrastructure.Repositories;
@@ -46,6 +47,7 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<ITorneoRepository, TorneoRepository>(); 
 builder.Services.AddScoped<IEstadioRepository, EstadioRepository>();
+builder.Services.AddScoped<ICiudadesRepository, CiudadesRepository>();
 
 
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -53,6 +55,7 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<ITorneoService, TorneoService>();
 builder.Services.AddScoped<IEstadioService, EstadioService>();
+builder.Services.AddScoped<ICiudadesService, CiudadesService>();
 
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
