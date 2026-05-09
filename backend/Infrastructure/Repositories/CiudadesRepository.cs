@@ -2,6 +2,7 @@
 using Domain.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Infrastructure.Repositories;
 
@@ -56,5 +57,12 @@ public class CiudadesRepository : ICiudadesRepository
         _context.Ciudades.Remove(ciudad);
         await _context.SaveChangesAsync();
         return ciudad;
+    }
+
+    public async Task<Ciudades?> GetByNombreAsync(string nombre)
+    {
+        return await _context.Ciudades
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Nombre == nombre);
     }
 }

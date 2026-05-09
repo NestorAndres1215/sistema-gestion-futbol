@@ -47,4 +47,11 @@ public class PaisesRepository : IPaisesRepository
         await _context.SaveChangesAsync();
         return pais;
     }
+
+    public async  Task<Paises?> GetByNombreAsync(string nombre)
+    {
+        return await _context.Paises
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Nombre == nombre);
+    }
 }

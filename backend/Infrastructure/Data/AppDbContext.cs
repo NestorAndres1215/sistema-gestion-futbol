@@ -17,4 +17,8 @@ public class AppDbContext : DbContext
     public DbSet<Estadio> Estadios { get; set; }
     public DbSet<Ciudades> Ciudades { get; set; }
     public DbSet<Paises> Paises { get; set; }
+    public DbSet<Personas> Personas { get; set; }
+    public DbSet<Arbitros> Arbitros { get; set; }
+    public DbSet<Jugadores> Jugadores { get; set; }
+    public DbSet<Entrenadores> Entrenadores { get; set; }
 }
