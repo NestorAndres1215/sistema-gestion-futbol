@@ -6,18 +6,22 @@ const request = async (url: string, options: RequestInit = {}) => {
   const match = document.cookie.match(/(^| )token=([^;]+)/);
   const token = match ? match[2] : null;
 
+  const isFormData = options.body instanceof FormData;
+
   const headers: any = {
-    "Content-Type": "application/json",
     ...(options.headers || {})
   };
 
+  if (!isFormData) {
+    headers["Content-Type"] = "application/json";
+  }
 
   if (token) {
     headers.Authorization = `Bearer ${token}`;
   }
 
   const res = await fetch(`${API_URL}${url}`, {
-    ...options, 
+    ...options,
     headers
   });
 
@@ -31,16 +35,33 @@ const request = async (url: string, options: RequestInit = {}) => {
 
 export const api = {
   get: (url: string) => request(url),
-  post: (url: string, body: any) =>
+
+  post: (
+    url: string,
+    body: any,
+    options: RequestInit = {}
+  ) =>
     request(url, {
       method: "POST",
-      body: JSON.stringify(body)
+      body: body instanceof FormData
+        ? body
+        : JSON.stringify(body),
+      ...options
     }),
-  put: (url: string, body: any) =>
+
+  put: (
+    url: string,
+    body: any,
+    options: RequestInit = {}
+  ) =>
     request(url, {
       method: "PUT",
-      body: JSON.stringify(body)
+      body: body instanceof FormData
+        ? body
+        : JSON.stringify(body),
+      ...options
     }),
+
   delete: (url: string) =>
     request(url, {
       method: "DELETE"
