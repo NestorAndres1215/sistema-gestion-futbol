@@ -22,7 +22,7 @@ type Categoria = {
 };
 
 
-export default function FormTorneo() {
+export default function TorneoFormulario() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const tipo = searchParams.get("tipo");

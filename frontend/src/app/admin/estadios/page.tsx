@@ -32,7 +32,7 @@ export default function Estadio() {
             icon="fas fa-map-location-dot"
             title="Ver Estadios"
             description="Explorar y administrar estadios registrados"
-            onClick={() => console.log("ver-estadios")}
+            onClick={() => router.push("/admin/estadios/listar")}
           />
         </div>
 

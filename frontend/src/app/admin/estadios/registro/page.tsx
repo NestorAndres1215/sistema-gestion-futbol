@@ -11,7 +11,7 @@ import ActionButton from "@/components/button/button";
 import { addEstadio } from "@/services/estadio.service";
 import { useRouter } from "next/navigation";
 
-export default function Estadio() {
+export default function EstadioFormulario() {
     const router = useRouter();
     const [nombre, setNombre] = useState("");
     const [descripcion, setDescripcion] = useState("");
@@ -69,7 +69,7 @@ export default function Estadio() {
 
             console.error(error);
 
-            alert("Error al registrar estadio");
+                        alert("Error al registrar estadio");
         }
     };
 

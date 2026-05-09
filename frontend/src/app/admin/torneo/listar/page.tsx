@@ -8,7 +8,7 @@ import Breadcrumb from "@/components/bread-crumb/bread-cumb";
 import { getTorneos } from "@/services/torneo.service";
 import SelectionCard from "@/components/selection-card/selection-card";
 
-export default function Listar() {
+export default function ListarTorneo() {
     const searchParams = useSearchParams();
 
     const tipo = searchParams.get("tipo") ?? "";
