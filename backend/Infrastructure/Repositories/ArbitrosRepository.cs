@@ -32,13 +32,13 @@ public class ArbitrosRepository : IArbitroRepository
     string? estado)
     {
         var query = _context.Arbitros
-            .Include(a => a.Persona)
-                .ThenInclude(p => p.PaisNacimiento)
-            .AsQueryable();
+           .Include(a => a.Persona)
+               .ThenInclude(p => p.PaisNacimiento)
+           .Include(a => a.Persona)
+               .ThenInclude(p => p.CiudadNacimiento)
+           .AsQueryable();
 
-        // =========================
-        // SEARCH
-        // =========================
+
         if (!string.IsNullOrWhiteSpace(search))
         {
             query = query.Where(a =>
@@ -52,9 +52,6 @@ public class ArbitrosRepository : IArbitroRepository
             );
         }
 
-        // =========================
-        // FILTROS
-        // =========================
         if (!string.IsNullOrWhiteSpace(categoria))
             query = query.Where(a => a.Categoria == categoria);
 
@@ -68,23 +65,16 @@ public class ArbitrosRepository : IArbitroRepository
         if (!string.IsNullOrWhiteSpace(estado))
             query = query.Where(a => a.Estado == estado);
 
-        // =========================
-        // TOTAL
-        // =========================
         var total = await query.CountAsync();
 
-        // =========================
-        // DATA (IMPORTANTE: SIN SELECT NEW {})
-        // =========================
+
         var data = await query
             .OrderByDescending(a => a.Nivel)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
 
-        // =========================
-        // RETURN
-        // =========================
+ 
         return new PagedResult<Arbitros>
         {
             Items = data,

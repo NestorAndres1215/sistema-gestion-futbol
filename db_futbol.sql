@@ -49,6 +49,7 @@ CREATE TABLE Estadios (
         CHECK (Estado IN ('Disponible', 'Mantenimiento', 'Suspendido','Cerrado'))
 );
 
+
 CREATE TABLE Personas (
     Id INT PRIMARY KEY IDENTITY,
 
@@ -74,11 +75,8 @@ CREATE TABLE Personas (
     FechaCreacion DATETIME DEFAULT GETDATE(),
     FechaActualizacion DATETIME NULL,
 
-    FOREIGN KEY (PaisNacimientoId)
-        REFERENCES Paises(Id),
-
-    FOREIGN KEY (CiudadNacimientoId)
-        REFERENCES Ciudades(Id),
+    FOREIGN KEY (PaisNacimientoId) REFERENCES Paises(Id),
+    FOREIGN KEY (CiudadNacimientoId) REFERENCES Ciudades(Id),
 
     CONSTRAINT CK_Persona_Estado
         CHECK (Estado IN ('Activo', 'Inactivo', 'Retirado')),
@@ -95,22 +93,187 @@ CREATE TABLE Paises (
 );
 
 
-CREATE TABLE Paises (
-    Id INT PRIMARY KEY IDENTITY,
-    Nombre NVARCHAR(100) NOT NULL UNIQUE,
-    CodigoISO NVARCHAR(10) NOT NULL UNIQUE
+
+
+
+CREATE TABLE Entrenadores (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+
+    PersonaId INT NOT NULL,
+
+    EstiloJuego NVARCHAR(50) NULL,
+    Licencia NVARCHAR(50) NULL,
+
+    FechaDebut DATE NULL,
+    FechaRetiro DATE NULL,
+
+    AnosExperiencia INT DEFAULT 0,
+    Nivel INT DEFAULT 50,
+    Reputacion INT DEFAULT 50,
+
+    Salario DECIMAL(18,2) NULL,
+
+    Estado NVARCHAR(20) DEFAULT 'Activo',
+
+    FOREIGN KEY (PersonaId)
+        REFERENCES Personas(Id),
+
+    CONSTRAINT CK_Entrenador_Estado
+        CHECK (Estado IN ('Activo', 'Retirado')),
+
+    CONSTRAINT CK_Entrenador_Nivel
+        CHECK (Nivel BETWEEN 1 AND 100),
+
+    CONSTRAINT CK_Entrenador_Reputacion
+        CHECK (Reputacion BETWEEN 1 AND 100)
 );
 
 
+CREATE TABLE Arbitros (
+Id INT PRIMARY KEY IDENTITY,
+     PersonaId INT NOT NULL,   
 
+    -- =========================
+    -- PERFIL ARBITRAL
+    -- =========================
+    Categoria NVARCHAR(50) NULL,
+    -- FIFA / Nacional / Regional
 
+    Especialidad NVARCHAR(30) NULL,
+    -- Principal / VAR / Asistente
 
+    -- =========================
+    -- CARRERA
+    -- =========================
+    FechaDebut DATE NULL,
+    FechaRetiro DATE NULL,
 
+    AnosExperiencia INT DEFAULT 0,
 
+    Nivel INT DEFAULT 50,
 
+    Reputacion INT DEFAULT 50,
 
+    PartidosDirigidos INT DEFAULT 0,
 
+    -- =========================
+    -- ESTADO
+    -- =========================
+    Estado NVARCHAR(20) DEFAULT 'Activo',
 
+    -- =========================
+    -- RELACIÓN
+    -- =========================
+    FOREIGN KEY (PersonaId)
+        REFERENCES Personas(Id),
+
+    -- =========================
+    -- VALIDACIONES
+    -- =========================
+    CONSTRAINT CK_Arbitro_Estado
+        CHECK (Estado IN ('Activo', 'Retirado')),
+
+    CONSTRAINT CK_Arbitro_Especialidad
+        CHECK (
+            Especialidad IN (
+                'Principal',
+                'VAR',
+                'Asistente'
+            )
+        ),
+
+    CONSTRAINT CK_Arbitro_Nivel
+        CHECK (Nivel BETWEEN 1 AND 100),
+
+    CONSTRAINT CK_Arbitro_Reputacion
+        CHECK (Reputacion BETWEEN 1 AND 100)
+);
+
+CREATE TABLE Jugadores (
+    Id INT PRIMARY KEY IDENTITY,
+     PersonaId INT NOT NULL,  
+
+    -- =========================
+    -- PERFIL FUTBOLÍSTICO
+    -- =========================
+    PosicionPrincipal NVARCHAR(50) NOT NULL,
+    -- Arquero / Defensa / Mediocampo / Delantero
+
+    PosicionSecundaria NVARCHAR(50) NULL,
+
+    PiernaHabil NVARCHAR(10) NULL,
+    -- Izquierda / Derecha / Ambas
+
+    -- =========================
+    -- CARRERA
+    -- =========================
+    FechaDebut DATE NULL,
+
+    FechaRetiro DATE NULL,
+
+    AnosExperiencia INT DEFAULT 0,
+
+    -- =========================
+    -- ESTADO
+    -- =========================
+    Estado NVARCHAR(20) DEFAULT 'Activo',
+
+    EstadoFisico NVARCHAR(30) DEFAULT 'Disponible',
+    -- Disponible / Lesionado / Suspendido
+
+    -- =========================
+    -- RELACIÓN
+    -- =========================
+    FOREIGN KEY (PersonaId)
+        REFERENCES Personas(Id),
+
+    -- =========================
+    -- VALIDACIONES
+    -- =========================
+    CONSTRAINT CK_Jugador_Estado
+        CHECK (Estado IN ('Activo', 'Retirado')),
+
+    CONSTRAINT CK_Jugador_EstadoFisico
+        CHECK (
+            EstadoFisico IN (
+                'Disponible',
+                'Lesionado',
+                'Suspendido'
+            )
+        ),
+
+    CONSTRAINT CK_Jugador_Pierna
+        CHECK (
+            PiernaHabil IN (
+                'Izquierda',
+                'Derecha',
+                'Ambas'
+            )
+        )
+);
+
+CREATE TABLE Lesiones (
+    Id INT PRIMARY KEY IDENTITY,
+
+    JugadorId INT NOT NULL,
+
+    Tipo NVARCHAR(50) NOT NULL,
+    Gravedad NVARCHAR(20),
+
+    FechaInicio DATE NOT NULL,
+    FechaFin DATE NULL,
+
+    Estado NVARCHAR(20) DEFAULT 'Activa',
+
+    FOREIGN KEY (JugadorId)
+        REFERENCES Jugadores(PersonaId),
+
+    CONSTRAINT CK_Lesion_Estado
+        CHECK (Estado IN ('Activa', 'Recuperado')),
+
+    CONSTRAINT CK_Lesion_Gravedad
+        CHECK (Gravedad IN ('Leve', 'Moderada', 'Grave'))
+);
 
 INSERT INTO Paises (Nombre, CodigoISO)
 VALUES
@@ -329,9 +492,12 @@ CREATE TABLE Ciudades (
     PaisId INT NOT NULL,
     FOREIGN KEY (PaisId) REFERENCES Paises(Id)
 );
-
+(SELECT Id FROM Paises WHERE Nombre = 'Inglaterra')
 INSERT INTO Ciudades (Nombre, PaisId)
 VALUES
+
+('Northumberland', (SELECT Id FROM Paises WHERE Nombre = 'Inglaterra'))
+
 -- Perú
 ('Lima', (SELECT Id FROM Paises WHERE Nombre = 'Perú')),
 ('Arequipa', (SELECT Id FROM Paises WHERE Nombre = 'Perú')),
