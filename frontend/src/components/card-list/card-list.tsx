@@ -1,5 +1,7 @@
 "use client";
+
 import styles from "./card-list.module.css";
+import { useState } from "react";
 
 type CardListProps<T> = {
   data: T[];
@@ -7,7 +9,40 @@ type CardListProps<T> = {
   getSubtitle?: (item: T) => string;
   getImage?: (item: T) => string | null;
   onDetail?: (item: T) => void;
+
+  // 👇 solo para personalizar imagen
+  imageClassName?: string;
 };
+
+function CardImage({
+  src,
+  alt,
+  imageClassName,
+}: {
+  src: string;
+  alt: string;
+  imageClassName?: string;
+}) {
+  const [error, setError] = useState(false);
+
+  if (error) {
+    return (
+      <div className={styles.imageFallback}>
+        <i className="ti ti-photo-off" />
+      </div>
+    );
+  }
+
+  return (
+    <img
+      src={src}
+      alt={alt}
+      className={`${styles.image} ${imageClassName || ""}`}
+      onError={() => setError(true)}
+      loading="lazy"
+    />
+  );
+}
 
 export default function CardList<T>({
   data,
@@ -15,47 +50,62 @@ export default function CardList<T>({
   getSubtitle,
   getImage,
   onDetail,
+  imageClassName,
 }: CardListProps<T>) {
-  if (!data?.length) {
+
+  if (!data || data.length === 0) {
     return <p className={styles.empty}>No hay datos</p>;
   }
 
   return (
     <div className={styles.grid}>
-      {data.map((item, i) => (
-        <div key={i} className={styles.card}>
+      {data.map((item, i) => {
+        const title = getTitle(item);
+        const subtitle = getSubtitle?.(item);
+        const img = getImage?.(item);
 
-          {getImage?.(item) && (
-            <div className={styles.imageWrap}>
-              <img
-                src={getImage(item)!}
-                alt={getTitle(item)}
-                className={styles.image}
-              />
-            </div>
-          )}
+        return (
+          <div key={i} className={styles.card}>
 
-          <div className={styles.body}>
-            <div>
-              <h5 className={styles.title}>{getTitle(item)}</h5>
-              {getSubtitle && (
-                <p className={styles.subtitle}>{getSubtitle(item)}</p>
+            {/* IMAGEN */}
+            <div className={imageClassName}>
+              {img ? (
+                <CardImage
+                  src={img}
+                  alt={title}
+                  imageClassName={imageClassName}
+                />
+              ) : (
+                <div className={styles.imageFallback}>
+                  <i className="ti ti-photo-off" />
+                </div>
               )}
             </div>
 
-            {onDetail && (
-              <button
-                className={styles.btn}
-                onClick={() => onDetail(item)}
-              >
-                <i className="ti ti-eye" />
-                Detalle
-              </button>
-            )}
-          </div>
+            {/* BODY */}
+            <div className={styles.body}>
+              <div>
+                <h5 className={styles.title}>{title}</h5>
 
-        </div>
-      ))}
+                {subtitle && (
+                  <p className={styles.subtitle}>{subtitle}</p>
+                )}
+              </div>
+
+              {onDetail && (
+                <button
+                  className={styles.btn}
+                  onClick={() => onDetail(item)}
+                >
+                  <i className="ti ti-eye" />
+                  Detalle
+                </button>
+              )}
+            </div>
+
+          </div>
+        );
+      })}
     </div>
   );
 }

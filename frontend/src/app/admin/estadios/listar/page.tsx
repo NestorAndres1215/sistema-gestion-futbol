@@ -7,15 +7,16 @@ import { getEstadios, getAniosEstadios } from "@/services/estadio.service";
 import SearchBar from "@/components/search-bar/search-bar";
 import FilterBar from "@/components/filter-bar/filter-bar";
 import CardList from "@/components/card-list/card-list";
+import Pagination from "@/components/pagination/pagination";
 import { QueryState } from "./listar.type";
-
-
+import styles from "@/components/card-list/card-list.module.css";
 
 export default function ListarEstadios() {
 
     const [data, setData] = useState<any[]>([]);
     const [anios, setAnios] = useState<number[]>([]);
     const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
     const pageSize = 15;
 
@@ -39,10 +40,16 @@ export default function ListarEstadios() {
                 estado: q.estado,
             });
 
-            const lista = res?.data ?? res?.items ?? res;
+            const lista = res?.items ?? res?.data ?? res;
+
             setData(Array.isArray(lista) ? lista : []);
+
+            // 👇 IMPORTANTE: totalPages desde backend
+            setTotalPages(res?.totalPages ?? 1);
+
         } catch (error) {
             setData([]);
+            setTotalPages(1);
         }
     };
 
@@ -65,7 +72,6 @@ export default function ListarEstadios() {
         fetchEstadios(query, page);
     }, [query, page]);
 
-
     const handleSearch = (value: string) => {
         setQuery((prev) => ({
             ...prev,
@@ -74,7 +80,6 @@ export default function ListarEstadios() {
 
         setPage(1);
     };
-
 
     const userFilters = [
         {
@@ -115,7 +120,6 @@ export default function ListarEstadios() {
         },
     ];
 
-
     const handleFilter = (filters: Record<string, any>) => {
         setQuery((prev) => ({
             ...prev,
@@ -126,7 +130,7 @@ export default function ListarEstadios() {
     };
 
     return (
-        <AdminLayout pageTitle="Estadios" pageSubtitle="Listado" >
+        <AdminLayout pageTitle="Estadios" pageSubtitle="Listado">
             <Breadcrumb
                 items={[
                     { label: "Estadios", href: "/admin/estadios" },
@@ -152,9 +156,16 @@ export default function ListarEstadios() {
                     getImage={(e) =>
                         e.fotoUrl ? `https://localhost:7269${e.fotoUrl}` : null
                     }
+                    imageClassName={styles.imageStadium}
                     onDetail={(e) => console.log(e.id)}
                 />
 
+                {/* 🔥 PAGINACIÓN */}
+                <Pagination
+                    currentPage={page}
+                    totalPages={totalPages}
+                    onPageChange={(p) => setPage(p)}
+                />
             </div>
         </AdminLayout>
     );
