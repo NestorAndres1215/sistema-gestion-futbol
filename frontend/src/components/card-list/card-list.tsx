@@ -1,5 +1,6 @@
 "use client";
 
+import ActionButton from "../button/button";
 import styles from "./card-list.module.css";
 import { useState } from "react";
 
@@ -58,51 +59,52 @@ export default function CardList<T>({
   }
 
   return (
-    <div className={styles.grid}>
+    <div className="row g-3">
       {data.map((item, i) => {
+
         const title = getTitle(item);
         const subtitle = getSubtitle?.(item);
         const img = getImage?.(item);
 
         return (
-          <div key={i} className={styles.card}>
+          <div key={i} className="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div key={i} className={styles.card}>
 
-            {/* IMAGEN */}
-            <div className={imageClassName}>
-              {img ? (
-                <CardImage
-                  src={img}
-                  alt={title}
-                  imageClassName={imageClassName}
-                />
-              ) : (
-                <div className={styles.imageFallback}>
-                  <i className="ti ti-photo-off" />
-                </div>
-              )}
-            </div>
-
-            {/* BODY */}
-            <div className={styles.body}>
-              <div>
-                <h5 className={styles.title}>{title}</h5>
-
-                {subtitle && (
-                  <p className={styles.subtitle}>{subtitle}</p>
+              {/* IMAGEN */}
+              <div className={imageClassName}>
+                {img ? (
+                  <CardImage
+                    src={img}
+                    alt={title}
+                    imageClassName={imageClassName}
+                  />
+                ) : (
+                  <div className={styles.imageFallback}>
+                    <i className="ti ti-photo-off" />
+                  </div>
                 )}
               </div>
 
-              {onDetail && (
-                <button
-                  className={styles.btn}
-                  onClick={() => onDetail(item)}
-                >
-                  <i className="ti ti-eye" />
-                  Detalle
-                </button>
-              )}
-            </div>
+              {/* BODY */}
+              <div className="d-flex flex-column justify-content-between gap-3 p-3 flex-grow-1">
+                <div>
+                  <h5 className={styles.title}>{title}</h5>
 
+                  {subtitle && (
+                    <p className={styles.subtitle}>{subtitle}</p>
+                  )}
+                </div>
+
+                {onDetail && (
+                  <ActionButton mode="detail"
+                    onClick={() => onDetail(item)}
+                  />
+
+
+                )}
+              </div>
+
+            </div>
           </div>
         );
       })}
