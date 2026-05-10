@@ -25,7 +25,7 @@ const config = {
     style: styles.update,
   },
   detail: {
-    text: "Ver detalle",
+    text: "Detalle",
     icon: "fa-solid fa-eye",
     style: styles.detail,
   },

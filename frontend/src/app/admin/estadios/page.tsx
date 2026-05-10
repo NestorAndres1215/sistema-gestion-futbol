@@ -36,6 +36,15 @@ export default function Estadio() {
           />
         </div>
 
+        <div className="col-12 col-sm-6">
+          <SelectionCard
+            icon="fas fa-pen-to-square"
+            title="Edición de Estadios"
+            description="Modificar información y datos de los estadios"
+            onClick={() => router.push("/admin/estadios/edicion")}
+          />
+        </div>
+
       </div>
 
     </AdminLayout>
