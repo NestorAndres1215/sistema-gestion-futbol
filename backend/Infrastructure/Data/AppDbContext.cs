@@ -21,4 +21,5 @@ public class AppDbContext : DbContext
     public DbSet<Arbitros> Arbitros { get; set; }
     public DbSet<Jugadores> Jugadores { get; set; }
     public DbSet<Entrenadores> Entrenadores { get; set; }
+
 }

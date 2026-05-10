@@ -1,32 +1,23 @@
-﻿using System;
-
-namespace Domain.Entities;
+﻿using Domain.Entities;
 
 public class Arbitros
 {
+    public int Id { get; set; }
+
     public int PersonaId { get; set; }
 
-    // PERFIL ARBITRAL
     public string? Categoria { get; set; }
-
     public string? Especialidad { get; set; }
 
-    // CARRERA
     public DateTime? FechaDebut { get; set; }
-
     public DateTime? FechaRetiro { get; set; }
 
-    public int AnosExperiencia { get; set; } = 0;
+    public int AnosExperiencia { get; set; }
+    public int Nivel { get; set; }
+    public int Reputacion { get; set; }
+    public int PartidosDirigidos { get; set; }
 
-    public int Nivel { get; set; } = 50;
-
-    public int Reputacion { get; set; } = 50;
-
-    public int PartidosDirigidos { get; set; } = 0;
-
-    // ESTADO
     public string Estado { get; set; } = "Activo";
 
-    // RELACIÓN
-    public virtual Personas? Persona { get; set; }
+    public Personas Persona { get; set; } = null!;
 }

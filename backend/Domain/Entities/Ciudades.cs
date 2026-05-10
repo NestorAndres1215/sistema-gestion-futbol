@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿
 
 namespace Domain.Entities;
 
@@ -11,7 +11,4 @@ public class Ciudades
     public int PaisId { get; set; }
 
     public Paises? Pais { get; set; }
-
-    public ICollection<Personas> Personas { get; set; }
-        = new List<Personas>();
 }

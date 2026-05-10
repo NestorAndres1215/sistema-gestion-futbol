@@ -33,12 +33,7 @@ public class ArbitrosService : IArbitrosService
     public async Task<Arbitros> AddAsync(ArbitrosDto arbitros)
     {
 
-        if (arbitros.FechaDebut.HasValue &&
-            arbitros.FechaRetiro.HasValue &&
-            arbitros.FechaDebut > arbitros.FechaRetiro)
-        {
-            throw new NotFoundException("La fecha de debut no puede ser mayor que la fecha de retiro.");
-        }
+
 
         var pais = await _paisRepo.GetByNombreAsync(arbitros.PaisNacimiento);
 

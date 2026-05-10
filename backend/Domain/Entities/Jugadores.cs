@@ -4,6 +4,8 @@ namespace Domain.Entities;
 
 public class Jugadores
 {
+
+    public int Id { get; set; }
     public int PersonaId { get; set; }
 
     // PERFIL FUTBOLÍSTICO

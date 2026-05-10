@@ -4,6 +4,7 @@ namespace Domain.Entities;
 
 public class Entrenadores
 {
+    public int Id { get; set; }
     public int PersonaId { get; set; }
     public string? EstiloJuego { get; set; }
     public string? Licencia { get; set; }

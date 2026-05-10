@@ -11,12 +11,12 @@ namespace Application.Services;
 public class PersonasService : IPersonasService
 {
     private readonly IPersonasRepository _repo;
-    private readonly IPaisesService _paisesService;
 
-    public PersonasService(IPersonasRepository repo, IPaisesService paisesService)
+
+    public PersonasService(IPersonasRepository repo)
     {
         _repo = repo;
-        _paisesService = paisesService;
+
     }
 
     public async Task<Personas> AddAsync(Personas personas)

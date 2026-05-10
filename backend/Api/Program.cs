@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,6 +49,9 @@ builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddScoped<ITorneoRepository, TorneoRepository>(); 
 builder.Services.AddScoped<IEstadioRepository, EstadioRepository>();
 builder.Services.AddScoped<ICiudadesRepository, CiudadesRepository>();
+builder.Services.AddScoped<IPaisesRepository, PaisesRepository>();
+builder.Services.AddScoped<IPersonasRepository, PersonasRepository>();
+builder.Services.AddScoped<IArbitroRepository,ArbitrosRepository>();    
 
 
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -56,6 +60,9 @@ builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddScoped<ITorneoService, TorneoService>();
 builder.Services.AddScoped<IEstadioService, EstadioService>();
 builder.Services.AddScoped<ICiudadesService, CiudadesService>();
+builder.Services.AddScoped<IPaisesService,PaisesService>();
+builder.Services.AddScoped<IPersonasService, PersonasService>();
+builder.Services.AddScoped<IArbitrosService,ArbitrosService>();
 
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
@@ -69,7 +76,12 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod()
               .AllowAnyHeader());
 });
-
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler =
+            ReferenceHandler.IgnoreCycles;
+    });
 var app = builder.Build();
 
 
