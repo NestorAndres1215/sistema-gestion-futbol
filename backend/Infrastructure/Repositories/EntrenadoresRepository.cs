@@ -96,8 +96,12 @@ public class EntrenadoresRepository : IEntrenadoresRepository
     public async Task<Entrenadores?> GetByIdAsync(int id)
     {
         return await _context.Entrenadores
-           .AsNoTracking()
-           .SingleOrDefaultAsync(x => x.Id == id);
+            .Include(x => x.Persona)
+                .ThenInclude(p => p.CiudadNacimiento)
+            .Include(x => x.Persona)
+                .ThenInclude(p => p.PaisNacimiento)
+            .AsNoTracking()
+            .SingleOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<Entrenadores> UpdateAsync(Entrenadores entrenadores)

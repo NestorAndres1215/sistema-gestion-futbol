@@ -496,7 +496,7 @@ CREATE TABLE Ciudades (
 INSERT INTO Ciudades (Nombre, PaisId)
 VALUES
 
-('Northumberland', (SELECT Id FROM Paises WHERE Nombre = 'Inglaterra'))
+('Barcelona', (62)),
 
 -- Perú
 ('Lima', (SELECT Id FROM Paises WHERE Nombre = 'Perú')),
@@ -504,7 +504,7 @@ VALUES
 ('Cusco', (SELECT Id FROM Paises WHERE Nombre = 'Perú')),
 
 -- Argentina
-('Buenos Aires', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Barcelona', (SELECT Id FROM Paises WHERE Nombre = 'España')),
 ('Córdoba', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
 ('Rosario', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
 
