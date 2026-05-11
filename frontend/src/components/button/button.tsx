@@ -2,6 +2,7 @@
 
 import styles from "./button.module.css";
 
+
 type ActionButtonProps = {
   mode?: "create" | "update" | "detail" | "delete" | "clear"| "cancelar";
   onClick?: () => void;

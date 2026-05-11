@@ -7,7 +7,6 @@ export const useLogin = () => {
         const data = await login(email, password);
         document.cookie = `token=${data.token}; path=/`;
         return data;
-
     };
 
     return { submitLogin, };

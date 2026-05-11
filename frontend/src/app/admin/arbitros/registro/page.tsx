@@ -322,11 +322,6 @@ export default function ArbitroFormulario() {
                             />
                         </div>
                     </div>
-
-
-
-
-
                     <div className="row g-3">
 
                         <div className="col-12 col-md-4">

@@ -7,7 +7,7 @@ namespace Api.Controllers;
 
 [ApiController]
 [Route("api/arbitros")]
-public class ArbitroController : Controller
+public class ArbitroController : ControllerBase
 {
     private readonly IArbitrosService _service;
 
@@ -35,5 +35,11 @@ public class ArbitroController : Controller
     {
         var result = await _service.GetAllAsync(page, pageSize, search, categoria, pais,  estado);
         return Ok(result);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        return Ok(await _service.GetByIdAsync(id));
     }
 }

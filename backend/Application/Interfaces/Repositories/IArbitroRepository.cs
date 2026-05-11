@@ -16,4 +16,5 @@ public interface IArbitroRepository
 
     Task<Arbitros> AddAsync(Arbitros arbitros);
     Task<Arbitros> UpdateAsync(Arbitros arbitros);
+    Task<Arbitros?> GetByIdAsync(int id);
 }

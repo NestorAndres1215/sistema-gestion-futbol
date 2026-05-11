@@ -130,7 +130,13 @@ public class ArbitrosService : IArbitrosService
         return await _repository.GetAllAsync(page, pageSize, search, categoria, pais, estado);
     }
 
-    public Task<Arbitros> UpdateAsync(int id, ArbitrosDto arbitros)
+    public async Task<Arbitros> GetByIdAsync(int id)
+    {
+       return await _repository.GetByIdAsync(id)
+         ?? throw new NotFoundException("Árbitro no encontrado");
+    }
+
+    public async  Task<Arbitros> UpdateAsync(int id, ArbitrosDto arbitros)
     {
         throw new NotImplementedException();
     }

@@ -84,6 +84,13 @@ public class ArbitrosRepository : IArbitroRepository
         };
     }
 
+    public async Task<Arbitros?> GetByIdAsync(int id)
+    {
+        return await _context.Arbitros
+            .AsNoTracking()
+            .SingleOrDefaultAsync(x => x.Id == id);
+    }
+
     public async Task<Arbitros> UpdateAsync(Arbitros arbitros)
     {
         _context.Arbitros.Update(arbitros);

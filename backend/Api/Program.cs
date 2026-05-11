@@ -51,7 +51,8 @@ builder.Services.AddScoped<IEstadioRepository, EstadioRepository>();
 builder.Services.AddScoped<ICiudadesRepository, CiudadesRepository>();
 builder.Services.AddScoped<IPaisesRepository, PaisesRepository>();
 builder.Services.AddScoped<IPersonasRepository, PersonasRepository>();
-builder.Services.AddScoped<IArbitroRepository,ArbitrosRepository>();    
+builder.Services.AddScoped<IArbitroRepository,ArbitrosRepository>();
+builder.Services.AddScoped<IEntrenadoresRepository, EntrenadoresRepository>();
 
 
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -63,6 +64,7 @@ builder.Services.AddScoped<ICiudadesService, CiudadesService>();
 builder.Services.AddScoped<IPaisesService,PaisesService>();
 builder.Services.AddScoped<IPersonasService, PersonasService>();
 builder.Services.AddScoped<IArbitrosService,ArbitrosService>();
+builder.Services.AddScoped<IEntrenadoresService, EntrenadoresService>();
 
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();

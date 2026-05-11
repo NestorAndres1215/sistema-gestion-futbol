@@ -10,12 +10,10 @@ export function proxy(req: NextRequest) {
     const isAdminRoute = path.startsWith("/admin");
     const isUserRoute = path.startsWith("/user");
 
-    // Si no está autenticado
     if ((isAdminRoute || isUserRoute) && !token) {
         return NextResponse.redirect(new URL("/auth/login", req.url));
     }
 
-    // Si ya está logueado y quiere ir a login
     if (isLogin && token) {
         return NextResponse.redirect(
             new URL(
@@ -27,7 +25,6 @@ export function proxy(req: NextRequest) {
         );
     }
 
-    // Protección por roles
     if (isAdminRoute && role !== "admin") {
         return NextResponse.redirect(new URL("/403", req.url));
     }

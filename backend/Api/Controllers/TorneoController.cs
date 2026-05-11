@@ -8,7 +8,7 @@ namespace Api.Controllers;
 [Authorize]
 [ApiController]
 [Route("api/torneos")]
-public class TorneoController : Controller
+public class TorneoController : ControllerBase
 {
     private readonly ITorneoService _service;
 

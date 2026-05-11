@@ -1,24 +1,25 @@
 ﻿using Application.Dto;
 using Application.Interfaces.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
+[Route("api/[controller]")]
 [ApiController]
-[Route("api/estadios")]
-public class EstadiosController : ControllerBase
+public class EntrenadoresController : ControllerBase
 {
-    private readonly IEstadioService _service;
+    private readonly IEntrenadoresService _service;
 
-    public EstadiosController(IEstadioService service)
+    public EntrenadoresController(IEntrenadoresService service)
     {
         _service = service;
     }
 
     [HttpPost]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> Registrar([FromForm] EstadioDTo dto)
-    { 
+    public async Task<IActionResult> Registrar([FromForm] EntrenadoresDto dto)
+    {
         return Ok(await _service.AddAsync(dto));
     }
 
@@ -27,13 +28,12 @@ public class EstadiosController : ControllerBase
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 10,
         [FromQuery] string? search = null,
-        [FromQuery] string? tipoCesped = null,
+        [FromQuery] string? estiloJuego = null,
         [FromQuery] string? pais = null,
-        [FromQuery] int? anio = null,
         [FromQuery] string? estado = null
     )
     {
-        var result = await _service.GetAllAsync(page, pageSize,search,tipoCesped,pais,anio,estado);
+        var result = await _service.GetAllAsync(page, pageSize, search, estiloJuego, pais, estado);
         return Ok(result);
     }
 
@@ -41,11 +41,5 @@ public class EstadiosController : ControllerBase
     public async Task<IActionResult> GetById(int id)
     {
         return Ok(await _service.GetByIdAsync(id));
-    }
-
-    [HttpGet("anio")]
-    public async Task<IActionResult> GetAniosAsync()
-    {
-        return Ok(await _service.GetAniosAsync());
     }
 }
