@@ -9,12 +9,15 @@ export default function EntityDetail({ fields }: { fields: Field[] }) {
         <p className={styles.headTitle}>Detalle</p>
       </div>
 
-      <div className={styles.list}>
+      <div className="d-flex flex-column position-relative">
         {fields.map((f, i) => (
-          <div key={i} className={styles.row}>
-            <span className={styles.label}>{f.label}</span>
-            <span className={styles.value}>{f.value ?? "—"}</span>
-          </div>
+         <div
+  key={i}
+  className={`d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-between gap-3 gap-md-4 px-4 py-3 position-relative ${styles.row}`}
+>
+  <span className={styles.label}>{f.label}</span>
+  <span className={styles.value}>{f.value ?? "—"}</span>
+</div>
         ))}
       </div>
 

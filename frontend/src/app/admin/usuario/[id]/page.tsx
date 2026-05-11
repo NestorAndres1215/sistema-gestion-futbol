@@ -21,24 +21,25 @@ export default function UserDetailPage() {
     if (id) fetchUser();
   }, [id]);
 
+  const getFields = () => [
+    { label: "ID", value: user?.id },
+    { label: "Usuario", value: user?.username },
+    { label: "Email", value: user?.email },
+    { label: "Estado", value: user?.estado },
+    { label: "Rol", value: user?.rol?.nombre },
+  ];
+
   return (
     <AdminLayout pageTitle="Detalle Usuario" pageSubtitle="Información">
 
-      <Breadcrumb items={[
-        { label: "Usuario", href: "/admin/usuario" },
-        { label: "Detalle Usuario" },
-      ]} />
-
-      <EntityDetail
-
-        fields={[
-          { label: "ID", value: user?.id },
-          { label: "Usuario", value: user?.username },
-          { label: "Email", value: user?.email },
-          { label: "Estado", value: user?.estado },
-          { label: "Rol", value: user?.rol?.nombre },
+      <Breadcrumb
+        items={[
+          { label: "Usuario", href: "/admin/usuario" },
+          { label: "Detalle Usuario" },
         ]}
       />
+
+      <EntityDetail fields={getFields()} />
 
     </AdminLayout>
   );
