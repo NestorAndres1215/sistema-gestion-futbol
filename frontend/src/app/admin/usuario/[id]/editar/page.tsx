@@ -61,7 +61,7 @@ export default function EditUserPage() {
     : "??";
 
   return (
-    <AdminLayout pageTitle="Editar Usuario" pageSubtitle="Modificar datos">
+    <AdminLayout pageTitle="Editar" pageSubtitle="Modificar datos">
       <Breadcrumb items={[
         { label: "Usuario", href: "/admin/usuario" },
         { label: "Editar Usuario" },
@@ -76,14 +76,13 @@ export default function EditUserPage() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} noValidate className={styles.form}>
+        <form onSubmit={handleSubmit} noValidate className="d-flex flex-column gap-4 p-4">
 
-          <div className={styles.field}>
+          <div className="d-flex flex-column gap-2">
             <label htmlFor="eu-username" className={styles.label}>
               Nombre de usuario
             </label>
             <div className={styles.inputWrap}>
-              <i className={`fa-solid fa-user me-2 ${styles.icon}`} />
               <input
                 id="eu-username"
                 name="username"
@@ -97,12 +96,12 @@ export default function EditUserPage() {
             </div>
           </div>
 
-          <div className={styles.field}>
+          <div className="d-flex flex-column gap-2">
             <label htmlFor="eu-email" className={styles.label}>
               Correo electrónico
             </label>
             <div className={styles.inputWrap}>
-              <i className={`fa-regular fa-envelope me-2 ${styles.icon}`} />
+
               <input
                 id="eu-email"
                 name="email"

@@ -9,7 +9,6 @@ import Breadcrumb from "@/components/bread-crumb/bread-cumb";
 
 export default function UserDetailPage() {
   const { id } = useParams();
-
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
