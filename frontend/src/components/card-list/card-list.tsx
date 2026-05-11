@@ -10,8 +10,6 @@ type CardListProps<T> = {
   getSubtitle?: (item: T) => string;
   getImage?: (item: T) => string | null;
   onDetail?: (item: T) => void;
-
-  // 👇 solo para personalizar imagen
   imageClassName?: string;
 };
 
@@ -29,7 +27,7 @@ function CardImage({
   if (error) {
     return (
       <div className={styles.imageFallback}>
-        <i className="ti ti-photo-off" />
+        <i className="fas fa-photo-alt" />
       </div>
     );
   }
@@ -80,7 +78,7 @@ export default function CardList<T>({
                   />
                 ) : (
                   <div className={styles.imageFallback}>
-                    <i className="ti ti-photo-off" />
+                    <i className="fas fa-photo-alt" />
                   </div>
                 )}
               </div>
@@ -99,8 +97,6 @@ export default function CardList<T>({
                   <ActionButton mode="detail"
                     onClick={() => onDetail(item)}
                   />
-
-
                 )}
               </div>
 

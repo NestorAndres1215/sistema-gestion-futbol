@@ -20,7 +20,7 @@ export default function DetailCard({ title, image, items }: Props) {
           <img src={image} alt={title} className={styles.image} />
         ) : (
           <div className={styles.imageFallback}>
-            <i className="ti ti-user" />
+            <i className="fas fa-user" />
           </div>
         )}
       </div>
