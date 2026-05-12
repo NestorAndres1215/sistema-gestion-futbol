@@ -1,7 +1,7 @@
 "use client";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import AdminLayout from "../../../../shared/components/layout/admin/layout";
-import styles from "./registro-entrenador.module.css"
+import styles from "@/features/entrenador/registro-entrenador.module.css";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ActionButton from "@/shared/components/ui/button/button";

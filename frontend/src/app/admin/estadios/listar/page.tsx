@@ -8,7 +8,8 @@ import CardList from "@/shared/components/ui/card-list/card-list";
 import Pagination from "@/shared/components/ui/pagination/pagination";
 import styles from "@/shared/components/ui/card-list/card-list.module.css";
 import { useRouter } from "next/navigation";
-import useEstadioList from "@/features/estadio/hooks/useEstadioList";
+import useEstadio from "@/features/estadio/hooks/useEstadio";
+
 
 export default function ListarEstadios() {
     const router = useRouter();
@@ -22,7 +23,7 @@ export default function ListarEstadios() {
         handleSearch,
         handleFilter,
         userFilters,
-    } = useEstadioList();
+    } = useEstadio();
 
     return (
         <AdminLayout pageTitle="Estadios" pageSubtitle="Listado">

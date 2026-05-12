@@ -1,4 +1,4 @@
-import { DetailField } from "./estadio-detail.types";
+import { DetailField } from "./estadioDetail.types";
 
 export const buildEstadioFields = (estadio: any): DetailField[] => {
     return [

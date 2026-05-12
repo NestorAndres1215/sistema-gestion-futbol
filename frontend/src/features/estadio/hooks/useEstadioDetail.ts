@@ -1,7 +1,7 @@
 import { useParams } from "next/navigation";
 import { getEstadioById } from "../services/estadio.service";
 import { useEffect, useState } from "react";
-import { buildEstadioFields } from "../types/estadio-detail.data";
+import { buildEstadioFields } from "../types/estadioData.types";
 
 export default function useEstadioDetail() {
 

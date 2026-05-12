@@ -3,9 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { addEstadio } from "../services/estadio.service";
-
-// features/estadio/mappers/estadio.mapper.ts
-
+import { SwalService } from "@/shared/lib/swal/swal.service";
 
 export default function useEstadioRegistro() {
   const router = useRouter();
@@ -44,6 +42,7 @@ export default function useEstadioRegistro() {
     });
     setFoto(null);
   };
+
   const estadioToFormData = (form: any, foto: File | null) => {
     const fd = new FormData();
     console.log(form);
@@ -65,13 +64,20 @@ export default function useEstadioRegistro() {
 
     return fd;
   };
-  
+
   const registrarEstadio = async () => {
-    const fd = estadioToFormData(form, foto);
+    try {
+      const fd = estadioToFormData(form, foto);
 
-    await addEstadio(fd);
+      await addEstadio(fd);
 
-    router.push("/admin/estadios");
+      SwalService.success("Estadio registrado exitosamente");
+      router.push("/admin/estadios");
+    }
+    catch (error: any) {
+      SwalService.error(error.message);
+    }
+
   };
 
   return {

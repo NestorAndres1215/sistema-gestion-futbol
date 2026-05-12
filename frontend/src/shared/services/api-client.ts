@@ -4,7 +4,7 @@ export const API_URL = "https://localhost:7269/api";
 const request = async (url: string, options: RequestInit = {}) => {
   const match = document.cookie.match(/(^| )token=([^;]+)/);
   const token = match ? match[2] : null;
- 
+
   const isFormData = options.body instanceof FormData;
 
   const headers: any = {
@@ -25,7 +25,11 @@ const request = async (url: string, options: RequestInit = {}) => {
   });
 
   if (!res.ok) {
-    throw new Error("Error en la petición");
+
+    const errorData = await res.json();
+    throw {
+      message: errorData.Message
+    };
   }
 
   return res.json();

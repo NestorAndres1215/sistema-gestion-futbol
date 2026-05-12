@@ -1,17 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
-import AdminLayout from "../../../../shared/components/layout/admin/layout";
+import AdminLayout from "@/shared/components/layout/admin/layout";
 import styles from "@/features/estadio/styles/registro.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
-import { addEstadio } from "@/features/estadio/services/estadio.service";
 import { useRouter } from "next/navigation";
 import useEstadioRegistro from "@/features/estadio/hooks/useEstadioRegistro";
-import { tiposCesped } from "@/features/estadio/constants/estadio-options";
+import { tiposCesped } from "@/features/estadio/constants/estadioOptions";
 
 export default function EstadioFormulario() {
-    const router = useRouter();
+
 
     const { form, foto, setFoto, handleChange, limpiarFormulario, registrarEstadio } = useEstadioRegistro();
     return (
@@ -75,206 +73,270 @@ export default function EstadioFormulario() {
 
                     </div>
 
-                    <div className={styles.field}>
+                    <div className="row g-3">
 
-                        <label className={styles.label}>
-                            Fecha de Apertura
-                        </label>
+                        <div className="col-12 col-md-6">
 
-                        <div className={styles.inputWrap}>
+                            <div className={styles.field}>
 
-                            <input
-                                type="date"
-                                className={styles.input}
-                                value={form.fechaApertura}
-                                onChange={(e) =>
-                                    handleChange("fechaApertura", e.target.value)
-                                }
-                            />
+                                <label className={styles.label}>
+                                    Fecha de Apertura
+                                </label>
 
-                        </div>
-                    </div>
+                                <div className={styles.inputWrap}>
 
-                    <div className={styles.field}>
+                                    <input
+                                        type="date"
+                                        className={styles.input}
+                                        value={form.fechaApertura}
+                                        onChange={(e) => handleChange("fechaApertura", e.target.value)}
+                                    />
 
-                        <label className={styles.label}>
-                            Año
-                        </label>
+                                </div>
 
-                        <div className={styles.inputWrap}>
-
-                            <input
-                                type="number"
-                                placeholder="Año"
-                                className={styles.input}
-                                value={form.anio}
-                                onChange={(e) =>
-                                    handleChange("anio", e.target.value)
-                                }
-                            />
+                            </div>
 
                         </div>
 
-                    </div>
+                        <div className="col-12 col-md-6">
 
-                    <div className={styles.field}>
+                            <div className={styles.field}>
 
-                        <label className={styles.label}>
-                            Ciudad
-                        </label>
+                                <label className={styles.label}>
+                                    Año
+                                </label>
 
-                        <div className={styles.inputWrap}>
+                                <div className={styles.inputWrap}>
+                                    <input
+                                        type="number"
+                                        placeholder="Año"
+                                        className={styles.input}
+                                        value={form.anio}
+                                        onChange={(e) => handleChange("anio", e.target.value)}
+                                    />
+                                </div>
 
-                            <input
-                                type="text"
-                                placeholder="Ciudad"
-                                className={styles.input}
-                                value={form.ciudad}
-                                onChange={(e) =>
-                                    handleChange("ciudad", e.target.value)
-                                }
-                            />
+                            </div>
 
                         </div>
 
                     </div>
 
-                    <div className={styles.field}>
+                    <div className="row g-3">
 
-                        <label className={styles.label}>
-                            País
-                        </label>
+                        <div className="col-12 col-md-6">
 
-                        <div className={styles.inputWrap}>
+                            <div className={styles.field}>
 
-                            <select
-                                className={styles.input}
-                                value={form.pais}
-                                onChange={(e) =>
-                                    handleChange("pais", e.target.value)
-                                }
-                            >
+                                <label className={styles.label}>
+                                    Ciudad
+                                </label>
 
-                                <option value="">
-                                    Selecciona un país
-                                </option>
+                                <div className={styles.inputWrap}>
 
-                                <option value="Perú">
-                                    Perú
-                                </option>
+                                    <input
+                                        type="text"
+                                        placeholder="Ciudad"
+                                        className={styles.input}
+                                        value={form.ciudad}
+                                        onChange={(e) => handleChange("ciudad", e.target.value)}
+                                    />
 
-                                <option value="Argentina">
-                                    Argentina
-                                </option>
-                                <option value="España">
-                                    España
-                                </option>
+                                </div>
 
-                                <option value="Brasil">
-                                    Brasil
-                                </option>
+                            </div>
 
-                                <option value="Uruguay">
-                                    Uruguay
-                                </option>
+                        </div>
 
-                                <option value="Chile">
-                                    Chile
-                                </option>
+                        <div className="col-12 col-md-6">
 
-                            </select>
+                            <div className={styles.field}>
+
+                                <label className={styles.label}>
+                                    País
+                                </label>
+
+                                <div className={styles.inputWrap}>
+
+                                    <select
+                                        className={styles.input}
+                                        value={form.pais}
+                                        onChange={(e) =>
+                                            handleChange("pais", e.target.value)}
+                                    >
+
+                                        <option value="">
+                                            Selecciona un país
+                                        </option>
+
+                                        <option value="Perú">
+                                            Perú
+                                        </option>
+
+                                        <option value="Argentina">
+                                            Argentina
+                                        </option>
+
+                                        <option value="España">
+                                            España
+                                        </option>
+
+                                        <option value="Inglaterra">
+                                            Inglaterra
+                                        </option>
+
+                                        <option value="Brasil">
+                                            Brasil
+                                        </option>
+
+                                        <option value="Uruguay">
+                                            Uruguay
+                                        </option>
+
+                                        <option value="Chile">
+                                            Chile
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
                     </div>
 
-                    <div className={styles.field}>
+                    <div className="row g-3">
 
-                        <label className={styles.label}>
-                            Latitud
-                        </label>
+                        <div className="col-12 col-md-6">
 
-                        <div className={styles.inputWrap}>
+                            <div className={styles.field}>
 
-                            <input
-                                type="number"
-                                step="0.000001"
-                                placeholder="Latitud"
-                                className={styles.input}
-                                value={form.latitud}
-                                onChange={(e) =>
-                                    handleChange("latitud", e.target.value)
-                                }
-                            />
+                                <label className={styles.label}>
+                                    Latitud
+                                </label>
+
+                                <div className={styles.inputWrap}>
+
+                                    <input
+                                        type="number"
+                                        step="0.000001"
+                                        placeholder="Latitud"
+                                        className={styles.input}
+                                        value={form.latitud}
+                                        onChange={(e) =>
+                                            handleChange(
+                                                "latitud",
+                                                e.target.value
+                                            )
+                                        }
+                                    />
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div className="col-12 col-md-6">
+
+                            <div className={styles.field}>
+
+                                <label className={styles.label}>
+                                    Longitud
+                                </label>
+
+                                <div className={styles.inputWrap}>
+
+                                    <input
+                                        type="number"
+                                        step="0.000001"
+                                        placeholder="Longitud"
+                                        className={styles.input}
+                                        value={form.longitud}
+                                        onChange={(e) =>
+                                            handleChange(
+                                                "longitud",
+                                                e.target.value
+                                            )
+                                        }
+                                    />
+
+                                </div>
+
+                            </div>
 
                         </div>
 
                     </div>
 
-                    <div className={styles.field}>
+                    <div className="row g-3">
 
-                        <label className={styles.label}>
-                            Longitud
-                        </label>
+                        <div className="col-12 col-md-6">
 
-                        <div className={styles.inputWrap}>
+                            <div className={styles.field}>
 
-                            <input
-                                type="number"
-                                step="0.000001"
-                                placeholder="Longitud"
-                                className={styles.input}
-                                value={form.longitud}
-                                onChange={(e) =>
-                                    handleChange("longitud", e.target.value)
-                                }
-                            />
+                                <label className={styles.label}>
+                                    Capacidad
+                                </label>
 
-                        </div>
+                                <div className={styles.inputWrap}>
 
-                    </div>
+                                    <input
+                                        type="number"
+                                        placeholder="Capacidad"
+                                        className={styles.input}
+                                        value={form.capacidad}
+                                        onChange={(e) =>
+                                            handleChange(
+                                                "capacidad",
+                                                e.target.value
+                                            )
+                                        }
+                                    />
 
-                    <div className={styles.field}>
+                                </div>
 
-                        <label className={styles.label}>
-                            Capacidad
-                        </label>
-
-                        <div className={styles.inputWrap}>
-
-                            <input
-                                type="number"
-                                placeholder="Capacidad"
-                                className={styles.input}
-                                value={form.capacidad}
-                                onChange={(e) =>
-                                    handleChange("capacidad", e.target.value)
-                                }
-                            />
+                            </div>
 
                         </div>
 
-                    </div>
+                        <div className="col-12 col-md-6">
 
-                    <div className={styles.field}>
+                            <div className={styles.field}>
 
-                        <label className={styles.label}>
-                            Tipo de Césped
-                        </label>
+                                <label className={styles.label}>
+                                    Tipo de Césped
+                                </label>
 
-                        <div className={styles.inputWrap}>
+                                <div className={styles.inputWrap}>
 
-                            <select
-                                className={styles.input}
-                                value={form.tipoCesped}
-                                onChange={(e) => handleChange("tipoCesped", e.target.value)}
-                            >
-                                {tiposCesped.map((item) => (
-                                    <option key={item.value} value={item.value}>
-                                        {item.label}
-                                    </option>
-                                ))}
-                            </select>
+                                    <select
+                                        className={styles.input}
+                                        value={form.tipoCesped}
+                                        onChange={(e) =>
+                                            handleChange(
+                                                "tipoCesped",
+                                                e.target.value
+                                            )
+                                        }
+                                    >
+
+                                        {tiposCesped.map((item) => (
+                                            <option
+                                                key={item.value}
+                                                value={item.value}
+                                            >
+                                                {item.label}
+                                            </option>
+                                        ))}
+
+                                    </select>
+
+                                </div>
+
+                            </div>
 
                         </div>
 

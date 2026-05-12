@@ -1,24 +1,20 @@
 "use client";
 import { useEffect, useState } from "react";
-import AdminLayout from "../../../../shared/components/layout/admin/layout";
+import AdminLayout from "@/shared/components/layout/admin/layout";
 import { getEntrenadores } from "@/features/entrenador/services/entrenador.service";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import Pagination from "@/shared/components/ui/pagination/pagination";
 import CardList from "@/shared/components/ui/card-list/card-list";
 import FilterBar from "@/shared/components/ui/filter-bar/filter-bar";
 import SearchBar from "@/shared/components/ui/search-bar/search-bar";
-import styles from "@/components/card-list/card-list.module.css";
+import styles from "@/shared/components/ui/card-list/card-list.module.css";
 import { useRouter } from "next/navigation";
-type QueryState = {
-    search: string;
-    estiloJuego: string;
-    pais: string;
-    estado: string;
-};
+import { EntrenadorQueryState } from "@/features/entrenador/types/entrenadorQueryState.types";
+
 
 export default function EntrenadorLista() {
-const router = useRouter();
-    const [query, setQuery] = useState<QueryState>({
+    const router = useRouter();
+    const [query, setQuery] = useState<EntrenadorQueryState>({
         search: "",
         estiloJuego: "",
         pais: "",
@@ -31,7 +27,7 @@ const router = useRouter();
 
     const pageSize = 15;
 
-    const fetchData = async (q: QueryState, currentPage: number) => {
+    const fetchData = async (q: EntrenadorQueryState, currentPage: number) => {
         try {
             const res = await getEntrenadores({
                 ...q,
@@ -63,7 +59,7 @@ const router = useRouter();
         setPage(1);
     };
 
-    const handleFilter = (filters: Partial<QueryState>) => {
+    const handleFilter = (filters: Partial<EntrenadorQueryState>) => {
         setQuery((prev) => ({
             ...prev,
             ...filters,

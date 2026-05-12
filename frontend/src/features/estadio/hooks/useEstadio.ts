@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { getAniosEstadios, getEstadios } from "../services/estadio.service";
-import { QueryState } from "../types/queryState.types";
+
 import { useRouter } from "next/navigation";
+import { EstadioQueryState } from "../types/estadioQueryState.types";
+import { stadiumColumns } from "../constants/estadioColumns";
 
 export default function useEstadio() {
 
@@ -12,7 +14,7 @@ export default function useEstadio() {
     const [totalPages, setTotalPages] = useState(1);
     const pageSize = 15;
 
-    const [query, setQuery] = useState<QueryState>({
+    const [query, setQuery] = useState<EstadioQueryState>({
         search: "",
         tipoCesped: "",
         pais: "",
@@ -20,7 +22,7 @@ export default function useEstadio() {
         estado: "",
     });
 
-    const fetchEstadios = async (q: QueryState, currentPage: number) => {
+    const fetchEstadios = async (q: EstadioQueryState, currentPage: number) => {
         try {
             const res = await getEstadios({
                 page: currentPage,
@@ -120,17 +122,6 @@ export default function useEstadio() {
         setPage(1);
     };
 
-
-    const stadiumColumns = [
-        { header: "ID", accessor: "id" },
-        { header: "Nombre", accessor: "nombre" },
-        { header: "País", accessor: "pais" },
-        { header: "Ciudad", accessor: "ciudad" },
-        { header: "Año", accessor: "anio" },
-        { header: "Capacidad", accessor: "capacidad" },
-
-    ];
-    
     const userActions = {
         onView: (u: any) =>
             router.push(`/admin/estadios/edicion/${u.id}`),
@@ -140,8 +131,8 @@ export default function useEstadio() {
 
     };
 
-
     return {
-        userActions,stadiumColumns, data, query, handleSearch, userFilters, handleFilter, page, totalPages, setPage
+        userActions, stadiumColumns, data, query, handleSearch,
+        userFilters, handleFilter, page, totalPages, setPage
     }
 }
