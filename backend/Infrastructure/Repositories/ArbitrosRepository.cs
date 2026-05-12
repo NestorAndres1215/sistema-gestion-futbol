@@ -87,6 +87,10 @@ public class ArbitrosRepository : IArbitroRepository
     public async Task<Arbitros?> GetByIdAsync(int id)
     {
         return await _context.Arbitros
+            .Include(x => x.Persona)
+                .ThenInclude(p => p.CiudadNacimiento)
+            .Include(x => x.Persona)
+                .ThenInclude(p => p.PaisNacimiento)
             .AsNoTracking()
             .SingleOrDefaultAsync(x => x.Id == id);
     }

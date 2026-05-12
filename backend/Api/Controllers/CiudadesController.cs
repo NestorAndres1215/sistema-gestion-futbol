@@ -34,7 +34,6 @@ public class CiudadesController : ControllerBase
         return Ok(await _service.GetByPaisIdAsync(paisId));
     }
 
-
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] Ciudades ciudad)
     {

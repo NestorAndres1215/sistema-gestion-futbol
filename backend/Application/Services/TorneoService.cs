@@ -19,16 +19,19 @@ public class TorneoService : ITorneoService
 
     public async Task<Torneo> AddAsync(TorneoDto torneoDto)
     {
-        var existe = await _repo.GetByNombreAsync(torneoDto.nombre);
+        ValidarDto(torneoDto);
+
+        var existe = await _repo
+            .GetByNombreAsync(torneoDto.nombre);
 
         if (existe != null)
-            throw new BadRequestException("El torneo ya existe");
+            throw new BadRequestException("El torneo ya existe" );
 
         var existeUsuario = await _usuarioRepository
             .GetByUsernameAsync(torneoDto.creado);
 
         if (existeUsuario == null)
-            throw new BadRequestException("El usuario no existe");
+            throw new BadRequestException(  "El usuario no existe");
 
         var torneo = new Torneo
         {
@@ -47,6 +50,34 @@ public class TorneoService : ITorneoService
         await _repo.AddAsync(torneo);
 
         return torneo;
+    }
+
+
+    private void ValidarDto(TorneoDto torneoDto)
+    {
+        if (torneoDto == null)
+            throw new BadRequestException("El cuerpo de la solicitud es obligatorio");
+
+        if (string.IsNullOrWhiteSpace(torneoDto.nombre))
+            throw new BadRequestException("El nombre es obligatorio");
+
+        if (string.IsNullOrWhiteSpace(torneoDto.tipo))
+            throw new BadRequestException("El tipo es obligatorio");
+
+        if (string.IsNullOrWhiteSpace(torneoDto.tipoParticipante))
+        {
+            throw new BadRequestException(   "El tipo de participante es obligatorio");
+        }
+
+        if (string.IsNullOrWhiteSpace(torneoDto.descricpcion))
+        {
+            throw new BadRequestException("La descripción es obligatoria");
+        }
+
+        if (string.IsNullOrWhiteSpace(  torneoDto.creado))
+        {
+            throw new BadRequestException("El usuario creador es obligatorio");
+        }
     }
 
     public async Task<PagedResult<Torneo>> GetAllAsync(int page,
