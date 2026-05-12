@@ -1,18 +1,19 @@
 "use client";
 
-import Breadcrumb from "@/components/bread-crumb/bread-cumb";
-import AdminLayout from "../../layout/AdminLayout";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
+import AdminLayout from "../../../../shared/components/layout/admin/layout";
 import { useEffect, useState } from "react";
 import { getEstadios, getAniosEstadios } from "@/services/estadio.service";
-import SearchBar from "@/components/search-bar/search-bar";
-import FilterBar from "@/components/filter-bar/filter-bar";
-import CardList from "@/components/card-list/card-list";
-import Pagination from "@/components/pagination/pagination";
+import SearchBar from "@/shared/components/ui/search-bar/search-bar";
+import FilterBar from "@/shared/components/ui/filter-bar/filter-bar";
+import CardList from "@/shared/components/ui/card-list/card-list";
+import Pagination from "@/shared/components/ui/pagination/pagination";
 import { QueryState } from "./listar.type";
 import styles from "@/components/card-list/card-list.module.css";
+import { useRouter } from "next/navigation";
 
 export default function ListarEstadios() {
-
+    const router = useRouter();
     const [data, setData] = useState<any[]>([]);
     const [anios, setAnios] = useState<number[]>([]);
     const [page, setPage] = useState(1);
@@ -44,7 +45,6 @@ export default function ListarEstadios() {
 
             setData(Array.isArray(lista) ? lista : []);
 
-            // 👇 IMPORTANTE: totalPages desde backend
             setTotalPages(res?.totalPages ?? 1);
 
         } catch (error) {
@@ -157,7 +157,7 @@ export default function ListarEstadios() {
                         e.fotoUrl ? `https://localhost:7269${e.fotoUrl}` : null
                     }
                     imageClassName={styles.imageStadium}
-                    onDetail={(e) => console.log(e.id)}
+                    onDetail={(e) => router.push(`/admin/estadios/listar/${e.id}`)}
                 />
 
                 {/* 🔥 PAGINACIÓN */}

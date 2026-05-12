@@ -2,24 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
-
-import Breadcrumb from "@/components/bread-crumb/bread-cumb";
-import AdminLayout from "../../layout/AdminLayout";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
+import AdminLayout from "@/shared/components/layout/admin/layout";
 import styles from "./registro-torneo.module.css";
 
-import { getCategories } from "@/services/categoria.service";
-import ActionButton from "@/components/button/button";
-
-import { addTorneo } from "@/services/torneo.service";
-
+import ActionButton from "@/shared/components/ui/button/button";
 
 import { useRouter } from "next/navigation";
-type Categoria = {
-    id: number;
-    nombre: string;
-    descripcion: string;
-    fechaCreacion: string;
-};
+import { Categoria } from "@/features/categoria/types/categoria.types";
+import { getCategories } from "@/features/categoria/services/categoria.service";
+import { addTorneo } from "@/features/torneo/services/torneo.service";
+
 
 
 export default function TorneoFormulario() {
@@ -42,6 +35,7 @@ export default function TorneoFormulario() {
 
         loadCategories();
     }, []);
+
     const limpiarFormulario = () => {
         formRef.current?.reset();
     };

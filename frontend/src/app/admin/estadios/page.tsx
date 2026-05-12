@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import Breadcrumb from "@/components/bread-crumb/bread-cumb";
-import AdminLayout from "../layout/AdminLayout";
-import SelectionCard from "@/components/selection-card/selection-card";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
+import AdminLayout from "../../../shared/components/layout/admin/layout";
+import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
 
 export default function Estadio() {
   const router = useRouter();

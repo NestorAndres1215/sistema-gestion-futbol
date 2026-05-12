@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-import AdminLayout from "../../layout/AdminLayout";
-import Breadcrumb from "@/components/bread-crumb/bread-cumb";
-import { getTorneos } from "@/services/torneo.service";
-import SelectionCard from "@/components/selection-card/selection-card";
+import AdminLayout from "../../../../shared/components/layout/admin/layout";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
+
+import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
+import { getTorneos } from "@/features/torneo/services/torneo.service";
 
 export default function ListarTorneo() {
     const searchParams = useSearchParams();

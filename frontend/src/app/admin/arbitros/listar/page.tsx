@@ -1,14 +1,16 @@
 "use client";
 
-import Breadcrumb from "@/components/bread-crumb/bread-cumb";
-import AdminLayout from "../../layout/AdminLayout";
-import SearchBar from "@/components/search-bar/search-bar";
-import FilterBar from "@/components/filter-bar/filter-bar";
-import CardList from "@/components/card-list/card-list";
-import Pagination from "@/components/pagination/pagination";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
+import AdminLayout from "../../../../shared/components/layout/admin/layout";
+import SearchBar from "@/shared/components/ui/search-bar/search-bar";
+import FilterBar from "@/shared/components/ui/filter-bar/filter-bar";
+import CardList from "@/shared/components/ui/card-list/card-list";
+import Pagination from "@/shared/components/ui/pagination/pagination";
 import styles from "@/components/card-list/card-list.module.css";
 import { useEffect, useState } from "react";
-import { getArbitros } from "@/services/arbitro.service";
+
+import { useRouter } from "next/navigation";
+import { getArbitros } from "@/features/arbitro/services/arbitro.service";
 
 type QueryState = {
     search: string;
@@ -18,7 +20,7 @@ type QueryState = {
 };
 
 export default function ListarArbitros() {
-
+    const router = useRouter();
     const [query, setQuery] = useState<QueryState>({
         search: "",
         categoria: "",
@@ -138,7 +140,7 @@ export default function ListarArbitros() {
                             : null
                     }
                     imageClassName={styles.imagePerfil}
-                    onDetail={(e) => console.log(e.id)}
+                    onDetail={(e) => router.push(`/admin/estadios/listar/${e.id}`)}
                 />
 
                 <Pagination

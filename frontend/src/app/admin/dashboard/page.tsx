@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { authGuard } from "@/utils/guard";
-import AdminLayout from "@/app/admin/layout/AdminLayout";
+import { authGuard } from "@/features/auth/guards/token.guard";
+import AdminLayout from "@/shared/components/layout/admin/layout";
 import styles from "./dashboard-admin.module.css";
 
 const METRICS = [

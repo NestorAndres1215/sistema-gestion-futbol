@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import AdminLayout from "../../layout/AdminLayout";
-import { getEntrenadores } from "@/services/entrenador.service";
-import Breadcrumb from "@/components/bread-crumb/bread-cumb";
-import Pagination from "@/components/pagination/pagination";
-import CardList from "@/components/card-list/card-list";
-import FilterBar from "@/components/filter-bar/filter-bar";
-import SearchBar from "@/components/search-bar/search-bar";
+import AdminLayout from "../../../../shared/components/layout/admin/layout";
+import { getEntrenadores } from "@/features/entrenador/services/entrenador.service";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
+import Pagination from "@/shared/components/ui/pagination/pagination";
+import CardList from "@/shared/components/ui/card-list/card-list";
+import FilterBar from "@/shared/components/ui/filter-bar/filter-bar";
+import SearchBar from "@/shared/components/ui/search-bar/search-bar";
 import styles from "@/components/card-list/card-list.module.css";
 import { useRouter } from "next/navigation";
 type QueryState = {

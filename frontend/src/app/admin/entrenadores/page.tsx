@@ -1,7 +1,7 @@
 "use client";
-import Breadcrumb from "@/components/bread-crumb/bread-cumb";
-import AdminLayout from "../layout/AdminLayout";
-import SelectionCard from "@/components/selection-card/selection-card";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
+import AdminLayout from "../../../shared/components/layout/admin/layout";
+import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
 import { useRouter } from "next/navigation";
 
 export default function Estadio() {

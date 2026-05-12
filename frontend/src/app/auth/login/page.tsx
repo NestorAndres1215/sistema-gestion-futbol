@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useLogin } from "@/hooks/useLogin";
-import { useAuthRedirect } from "@/hooks/useAuthRedirect";
-import styles from "./login.module.css";
-import ActionButton from "@/components/button/button";
+import { useLogin } from "@/features/auth/hooks/useLogin";
+import { useAuthRedirect } from "@/features/auth/hooks/useAuthRedirect";
+import styles from "@/features/auth/styles/login.module.css";
+import ActionButton from "@/shared/components/ui/button/button";
 
 export default function LoginPage() {
     const router = useRouter();

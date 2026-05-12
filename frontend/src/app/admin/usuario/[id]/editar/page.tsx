@@ -1,71 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-import AdminLayout from "@/app/admin/layout/AdminLayout";
-import { getUserById, updateUser } from "@/services/user.service";
-import { UsuarioModel } from "../../usuario.model";
-import { SwalService } from "@/services/swal/swal.service";
-import styles from "./editar-usuario.module.css";
-import Breadcrumb from "@/components/bread-crumb/bread-cumb";
-import ActionButton from "@/components/button/button";
+import AdminLayout from "@/shared/components/layout/admin/layout";
+import styles from "@/features/usuario/styles/editar.module.css";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
+import ActionButton from "@/shared/components/ui/button/button";
+import useUsuarioEdit from "@/features/usuario/hooks/useUsuarioEdit";
+import router from "next/router";
+
 export default function EditUserPage() {
-  const { id } = useParams();
-  const router = useRouter();
 
-  const [form, setForm] = useState<UsuarioModel>({
-    username: "",
-    email: "",
-    estado: "",
-    rol: "",
-  });
-
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const res = await getUserById(Number(id));
-      setForm({
-        username: res.username,
-        email: res.email,
-        estado: res.estado,
-        rol: res.rol.nombre,
-      });
-      setLoading(false);
-    };
-    if (id) fetchUser();
-  }, [id]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSaving(true);
-    try {
-      await updateUser(Number(id), form);
-      router.push("/admin/usuario");
-    } catch (error: any) {
-      SwalService.error(
-        error?.response?.data?.message || error?.message || "Error inesperado"
-      );
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  const initials = form.username
-    ? form.username.slice(0, 2).toUpperCase()
-    : "??";
+  const { initials, form, handleSubmit, id, handleChange, breadcrumbUsuarioEdit } = useUsuarioEdit();
 
   return (
     <AdminLayout pageTitle="Editar" pageSubtitle="Modificar datos">
-      <Breadcrumb items={[
-        { label: "Usuario", href: "/admin/usuario" },
-        { label: "Editar Usuario" },
-      ]} />
+      <Breadcrumb items={breadcrumbUsuarioEdit} />
 
       <div className={styles.card}>
         <div className={styles.cardHead}>

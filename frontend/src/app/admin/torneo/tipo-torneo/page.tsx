@@ -1,9 +1,9 @@
 "use client";
 
-import Breadcrumb from "@/components/bread-crumb/bread-cumb";
-import AdminLayout from "../../layout/AdminLayout";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
+import AdminLayout from "../../../../shared/components/layout/admin/layout";
 import { useRouter, useSearchParams } from "next/navigation";
-import SelectionCard from "@/components/selection-card/selection-card";
+import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
 
 export default function TipoTorneo() {
   const router = useRouter();

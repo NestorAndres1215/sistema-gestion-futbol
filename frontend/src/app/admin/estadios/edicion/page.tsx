@@ -1,14 +1,14 @@
 "use client";
 
-import Breadcrumb from "@/components/bread-crumb/bread-cumb"
-import AdminLayout from "../../layout/AdminLayout"
-import FilterBar from "@/components/filter-bar/filter-bar"
-import Pagination from "@/components/pagination/pagination"
-import SearchBar from "@/components/search-bar/search-bar"
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb"
+import AdminLayout from "../../../../shared/components/layout/admin/layout"
+import FilterBar from "@/shared/components/ui/filter-bar/filter-bar"
+import Pagination from "@/shared/components/ui/pagination/pagination"
+import SearchBar from "@/shared/components/ui/search-bar/search-bar"
 import { useEffect, useState } from "react"
 import { QueryState } from "../listar/listar.type"
 import { getAniosEstadios, getEstadios } from "@/services/estadio.service"
-import Table from "@/components/table/table"
+import Table from "@/shared/components/ui/table/table"
 import { useRouter } from "next/navigation";
 
 export default function Estadio() {
@@ -139,10 +139,10 @@ export default function Estadio() {
     ];
     const userActions = {
         onView: (u: any) =>
-            router.push(`/admin/usuario/${u.id}`),
+            router.push(`/admin/estadios/edicion/${u.id}`),
 
         onEdit: (u: any) =>
-            router.push(`/admin/usuario/${u.id}/editar`),
+            router.push(`/admin/estadios/edicion/${u.id}/editar`),
 
     };
 

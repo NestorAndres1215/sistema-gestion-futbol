@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import AdminLayout from "@/app/admin/layout/AdminLayout";
+import AdminLayout from "@/shared/components/layout/admin/layout";
 import { useParams } from "next/navigation";
-import { getEntrenadorById } from "@/services/entrenador.service";
-import DetailCard from "@/components/card-detail/card-detail";
+import { getEntrenadorById } from "@/features/entrenador/services/entrenador.service";
+import DetailCard from "@/shared/components/ui/card-detail/card-detail";
 
 export default function EntrenadorDetalle() {
 
@@ -15,15 +15,8 @@ export default function EntrenadorDetalle() {
     useEffect(() => {
 
         const fetchEntrenador = async () => {
-            try {
-
-                const res = await getEntrenadorById(Number(params.id));
-
-                setEntrenador(res);
-
-            } catch (error) {
-                console.error(error);
-            }
+            const res = await getEntrenadorById(Number(params.id));
+            setEntrenador(res);
         };
 
         if (params.id) {
@@ -77,7 +70,6 @@ export default function EntrenadorDetalle() {
 
     return (
         <AdminLayout>
-
             {
                 entrenador && (
                     <DetailCard
@@ -87,7 +79,6 @@ export default function EntrenadorDetalle() {
                     />
                 )
             }
-
         </AdminLayout>
     );
 }

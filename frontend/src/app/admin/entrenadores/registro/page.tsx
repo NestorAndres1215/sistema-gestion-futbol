@@ -1,11 +1,11 @@
 "use client";
-import Breadcrumb from "@/components/bread-crumb/bread-cumb";
-import AdminLayout from "../../layout/AdminLayout";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
+import AdminLayout from "../../../../shared/components/layout/admin/layout";
 import styles from "./registro-entrenador.module.css"
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import ActionButton from "@/components/button/button";
-import { addEntrenador } from "@/services/entrenador.service";
+import ActionButton from "@/shared/components/ui/button/button";
+import { addEntrenador } from "@/features/entrenador/services/entrenador.service";
 export default function EntrenadorFormulario() {
     const router = useRouter();
     const [nombre, setNombre] = useState("");

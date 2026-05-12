@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import Breadcrumb from "@/components/bread-crumb/bread-cumb";
-import AdminLayout from "../../layout/AdminLayout";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
+import AdminLayout from "../../../../shared/components/layout/admin/layout";
 import styles from "./registro-arbitros.module.css";
-import ActionButton from "@/components/button/button";
-import { addArbitro } from "@/services/arbitro.service";
+import ActionButton from "@/shared/components/ui/button/button";
+
 import { useRouter } from "next/navigation";
+import { addArbitro } from "@/features/arbitro/services/arbitro.service";
 
 export default function ArbitroFormulario() {
     const router = useRouter();

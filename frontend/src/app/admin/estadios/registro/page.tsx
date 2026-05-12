@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Breadcrumb from "@/components/bread-crumb/bread-cumb";
-import AdminLayout from "../../layout/AdminLayout";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
+import AdminLayout from "../../../../shared/components/layout/admin/layout";
 import styles from "./registro-estadio.module.css";
-import ActionButton from "@/components/button/button";
+import ActionButton from "@/shared/components/ui/button/button";
 import { addEstadio } from "@/services/estadio.service";
 import { useRouter } from "next/navigation";
 
