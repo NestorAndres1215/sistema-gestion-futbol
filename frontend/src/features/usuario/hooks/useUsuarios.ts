@@ -80,6 +80,10 @@ export function useUsers() {
     onDelete: (u: any) => handleDelete(u),
   };
 
+  const breadcrumbUsuario = [
+    { label: "Usuario" },
+  ];
+
   return {
     data,
     page,
@@ -91,6 +95,7 @@ export function useUsers() {
     userColumns,
     userActions,
     userFilters,
+    breadcrumbUsuario
   };
-  
+
 }

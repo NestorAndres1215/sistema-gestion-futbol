@@ -1,21 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
-import AdminLayout from "../../../shared/components/layout/admin/layout";
+import AdminLayout from "@/shared/components/layout/admin/layout";
 import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
+import useTorneo from "@/features/torneo/hooks/useTorneo";
 
 export default function Torneo() {
-  const router = useRouter();
-  const [tipo, setTipo] = useState<string>("");
 
-  const handleSelectTipo = (value: string) => {
-    setTipo(value);
-    router.push(`/admin/torneo/tipo-torneo?tipo=${value}`);
-  };
-
+  const { tipo, handleSelectTipo } = useTorneo()
+  
   return (
     <AdminLayout pageTitle="Torneos" pageSubtitle="Mantenimiento">
 

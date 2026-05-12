@@ -1,4 +1,4 @@
-import { api } from "../../../shared/services/api-client";
+import { api } from "@/shared/services/api-client";
 
 export const getUsers = async ({ page = 1, pageSize = 10, search = "", estado = "", rol = "", }: {
   page?: number; pageSize?: number; search?: string; estado?: string; rol?: string;

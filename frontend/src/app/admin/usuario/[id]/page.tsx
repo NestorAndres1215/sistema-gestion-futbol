@@ -7,20 +7,12 @@ import { useUsuarioDetails } from "@/features/usuario/hooks/useUsuarioDetails";
 
 
 export default function UserDetailPage() {
-  const { fields } = useUsuarioDetails();
+  const { fields, breadcrumbUsuarioDetails } = useUsuarioDetails();
 
   return (
     <AdminLayout pageTitle="Detalle Usuario" pageSubtitle="Información">
-
-      <Breadcrumb
-        items={[
-          { label: "Usuario", href: "/admin/usuario" },
-          { label: "Detalle Usuario" },
-        ]}
-      />
-
+      <Breadcrumb items={breadcrumbUsuarioDetails} />
       <EntityDetail fields={fields} />
-
     </AdminLayout>
   );
 }

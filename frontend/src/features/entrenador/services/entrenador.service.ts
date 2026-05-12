@@ -1,4 +1,4 @@
-import { api } from "../../../shared/services/api-client";
+import { api } from "@/shared/services/api-client";
 
 export const addEntrenador = async (data: FormData) => {
   const response = await api.post("/entrenadores", data);

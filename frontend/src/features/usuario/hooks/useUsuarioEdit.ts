@@ -6,7 +6,7 @@ import { SwalService } from "@/shared/lib/swal/swal.service";
 
 
 export default function useUsuarioEdit() {
-  
+
   const { id } = useParams();
   const router = useRouter();
 
@@ -37,7 +37,7 @@ export default function useUsuarioEdit() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,7 +56,7 @@ export default function useUsuarioEdit() {
     { label: "Usuario", href: "/admin/usuario" },
     { label: "Editar Usuario" },
   ];
-  
+
   const initials = form.username
     ? form.username.slice(0, 2).toUpperCase()
     : "??";

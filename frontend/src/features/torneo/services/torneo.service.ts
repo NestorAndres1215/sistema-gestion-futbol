@@ -1,4 +1,4 @@
-import { api } from "../shared/services/api-client";
+import { api } from "@/shared/services/api-client";
 
 export const getTorneos= async ({ page = 1, pageSize = 10, search = "", tipo = "", tipoParticipante = "", estado = "", }: {
   page?: number; pageSize?: number; search?: string; tipo?: string; tipoParticipante?: string; estado?: string;

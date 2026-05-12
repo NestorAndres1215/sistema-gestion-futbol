@@ -1,4 +1,5 @@
-import { api } from "../shared/services/api-client";
+import { api } from "@/shared/services/api-client";
+
 
 export const addEstadio = async (data: FormData) => {
   const response = await api.post("/estadios", data);

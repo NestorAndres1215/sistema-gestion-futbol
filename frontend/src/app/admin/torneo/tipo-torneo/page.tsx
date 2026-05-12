@@ -1,23 +1,13 @@
 "use client";
 
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
-import AdminLayout from "../../../../shared/components/layout/admin/layout";
-import { useRouter, useSearchParams } from "next/navigation";
+import AdminLayout from "@/shared/components/layout/admin/layout";
 import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
+import useTipoTorneo from "@/features/torneo/hooks/useTipoTorneo";
 
 export default function TipoTorneo() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
 
-  const tipo = searchParams.get("tipo");
-
-
-  const irATorneo = (categoria: string) => {
-    router.push(`/admin/torneo/listar?tipo=${tipo}&categoria=${categoria}`);
-  };
-  const irFormulario = () => {
-    router.push(`/admin/torneo/registro?tipo=${tipo}`);
-  }
+  const { tipo, irATorneo, irFormulario } = useTipoTorneo();
   return (
     <AdminLayout>
       <Breadcrumb

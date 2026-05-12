@@ -1,4 +1,5 @@
-import { api } from "../shared/services/api-client";
+import { api } from "@/shared/services/api-client";
+
 
 export const getCategories = async () => {
   const response = await api.get("/categorias");

@@ -18,6 +18,7 @@ export default function UsersPage() {
     query,
     handleSearch,
     handleFilter,
+    breadcrumbUsuario,
     userColumns,
     userActions,
     userFilters,
@@ -26,7 +27,7 @@ export default function UsersPage() {
   return (
     <AdminLayout pageTitle="Usuario" pageSubtitle="Mantenimiento">
 
-      <Breadcrumb items={[{ label: "Usuario" }]} />
+      <Breadcrumb items={breadcrumbUsuario} />
 
       <SearchBar
         value={query.search}

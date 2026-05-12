@@ -1,72 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import AdminLayout from "@/shared/components/layout/admin/layout";
-import { useParams, useRouter } from "next/navigation";
 import DetailCard from "@/shared/components/ui/card-detail/card-detail";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
-import { getEstadioById } from "@/services/estadio.service";
+import useEstadioDetail from "@/features/estadio/hooks/useEstadioDetail";
+
 
 export default function EstadioDetalle() {
- 
-    const params = useParams();
-
-    const [estadio, setEstadio] = useState<any>(null);
-
-    useEffect(() => {
-
-        const fetchEstadio = async () => {
-            const res = await getEstadioById(Number(params.id));
-            setEstadio(res);
-        };
-
-        if (params.id) {
-            fetchEstadio();
-        }
-
-    }, [params.id]);
-
-    const items = estadio
-        ? [
-            {
-                label: "País",
-                value: estadio.pais,
-            },
-            {
-                label: "Ciudad",
-                value: estadio.ciudad,
-            },
-            {
-                label: "Capacidad",
-                value: estadio.capacidad,
-            },
-            {
-                label: "Tipo Césped",
-                value: estadio.tipoCesped,
-            },
-            {
-                label: "Fecha de Apertura",
-                value: estadio.fechaApertura
-                    ? new Date(estadio.fechaApertura).toLocaleDateString()
-                    : "Sin registro",
-            },
-            {
-                label: "Edad",
-                value: estadio.anio
-                    ? `${new Date().getFullYear() - estadio.anio} años`
-                    : "Sin registro",
-            },
-            {
-                label: "Latitud",
-                value: `${estadio.latitud}°`,
-            },
-            {
-                label: "Longitud",
-                value: `${estadio.longitud}°`,
-            },
-        ]
-        : [];
-
+    const { estadio, items } = useEstadioDetail();
     return (
         <AdminLayout>
             <Breadcrumb

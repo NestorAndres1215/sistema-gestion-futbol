@@ -1,16 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
-import AdminLayout from "../../../shared/components/layout/admin/layout";
+import AdminLayout from "@/shared/components/layout/admin/layout";
 import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
 
 export default function Estadio() {
   const router = useRouter();
-
-
   return (
     <AdminLayout pageTitle="Estadios" pageSubtitle="Mantenimiento">
 

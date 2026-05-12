@@ -1,4 +1,4 @@
-import { api } from "../shared/services/api-client";
+import { api } from "@/shared/services/api-client";
 
 export const addArbitro = async (data: FormData) => {
   const response = await api.post("/arbitros", data);
