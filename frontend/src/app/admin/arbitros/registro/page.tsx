@@ -1,13 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import AdminLayout from "../../../../shared/components/layout/admin/layout";
 import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
-
 import { useRouter } from "next/navigation";
-import { addArbitro } from "@/features/arbitro/services/arbitro.service";
 import useArbitroRegistro from "@/features/arbitro/hooks/useArbitroRegistro";
 
 export default function ArbitroFormulario() {
@@ -49,7 +46,7 @@ export default function ArbitroFormulario() {
 
                 <form noValidate className={styles.form}>
 
-                    <div className={styles.field}>
+                    <div className="d-flex flex-column gap-2 w-100">
                         <label className={styles.label}>Nombre</label>
                         <div className={styles.inputWrap}>
                             <input
@@ -66,7 +63,7 @@ export default function ArbitroFormulario() {
                     <div className="row g-3">
 
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Apellido Paterno</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -81,7 +78,7 @@ export default function ArbitroFormulario() {
                         </div>
 
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Apellido Materno</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -97,7 +94,7 @@ export default function ArbitroFormulario() {
 
                     </div>
 
-                    <div className={styles.field}>
+                    <div className="d-flex flex-column gap-2 w-100">
                         <label className={styles.label}>Fecha Nacimiento</label>
                         <div className={styles.inputWrap}>
                             <input
@@ -113,7 +110,7 @@ export default function ArbitroFormulario() {
 
                         {/* PAÍS - CIUDAD */}
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>País Nacimiento</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -128,7 +125,7 @@ export default function ArbitroFormulario() {
                         </div>
 
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Ciudad Nacimiento</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -144,7 +141,7 @@ export default function ArbitroFormulario() {
 
                         {/* ALTURA - PESO */}
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Altura</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -159,7 +156,7 @@ export default function ArbitroFormulario() {
                         </div>
 
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Peso</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -179,7 +176,7 @@ export default function ArbitroFormulario() {
 
                         {/* PIE DOMINANTE */}
                         <div className="col-12 col-md-4">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Pie Dominante</label>
 
                                 <div className={styles.inputWrap}>
@@ -200,7 +197,7 @@ export default function ArbitroFormulario() {
 
                         {/* CATEGORÍA */}
                         <div className="col-12 col-md-4">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Categoría</label>
 
                                 <div className={styles.inputWrap}>
@@ -220,9 +217,8 @@ export default function ArbitroFormulario() {
                             </div>
                         </div>
 
-                        {/* ESPECIALIDAD */}
                         <div className="col-12 col-md-4">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Especialidad</label>
 
                                 <div className={styles.inputWrap}>
@@ -245,7 +241,7 @@ export default function ArbitroFormulario() {
                     </div>
 
 
-                    <div className={styles.field}>
+                    <div className="d-flex flex-column gap-2 w-100">
                         <label className={styles.label}>Fecha Debut</label>
                         <div className={styles.inputWrap}>
                             <input
@@ -259,7 +255,7 @@ export default function ArbitroFormulario() {
                     <div className="row g-3">
 
                         <div className="col-12 col-md-4">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Años Experiencia</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -274,7 +270,7 @@ export default function ArbitroFormulario() {
                         </div>
 
                         <div className="col-12 col-md-4">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Nivel</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -289,7 +285,7 @@ export default function ArbitroFormulario() {
                         </div>
 
                         <div className="col-12 col-md-4">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Reputación</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -305,7 +301,7 @@ export default function ArbitroFormulario() {
 
                     </div>
 
-                    <div className={styles.field}>
+                    <div className="d-flex flex-column gap-2 w-100">
                         <label className={styles.label}>Foto</label>
                         <div className={styles.inputWrap}>
                             <input

@@ -97,15 +97,8 @@ export default function LoginPage() {
                                 <button
                                     type="button"
                                     className={styles.toggleBtn}
-                                    onClick={() => setShowPassword((p) => !p)}
-                                >
-                                    <i
-                                        className={
-                                            showPassword
-                                                ? "fa fa-eye-slash"
-                                                : "fa fa-eye"
-                                        }
-                                    />
+                                    onClick={() => setShowPassword((p) => !p)} >
+                                    <i className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"} />
                                 </button>
                             </div>
 

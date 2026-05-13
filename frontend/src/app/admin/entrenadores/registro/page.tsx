@@ -36,7 +36,7 @@ export default function EntrenadorFormulario() {
                     </p>
                 </div>
                 <form noValidate className={styles.form}>
-                    <div className={styles.field}>
+                    <div className="d-flex flex-column gap-2 w-100">
                         <label className={styles.label}>
                             Nombre
                         </label>
@@ -58,7 +58,7 @@ export default function EntrenadorFormulario() {
                     <div className="row g-3">
 
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Apellido Paterno</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -73,7 +73,7 @@ export default function EntrenadorFormulario() {
                         </div>
 
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Apellido Materno</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -88,7 +88,7 @@ export default function EntrenadorFormulario() {
                         </div>
 
                     </div>
-                    <div className={styles.field}>
+                    <div className="d-flex flex-column gap-2 w-100">
                         <label className={styles.label}>Fecha Nacimiento</label>
                         <div className={styles.inputWrap}>
                             <input
@@ -103,7 +103,7 @@ export default function EntrenadorFormulario() {
 
                         {/* PAÍS - CIUDAD */}
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>País Nacimiento</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -118,7 +118,7 @@ export default function EntrenadorFormulario() {
                         </div>
 
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Ciudad Nacimiento</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -134,7 +134,7 @@ export default function EntrenadorFormulario() {
 
                         {/* ALTURA - PESO */}
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Altura</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -149,7 +149,7 @@ export default function EntrenadorFormulario() {
                         </div>
 
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Peso</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -168,7 +168,7 @@ export default function EntrenadorFormulario() {
 
                         {/* PIE DOMINANTE */}
                         <div className="col-12 col-md-4">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Pie Dominante</label>
 
                                 <div className={styles.inputWrap}>
@@ -188,7 +188,7 @@ export default function EntrenadorFormulario() {
                         </div>
 
                         <div className="col-12 col-md-4">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Estilo de Juego</label>
 
                                 <div className={styles.inputWrap}>
@@ -207,7 +207,7 @@ export default function EntrenadorFormulario() {
                             </div>
                         </div>
                         <div className="col-12 col-md-4">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Licencia</label>
 
                                 <div className={styles.inputWrap}>
@@ -231,7 +231,7 @@ export default function EntrenadorFormulario() {
 
                     <div className="row g-3">
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Fecha Debut</label>
                                 <div className={styles.inputWrap}>
                                     <input
@@ -246,7 +246,7 @@ export default function EntrenadorFormulario() {
                         </div>
                         <div className="col-12 col-md-6">
 
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Años de Experiencia</label>
 
                                 <div className={styles.inputWrap}>
@@ -267,7 +267,7 @@ export default function EntrenadorFormulario() {
                     <div className="row g-3">
 
                         <div className="col-12 col-md-4">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Nivel</label>
 
                                 <div className={styles.inputWrap}>
@@ -285,7 +285,7 @@ export default function EntrenadorFormulario() {
                         </div>
 
                         <div className="col-12 col-md-4">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Reputación</label>
 
                                 <div className={styles.inputWrap}>
@@ -303,7 +303,7 @@ export default function EntrenadorFormulario() {
                         </div>
 
                         <div className="col-12 col-md-4">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Salario</label>
 
                                 <div className={styles.inputWrap}>
@@ -322,7 +322,7 @@ export default function EntrenadorFormulario() {
                         </div>
 
                     </div>
-                    <div className={styles.field}>
+                    <div className="d-flex flex-column gap-2 w-100">
                         <label className={styles.label}>Foto</label>
                         <div className={styles.inputWrap}>
                             <input

@@ -34,9 +34,9 @@ export default function useArbitroRegistro() {
     });
 
     const [foto, setFoto] = useState<File | null>(null);
-  const handleChange = (key: string, value: any) => {
-    setForm((prev) => ({ ...prev, [key]: value }));
-  };
+    const handleChange = (key: string, value: any) => {
+        setForm((prev) => ({ ...prev, [key]: value }));
+    };
     const limpiarFormulario = () => {
         setForm({
             nombre: "",
@@ -78,18 +78,18 @@ export default function useArbitroRegistro() {
 
     const registrarArbitro = async () => {
         try {
-          const fd = arbitroToFormData(form, foto);
-    
-          await addArbitro(fd);
-    
-          SwalService.success("Árbitro registrado exitosamente");
-          router.push("/admin/arbitros");
+            const fd = arbitroToFormData(form, foto);
+
+            await addArbitro(fd);
+
+            SwalService.success("Árbitro registrado exitosamente");
+            router.push("/admin/arbitros");
         }
         catch (error: any) {
-          SwalService.error(error.message);
+            SwalService.error(error.message);
         }
-    
-      };
+
+    };
 
     return {
         piesDominantes,
