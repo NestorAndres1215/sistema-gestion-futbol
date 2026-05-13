@@ -2,9 +2,8 @@
 
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import AdminLayout from "@/shared/components/layout/admin/layout";
-import styles from "@/features/estadio/styles/registro.module.css";
+import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
-import { useRouter } from "next/navigation";
 import useEstadioRegistro from "@/features/estadio/hooks/useEstadioRegistro";
 import { tiposCesped } from "@/features/estadio/constants/estadioOptions";
 

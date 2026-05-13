@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import AdminLayout from "../../../../shared/components/layout/admin/layout";
-import styles from "./registro-arbitros.module.css";
+import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 
 import { useRouter } from "next/navigation";
