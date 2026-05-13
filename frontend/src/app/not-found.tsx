@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+
 import styles from "./not-found.module.css";
 import { useRouter } from "next/navigation";
 import ActionButton from "@/shared/components/ui/button/button";
