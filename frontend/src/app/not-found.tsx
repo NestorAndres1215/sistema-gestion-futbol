@@ -38,9 +38,7 @@ export default function NotFound() {
 
         <div className={styles.code}>404</div>
 
-        <div className={styles.iconWrap} aria-hidden="true">
-          <i className="fa-solid fa-triangle-exclamation" />
-        </div>
+
 
         <h1 className={styles.title}>Página no encontrada</h1>
         <p className={styles.sub}>
@@ -48,7 +46,7 @@ export default function NotFound() {
         </p>
 
 
-        <div className="d-flex flex-column gap-2 w-100" style={{ maxWidth: "250px" }}>
+        <div className="d-flex flex-column gap-2 w-100" style={{ maxWidth: "450px" }}>
           <div className="row">
             <div className="col-6">
               <ActionButton
