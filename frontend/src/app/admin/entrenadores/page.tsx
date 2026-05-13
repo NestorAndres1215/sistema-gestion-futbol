@@ -28,6 +28,14 @@ export default function Estadio() {
                         onClick={() => router.push("/admin/entrenadores/listar")}
                     />
                 </div>
+                <div className="col-12 col-sm-6">
+                    <SelectionCard
+                        icon="fas fa-pen-to-square"
+                        title="Edición de Entrenadores"
+                        description="Modificar información y datos de los entrenadores"
+                        onClick={() => router.push("/admin/entrenadores/edicion")}
+                    />
+                </div>
             </div>
         </AdminLayout>
     )

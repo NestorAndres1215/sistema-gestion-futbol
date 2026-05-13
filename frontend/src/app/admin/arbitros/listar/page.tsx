@@ -6,7 +6,7 @@ import SearchBar from "@/shared/components/ui/search-bar/search-bar";
 import FilterBar from "@/shared/components/ui/filter-bar/filter-bar";
 import CardList from "@/shared/components/ui/card-list/card-list";
 import Pagination from "@/shared/components/ui/pagination/pagination";
-import styles from "@/components/card-list/card-list.module.css";
+import styles from "@/shared/components/ui/card-list/card-list.module.css";
 import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";

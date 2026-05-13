@@ -11,7 +11,7 @@ import { tiposCesped } from "@/features/estadio/constants/estadioOptions";
 export default function EstadioFormulario() {
 
 
-    const { form, foto, setFoto, handleChange, limpiarFormulario, registrarEstadio } = useEstadioRegistro();
+    const { form, setFoto, handleChange, limpiarFormulario, registrarEstadio } = useEstadioRegistro();
     return (
         <AdminLayout pageTitle="Estadios" pageSubtitle="Mantenimiento">
 

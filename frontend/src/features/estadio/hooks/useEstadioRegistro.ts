@@ -44,25 +44,19 @@ export default function useEstadioRegistro() {
   };
 
   const estadioToFormData = (form: any, foto: File | null) => {
-    const fd = new FormData();
-    console.log(form);
-    fd.append("Nombre", form.nombre);
-    fd.append("Descripcion", form.descripcion);
-    fd.append("FechaApertura", form.fechaApertura);
+    const formData = new FormData();
+    Object.entries(form).forEach(
+      ([key, value]) => {
+        formData.append(
+          key,
+          String(value)
+        );
+      }
+    );
 
-    fd.append("Anio", String(Number(form.anio)));
-    fd.append("Ciudad", form.ciudad);
-    fd.append("Pais", form.pais);
+    if (foto) formData.append("Foto", foto);
 
-    fd.append("Latitud", String(Number(form.latitud)));
-    fd.append("Longitud", String(Number(form.longitud)));
-    fd.append("Capacidad", String(Number(form.capacidad)));
-
-    fd.append("TipoCesped", form.tipoCesped);
-
-    if (foto) fd.append("Foto", foto);
-
-    return fd;
+    return formData;
   };
 
   const registrarEstadio = async () => {
