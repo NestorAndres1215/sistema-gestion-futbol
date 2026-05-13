@@ -7,103 +7,12 @@ import FilterBar from "@/shared/components/ui/filter-bar/filter-bar";
 import CardList from "@/shared/components/ui/card-list/card-list";
 import Pagination from "@/shared/components/ui/pagination/pagination";
 import styles from "@/shared/components/ui/card-list/card-list.module.css";
-import { useEffect, useState } from "react";
-
 import { useRouter } from "next/navigation";
-import { getArbitros } from "@/features/arbitro/services/arbitro.service";
-
-type QueryState = {
-    search: string;
-    categoria: string;
-    pais: string;
-    estado: string;
-};
+import useArbitro from "@/features/arbitro/hooks/useArbitro";
 
 export default function ListarArbitros() {
     const router = useRouter();
-    const [query, setQuery] = useState<QueryState>({
-        search: "",
-        categoria: "",
-        pais: "",
-        estado: "",
-    });
-
-    const [data, setData] = useState<any[]>([]);
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-
-    const pageSize = 15;
-
-    const fetchData = async (q: QueryState, currentPage: number) => {
-        try {
-            const res = await getArbitros({
-                ...q,
-                page: currentPage,
-                pageSize,
-            });
-
-            const lista = res?.items ?? res?.data ?? [];
-
-            setData(Array.isArray(lista) ? lista : []);
-            setTotalPages(res?.totalPages ?? 1);
-
-        } catch (error) {
-            setData([]);
-            setTotalPages(1);
-        }
-    };
-
-    useEffect(() => {
-        fetchData(query, page);
-    }, [query, page]);
-
-    const handleSearch = (value: string) => {
-        setQuery((prev) => ({
-            ...prev,
-            search: value,
-        }));
-
-        setPage(1);
-    };
-
-    const handleFilter = (filters: Partial<QueryState>) => {
-        setQuery((prev) => ({
-            ...prev,
-            ...filters,
-        }));
-
-        setPage(1);
-    };
-
-    const userFilters = [
-        {
-            key: "categoria",
-            placeholder: "Categoría",
-            options: [
-                { value: "FIFA", label: "FIFA" },
-                { value: "Nacional", label: "Nacional" },
-                { value: "Regional", label: "Regional" },
-            ],
-        },
-        {
-            key: "pais",
-            placeholder: "País",
-            options: [
-                { value: "Perú", label: "Perú" },
-                { value: "Brasil", label: "Brasil" },
-                { value: "Argentina", label: "Argentina" },
-                { value: "Italia", label: "Italia" },
-            ],
-        },
-        {
-            key: "estado",
-            placeholder: "Estado",
-            options: [
-                { value: "Activo", label: "Activo" },
-                { value: "Retirado", label: "Retirado" },
-            ],
-        },
-    ];
+    const { query, data, page, totalPages, handleSearch, handleFilter, arbitroFilters, setPage } = useArbitro();
 
     return (
         <AdminLayout>
@@ -123,7 +32,7 @@ export default function ListarArbitros() {
 
                 <FilterBar
                     onChange={handleFilter}
-                    selectFilters={userFilters}
+                    selectFilters={arbitroFilters}
                 />
 
                 <CardList

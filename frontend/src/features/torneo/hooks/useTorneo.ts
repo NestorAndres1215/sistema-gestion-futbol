@@ -11,9 +11,6 @@ export default function useTorneo() {
         router.push(`/admin/torneo/tipo-torneo?tipo=${value}`);
     };
 
-
-    
-
     return {
         tipo,
         handleSelectTipo

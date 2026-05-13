@@ -168,7 +168,7 @@ select.input option:disabled {
   background: rgba(110, 231, 183, 0.15);
   border-color: rgba(110, 231, 183, 0.4);
 }
-/* Quitar spinner en input number */
+
 .input[type="number"]::-webkit-outer-spin-button,
 .input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;

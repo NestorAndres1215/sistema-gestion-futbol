@@ -20,11 +20,7 @@ export default function NotFound() {
   const { goTo } = useAppRouter();
 
   return (
-    <>
-      <div className={styles.bgBlobs} aria-hidden="true">
-        <div className={styles.blob1} />
-        <div className={styles.blob2} />
-      </div>
+
 
       <div className={styles.page}>
         <div className="d-flex align-items-center gap-2 mb-5">
@@ -37,9 +33,6 @@ export default function NotFound() {
         </div>
 
         <div className={styles.code}>404</div>
-
-
-
         <h1 className={styles.title}>Página no encontrada</h1>
         <p className={styles.sub}>
           El recurso que buscas no existe o fue movido.
@@ -66,6 +59,6 @@ export default function NotFound() {
 
 
       </div>
-    </>
+ 
   );
 }

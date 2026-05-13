@@ -3,7 +3,7 @@ import { api } from "@/shared/services/api-client";
 
 export const getCategories = async () => {
   const response = await api.get("/categorias");
-  return response; // 👈 SIN .data
+  return response; 
 };
 
 export const getCategoryById = async (id: number | string) => {
