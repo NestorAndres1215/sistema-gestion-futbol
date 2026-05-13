@@ -1,15 +1,14 @@
 "use client";
 
 import AdminLayout from "@/shared/components/layout/admin/layout";
-import styles from "@/features/usuario/styles/editar.module.css";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import ActionButton from "@/shared/components/ui/button/button";
 import useUsuarioEdit from "@/features/usuario/hooks/useUsuarioEdit";
 import router from "next/router";
-
+import styles from "@/shared/styles/form.module.css";
 export default function EditUserPage() {
 
-  const { initials, form, handleSubmit, id, handleChange, breadcrumbUsuarioEdit } = useUsuarioEdit();
+  const { form, handleSubmit, handleChange, breadcrumbUsuarioEdit } = useUsuarioEdit();
 
   return (
     <AdminLayout pageTitle="Editar" pageSubtitle="Modificar datos">
@@ -17,11 +16,9 @@ export default function EditUserPage() {
 
       <div className={styles.card}>
         <div className={styles.cardHead}>
-          <div className={styles.avatar}>{initials}</div>
-          <div>
-            <p className={styles.cardName}>{form.username || "Usuario"}</p>
-            <p className={styles.cardMeta}>ID #{id}</p>
-          </div>
+          <p className={styles.cardName}>
+            Formulario de Usuario
+          </p>
         </div>
 
         <form onSubmit={handleSubmit} noValidate className="d-flex flex-column gap-4 p-4">
