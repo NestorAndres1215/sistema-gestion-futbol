@@ -74,7 +74,7 @@ export default function useEstadio() {
         setPage(1);
     };
 
-    const userFilters = [
+    const estadioFilters = [
         {
             key: "estado",
             placeholder: "Estado",
@@ -122,17 +122,17 @@ export default function useEstadio() {
         setPage(1);
     };
 
-    const userActions = {
-        onView: (u: any) =>
-            router.push(`/admin/estadios/edicion/${u.id}`),
+    const estadioActions = {
+        onView: (e: any) =>
+            router.push(`/admin/estadios/edicion/${e.id}`),
 
-        onEdit: (u: any) =>
-            router.push(`/admin/estadios/edicion/${u.id}/editar`),
+        onEdit: (e: any) =>
+            router.push(`/admin/estadios/edicion/${e.id}/editar`),
 
     };
 
     return {
-        userActions, stadiumColumns, data, query, handleSearch,
-        userFilters, handleFilter, page, totalPages, setPage
+        estadioActions, stadiumColumns, data, query, handleSearch,
+        estadioFilters, handleFilter, page, totalPages, setPage
     }
 }

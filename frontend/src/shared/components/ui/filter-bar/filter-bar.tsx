@@ -12,7 +12,7 @@ export default function FilterBar({ onChange, selectFilters = [] }: Props) {
   };
 
   return (
-   <div className="d-flex align-items-center flex-wrap gap-2 mb-3">
+   <div className={styles.container}>
       {selectFilters.map((filter) => (
         <div key={filter.key} className="position-relative d-flex align-items-center flex-grow-1" style={{ minWidth: "160px", flex: 2 }}>
           <i className={`fa-solid fa-chevron-down ${styles.selectIcon}`} />

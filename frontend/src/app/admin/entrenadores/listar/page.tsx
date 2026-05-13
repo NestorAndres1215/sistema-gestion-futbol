@@ -11,9 +11,9 @@ import { useRouter } from "next/navigation";
 import useEntrenador from "@/features/entrenador/hooks/useEntrenador";
 
 
-export default function EntrenadorLista() {
+export default function EntrenadorListaCard() {
     const router = useRouter();
-    const { query, handleSearch, handleFilter, userFilters, data, page, totalPages, setPage } = useEntrenador();
+    const { query, handleSearch, handleFilter, entrenadorFilters, data, page, totalPages, setPage } = useEntrenador();
     return (
         <AdminLayout>
             <Breadcrumb
@@ -31,7 +31,7 @@ export default function EntrenadorLista() {
 
                 <FilterBar
                     onChange={handleFilter}
-                    selectFilters={userFilters}
+                    selectFilters={entrenadorFilters}
                 />
 
                 <CardList

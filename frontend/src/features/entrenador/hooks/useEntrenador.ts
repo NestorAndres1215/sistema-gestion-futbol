@@ -1,8 +1,13 @@
-import { useEffect, useState } from "react";
+
 import { EntrenadorQueryState } from "../types/entrenadorQueryState.types";
 import { getEntrenadores } from "../services/entrenador.service";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { formatDate } from "@/shared/utils/date.utils";
+
 
 export default function useEntrenador() {
+    const router = useRouter();
     const [query, setQuery] = useState<EntrenadorQueryState>({
         search: "",
         estiloJuego: "",
@@ -57,10 +62,10 @@ export default function useEntrenador() {
         setPage(1);
     };
 
-    const userFilters = [
+    const entrenadorFilters = [
         {
             key: "estiloJuego",
-            placeholder: "Estilo de Juego|",
+            placeholder: "Estilo de Juego",
             options: [
                 { value: "Ofensivo", label: "Ofensivo" },
                 { value: "Defensivo", label: "Defensivo" },
@@ -81,6 +86,7 @@ export default function useEntrenador() {
                 { value: "España", label: "España" },
             ],
         },
+        
         {
             key: "estado",
             placeholder: "Estado",
@@ -91,7 +97,48 @@ export default function useEntrenador() {
         },
     ];
 
-    return{
+
+    const entrenadorActions = {
+        onView: (u: any) =>
+            router.push(`/admin/entrenador/edicion/${u.id}`),
+
+        onEdit: (u: any) =>
+            router.push(`/admin/entrenador/edicion/${u.id}/editar`),
+
+    };
+
+    const entrenadorColumns = [
+        {
+            header: "ID",
+            accessor: (row: any) => row.id,
+        },
+        {
+            header: "Nombre",
+            accessor: (row: any) => row.persona?.nombre,
+        },
+        {
+            header: "Apellido",
+            accessor: (row: any) => row.persona?.apellidoPaterno,
+        },
+        {
+            header: "Estilo de Juego",
+            accessor: (row: any) => row.estiloJuego,
+        },
+        {
+            header: "País",
+            accessor: (row: any) => row.persona?.paisNacimiento?.nombre,
+        },
+        {
+            header: "Fecha de Debut",
+            accessor: (row: any) => formatDate(row.fechaDebut),
+        },
+        {
+            header: "Estado",
+            accessor: (row: any) => row.estado,
+        },
+    ];
+
+    return {
         query,
         data,
         page,
@@ -99,6 +146,8 @@ export default function useEntrenador() {
         handleSearch,
         handleFilter,
         setPage,
-        userFilters,
+        entrenadorFilters,
+        entrenadorActions,
+        entrenadorColumns,
     }
 }

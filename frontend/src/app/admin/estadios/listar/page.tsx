@@ -22,7 +22,7 @@ export default function ListarEstadios() {
         totalPages,
         handleSearch,
         handleFilter,
-        userFilters,
+        estadioFilters,
     } = useEstadio();
 
     return (
@@ -42,7 +42,7 @@ export default function ListarEstadios() {
 
                 <FilterBar
                     onChange={handleFilter}
-                    selectFilters={userFilters}
+                    selectFilters={estadioFilters}
                 />
 
                 <CardList

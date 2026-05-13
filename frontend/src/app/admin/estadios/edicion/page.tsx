@@ -11,12 +11,12 @@ import useEstadio from "@/features/estadio/hooks/useEstadio";
 export default function Estadio() {
 
     const {
-        userActions,
+        estadioActions,
         stadiumColumns,
         data,
         query,
         handleSearch,
-        userFilters,
+        estadioFilters,
         handleFilter,
         page,
         totalPages,
@@ -40,14 +40,14 @@ export default function Estadio() {
 
                 <FilterBar
                     onChange={handleFilter}
-                    selectFilters={userFilters}
+                    selectFilters={estadioFilters}
                 />
 
                 <Table
                     data={data}
                     columns={stadiumColumns}
                     showActions
-                    actions={userActions}
+                    actions={estadioActions}
                 />
 
                 <Pagination
