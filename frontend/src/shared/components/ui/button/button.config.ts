@@ -1,4 +1,5 @@
 import styles from "./button.module.css";
+
 export const config = {
     create: {
         text: "Registrar",
@@ -23,11 +24,22 @@ export const config = {
     clear: {
         text: "Limpiar",
         icon: "fa-solid fa-broom",
-        style: styles.delete,
+        style: styles.clear,
     },
     cancelar: {
         text: "Cancelar",
         icon: "fa-solid fa-xmark",
-        style: styles.delete,
+        style: styles.cancelar,
+    },
+
+    volver: {
+        text: "Volver",
+        icon: "fa-solid fa-arrow-left",
+        style: styles.volver,
+    },
+    dashboard: {
+        text: "Dashboard",
+        icon: "fa-solid fa-gauge",
+        style: styles.dashboard,
     },
 };

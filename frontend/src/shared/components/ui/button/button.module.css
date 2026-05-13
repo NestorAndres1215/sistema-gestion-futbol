@@ -57,13 +57,46 @@
   transform: translateY(-2px);
 }
 
-.delete {
-  background: rgba(248, 113, 113, 0.15);
-  color: #f87171;
+.clear {
+  background: rgba(148, 163, 184, 0.15);
+  color: #94a3b8;
   transition: all 0.2s ease;
 }
 
-.delete:hover {
-  background: rgba(248, 113, 113, 0.25);
+.clear:hover {
+  background: rgba(148, 163, 184, 0.25);
+  transform: translateY(-2px);
+}
+
+.cancelar {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+  transition: all 0.2s ease;
+}
+
+.cancelar:hover {
+  background: rgba(239, 68, 68, 0.22);
+  transform: translateY(-2px);
+}
+
+.volver {
+  background: rgba(100, 116, 139, 0.15);
+  color: #64748b;
+  transition: all 0.2s ease;
+}
+
+.volver:hover {
+  background: rgba(100, 116, 139, 0.25);
+  transform: translateY(-2px);
+}
+
+.dashboard {
+  background: rgba(99, 102, 241, 0.15);
+  color: #6366f1;
+  transition: all 0.2s ease;
+}
+
+.dashboard:hover {
+  background: rgba(99, 102, 241, 0.25);
   transform: translateY(-2px);
 }

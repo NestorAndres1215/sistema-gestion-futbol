@@ -1,8 +1,4 @@
-/* ═══════════════════════════════════════════
-   NotFound.module.css — Nexus Admin
-═══════════════════════════════════════════ */
 
-/* ── Blobs ──────────────────────────────────── */
 .bgBlobs {
   position: fixed;
   inset: 0;
@@ -35,7 +31,6 @@
   left: -120px;
 }
 
-/* ── Página ─────────────────────────────────── */
 .page {
   position: relative;
   z-index: 1;
@@ -48,14 +43,6 @@
   padding: 24px;
   font-family: 'DM Sans', sans-serif;
   text-align: center;
-}
-
-/* ── Logo ───────────────────────────────────── */
-.logoRow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 48px;
 }
 
 .logoMark {
@@ -85,7 +72,6 @@
   color: #6ee7b7;
 }
 
-/* ── 404 grande ─────────────────────────────── */
 .code {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
@@ -97,11 +83,9 @@
   letter-spacing: -0.05em;
   line-height: 1;
   margin-bottom: 4px;
-  /* borde sutil */
   -webkit-text-stroke: 1px rgba(110, 231, 183, 0.15);
 }
 
-/* ── Icono ──────────────────────────────────── */
 .iconWrap {
   width: 56px;
   height: 56px;
@@ -116,7 +100,6 @@
   margin: 0 auto 20px;
 }
 
-/* ── Textos ─────────────────────────────────── */
 .title {
   font-family: 'Syne', sans-serif;
   font-weight: 800;
@@ -131,54 +114,4 @@
   font-size: 13px;
   color: #4a5568;
   margin: 0 0 36px;
-}
-
-/* ── Botones ────────────────────────────────── */
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.btnPrimary {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #6ee7b7, #34d399);
-  color: #0a0d13;
-  border: none;
-  border-radius: 9px;
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 13px;
-  text-decoration: none;
-  box-shadow: 0 4px 16px rgba(110, 231, 183, 0.2);
-  transition: filter 0.15s, box-shadow 0.15s;
-}
-
-.btnPrimary:hover {
-  filter: brightness(1.06);
-  box-shadow: 0 6px 22px rgba(110, 231, 183, 0.32);
-}
-
-.btnSecondary {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  background: transparent;
-  border: 1.5px solid rgba(255, 255, 255, 0.08);
-  border-radius: 9px;
-  color: #6b7280;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
-}
-
-.btnSecondary:hover {
-  background: rgba(255, 255, 255, 0.04);
-  color: #f0f4f8;
-  border-color: rgba(255, 255, 255, 0.14);
 }
