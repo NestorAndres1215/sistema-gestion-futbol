@@ -9,3 +9,8 @@ export const formatDate = (date?: string) => {
 
     return `${day}-${month}-${year}`;
 };
+
+export const formatDateInput = (date?: string) => {
+  if (!date) return "";
+  return date.split("T")[0];
+};

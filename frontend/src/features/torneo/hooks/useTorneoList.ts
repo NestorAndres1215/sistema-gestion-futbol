@@ -1,39 +1,34 @@
-
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { getTorneos } from "@/features/torneo/services/torneo.service";
-export default function useTorneoRegistro() {
 
-    const searchParams = useSearchParams();
-
-    const tipo = searchParams.get("tipo") ?? "";
-    const categoria = searchParams.get("categoria") ?? "";
+export default function useTorneoLista(tipo: string, categoria: string) {
 
     const [data, setData] = useState<any>(null);
-    const [page, setPage] = useState(1);
+    const [page] = useState(1);
     const pageSize = 30;
 
-    const fetchTorneos = async (currentPage: number) => {
-        const res = await getTorneos({
-            page: currentPage,
-            pageSize,
-            tipo: categoria,
-            tipoParticipante: tipo,
-        });
-
-        setData(res);
-    };
-
     useEffect(() => {
-        fetchTorneos(page);
+        const fetchTorneos = async () => {
+            const res = await getTorneos({
+                page,
+                pageSize,
+                tipo: categoria,
+                tipoParticipante: tipo,
+            });
+
+            setData(res);
+        };
+
+        fetchTorneos();
     }, [page, tipo, categoria]);
 
-   const breadcrumbItems = [
+    const breadcrumbItems = [
         { label: "Selección de Torneo", href: "/admin/torneo" },
         { label: "Listado de Torneos" },
-    ]
+    ];
+
     return {
         data,
         breadcrumbItems
-    }
+    };
 }

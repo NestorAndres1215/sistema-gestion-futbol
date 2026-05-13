@@ -4,7 +4,7 @@ import useEntrenadorDetail from "@/features/entrenador/hooks/useEntrenadorDetail
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import DetailCard from "@/shared/components/ui/card-detail/card-detail";
 
-export default function EntrenadorDetalle() {
+export default function EntrenadorDetallePage() {
 
     const { entrenador, items } = useEntrenadorDetail();
 

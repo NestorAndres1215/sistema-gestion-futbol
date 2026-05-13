@@ -1,23 +1,19 @@
-
 import { useRouter } from "next/navigation";
 import { Categoria } from "@/features/categoria/types/categoria.types";
 import { getCategories } from "@/features/categoria/services/categoria.service";
 import { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { addTorneo } from "../services/torneo.service";
 
-export default function useTorneoRegistro() {
+export default function useTorneoRegistro(tipo: string) {
 
-    const searchParams = useSearchParams();
     const router = useRouter();
-    const tipo = searchParams.get("tipo");
+
     const [categorias, setCategorias] = useState<Categoria[]>([]);
     const formRef = useRef<HTMLFormElement>(null);
 
     useEffect(() => {
         const loadCategories = async () => {
             try {
-
                 const data = await getCategories();
                 setCategorias(Array.isArray(data) ? data : []);
             } catch (error) {
@@ -47,6 +43,7 @@ export default function useTorneoRegistro() {
         };
 
         const rawUser = getCookie("user");
+
         const payload = {
             nombre: String(data.get("nombreTorneo") || ""),
             descripcion: String(data.get("descripcion") || ""),
@@ -62,5 +59,10 @@ export default function useTorneoRegistro() {
         router.push("/admin/torneo");
     };
 
-    return { categorias, tipo, formRef, limpiarFormulario, registrarTorneo }
+    return {
+        categorias,
+        formRef,
+        limpiarFormulario,
+        registrarTorneo
+    };
 }

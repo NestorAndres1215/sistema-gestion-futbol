@@ -5,7 +5,7 @@ import EntityDetail from "@/shared/components/ui/detail/entity-detail";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import useEstadioDetail from "@/features/estadio/hooks/useEstadioDetail";
 
-export default function EstadioDetailPage() {
+export default function EstadioDetalle() {
 
     const { items } = useEstadioDetail();
     return (

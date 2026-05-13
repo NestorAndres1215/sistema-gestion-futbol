@@ -6,6 +6,12 @@ export const addEstadio = async (data: FormData) => {
   return response.data;
 };
 
+
+export const updateEstadio = async (id: number, data: FormData) => {
+  const response = await api.put(`/estadios/${id}`, data);
+  return response.data;
+};
+
 export const getEstadios = async ({ page = 1, pageSize = 10, search = "", tipoCesped = "", pais = "", anio = 0, estado = "", }: {
   page?: number; pageSize?: number; search?: string; tipoCesped?: string; pais?: string; anio?: number; estado?: string;
 }) => {

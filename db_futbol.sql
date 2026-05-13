@@ -495,7 +495,19 @@ CREATE TABLE Ciudades (
 (SELECT Id FROM Paises WHERE Nombre = 'Inglaterra')
 INSERT INTO Ciudades (Nombre, PaisId)
 VALUES
+('Reggiolo', (SELECT Id FROM Paises WHERE Nombre = 'Italia')),
 
+
+('Fráncfort', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
+('Colonia', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
+('Stuttgart', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
+('Düsseldorf', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
+('Dortmund', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
+('Leipzig', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
+('Bremen', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
+('Hanóver', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
+('Núremberg', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
+('Dresde', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
 ('Barcelona', (62)),
 
 -- Perú

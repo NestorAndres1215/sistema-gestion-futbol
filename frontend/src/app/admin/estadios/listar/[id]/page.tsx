@@ -6,7 +6,7 @@ import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import useEstadioDetail from "@/features/estadio/hooks/useEstadioDetail";
 
 
-export default function EstadioDetalle() {
+export default function EstadioDetallePage() {
     const { estadio, items } = useEstadioDetail();
     return (
         <AdminLayout>

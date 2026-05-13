@@ -99,11 +99,12 @@ export default function useEntrenador() {
 
 
     const entrenadorActions = {
+        
         onView: (u: any) =>
-            router.push(`/admin/entrenador/edicion/${u.id}`),
+            router.push(`/admin/entrenadores/edicion/${u.id}`),
 
         onEdit: (u: any) =>
-            router.push(`/admin/entrenador/edicion/${u.id}/editar`),
+            router.push(`/admin/entrenadores/edicion/${u.id}/editar`),
 
     };
 

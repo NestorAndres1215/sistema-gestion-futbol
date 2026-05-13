@@ -49,7 +49,7 @@ export default function ListarArbitros() {
                             : null
                     }
                     imageClassName={styles.imagePerfil}
-                    onDetail={(e) => router.push(`/admin/estadios/listar/${e.id}`)}
+                    onDetail={(e) => router.push(`/admin/arbitros/listar/${e.id}`)}
                 />
 
                 <Pagination

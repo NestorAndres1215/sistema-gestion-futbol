@@ -137,5 +137,60 @@ public class EstadioService : IEstadioService
     {
         return await _repository.GetByNombreAsync(nombre);
     }
+
+    public async Task<Estadio> UpdateAsync(int id, EstadioDTo estadioDTo)
+    {
+        var estadio = await _repository.GetByIdAsync(id);
+
+        if (estadio == null)
+            throw new NotFoundException($"No se encontró el estadio con id {id}");
+
+        ValidarDto(estadioDTo);
+
+        // duplicado nombre
+        if (!string.Equals(estadio.Nombre, estadioDTo.Nombre, StringComparison.OrdinalIgnoreCase))
+        {
+            var existente = await _repository.GetByNombreAsync(estadioDTo.Nombre);
+
+            if (existente != null && existente.Id != id)
+                throw new BadRequestException("Ya existe un estadio con ese nombre");
+        }
+
+        // foto
+        if (estadioDTo.Foto != null)
+        {
+            if (!string.IsNullOrEmpty(estadio.FotoUrl))
+            {
+                var rutaAnterior = Path.Combine(
+                    Directory.GetCurrentDirectory(),
+                    "wwwroot",
+                    estadio.FotoUrl.TrimStart('/')
+                );
+
+                if (File.Exists(rutaAnterior))
+                    File.Delete(rutaAnterior);
+            }
+
+            estadio.FotoUrl = await GuardarFotoAsync(estadioDTo);
+        }
+
+        // update fields
+        estadio.Nombre = estadioDTo.Nombre;
+        estadio.Descripcion = estadioDTo.Descripcion ?? "";
+        estadio.FechaApertura = estadioDTo.FechaApertura;
+        estadio.Anio = estadioDTo.Anio;
+        estadio.Ciudad = estadioDTo.Ciudad;
+        estadio.Pais = estadioDTo.Pais;
+        estadio.Latitud = estadioDTo.Latitud;
+        estadio.Longitud = estadioDTo.Longitud;
+        estadio.Capacidad = estadioDTo.Capacidad;
+        estadio.TipoCesped = estadioDTo.TipoCesped;
+
+        estadio.FechaActualizacion = DateTime.Now;
+
+        await _repository.UpdateAsync(estadio);
+
+        return estadio;
+    }
 }
 

@@ -2,14 +2,27 @@
 
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import AdminLayout from "@/shared/components/layout/admin/layout";
-import styles from "@/features/torneo/styles/registro.module.css";
+import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useTorneoRegistro from "@/features/torneo/hooks/useTorneoRegistro";
+import { useEffect, useState } from "react";
 
 export default function TorneoFormulario() {
 
-    const { categorias, tipo, formRef,
-        limpiarFormulario, registrarTorneo } = useTorneoRegistro();
+     const [tipo, setTipo] = useState("");
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+
+        setTipo(params.get("tipo") ?? "");
+    }, []);
+
+    const {
+        categorias,
+        formRef,
+        limpiarFormulario,
+        registrarTorneo
+    } = useTorneoRegistro(tipo);
         
     return (
         <AdminLayout>
