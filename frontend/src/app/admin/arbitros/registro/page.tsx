@@ -8,95 +8,27 @@ import ActionButton from "@/shared/components/ui/button/button";
 
 import { useRouter } from "next/navigation";
 import { addArbitro } from "@/features/arbitro/services/arbitro.service";
+import useArbitroRegistro from "@/features/arbitro/hooks/useArbitroRegistro";
 
 export default function ArbitroFormulario() {
     const router = useRouter();
-    const piesDominantes = [
-        { value: "", label: "Selecciona pie dominante" },
-        { value: "Derecho", label: "Derecho" },
-        { value: "Izquierdo", label: "Izquierdo" },
-    ];
-    const categorias = ["FIFA", "Nacional", "Regional"];
-    const especialidades = ["Principal", "VAR", "Asistente"];
-    // PERSONA
-    const [nombre, setNombre] = useState("");
-    const [apellidoPaterno, setApellidoPaterno] = useState("");
-    const [apellidoMaterno, setApellidoMaterno] = useState("");
-    const [fechaNacimiento, setFechaNacimiento] = useState("");
-    const [paisNacimiento, setPaisNacimiento] = useState("");
-    const [ciudadNacimiento, setCiudadNacimiento] = useState("");
-    const [alturaCm, setAlturaCm] = useState("");
-    const [pesoKg, setPesoKg] = useState("");
-    const [pieDominante, setPieDominante] = useState("");
 
-    // ARBITRO
-    const [categoria, setCategoria] = useState("");
-    const [especialidad, setEspecialidad] = useState("");
-    const [fechaDebut, setFechaDebut] = useState("");
-    const [fechaRetiro, setFechaRetiro] = useState("");
-    const [anosExperiencia, setAnosExperiencia] = useState("");
-    const [nivel, setNivel] = useState("");
-    const [reputacion, setReputacion] = useState("");
+    const {
+        piesDominantes,
+        categorias,
+        especialidades,
+        limpiarFormulario,
+        registrarArbitro,
+        handleChange,
+        form,
+        setForm,
+        foto,
+        setFoto,
+    } = useArbitroRegistro();
 
-    const [foto, setFoto] = useState<File | null>(null);
 
-    const limpiarFormulario = () => {
-        setNombre("");
-        setApellidoPaterno("");
-        setApellidoMaterno("");
-        setFechaNacimiento("");
-        setPaisNacimiento("");
-        setCiudadNacimiento("");
-        setAlturaCm("");
-        setPesoKg("");
-        setPieDominante("");
 
-        setCategoria("");
-        setEspecialidad("");
-        setFechaDebut("");
-        setFechaRetiro("");
-        setAnosExperiencia("");
-        setNivel("");
-        setReputacion("");
 
-        setFoto(null);
-    };
-
-    const registrarArbitro = async () => {
-        try {
-            const formData = new FormData();
-
-            // PERSONA
-            formData.append("Nombre", nombre);
-            formData.append("ApellidoPaterno", apellidoPaterno);
-            formData.append("ApellidoMaterno", apellidoMaterno);
-            formData.append("FechaNacimiento", fechaNacimiento);
-            formData.append("PaisNacimiento", paisNacimiento);
-            formData.append("CiudadNacimiento", ciudadNacimiento);
-            formData.append("AlturaCm", alturaCm);
-            formData.append("PesoKg", pesoKg);
-            formData.append("PieDominante", pieDominante);
-
-            // ARBITRO
-            formData.append("Categoria", categoria);
-            formData.append("Especialidad", especialidad);
-            formData.append("FechaDebut", fechaDebut);
-            formData.append("AnosExperiencia", anosExperiencia);
-            formData.append("Nivel", nivel);
-            formData.append("Reputacion", reputacion);
-
-            if (foto) {
-                formData.append("Foto", foto);
-            }
-
-            await addArbitro(formData);
-            router.push("/admin/arbitros");
-
-        } catch (error) {
-            console.error(error);
-            alert("Error al registrar árbitro");
-        }
-    };
 
     return (
         <AdminLayout pageTitle="Árbitros" pageSubtitle="Mantenimiento">
@@ -124,8 +56,9 @@ export default function ArbitroFormulario() {
                                 type="text"
                                 placeholder="Nombre del árbitro"
                                 className={styles.input}
-                                value={nombre}
-                                onChange={(e) => setNombre(e.target.value)}
+                                value={form.nombre}
+                                onChange={(e) =>
+                                    handleChange("nombre", e.target.value)}
                             />
                         </div>
                     </div>
@@ -140,8 +73,8 @@ export default function ArbitroFormulario() {
                                         type="text"
                                         placeholder="Apellido paterno"
                                         className={styles.input}
-                                        value={apellidoPaterno}
-                                        onChange={(e) => setApellidoPaterno(e.target.value)}
+                                        value={form.apellidoPaterno}
+                                        onChange={(e) => handleChange("apellidoPaterno", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -155,8 +88,8 @@ export default function ArbitroFormulario() {
                                         type="text"
                                         placeholder="Apellido materno"
                                         className={styles.input}
-                                        value={apellidoMaterno}
-                                        onChange={(e) => setApellidoMaterno(e.target.value)}
+                                        value={form.apellidoMaterno}
+                                        onChange={(e) => handleChange("apellidoMaterno", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -170,8 +103,8 @@ export default function ArbitroFormulario() {
                             <input
                                 type="date"
                                 className={styles.input}
-                                value={fechaNacimiento}
-                                onChange={(e) => setFechaNacimiento(e.target.value)}
+                                value={form.fechaNacimiento}
+                                onChange={(e) => handleChange("fechaNacimiento", e.target.value)}
                             />
                         </div>
                     </div>
@@ -187,8 +120,8 @@ export default function ArbitroFormulario() {
                                         type="text"
                                         placeholder="País de nacimiento"
                                         className={styles.input}
-                                        value={paisNacimiento}
-                                        onChange={(e) => setPaisNacimiento(e.target.value)}
+                                        value={form.paisNacimiento}
+                                        onChange={(e) => handleChange("paisNacimiento", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -202,8 +135,8 @@ export default function ArbitroFormulario() {
                                         type="text"
                                         placeholder="Ciudad de nacimiento"
                                         className={styles.input}
-                                        value={ciudadNacimiento}
-                                        onChange={(e) => setCiudadNacimiento(e.target.value)}
+                                        value={form.ciudadNacimiento}
+                                        onChange={(e) => handleChange("ciudadNacimiento", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -218,8 +151,8 @@ export default function ArbitroFormulario() {
                                         type="number"
                                         placeholder="Altura en cm"
                                         className={styles.input}
-                                        value={alturaCm}
-                                        onChange={(e) => setAlturaCm(e.target.value)}
+                                        value={form.alturaCm}
+                                        onChange={(e) => handleChange("alturaCm", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -233,8 +166,8 @@ export default function ArbitroFormulario() {
                                         type="number"
                                         placeholder="Peso en kg"
                                         className={styles.input}
-                                        value={pesoKg}
-                                        onChange={(e) => setPesoKg(e.target.value)}
+                                        value={form.pesoKg}
+                                        onChange={(e) => handleChange("pesoKg", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -252,8 +185,8 @@ export default function ArbitroFormulario() {
                                 <div className={styles.inputWrap}>
                                     <select
                                         className={styles.input}
-                                        value={pieDominante}
-                                        onChange={(e) => setPieDominante(e.target.value)}
+                                        value={form.pieDominante}
+                                        onChange={(e) => handleChange("pieDominante", e.target.value)}
                                     >
                                         {piesDominantes.map((item) => (
                                             <option key={item.value} value={item.value}>
@@ -273,8 +206,8 @@ export default function ArbitroFormulario() {
                                 <div className={styles.inputWrap}>
                                     <select
                                         className={styles.input}
-                                        value={categoria}
-                                        onChange={(e) => setCategoria(e.target.value)}
+                                        value={form.categoria}
+                                        onChange={(e) => handleChange("categoria", e.target.value)}
                                     >
                                         <option value="">Selecciona categoría</option>
                                         {categorias.map((item) => (
@@ -295,8 +228,8 @@ export default function ArbitroFormulario() {
                                 <div className={styles.inputWrap}>
                                     <select
                                         className={styles.input}
-                                        value={especialidad}
-                                        onChange={(e) => setEspecialidad(e.target.value)}
+                                        value={form.especialidad}
+                                        onChange={(e) => handleChange("especialidad", e.target.value)}
                                     >
                                         <option value="">Selecciona especialidad</option>
                                         {especialidades.map((item) => (
@@ -318,8 +251,8 @@ export default function ArbitroFormulario() {
                             <input
                                 type="date"
                                 className={styles.input}
-                                value={fechaDebut}
-                                onChange={(e) => setFechaDebut(e.target.value)}
+                                value={form.fechaDebut}
+                                onChange={(e) => handleChange("fechaDebut", e.target.value)}
                             />
                         </div>
                     </div>
@@ -333,8 +266,8 @@ export default function ArbitroFormulario() {
                                         type="number"
                                         placeholder="Años dirigiendo"
                                         className={styles.input}
-                                        value={anosExperiencia}
-                                        onChange={(e) => setAnosExperiencia(e.target.value)}
+                                        value={form.anosExperiencia}
+                                        onChange={(e) => handleChange("anosExperiencia", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -348,8 +281,8 @@ export default function ArbitroFormulario() {
                                         type="number"
                                         placeholder="1 - 100"
                                         className={styles.input}
-                                        value={nivel}
-                                        onChange={(e) => setNivel(e.target.value)}
+                                        value={form.nivel}
+                                        onChange={(e) => handleChange("nivel", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -363,8 +296,8 @@ export default function ArbitroFormulario() {
                                         type="number"
                                         placeholder="1 - 100"
                                         className={styles.input}
-                                        value={reputacion}
-                                        onChange={(e) => setReputacion(e.target.value)}
+                                        value={form.reputacion}
+                                        onChange={(e) => handleChange("reputacion", e.target.value)}
                                     />
                                 </div>
                             </div>
@@ -372,7 +305,6 @@ export default function ArbitroFormulario() {
 
                     </div>
 
-                    {/* FOTO */}
                     <div className={styles.field}>
                         <label className={styles.label}>Foto</label>
                         <div className={styles.inputWrap}>
@@ -388,8 +320,6 @@ export default function ArbitroFormulario() {
                             />
                         </div>
                     </div>
-
-                    {/* BOTONES */}
                     <div className="row g-2 mt-3">
                         <div className="col-12 col-sm-6">
                             <ActionButton mode="clear" onClick={limpiarFormulario} />
@@ -398,10 +328,8 @@ export default function ArbitroFormulario() {
                             <ActionButton mode="create" onClick={registrarArbitro} />
                         </div>
                     </div>
-
                 </form>
             </div>
-
         </AdminLayout>
     );
 }

@@ -13,7 +13,7 @@ export default function useTorneoRegistro() {
     const tipo = searchParams.get("tipo");
     const [categorias, setCategorias] = useState<Categoria[]>([]);
     const formRef = useRef<HTMLFormElement>(null);
-    
+
     useEffect(() => {
         const loadCategories = async () => {
             try {
@@ -62,5 +62,5 @@ export default function useTorneoRegistro() {
         router.push("/admin/torneo");
     };
 
-    return{ categorias,tipo,formRef,limpiarFormulario, registrarTorneo }
+    return { categorias, tipo, formRef, limpiarFormulario, registrarTorneo }
 }
