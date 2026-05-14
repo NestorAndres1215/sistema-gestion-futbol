@@ -3,6 +3,7 @@ using Application.Dto;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -193,8 +194,56 @@ public class ArbitrosService : IArbitrosService
          ?? throw new NotFoundException("Árbitro no encontrado");
     }
 
-    public async  Task<Arbitros> UpdateAsync(int id, ArbitrosDto arbitros)
+    public async  Task<Arbitros> UpdateAsync(int id, ArbitrosDto dto)
     {
-        throw new NotImplementedException();
+        if (dto == null)
+            throw new BadRequestException("Datos inválidos");
+
+        ValidarDto(dto);
+
+        var arbitro = await _repository.GetByIdAsync(id);
+        if (arbitro == null)
+            throw new NotFoundException($"No se encontró el arbitro con id {id}");
+
+        var persona = arbitro.Persona;
+
+        if (persona == null)
+            throw new NotFoundException("Persona no encontrada");
+
+        var pais = await _paisRepo.GetByNombreAsync(dto.PaisNacimiento)
+            ?? throw new NotFoundException("El país no existe");
+
+        var ciudad = await _ciudadRepo.GetByNombreAsync(dto.CiudadNacimiento)
+            ?? throw new NotFoundException("La ciudad no existe");
+
+        if (dto.Foto != null)
+        {
+            persona.FotoUrl = await GuardarFotoAsync(dto);
+        }
+
+        persona.Nombre = dto.Nombre;
+        persona.ApellidoPaterno = dto.ApellidoPaterno;
+        persona.ApellidoMaterno = dto.ApellidoMaterno;
+        persona.FechaNacimiento = dto.FechaNacimiento;
+        persona.PaisNacimientoId = pais.Id;
+        persona.CiudadNacimientoId = ciudad.Id;
+        persona.AlturaCm = dto.AlturaCm;
+        persona.PesoKg = dto.PesoKg;
+        persona.PieDominante = dto.PieDominante;
+
+        await _personasService.UpdateAsync(persona);
+
+        arbitro.Categoria = dto.Categoria;
+        arbitro.Categoria = dto.Categoria;
+        arbitro.Especialidad = dto.Especialidad;
+        arbitro.FechaDebut = dto.FechaDebut;
+        arbitro.FechaRetiro = dto.FechaRetiro;
+        arbitro.AnosExperiencia = dto.AnosExperiencia;
+        arbitro.Nivel = dto.Nivel;
+        arbitro.Reputacion = dto.Reputacion;
+
+        await _repository.UpdateAsync(arbitro);
+
+        return arbitro;
     }
 }

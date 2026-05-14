@@ -23,6 +23,14 @@ public class ArbitroController : ControllerBase
         return Ok(await _service.AddAsync(dto));
     }
 
+    [HttpPut("{id}")]
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Actualizar(int id, [FromForm] ArbitrosDto dto)
+    {
+        return Ok(await _service.UpdateAsync(id, dto));
+    }
+
+
     [HttpGet]
     public async Task<IActionResult> GetAll(
         [FromQuery] int page = 1,

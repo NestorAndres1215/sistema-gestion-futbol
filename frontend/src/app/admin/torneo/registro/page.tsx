@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 export default function TorneoFormularioPage() {
 
-     const [tipo, setTipo] = useState("");
+    const [tipo, setTipo] = useState("");
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -23,7 +23,7 @@ export default function TorneoFormularioPage() {
         limpiarFormulario,
         registrarTorneo
     } = useTorneoRegistro(tipo);
-        
+
     return (
         <AdminLayout>
             <Breadcrumb
@@ -84,76 +84,78 @@ export default function TorneoFormularioPage() {
                         </div>
                     </div>
 
-                    {/* GÉNERO */}
-                    <div className={styles.field}>
-                        <label htmlFor="torneo-genero" className={styles.label}>
-                            Género
-                        </label>
-                        <div className={styles.inputWrap}>
-                            <select
-                                id="torneo-genero"
-                                name="genero"
-                                className={styles.input}
-                                required
-                                defaultValue=""
-                            >
-                                <option value="">Selecciona un género</option>
-                                <option value="masculino">Masculino</option>
-                                <option value="femenino">Femenino</option>
-                            </select>
+                    <div className="row g-3">
+                        <div className="col-12 col-sm-6 col-lg-4">
+                            <div className={styles.field}>
+                                <label htmlFor="torneo-genero" className={styles.label}>
+                                    Género
+                                </label>
+                                <div className={styles.inputWrap}>
+                                    <select
+                                        id="torneo-genero"
+                                        name="genero"
+                                        className={styles.input}
+                                        required
+                                        defaultValue=""
+                                    >
+                                        <option value="">Selecciona un género</option>
+                                        <option value="masculino">Masculino</option>
+                                        <option value="femenino">Femenino</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-12 col-sm-6 col-lg-4">
+                            <div className={styles.field}>
+                                <label htmlFor="torneo-tipo" className={styles.label}>
+                                    Tipo de Torneo
+                                </label>
+
+                                <div className={styles.inputWrap}>
+                                    <select
+                                        id="torneo-tipo"
+                                        name="tipoTorneo"
+                                        className={styles.input}
+                                        required
+                                        defaultValue=""
+                                    >
+                                        <option value="">
+                                            Selecciona tipo de torneo
+                                        </option>
+
+                                        <option value="copa_nacional">Copa Nacional</option>
+                                        <option value="copa_internacional">Copa Internacional</option>
+                                        <option value="ligas">Ligas</option>
+                                        <option value="temporada">Temporada</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>     <div className="col-12 col-sm-6 col-lg-4">
+                            <div className={styles.field}>
+                                <label htmlFor="torneo-categoria" className={styles.label}>
+                                    Categoría
+                                </label>
+
+                                <div className={styles.inputWrap}>
+                                    <select
+                                        id="torneo-categoria"
+                                        name="categoria"
+                                        className={styles.input}
+                                        required
+                                        defaultValue=""
+                                    >
+                                        <option value="">Selecciona categoría</option>
+
+                                        {categorias.map((cat) => (
+                                            <option key={cat.id} value={cat.nombre}>
+                                                {cat.nombre}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    {/* TIPO DE TORNEO */}
-                    <div className={styles.field}>
-                        <label htmlFor="torneo-tipo" className={styles.label}>
-                            Tipo de Torneo
-                        </label>
-
-                        <div className={styles.inputWrap}>
-                            <select
-                                id="torneo-tipo"
-                                name="tipoTorneo"
-                                className={styles.input}
-                                required
-                                defaultValue=""
-                            >
-                                <option value="">
-                                    Selecciona tipo de torneo
-                                </option>
-
-                                <option value="copa_nacional">Copa Nacional</option>
-                                <option value="copa_internacional">Copa Internacional</option>
-                                <option value="ligas">Ligas</option>
-                                <option value="temporada">Temporada</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div className={styles.field}>
-                        <label htmlFor="torneo-categoria" className={styles.label}>
-                            Categoría
-                        </label>
-
-                        <div className={styles.inputWrap}>
-                            <select
-                                id="torneo-categoria"
-                                name="categoria"
-                                className={styles.input}
-                                required
-                                defaultValue=""
-                            >
-                                <option value="">Selecciona categoría</option>
-
-                                {categorias.map((cat) => (
-                                    <option key={cat.id} value={cat.nombre}>
-                                        {cat.nombre}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
-
                     <div className="row g-2 mt-3">
 
                         <div className="col-12 col-sm-6">

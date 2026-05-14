@@ -202,7 +202,6 @@ public class EntrenadoresService : IEntrenadoresService
 
         await _personasService.UpdateAsync(persona);
 
-        // UPDATE ENTRENADOR
         entrenador.EstiloJuego = dto.EstiloJuego;
         entrenador.Licencia = dto.Licencia;
         entrenador.FechaDebut = dto.FechaDebut;

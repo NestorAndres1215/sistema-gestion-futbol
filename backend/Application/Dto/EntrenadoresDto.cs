@@ -27,5 +27,5 @@ public class EntrenadoresDto
     public int Reputacion { get; set; } = 50;
     public decimal? Salario { get; set; }
     public string EstadoEntrenador { get; set; } = "Activo";
-    public int personaId { get; set; }
+    public int? PersonaId { get; set; }
 }

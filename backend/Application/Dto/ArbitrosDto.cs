@@ -27,4 +27,5 @@ public class ArbitrosDto
     public int Nivel { get; set; } = 50;
     public int Reputacion { get; set; } = 50;
     public int PartidosDirigidos { get; set; } = 0;
+    public int PersonasId {get; set; }
 }
