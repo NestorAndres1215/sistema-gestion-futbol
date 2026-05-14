@@ -23,9 +23,9 @@ public class CiudadesService : ICiudadesService
         return await _repository.GetByIdAsync(id);
     }
 
-    public async Task<IEnumerable<Ciudades>> GetByPaisIdAsync(int paisId)
+    public async Task<IEnumerable<Ciudades>> GetByPaisNombreAsync(string nombrePais)
     {
-        return await _repository.GetByPaisIdAsync(paisId);
+        return await _repository.GetByPaisNombreAsync(nombrePais);
     }
 
     public async Task<Ciudades> AddAsync(Ciudades ciudad)

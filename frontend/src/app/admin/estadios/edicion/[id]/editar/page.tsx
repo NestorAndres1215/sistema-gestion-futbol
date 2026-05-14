@@ -257,7 +257,7 @@ export default function EstadioEditar() {
             <div className="row g-2 mt-3">
 
               <div className="col-12 col-sm-6">
-                <ActionButton mode="clear" onClick={() => router.back()} />
+                <ActionButton mode="cancelar" onClick={() => router.back()} />
               </div>
 
               <div className="col-12 col-sm-6">

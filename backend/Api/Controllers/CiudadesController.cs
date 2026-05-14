@@ -28,10 +28,10 @@ public class CiudadesController : ControllerBase
         return Ok(await _service.GetByIdAsync(id));
     }
 
-    [HttpGet("pais/{paisId}")]
-    public async Task<IActionResult> GetByPais(int paisId)
+    [HttpGet("pais/{nombrePais}")]
+    public async Task<IActionResult> GetByPais(string nombrePais)
     {
-        return Ok(await _service.GetByPaisIdAsync(paisId));
+        return Ok(await _service.GetByPaisNombreAsync(nombrePais));
     }
 
     [HttpPost]

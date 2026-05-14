@@ -1,9 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addEstadio } from "../services/estadio.service";
 import { SwalService } from "@/shared/lib/swal/swal.service";
+import { getCiudadesByPais } from "@/shared/services/ciudad.service";
+import { getPaises } from "@/shared/services/paises.service";
 
 export default function useEstadioRegistro() {
   const router = useRouter();
@@ -74,7 +76,67 @@ export default function useEstadioRegistro() {
 
   };
 
+   const [paises, setPaises] = useState<any[]>([]);
+    const [ciudades, setCiudades] = useState<any[]>([]);
+    useEffect(() => {
+
+        const loadPaises = async () => {
+
+            try {
+
+                const data = await getPaises();
+
+                setPaises(
+                    Array.isArray(data) ? data : []
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                setPaises([]);
+
+            }
+
+        };
+
+        loadPaises();
+
+    }, []);
+    useEffect(() => {
+
+        const loadCiudades = async () => {
+
+            if (!form.pais) {
+                setCiudades([]);
+                return;
+            }
+
+            try {
+
+                const data = await getCiudadesByPais(form.pais);
+
+                setCiudades(
+                    Array.isArray(data) ? data : []
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                setCiudades([]);
+
+            }
+
+        };
+
+        loadCiudades();
+
+    }, [form.pais]);
+
   return {
+    paises,
+    ciudades,
     form,
     foto,
     setFoto,

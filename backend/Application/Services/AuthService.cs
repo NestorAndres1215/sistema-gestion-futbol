@@ -25,11 +25,15 @@ public class AuthService : IAuthService
 
     public async Task<Usuario> Register(RegisterDto dto)
     {
-    
-        var existingUser = await _repo.GetByEmailAsync(dto.Email);
+        var existingEmail = await _repo.GetByEmailAsync(dto.Email);
+
+        if (existingEmail != null)
+            throw new BadRequestException("El email ya está registrado");
+
+        var existingUser = await _repo.GetByUsernameAsync(dto.Username);
 
         if (existingUser != null)
-            throw new BadRequestException("El email ya está registrado");
+            throw new BadRequestException("El nombre de usuario ya existe");
 
         var user = new Usuario
         {

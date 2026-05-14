@@ -61,11 +61,8 @@ export default function EditUserPage() {
           </div>
 
           <div className="row g-2">
-            <div className="col-12 col-md-6">
-              <ActionButton
-                mode="cancelar"
-                onClick={() => router.push("/admin/usuario")}
-              />
+            <div className="col-12 col-sm-6">
+              <ActionButton mode="cancelar" onClick={() => router.back()} />
             </div>
 
             <div className="col-12 col-md-6">

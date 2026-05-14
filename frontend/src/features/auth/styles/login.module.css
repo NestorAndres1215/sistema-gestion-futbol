@@ -1,36 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap');
 
-.bgBlobs {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-}
- 
-.blob1,
-.blob2 {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.1;
-}
- 
-.blob1 {
-  width: 500px;
-  height: 500px;
-  background: #6ee7b7;
-  top: -120px;
-  right: -120px;
-}
- 
-.blob2 {
-  width: 380px;
-  height: 380px;
-  background: #3b82f6;
-  bottom: -80px;
-  left: -100px;
-}
+
 
 .page {
   position: relative;

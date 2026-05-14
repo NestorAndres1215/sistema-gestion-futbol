@@ -42,4 +42,9 @@ export const config = {
         icon: "fa-solid fa-gauge",
         style: styles.dashboard,
     },
+    login: {
+        text: "Iniciar Sesión",
+        icon: "fa-solid fa-right-to-bracket",
+        style: styles.login,
+    },
 };

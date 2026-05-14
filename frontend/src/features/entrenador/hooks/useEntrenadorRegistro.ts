@@ -1,8 +1,10 @@
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { addEntrenador } from "../services/entrenador.service";
 import { SwalService } from "@/shared/lib/swal/swal.service";
+import { getCiudadesByPais } from "@/shared/services/ciudad.service";
+import { getPaises } from "@/shared/services/paises.service";
 
 export default function useEntrenadorRegistro() {
 
@@ -64,6 +66,63 @@ export default function useEntrenadorRegistro() {
         }));
     };
 
+       const [paises, setPaises] = useState<any[]>([]);
+    const [ciudades, setCiudades] = useState<any[]>([]);
+    useEffect(() => {
+
+        const loadPaises = async () => {
+
+            try {
+
+                const data = await getPaises();
+
+                setPaises(
+                    Array.isArray(data) ? data : []
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                setPaises([]);
+
+            }
+
+        };
+
+        loadPaises();
+
+    }, []);
+    useEffect(() => {
+
+        const loadCiudades = async () => {
+
+            if (!form.paisNacimiento) {
+                setCiudades([]);
+                return;
+            }
+
+            try {
+
+                const data = await getCiudadesByPais(form.paisNacimiento);
+
+                setCiudades(
+                    Array.isArray(data) ? data : []
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                setCiudades([]);
+
+            }
+
+        };
+
+        loadCiudades();
+
+    }, [form.paisNacimiento]);
     const limpiarFormulario = () => {
 
         setForm({
@@ -124,6 +183,8 @@ export default function useEntrenadorRegistro() {
         form,
         foto,
         setFoto,
+        paises,
+        ciudades,
         handleChange,
         limpiarFormulario,
         registrarEntrenador,

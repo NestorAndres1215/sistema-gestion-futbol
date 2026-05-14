@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addArbitro } from "../services/arbitro.service";
 import { SwalService } from "@/shared/lib/swal/swal.service";
 import { useRouter } from "next/navigation";
+import { getPaises } from "@/shared/services/paises.service";
+import { getCiudadesByPais } from "@/shared/services/ciudad.service";
 
 export default function useArbitroRegistro() {
     const router = useRouter();
@@ -33,10 +35,71 @@ export default function useArbitroRegistro() {
         reputacion: "",
     });
 
+
+    const [paises, setPaises] = useState<any[]>([]);
+    const [ciudades, setCiudades] = useState<any[]>([]);
+    useEffect(() => {
+
+        const loadPaises = async () => {
+
+            try {
+
+                const data = await getPaises();
+
+                setPaises(
+                    Array.isArray(data) ? data : []
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                setPaises([]);
+
+            }
+
+        };
+
+        loadPaises();
+
+    }, []);
+    useEffect(() => {
+
+        const loadCiudades = async () => {
+
+            if (!form.paisNacimiento) {
+                setCiudades([]);
+                return;
+            }
+
+            try {
+
+                const data = await getCiudadesByPais(form.paisNacimiento);
+
+                setCiudades(
+                    Array.isArray(data) ? data : []
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                setCiudades([]);
+
+            }
+
+        };
+
+        loadCiudades();
+
+    }, [form.paisNacimiento]);
+
+
     const [foto, setFoto] = useState<File | null>(null);
     const handleChange = (key: string, value: any) => {
         setForm((prev) => ({ ...prev, [key]: value }));
     };
+
     const limpiarFormulario = () => {
         setForm({
             nombre: "",
@@ -93,6 +156,8 @@ export default function useArbitroRegistro() {
 
     return {
         piesDominantes,
+        ciudades,
+        paises,
         categorias,
         especialidades,
         limpiarFormulario,

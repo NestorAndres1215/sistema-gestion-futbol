@@ -30,10 +30,10 @@ public class CiudadesRepository : ICiudadesRepository
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<IEnumerable<Ciudades>> GetByPaisIdAsync(int paisId)
+    public async Task<IEnumerable<Ciudades>> GetByPaisNombreAsync(string nombrePais)
     {
         return await _context.Ciudades
-            .Where(x => x.PaisId == paisId)
+            .Where(x => x.Pais.Nombre == nombrePais)
             .OrderBy(x => x.Nombre)
             .ToListAsync();
     }
@@ -63,6 +63,7 @@ public class CiudadesRepository : ICiudadesRepository
     {
         return await _context.Ciudades
             .AsNoTracking()
+            .OrderBy(x => x.Nombre)
             .FirstOrDefaultAsync(x => x.Nombre == nombre);
     }
 }

@@ -8,7 +8,8 @@ export default function EntrenadorFormulario() {
     const {
         form,
         foto,
-
+        paises,
+        ciudades,
         setFoto,
 
         handleChange,
@@ -104,30 +105,61 @@ export default function EntrenadorFormulario() {
                         {/* PAÍS - CIUDAD */}
                         <div className="col-12 col-md-6">
                             <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>País Nacimiento</label>
+
+                                <label className={styles.label}>
+                                    País Nacimiento
+                                </label>
+
                                 <div className={styles.inputWrap}>
-                                    <input
-                                        type="text"
-                                        placeholder="País de nacimiento"
+
+                                    <select
                                         className={styles.input}
                                         value={form.paisNacimiento}
                                         onChange={(e) => handleChange("paisNacimiento", e.target.value)}
-                                    />
+                                    >
+                                        <option value="">
+                                            Seleccione un país
+                                        </option>
+
+                                        {paises.map((pais) => (
+                                            <option key={pais.id} value={pais.nombre}           >
+                                                {pais.nombre}
+                                            </option>
+                                        ))}
+
+                                    </select>
+
                                 </div>
                             </div>
                         </div>
 
                         <div className="col-12 col-md-6">
                             <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Ciudad Nacimiento</label>
+
+                                <label className={styles.label}>
+                                    Ciudad Nacimiento
+                                </label>
+
                                 <div className={styles.inputWrap}>
-                                    <input
-                                        type="text"
-                                        placeholder="Ciudad de nacimiento"
+
+                                    <select
                                         className={styles.input}
                                         value={form.ciudadNacimiento}
                                         onChange={(e) => handleChange("ciudadNacimiento", e.target.value)}
-                                    />
+                                        disabled={!form.paisNacimiento}
+                                    >
+                                        <option value="">
+                                            Seleccione una ciudad
+                                        </option>
+
+                                        {ciudades.map((ciudad) => (
+                                            <option key={ciudad.id} value={ciudad.nombre}                >
+                                                {ciudad.nombre}
+                                            </option>
+                                        ))}
+
+                                    </select>
+
                                 </div>
                             </div>
                         </div>

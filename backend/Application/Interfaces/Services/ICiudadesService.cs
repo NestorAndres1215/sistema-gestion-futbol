@@ -8,7 +8,7 @@ public interface ICiudadesService
 
     Task<Ciudades?> GetByIdAsync(int id);
 
-    Task<IEnumerable<Ciudades>> GetByPaisIdAsync(int paisId);
+    Task<IEnumerable<Ciudades>> GetByPaisNombreAsync(string nombrePais);
 
     Task<Ciudades> AddAsync(Ciudades ciudad);
 

@@ -7,7 +7,6 @@ import useTorneoLista from "@/features/torneo/hooks/useTorneoList";
 
 export default function ListarTorneo() {
 
-    // 👇 SIN useSearchParams (lo resolvemos manual o por URL si luego quieres)
     const tipo = "";
     const categoria = "";
 

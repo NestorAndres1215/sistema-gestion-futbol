@@ -13,7 +13,7 @@ export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const { submitLogin } = useLogin();
+    const { submitLogin, registrar } = useLogin();
 
     useAuthRedirect();
 
@@ -36,85 +36,91 @@ export default function LoginPage() {
         }
     };
 
+
     return (
-        <>
-            <div className={styles.bgBlobs} aria-hidden="true">
-                <div className={styles.blob1} />
-                <div className={styles.blob2} />
+
+
+
+        <div className={styles.page}>
+
+            <div className="d-flex align-items-center gap-3 mb-4">
+                <div className={styles.logoMark}>
+                    <i className="fa-solid fa-futbol" />
+                </div>
+
+                <div className={styles.logoName}>
+                    Football <br />Manager
+                </div>
             </div>
 
-            <div className={styles.page}>
+            <div className={styles.card}>
 
-                <div className="d-flex align-items-center gap-3 mb-4">
-                    <div className={styles.logoMark}>
-                        <i className="fa-solid fa-futbol" />
-                    </div>
-
-                    <div className={styles.logoName}>
-                        Football <br />Manager
+                <div className="mb-4">
+                    <div className={styles.cardTitle}>Bienvenidos</div>
+                    <div className={styles.cardSub}>
+                        Ingresa tus credenciales para continuar
                     </div>
                 </div>
 
-                <div className={styles.card}>
+                <form onSubmit={handleSubmit}>
 
-                    <div className="mb-4">
-                        <div className={styles.cardTitle}>Bienvenidos</div>
-                        <div className={styles.cardSub}>
-                            Ingresa tus credenciales para continuar
+                    <div className="mb-3">
+                        <label className={styles.label}>
+                            Correo electrónico
+                        </label>
+
+                        <div className={styles.inputWrap}>
+                            <input
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder="Ingrese correo"
+                                className={styles.input}
+                            />
+                        </div>
+                    </div>
+                    <div className="mb-3">
+                        <label className={styles.label}>
+                            Contraseña
+                        </label>
+
+                        <div className={styles.inputWrap}>
+                            <input
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Ingrese contraseña"
+                                type={showPassword ? "text" : "password"}
+                                className={styles.input}
+                            />
+
+                            <button
+                                type="button"
+                                className={styles.toggleBtn}
+                                onClick={() => setShowPassword((p) => !p)} >
+                                <i className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"} />
+                            </button>
+                        </div>
+
+                        <div className="d-flex justify-content-end mt-3">
+                            <a href="/forgot-password"
+                                className={styles.forgot}>
+                                ¿Olvidaste tu contraseña?
+                            </a>
                         </div>
                     </div>
 
-                    <form onSubmit={handleSubmit}>
 
-                        <div className="mb-3">
-                            <label className={styles.label}>
-                                Correo electrónico
-                            </label>
+                    <div className="d-flex flex-column gap-3">
+                        <ActionButton mode="login" type="submit" />
 
-                            <div className={styles.inputWrap}>
-                                <input
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Ingrese correo"
-                                    className={styles.input}
-                                />
-                            </div>
-                        </div>
-                        <div className="mb-3">
-                            <label className={styles.label}>
-                                Contraseña
-                            </label>
-
-                            <div className={styles.inputWrap}>
-                                <input
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="Ingrese contraseña"
-                                    type={showPassword ? "text" : "password"}
-                                    className={styles.input}
-                                />
-
-                                <button
-                                    type="button"
-                                    className={styles.toggleBtn}
-                                    onClick={() => setShowPassword((p) => !p)} >
-                                    <i className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"} />
-                                </button>
-                            </div>
-
-                            <div className="d-flex justify-content-end mt-3">
-                                <a href="/forgot-password"
-                                    className={styles.forgot}>
-                                    ¿Olvidaste tu contraseña?
-                                </a>
-                            </div>
-                        </div>
-
-
-                        <ActionButton mode="create" type="submit" />
-                    </form>
-                </div>
+                        <ActionButton
+                            mode="create"
+                            type="button"
+                            onClick={registrar}
+                        />
+                    </div>
+                </form>
             </div>
-        </>
+        </div>
+
     );
 }

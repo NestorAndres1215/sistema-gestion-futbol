@@ -7,7 +7,10 @@ export type Button = {
     | "clear"
     | "cancelar"
     | "volver"
-    | "dashboard";
+    | "dashboard"
+    | "login";
+
   onClick?: () => void;
+
   type?: "button" | "submit";
 };
