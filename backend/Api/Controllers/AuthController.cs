@@ -22,6 +22,15 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
 
+
+    [HttpPost("register/admin")]
+    public async Task<IActionResult> RegisterAdmin(RegisterDto dto)
+    {
+        var result = await _auth.RegisterAdmin(dto);
+        return Ok(result);
+    }
+
+
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto dto)
     {

@@ -28,6 +28,12 @@ public class PaisesController : ControllerBase
         return Ok(await _service.GetByIdAsync(id));
     }
 
+    [HttpGet("nombre/{nombre}")]
+    public async Task<IActionResult> GetByNombre(string nombre)
+    {
+        return Ok(await _service.GetByNombreAsync(nombre));
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] Paises pais)
     {
@@ -37,17 +43,7 @@ public class PaisesController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] Paises pais)
     {
-        var existing = await _service.GetByIdAsync(id);
-
-        if (existing is null)
-            return NotFound();
-
-        existing.Nombre = pais.Nombre;
-        existing.CodigoISO = pais.CodigoISO;
-
-        await _service.UpdateAsync(existing);
-
-        return Ok(existing);
+        return Ok(await _service.UpdateAsync(pais));
     }
 
 

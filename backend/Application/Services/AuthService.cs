@@ -34,6 +34,8 @@ public class AuthService : IAuthService
 
         if (existingUser != null)
             throw new BadRequestException("El nombre de usuario ya existe");
+        ValidatePassword(dto.Password);
+
 
         var user = new Usuario
         {
@@ -47,6 +49,19 @@ public class AuthService : IAuthService
         await _repo.AddAsync(user);
 
         return user;
+    }
+
+    private void ValidatePassword(string password)
+    {
+        if (string.IsNullOrWhiteSpace(password) ||
+            password.Length < 8 ||
+            !password.Any(char.IsLetter) ||
+            !password.Any(char.IsDigit))
+        {
+            throw new BadRequestException(
+                "La contraseña debe tener al menos 8 caracteres e incluir letras y números"
+            );
+        }
     }
 
     public async Task<AuthResponseDto> Login(LoginDto dto)
@@ -68,5 +83,33 @@ public class AuthService : IAuthService
             Token = _jwt.GenerateToken(user.Id, user.Email, user.Rol.Nombre),
             Rol= user.Rol.Nombre
         };
+    }
+
+    public async Task<Usuario> RegisterAdmin(RegisterDto dto)
+    {
+        var existingEmail = await _repo.GetByEmailAsync(dto.Email);
+
+        if (existingEmail != null)
+            throw new BadRequestException("El email ya está registrado");
+
+        var existingUser = await _repo.GetByUsernameAsync(dto.Username);
+
+        if (existingUser != null)
+            throw new BadRequestException("El nombre de usuario ya existe");
+        ValidatePassword(dto.Password);
+
+
+        var user = new Usuario
+        {
+            Username = dto.Username,
+            Email = dto.Email,
+            Password = _hasher.Hash(dto.Password),
+            RolId = 1,
+            Estado = Estado.Activo
+        };
+
+        await _repo.AddAsync(user);
+
+        return user;
     }
 }
