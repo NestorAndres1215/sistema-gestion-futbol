@@ -19,7 +19,7 @@ export default function ConfiguracionPage() {
                             icon="fas fa-user-plus"
                             title="Registrar Usuario Admin"
                             description="Crear nuevos usuarios administradores del sistema"
-                            onClick={() => router.push("/admin/configuracion/usuarios-admin")}
+                            onClick={() => router.push("/admin/configuracion/registro-usuario")}
                         />
                     </div>
 

@@ -3,7 +3,7 @@ import styles from "./button.module.css";
 export const config = {
     create: {
         text: "Registrar",
-        icon: "fa-solid fa-plus",
+        icon: "fa-solid fa-floppy-disk",
         style: styles.create,
     },
     update: {

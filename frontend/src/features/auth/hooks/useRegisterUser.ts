@@ -33,11 +33,19 @@ export default function useRegisterUser() {
 
         }
     };
+    const limpiarForm = () => {
+        setForm({
+            username: "",
+            email: "",
+            password: "",
+        }
 
+        );
+    };
     return {
         form,
         handleChange,
-        registrar,
+        registrar,limpiarForm,
         showPassword,
         setShowPassword
     }

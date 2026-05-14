@@ -3,6 +3,7 @@
 import { useMe } from "@/features/auth/hooks/useMe";
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import styles from "./perfil-usuario.module.css";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 
 export default function PerfilUsuario() {
   const { user, error } = useMe();
@@ -13,6 +14,13 @@ export default function PerfilUsuario() {
 
   return (
     <AdminLayout>
+      <Breadcrumb
+        items={[
+          { label: "Configuracion", href: "/admin/configuracion" },
+          { label: "Perfil Usuario" },
+        ]}
+      />
+
       <div className={styles.wrapper}>
         <div className={styles.card}>
 
@@ -24,8 +32,8 @@ export default function PerfilUsuario() {
           </div>
 
           {user && (
-            <div className={styles.content}>
-              <div className={styles.hero}>
+            <div className="p-4 d-flex flex-column gap-3">
+              <div className="d-flex align-items-center gap-3">
                 <div className={styles.avatar}>{initials}</div>
                 <div>
                   <h2 className={styles.name}>{user.nombre}</h2>
