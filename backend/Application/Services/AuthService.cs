@@ -4,6 +4,7 @@ using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
 using Domain.Enums;
+using System.Security.Claims;
 
 namespace Application.Services;
 
@@ -111,5 +112,17 @@ public class AuthService : IAuthService
         await _repo.AddAsync(user);
 
         return user;
+    }
+
+    public async Task<Usuario?> GetCurrentUserFromClaims(ClaimsPrincipal user)
+    {
+        var userIdClaim = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+        if (userIdClaim == null)
+            return null;
+
+        var userId = int.Parse(userIdClaim);
+
+        return await _repo.GetByIdAsync(userId);
     }
 }
