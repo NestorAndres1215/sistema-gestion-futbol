@@ -1,5 +1,5 @@
 "use client";
-import useEntrenador from "@/features/entrenador/hooks/useEntrenador";
+import useArbitro from "@/features/arbitro/hooks/useArbitro";
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import FilterBar from "@/shared/components/ui/filter-bar/filter-bar";
@@ -7,23 +7,25 @@ import Pagination from "@/shared/components/ui/pagination/pagination";
 import SearchBar from "@/shared/components/ui/search-bar/search-bar";
 import Table from "@/shared/components/ui/table/table";
 
+export default function ListarArbitros() {
 
-export default function ListarEntrenadores() {
     const {
-        query, handleSearch, entrenadorColumns,
-        handleFilter, entrenadorActions, entrenadorFilters,
-        data, page, totalPages, setPage
-    } = useEntrenador();
+        query, data, page,arbitroColumns,
+        totalPages, handleSearch, handleFilter,
+        arbitroFilters, setPage,arbitroActions,
+    } = useArbitro();
 
     return (
-        <AdminLayout pageTitle="Entrenadores" pageSubtitle="Listado">
+        <AdminLayout>
             <Breadcrumb
                 items={[
-                    { label: "Entrenadores", href: "/admin/entrenadores" },
-                    { label: "Edicion Entrenadores" },
+                    { label: "Arbitros", href: "/admin/arbitros" },
+                    { label: "Edicion Arbitros" },
                 ]}
             />
+
             <div className="container mt-3">
+
                 <SearchBar
                     value={query.search}
                     onSearch={handleSearch}
@@ -31,13 +33,13 @@ export default function ListarEntrenadores() {
 
                 <FilterBar
                     onChange={handleFilter}
-                    selectFilters={entrenadorFilters}
+                    selectFilters={arbitroFilters}
                 />
                 <Table
                     data={data}
-                    columns={entrenadorColumns}
+                    columns={arbitroColumns}
                     showActions
-                    actions={entrenadorActions}
+                    actions={arbitroActions}
                 />
 
                 <Pagination
@@ -45,10 +47,8 @@ export default function ListarEntrenadores() {
                     totalPages={totalPages}
                     onPageChange={(p) => setPage(p)}
                 />
+
             </div>
-
-
-
         </AdminLayout>
     )
-} 
+}

@@ -7,6 +7,7 @@ import SelectionCard from "@/shared/components/ui/selection-card/selection-card"
 
 export default function Estadio() {
   const router = useRouter();
+
   return (
     <AdminLayout pageTitle="Estadios" pageSubtitle="Mantenimiento">
 
@@ -14,30 +15,39 @@ export default function Estadio() {
 
       <div className="row g-3">
 
-        <div className="col-12 col-sm-6">
+        <div className="col-12 col-sm-6 col-md-6">
           <SelectionCard
-            icon="fas fa-plus-circle"
+            icon="fas fa-plus"
             title="Registrar Estadios"
             description="Agregar nuevos estadios al sistema"
             onClick={() => router.push("/admin/estadios/registro")}
           />
         </div>
 
-        <div className="col-12 col-sm-6">
+        <div className="col-12 col-sm-6 col-md-6">
           <SelectionCard
-            icon="fas fa-map-location-dot"
+            icon="fas fa-map"
             title="Ver Estadios"
             description="Explorar y administrar estadios registrados"
             onClick={() => router.push("/admin/estadios/listar")}
           />
         </div>
 
-        <div className="col-12 col-sm-6">
+        <div className="col-12 col-sm-6 col-md-6">
           <SelectionCard
-            icon="fas fa-pen-to-square"
+            icon="fas fa-pen"
             title="Edición de Estadios"
             description="Modificar información y datos de los estadios"
             onClick={() => router.push("/admin/estadios/edicion")}
+          />
+        </div>
+
+        <div className="col-12 col-sm-6 col-md-6">
+          <SelectionCard
+            icon="fas fa-chart-bar"
+            title="Estadísticas"
+            description="Visualizar datos y rendimiento del sistema"
+            onClick={() => router.push("/admin/estadios/estadisticas")}
           />
         </div>
 

@@ -39,7 +39,7 @@ export const NAV_SECTIONS: NavSection[] = [
   {
     title: "Sistema",
     items: [
-      { id: "settings", label: "Configuración", href: "/settings", icon: Icon.settings },
+      { id: "settings", label: "Configuración", href: "/admin/configuracion", icon: Icon.settings },
     ],
   },
 ];

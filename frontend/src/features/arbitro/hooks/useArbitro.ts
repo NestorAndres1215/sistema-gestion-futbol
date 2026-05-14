@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { ArbitroQueryState } from "../types/arbitroQueryState";
 import { getArbitros } from "../services/arbitro.service";
+import { useRouter } from "next/navigation";
+import { formatDate } from "@/shared/utils/date.utils";
 
-export default function useArbitro(){
-
+export default function useArbitro() {
+    const router = useRouter();
     const [query, setQuery] = useState<ArbitroQueryState>({
         search: "",
         categoria: "",
@@ -88,7 +90,51 @@ export default function useArbitro(){
         },
     ];
 
-    return{
+    const arbitroActions = {
+
+        onView: (u: any) =>
+            router.push(`/admin/arbitros/edicion/${u.id}`),
+
+        onEdit: (u: any) =>
+            router.push(`/admin/arbitros/edicion/${u.id}/editar`),
+
+    };
+
+  const arbitroColumns = [
+        {
+            header: "ID",
+            accessor: (row: any) => row.id,
+        },
+        {
+            header: "Nombre",
+            accessor: (row: any) => row.persona?.nombre,
+        },
+        {
+            header: "Apellido",
+            accessor: (row: any) => row.persona?.apellidoPaterno,
+        },
+        {
+            header: "Categoria",
+            accessor: (row: any) => row.categoria,
+        },
+        {
+            header: "País",
+            accessor: (row: any) => row.persona?.paisNacimiento?.nombre,
+        },
+        {
+            header: "Fecha de Debut",
+            accessor: (row: any) => formatDate(row.fechaDebut),
+        },
+        {
+            header: "Estado",
+            accessor: (row: any) => row.estado,
+        },
+    ];
+
+
+    return {
+        arbitroColumns,
+        arbitroActions,
         query,
         data,
         page,

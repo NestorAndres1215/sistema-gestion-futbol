@@ -1,16 +1,16 @@
-
 "use client";
-import AdminLayout from "@/shared/components/layout/admin/layout";
-import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
-import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
-import { useRouter } from "next/navigation";
 
-export default function Selecciones() {
+import { useRouter } from "next/navigation";
+import AdminLayout from "@/shared/components/layout/admin/layout";
+import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
+
+export default function Clubes() {
     const router = useRouter();
 
     return (
-        <AdminLayout pageTitle="Selecciones" pageSubtitle="Mantenimiento">
-            <Breadcrumb items={[{ label: "Selecciona Opciones" }]} />
+        <AdminLayout pageTitle="Clubes" pageSubtitle="Mantenimiento">
+   <Breadcrumb items={[{ label: "Selecciona Opciones" }]} />
             <div className="container py-3">
 
                 <div className="row g-3">
@@ -18,27 +18,27 @@ export default function Selecciones() {
                     <div className="col-12 col-sm-6 col-md-6">
                         <SelectionCard
                             icon="fas fa-plus-circle"
-                            title="Registrar Selección"
-                            description="Agregar nuevas selecciones al sistema"
-                            onClick={() => router.push("/admin/selecciones/registro")}
+                            title="Registrar Club"
+                            description="Agregar nuevos clubes al sistema"
+                            onClick={() => router.push("/admin/clubes/registro")}
                         />
                     </div>
 
                     <div className="col-12 col-sm-6 col-md-6">
                         <SelectionCard
-                            icon="fas fa-flag"
-                            title="Ver Selecciones"
-                            description="Explorar selecciones registradas"
-                            onClick={() => router.push("/admin/selecciones/listar")}
+                            icon="fas fa-shield-alt"
+                            title="Ver Clubes"
+                            description="Explorar clubes registrados"
+                            onClick={() => router.push("/admin/clubes/listar")}
                         />
                     </div>
 
                     <div className="col-12 col-sm-6 col-md-6">
                         <SelectionCard
                             icon="fas fa-pen"
-                            title="Edición de Selecciones"
-                            description="Modificar información de selecciones"
-                            onClick={() => router.push("/admin/selecciones/edicion")}
+                            title="Edición de Clubes"
+                            description="Modificar información de los clubes"
+                            onClick={() => router.push("/admin/clubes/edicion")}
                         />
                     </div>
 
@@ -46,8 +46,8 @@ export default function Selecciones() {
                         <SelectionCard
                             icon="fas fa-chart-bar"
                             title="Estadísticas"
-                            description="Ver rendimiento y datos de selecciones"
-                            onClick={() => router.push("/admin/selecciones/estadisticas")}
+                            description="Ver rendimiento y datos de clubes"
+                            onClick={() => router.push("/admin/clubes/estadisticas")}
                         />
                     </div>
 
