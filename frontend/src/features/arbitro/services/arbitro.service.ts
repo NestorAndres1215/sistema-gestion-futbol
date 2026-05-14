@@ -38,3 +38,8 @@ export const getArbitroById = async (id: number | string) => {
   const response = await api.get(`/arbitros/${id}`);
   return response;
 };
+
+export const updateArbitro= async (id: number, data: FormData) => {
+  const response = await api.put(`/arbitros/${id}`, data);
+  return response.data;
+};

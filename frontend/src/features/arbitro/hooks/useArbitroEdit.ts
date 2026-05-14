@@ -2,7 +2,9 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getArbitroById } from "../services/arbitro.service";
+import { getArbitroById, updateArbitro } from "../services/arbitro.service";
+import { formatDateInput } from "@/shared/utils/date.utils";
+import { SwalService } from "@/shared/lib/swal/swal.service";
 
 export default function useArbitroEdit() {
   const params = useParams();
@@ -10,8 +12,6 @@ export default function useArbitroEdit() {
 
   const id = Array.isArray(params.id) ? params.id[0] : params.id;
 
-  const [foto, setFoto] = useState<File | null>(null);
-  const [fotoPreview, setFotoPreview] = useState<string>("");
 
   const [form, setForm] = useState({
     nombre: "",
@@ -30,10 +30,13 @@ export default function useArbitroEdit() {
     anosExperiencia: "",
     nivel: "",
     reputacion: "",
+    personaId: "",
   });
 
   const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
+  const [foto, setFoto] = useState<File | null>(null);
+  const [fotoPreview, setFotoPreview] = useState<string | null>(null);
+
 
   useEffect(() => {
     const fetchArbitro = async () => {
@@ -41,27 +44,29 @@ export default function useArbitroEdit() {
         if (!id) return;
 
         const res = await getArbitroById(Number(id));
-
+        if (!res) return;
+        const persona = res.persona;
         setForm({
-          nombre: res.nombre ?? "",
-          apellidoPaterno: res.apellidoPaterno ?? "",
-          apellidoMaterno: res.apellidoMaterno ?? "",
-          fechaNacimiento: res.fechaNacimiento ?? "",
-          paisNacimiento: res.paisNacimiento ?? "",
-          ciudadNacimiento: res.ciudadNacimiento ?? "",
-          alturaCm: res.alturaCm ?? "",
-          pesoKg: res.pesoKg ?? "",
-          pieDominante: res.pieDominante ?? "",
+          nombre: persona.nombre ?? "",
+          apellidoPaterno: persona.apellidoPaterno ?? "",
+          apellidoMaterno: persona.apellidoMaterno ?? "",
+          fechaNacimiento: formatDateInput(persona.fechaNacimiento),
+          paisNacimiento: persona.paisNacimiento.nombre ?? "",
+          ciudadNacimiento: persona.ciudadNacimiento?.nombre ?? "",
+          alturaCm: persona.alturaCm?.toString() ?? "",
+          pesoKg: persona.pesoKg?.toString() ?? "",
+          pieDominante: persona.pieDominante ?? "",
           categoria: res.categoria ?? "",
           especialidad: res.especialidad ?? "",
-          fechaDebut: res.fechaDebut ?? "",
+          fechaDebut: formatDateInput(res.fechaDebut),
           fechaRetiro: res.fechaRetiro ?? "",
           anosExperiencia: res.anosExperiencia ?? "",
           nivel: res.nivel ?? "",
           reputacion: res.reputacion ?? "",
+          personaId: res.persona.id,
         });
 
-        setFotoPreview(res.foto ?? "");
+        setFotoPreview(persona.fotoUrl ?? null);
       } finally {
         setLoading(false);
       }
@@ -75,17 +80,46 @@ export default function useArbitroEdit() {
   };
 
   const handleFotoChange = (file: File | null) => {
+
+    if (!file) return;
+
     setFoto(file);
 
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setFotoPreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
+    const url = URL.createObjectURL(file);
+    setFotoPreview(url);
   };
 
+  const formToFormData = (form: any, foto: File | null) => {
+
+    const formData = new FormData();
+
+    Object.entries(form).forEach(([key, value]) => {
+      formData.append(key, String(value));
+    });
+
+    if (foto) {
+      formData.append("Foto", foto);
+    }
+
+    return formData;
+  };
+
+  const actualizarArbitro = async () => {
+    try {
+
+      const fd = formToFormData(form, foto);
+
+      await updateArbitro(Number(params.id), fd);
+
+      SwalService.success("Arbitro actualizado exitosamente");
+
+      router.push("/admin/arbitros");
+
+    } catch (error: any) {
+
+      SwalService.error(error.message);
+    }
+  }
   return {
     form,
     foto,
@@ -93,7 +127,7 @@ export default function useArbitroEdit() {
     handleFotoChange,
     handleChange,
     loading,
-    saving,
+    actualizarArbitro,
     router,
     id,
   };
