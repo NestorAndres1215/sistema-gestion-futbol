@@ -59,7 +59,7 @@ function resultado(gf: number, gc: number): { label: string; key: string } {
 
 
 
-export default function Dashboard() {
+export default function DashboardPage() {
   const router = useRouter();
 
   useEffect(() => {

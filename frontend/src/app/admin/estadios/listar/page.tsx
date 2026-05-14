@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import useEstadio from "@/features/estadio/hooks/useEstadio";
 
 
-export default function ListarEstadios() {
+export default function EstadiosListaPage() {
     const router = useRouter();
 
     const {

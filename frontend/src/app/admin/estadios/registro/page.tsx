@@ -7,7 +7,7 @@ import ActionButton from "@/shared/components/ui/button/button";
 import useEstadioRegistro from "@/features/estadio/hooks/useEstadioRegistro";
 import { tiposCesped } from "@/features/estadio/constants/estadioOptions";
 
-export default function EstadioFormulario() {
+export default function EstadioRegistroPage() {
 
 
     const { 

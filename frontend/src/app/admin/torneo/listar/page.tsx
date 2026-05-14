@@ -5,7 +5,7 @@ import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
 import useTorneoLista from "@/features/torneo/hooks/useTorneoList";
 
-export default function ListarTorneo() {
+export default function ListarTorneoPage() {
 
     const tipo = "";
     const categoria = "";

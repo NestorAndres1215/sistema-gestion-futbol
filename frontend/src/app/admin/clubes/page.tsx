@@ -5,7 +5,7 @@ import AdminLayout from "@/shared/components/layout/admin/layout";
 import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 
-export default function Clubes() {
+export default function ClubesPage() {
     const router = useRouter();
 
     return (

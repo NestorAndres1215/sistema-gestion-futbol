@@ -6,7 +6,7 @@ import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
 
-export default function Arbitros() {
+export default function ArbitrosPage() {
     const router = useRouter();
 
     return (

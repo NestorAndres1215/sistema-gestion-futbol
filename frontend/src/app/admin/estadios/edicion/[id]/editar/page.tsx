@@ -7,7 +7,7 @@ import styles from "@/shared/styles/editar.module.css";
 import { useRouter } from "next/navigation";
 import ActionButton from "@/shared/components/ui/button/button";
 
-export default function EstadioEditar() {
+export default function EstadioEditarPage() {
   const router = useRouter();
 
   const {

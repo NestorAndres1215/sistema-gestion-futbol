@@ -5,7 +5,7 @@ import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
 
-export default function Estadio() {
+export default function EstadioPage() {
   const router = useRouter();
 
   return (

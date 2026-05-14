@@ -8,7 +8,7 @@ import SearchBar from "@/shared/components/ui/search-bar/search-bar";
 import Table from "@/shared/components/ui/table/table";
 
 
-export default function ListarEntrenadores() {
+export default function EntrenadoresEdicion() {
     const {
         query, handleSearch, entrenadorColumns,
         handleFilter, entrenadorActions, entrenadorFilters,

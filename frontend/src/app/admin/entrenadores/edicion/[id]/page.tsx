@@ -4,7 +4,7 @@ import AdminLayout from "@/shared/components/layout/admin/layout";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import EntityDetail from "@/shared/components/ui/detail/entity-detail";
 
-export default function EntrenadorDetalle() {
+export default function EntrenadorEdicionDetalle() {
     const { items } = useEntrenadorDetail();
     return (
         <AdminLayout>

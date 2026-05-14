@@ -7,7 +7,7 @@ import Pagination from "@/shared/components/ui/pagination/pagination";
 import SearchBar from "@/shared/components/ui/search-bar/search-bar";
 import Table from "@/shared/components/ui/table/table";
 
-export default function ListarArbitros() {
+export default function ArbitrosEdicion() {
 
     const {
         query, data, page,arbitroColumns,

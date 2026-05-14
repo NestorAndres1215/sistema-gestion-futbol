@@ -10,7 +10,7 @@ import styles from "@/shared/components/ui/card-list/card-list.module.css";
 import { useRouter } from "next/navigation";
 import useArbitro from "@/features/arbitro/hooks/useArbitro";
 
-export default function ListarArbitros() {
+export default function ArbitrosListarPage() {
     const router = useRouter();
     const { query, data, page, totalPages, handleSearch, handleFilter, arbitroFilters, setPage } = useArbitro();
 

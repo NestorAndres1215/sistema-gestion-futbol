@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import useEntrenador from "@/features/entrenador/hooks/useEntrenador";
 
 
-export default function EntrenadorListaCard() {
+export default function EntrenadorListaPage() {
     const router = useRouter();
     const { query, handleSearch, handleFilter, entrenadorFilters, data, page, totalPages, setPage } = useEntrenador();
     return (

@@ -5,7 +5,7 @@ import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
 import { useRouter } from "next/navigation";
 
-export default function Selecciones() {
+export default function SeleccionesPage() {
     const router = useRouter();
 
     return (

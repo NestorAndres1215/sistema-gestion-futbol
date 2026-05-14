@@ -5,11 +5,12 @@ import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import ActionButton from "@/shared/components/ui/button/button";
 import styles from "@/shared/styles/editar.module.css";
 import { useRouter } from "next/navigation";
-export default function EntrenadorEdit() {
+
+export default function EntrenadorEditar() {
     const router = useRouter();
-    const { form,
-        loading,
-        foto,
+    
+    const {
+        form,
         fotoPreview,
         handleChange,
         handleFotoChange,

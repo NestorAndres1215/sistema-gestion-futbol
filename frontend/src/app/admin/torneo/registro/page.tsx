@@ -7,7 +7,7 @@ import ActionButton from "@/shared/components/ui/button/button";
 import useTorneoRegistro from "@/features/torneo/hooks/useTorneoRegistro";
 import { useEffect, useState } from "react";
 
-export default function TorneoFormulario() {
+export default function TorneoFormularioPage() {
 
      const [tipo, setTipo] = useState("");
 

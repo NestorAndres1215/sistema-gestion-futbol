@@ -5,7 +5,7 @@ import AdminLayout from "@/shared/components/layout/admin/layout";
 import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
 import { useRouter } from "next/navigation";
 
-export default function Entrenadores() {
+export default function EntrenadoresPage() {
     const router = useRouter();
 
     return (

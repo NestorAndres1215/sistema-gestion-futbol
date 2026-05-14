@@ -5,7 +5,7 @@ import AdminLayout from "@/shared/components/layout/admin/layout";
 import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
 import useTipoTorneo from "@/features/torneo/hooks/useTipoTorneo";
 
-export default function TipoTorneo() {
+export default function TipoTorneoPage() {
 
   const { tipo, irATorneo, irFormulario } = useTipoTorneo();
   return (

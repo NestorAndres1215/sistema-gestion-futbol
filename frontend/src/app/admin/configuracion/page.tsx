@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
 
-export default function Configuracion() {
+export default function ConfiguracionPage() {
     const router = useRouter();
 
     return (

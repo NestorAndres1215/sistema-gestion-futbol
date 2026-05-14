@@ -5,7 +5,7 @@ import DetailCard from "@/shared/components/ui/card-detail/card-detail";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import useArbitroDetail from "@/features/arbitro/hooks/useArbitroDetail";
 
-export default function ArbitroDetalle() {
+export default function ArbitroDetallePage() {
 
     const { arbitro, items } = useArbitroDetail();
     return (

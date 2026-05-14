@@ -8,7 +8,7 @@ import SearchBar from "@/shared/components/ui/search-bar/search-bar"
 import Table from "@/shared/components/ui/table/table"
 import useEstadio from "@/features/estadio/hooks/useEstadio";
 
-export default function Estadio() {
+export default function EstadioEdicionPage() {
 
     const {
         estadioActions,

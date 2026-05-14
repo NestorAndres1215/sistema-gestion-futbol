@@ -5,7 +5,7 @@ import AdminLayout from "@/shared/components/layout/admin/layout";
 import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
 import useTorneo from "@/features/torneo/hooks/useTorneo";
 
-export default function Torneo() {
+export default function TorneoPage() {
 
   const { tipo, handleSelectTipo } = useTorneo()
   

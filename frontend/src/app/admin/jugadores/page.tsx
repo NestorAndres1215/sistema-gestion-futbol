@@ -5,12 +5,12 @@ import AdminLayout from "@/shared/components/layout/admin/layout";
 import SelectionCard from "@/shared/components/ui/selection-card/selection-card";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 
-export default function Jugadores() {
+export default function JugadoresPage() {
     const router = useRouter();
 
     return (
         <AdminLayout pageTitle="Jugadores" pageSubtitle="Mantenimiento">
-   <Breadcrumb items={[{ label: "Selecciona Opciones" }]} />
+            <Breadcrumb items={[{ label: "Selecciona Opciones" }]} />
             <div className="container py-3">
 
                 <div className="row g-3">
