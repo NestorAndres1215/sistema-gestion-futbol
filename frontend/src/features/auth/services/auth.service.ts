@@ -23,12 +23,18 @@ export const login = async (email: string, password: string) => {
     return data;
 };
 
-export const addUser= async (data: any) => {
-  const response = await api.post("/auth/register", data);
-  return response.data;
+export const addUser = async (data: any) => {
+    const response = await api.post("/auth/register", data);
+    return response.data;
 };
 
-export const addUserAdmin= async (data: any) => {
-  const response = await api.post("/auth/register/admin", data);
-  return response.data;
+export const addUserAdmin = async (data: any) => {
+    const response = await api.post("/auth/register/admin", data);
+    return response.data;
+};
+
+export const getMe = async () => {
+    const res = await api.get("/auth/me");
+    console.log(res)
+    return res;
 };

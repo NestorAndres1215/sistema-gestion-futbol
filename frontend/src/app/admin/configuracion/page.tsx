@@ -37,7 +37,7 @@ export default function ConfiguracionPage() {
                             icon="fas fa-user-cog"
                             title="Perfil de Usuario"
                             description="Administrar información del usuario"
-                            onClick={() => router.push("/admin/configuracion/perfil")}
+                            onClick={() => router.push("/admin/configuracion/perfil-usuario")}
                         />
                     </div>
 
