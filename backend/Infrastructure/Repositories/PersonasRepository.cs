@@ -37,6 +37,20 @@ public class PersonasRepository : IPersonasRepository
             .FirstOrDefaultAsync(x => x.Nombre == nombre);
     }
 
+    public async Task<Personas?> GetByNombreCompletoAsync(
+       string nombre,
+       string apellidoPaterno,
+       string apellidoMaterno
+   )
+    {
+        return await _context.Personas
+            .FirstOrDefaultAsync(p =>
+                p.Nombre == nombre &&
+                p.ApellidoPaterno == apellidoPaterno &&
+                p.ApellidoMaterno == apellidoMaterno
+            );
+    }
+
     public async Task<Personas> UpdateAsync(Personas personas)
     {
         _context.Personas.Update(personas);

@@ -3,7 +3,7 @@
 import useEstadioEdit from "@/features/estadio/hooks/useEstadioEdit";
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
-import styles from "./estadio-editar.module.css";
+import styles from "@/shared/styles/editar.module.css";
 import { useRouter } from "next/navigation";
 import ActionButton from "@/shared/components/ui/button/button";
 

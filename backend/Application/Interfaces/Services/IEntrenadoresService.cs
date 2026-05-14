@@ -15,4 +15,6 @@ public interface IEntrenadoresService
     Task<Entrenadores> AddAsync(EntrenadoresDto entrenadores);
     Task<Entrenadores> UpdateAsync(int id, EntrenadoresDto entrenadores);
     Task<Entrenadores> GetByIdAsync(int id);
+
+
 }

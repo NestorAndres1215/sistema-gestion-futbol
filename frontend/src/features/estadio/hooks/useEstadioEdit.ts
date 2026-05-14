@@ -63,7 +63,7 @@ export default function useEstadioEdit() {
 
         console.error("Error cargando estadio:", error);
 
-      }
+      } 
 
     };
 
@@ -121,7 +121,7 @@ export default function useEstadioEdit() {
 
       const fd = estadioToFormData(form, foto);
 
-      await updateEstadio(Number(params.id), fd);
+      await updateEstadio(  Number(params.id),  fd);
 
       SwalService.success(
         "Estadio actualizado exitosamente"

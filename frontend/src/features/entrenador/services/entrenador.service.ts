@@ -5,6 +5,12 @@ export const addEntrenador = async (data: FormData) => {
   return response.data;
 };
 
+export const updateEntrenador= async (id: number, data: FormData) => {
+  const response = await api.put(`/entrenadores/${id}`, data);
+  return response.data;
+};
+
+
 export const getEntrenadores = async ({
   page = 1,
   pageSize = 10,

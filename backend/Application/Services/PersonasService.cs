@@ -45,4 +45,31 @@ public class PersonasService : IPersonasService
         return await _repo.GetByNombreAsync(nombre)
             ?? throw new NotFoundException("Categoría no encontrada");
     }
+
+    public async Task<Personas?> GetByNombreCompletoAsync(
+      string nombre,
+      string apellidoPaterno,
+      string apellidoMaterno
+  )
+    {
+        if (string.IsNullOrWhiteSpace(nombre))
+            throw new BadRequestException("El nombre es obligatorio");
+
+        if (string.IsNullOrWhiteSpace(apellidoPaterno))
+            throw new BadRequestException("El apellido paterno es obligatorio");
+
+        if (string.IsNullOrWhiteSpace(apellidoMaterno))
+            throw new BadRequestException("El apellido materno es obligatorio");
+
+        return await _repo.GetByNombreCompletoAsync(
+            nombre,
+            apellidoPaterno,
+            apellidoMaterno
+        );
+    }
+
+    public async  Task<Personas> UpdateAsync(Personas personas)
+    {
+        return await _repo.UpdateAsync(personas);
+    }
 }
