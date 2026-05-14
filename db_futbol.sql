@@ -479,6 +479,7 @@ VALUES
 ('Yibuti', 'DJI'),
 ('Zambia', 'ZMB'),
 ('Zimbabue', 'ZWE');
+
 CREATE TABLE Ciudades (
     Id INT PRIMARY KEY IDENTITY,
     Nombre NVARCHAR(100) NOT NULL,
@@ -492,9 +493,19 @@ CREATE TABLE Ciudades (
     PaisId INT NOT NULL,
     FOREIGN KEY (PaisId) REFERENCES Paises(Id)
 );
-(SELECT Id FROM Paises WHERE Nombre = 'Inglaterra')
+(SELECT Id FROM Paises WHERE Nombre = 'Portugal')
 INSERT INTO Ciudades (Nombre, PaisId)
 VALUES
+('Coimbra', (SELECT Id FROM Paises WHERE Nombre = 'Portugal')),
+('Faro', (SELECT Id FROM Paises WHERE Nombre = 'Portugal')),
+('Braga', (SELECT Id FROM Paises WHERE Nombre = 'Portugal')),
+('Aveiro', (SELECT Id FROM Paises WHERE Nombre = 'Portugal')),
+('Setúbal', (SELECT Id FROM Paises WHERE Nombre = 'Portugal')),
+('Évora', (SELECT Id FROM Paises WHERE Nombre = 'Portugal')),
+('Guimarães', (SELECT Id FROM Paises WHERE Nombre = 'Portugal'));
+INSERT INTO Ciudades (Nombre, PaisId)
+VALUES
+
 ('Reggiolo', (SELECT Id FROM Paises WHERE Nombre = 'Italia')),
 
 

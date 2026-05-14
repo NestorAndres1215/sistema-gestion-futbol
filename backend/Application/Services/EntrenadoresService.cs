@@ -185,13 +185,11 @@ public class EntrenadoresService : IEntrenadoresService
         var ciudad = await _ciudadRepo.GetByNombreAsync(dto.CiudadNacimiento)
             ?? throw new NotFoundException("La ciudad no existe");
 
-        // FOTO (solo si viene nueva)
         if (dto.Foto != null)
         {
             persona.FotoUrl = await GuardarFotoAsync(dto);
         }
 
-        // UPDATE PERSONA
         persona.Nombre = dto.Nombre;
         persona.ApellidoPaterno = dto.ApellidoPaterno;
         persona.ApellidoMaterno = dto.ApellidoMaterno;
