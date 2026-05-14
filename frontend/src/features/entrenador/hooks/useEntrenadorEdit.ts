@@ -26,7 +26,7 @@ export default function useEntrenadorEdit() {
     anosExperiencia: "",
     nivel: "",
     reputacion: "",
-    personaId:"",
+    personaId: "",
   });
 
   const [loading, setLoading] = useState(true);
@@ -40,12 +40,8 @@ export default function useEntrenadorEdit() {
       if (!params?.id) return;
 
       try {
-        setLoading(true);
-
         const res = await getEntrenadorById(Number(params.id));
-        console.log(res)
         if (!res) return;
-
         const persona = res.persona;
 
         setForm({
@@ -65,15 +61,13 @@ export default function useEntrenadorEdit() {
           anosExperiencia: res.anosExperiencia?.toString() ?? "",
           nivel: res.nivel?.toString() ?? "",
           reputacion: res.reputacion?.toString() ?? "",
-          personaId:res.persona.id,
+          personaId: res.persona.id,
         });
 
         setFotoPreview(persona.fotoUrl ?? null);
 
       } catch (error) {
         console.error("Error cargando entrenador:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
