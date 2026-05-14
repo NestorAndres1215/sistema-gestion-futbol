@@ -20,7 +20,7 @@ export default function ArbitrosEdicion() {
             <Breadcrumb
                 items={[
                     { label: "Arbitros", href: "/admin/arbitros" },
-                    { label: "Edicion Arbitros" },
+                    { label: "Edicion" },
                 ]}
             />
 

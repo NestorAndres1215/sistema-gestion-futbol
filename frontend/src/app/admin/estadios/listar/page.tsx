@@ -15,14 +15,8 @@ export default function EstadiosListaPage() {
     const router = useRouter();
 
     const {
-        query,
-        data,
-        page,
-        setPage,
-        totalPages,
-        handleSearch,
-        handleFilter,
-        estadioFilters,
+        query, data, page, totalPages, estadioFilters,
+        setPage, handleSearch, handleFilter,
     } = useEstadio();
 
     return (
@@ -30,7 +24,7 @@ export default function EstadiosListaPage() {
             <Breadcrumb
                 items={[
                     { label: "Estadios", href: "/admin/estadios" },
-                    { label: "Listado de Estadios" },
+                    { label: "Listado" },
                 ]}
             />
 

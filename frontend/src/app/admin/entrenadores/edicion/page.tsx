@@ -20,7 +20,7 @@ export default function EntrenadoresEdicion() {
             <Breadcrumb
                 items={[
                     { label: "Entrenadores", href: "/admin/entrenadores" },
-                    { label: "Edicion Entrenadores" },
+                    { label: "Edicion" },
                 ]}
             />
             <div className="container mt-3">

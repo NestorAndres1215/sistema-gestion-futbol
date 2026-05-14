@@ -18,7 +18,7 @@ export default function EstadioEdicionDetallePage() {
                 items={[
                     { label: "Estadios", href: "/admin/estadios" },
                     { label: "Edición", href: "/admin/estadios/edicion" },
-                    { label: "Detalle Estadio" },
+                    { label: "Detalle" },
                 ]}
             />
 

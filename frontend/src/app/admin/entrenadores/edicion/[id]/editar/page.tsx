@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 export default function EntrenadorEditar() {
     const router = useRouter();
-    
+
     const {
         form,
         fotoPreview,
@@ -22,8 +22,8 @@ export default function EntrenadorEditar() {
             <Breadcrumb
                 items={[
                     { label: "Entrenadores", href: "/admin/entrenadores" },
-                    { label: "Edición", href: "/admin/entrenadores/edicion" },
-                    { label: "Editar Entrenador" },
+                    { label: "Edicion ", href: "/admin/entrenadores/edicion" },
+                    { label: "Editar" },
                 ]}
             />
 

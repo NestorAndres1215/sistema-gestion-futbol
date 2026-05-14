@@ -28,7 +28,7 @@ export default function EstadioEdicionPage() {
             <Breadcrumb
                 items={[
                     { label: "Estadios", href: "/admin/estadios" },
-                    { label: "Edicion Estadios" },
+                    { label: "Edicion" },
                 ]}
             />
 

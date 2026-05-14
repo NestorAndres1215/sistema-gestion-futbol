@@ -13,7 +13,7 @@ export default function EntrenadorEdicionDetalle() {
                 items={[
                     { label: "Entrenadores", href: "/admin/entrenadores" },
                     { label: "Edición", href: "/admin/entrenadores/edicion" },
-                    { label: "Detalle Entrenador" },
+                    { label: "Detalle" },
                 ]}
             />
 

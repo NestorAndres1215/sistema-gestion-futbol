@@ -19,7 +19,7 @@ export default function EntrenadorListaPage() {
             <Breadcrumb
                 items={[
                     { label: "Entrenadores", href: "/admin/entrenadores" },
-                    { label: "Listado de Entrenadores" },
+                    { label: "Listado " },
                 ]}
             />
             <div className="container mt-3">

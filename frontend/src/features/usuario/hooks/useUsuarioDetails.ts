@@ -27,7 +27,7 @@ export function useUsuarioDetails() {
 
   const breadcrumbUsuarioDetails = [
     { label: "Usuario", href: "/admin/usuario" },
-    { label: "Detalle Usuario" },
+    { label: "Detalle" },
   ];
 
   return { user, fields, breadcrumbUsuarioDetails };

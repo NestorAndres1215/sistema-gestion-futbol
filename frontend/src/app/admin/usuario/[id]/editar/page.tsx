@@ -6,9 +6,12 @@ import ActionButton from "@/shared/components/ui/button/button";
 import useUsuarioEdit from "@/features/usuario/hooks/useUsuarioEdit";
 import router from "next/router";
 import styles from "@/shared/styles/form.module.css";
-export default function EditUserPage() {
+export default function UsuarioDetallePage() {
 
-  const { form, handleSubmit, handleChange, breadcrumbUsuarioEdit } = useUsuarioEdit();
+  const {
+    form, handleSubmit,
+    handleChange, breadcrumbUsuarioEdit
+  } = useUsuarioEdit();
 
   return (
     <AdminLayout pageTitle="Editar" pageSubtitle="Modificar datos">

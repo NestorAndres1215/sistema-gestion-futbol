@@ -6,7 +6,7 @@ import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import { useUsuarioDetails } from "@/features/usuario/hooks/useUsuarioDetails";
 
 
-export default function UserDetailPage() {
+export default function UserDetallePage() {
   const { fields, breadcrumbUsuarioDetails } = useUsuarioDetails();
 
   return (

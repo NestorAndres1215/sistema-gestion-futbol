@@ -13,7 +13,7 @@ export default function ArbitroEdicionDetalle() {
                 items={[
                     { label: "Árbitros", href: "/admin/arbitros" },
                     { label: "Edicion", href: "/admin/arbitros/edicion" },
-                    { label: "Detalle de Árbitro" },
+                    { label: "Detalle" },
                 ]}
             />
             <EntityDetail fields={itemsDel} />

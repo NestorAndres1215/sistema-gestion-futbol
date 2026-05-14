@@ -13,8 +13,8 @@ export default function EstadioDetallePage() {
             <Breadcrumb
                 items={[
                     { label: "Estadios", href: "/admin/estadios" },
-                    { label: "Listado de Estadios", href: "/admin/estadios/listar" },
-                    { label: "Detalle de Estadio" },
+                    { label: "Listado", href: "/admin/estadios/listar" },
+                    { label: "Detalle" },
                 ]}
             />
 

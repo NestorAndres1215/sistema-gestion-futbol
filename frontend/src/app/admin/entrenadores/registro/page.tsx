@@ -5,24 +5,13 @@ import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useEntrenadorRegistro from "@/features/entrenador/hooks/useEntrenadorRegistro";
 export default function EntrenadorRegistroPage() {
+
     const {
-        form,
-        foto,
-        paises,
-        ciudades,
-        setFoto,
-
-        handleChange,
-
-        limpiarFormulario,
-
-        registrarEntrenador,
-
-        piesDominantes,
-        estilosJuego,
-        licencias,
-
+        form, paises, ciudades,
+        setFoto, handleChange, limpiarFormulario, registrarEntrenador,
+        piesDominantes, estilosJuego, licencias,
     } = useEntrenadorRegistro();
+    
     return (
         <AdminLayout>
             <Breadcrumb

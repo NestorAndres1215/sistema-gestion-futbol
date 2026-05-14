@@ -54,7 +54,7 @@ export default function useUsuarioEdit() {
 
   const breadcrumbUsuarioEdit = [
     { label: "Usuario", href: "/admin/usuario" },
-    { label: "Editar Usuario" },
+    { label: "Editar" },
   ];
 
   const initials = form.username

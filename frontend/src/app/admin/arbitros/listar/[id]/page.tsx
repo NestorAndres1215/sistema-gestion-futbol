@@ -13,8 +13,8 @@ export default function ArbitroDetallePage() {
             <Breadcrumb
                 items={[
                     { label: "Árbitros", href: "/admin/arbitros" },
-                    { label: "Listado de Árbitros", href: "/admin/arbitros/listar" },
-                    { label: "Detalle de Árbitro" },
+                    { label: "Listado", href: "/admin/arbitros/listar" },
+                    { label: "Detalle" },
                 ]}
             />
 

@@ -19,7 +19,7 @@ export default function ArbitrosListarPage() {
             <Breadcrumb
                 items={[
                     { label: "Árbitros", href: "/admin/arbitros" },
-                    { label: "Listado de Árbitros" },
+                    { label: "Listado" },
                 ]}
             />
 
