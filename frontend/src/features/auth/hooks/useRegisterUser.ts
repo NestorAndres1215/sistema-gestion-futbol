@@ -24,7 +24,7 @@ export default function useRegisterUser() {
 
             SwalService.success("Usuario registrado exitosamente");
 
-            router.push("/auth/login");
+            router.back();
 
         }
         catch (error: any) {
@@ -45,7 +45,7 @@ export default function useRegisterUser() {
     return {
         form,
         handleChange,
-        registrar,limpiarForm,
+        registrar, limpiarForm,
         showPassword,
         setShowPassword
     }
