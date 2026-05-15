@@ -35,6 +35,10 @@ export const addUserAdmin = async (data: any) => {
 
 export const getMe = async () => {
     const res = await api.get("/auth/me");
-    console.log(res)
     return res;
+};
+
+export const updatePassword = async (id: number, data: any) => {
+    const response = await api.put(`/auth/${id}`, data);
+    return response.data;
 };

@@ -28,7 +28,7 @@ export default function ConfiguracionPage() {
                             icon="fas fa-key"
                             title="Cambiar Contraseña"
                             description="Actualizar credenciales de acceso"
-                            onClick={() => router.push("/admin/configuracion/cambiar-password")}
+                            onClick={() => router.push("/admin/configuracion/cambiar-contrasenia")}
                         />
                     </div>
 

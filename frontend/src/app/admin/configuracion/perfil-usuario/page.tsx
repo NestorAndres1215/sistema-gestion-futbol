@@ -2,11 +2,11 @@
 
 import { useMe } from "@/features/auth/hooks/useMe";
 import AdminLayout from "@/shared/components/layout/admin/layout";
-import styles from "./perfil-usuario.module.css";
+import styles from "@/shared/styles/perfil.module.css";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 
 export default function PerfilUsuario() {
-  const { user, error } = useMe();
+  const { user } = useMe();
 
   const initials = user?.nombre
     ? user.nombre.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()
