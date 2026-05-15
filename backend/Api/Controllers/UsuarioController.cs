@@ -24,9 +24,7 @@ public class UsuarioController : ControllerBase
         [FromQuery] int pageSize = 10,
         [FromQuery] string? search = null,
         [FromQuery] string? estado = null,
-         [FromQuery] string? rol = null
-
-    )
+        [FromQuery] string? rol = null )
     {
         var result = await _service.GetAllAsync(page, pageSize, search,estado, rol);
         return Ok(result);

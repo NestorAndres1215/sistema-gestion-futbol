@@ -13,7 +13,11 @@ import useEntrenador from "@/features/entrenador/hooks/useEntrenador";
 
 export default function EntrenadorListaPage() {
     const router = useRouter();
-    const { query, handleSearch, handleFilter, entrenadorFilters, data, page, totalPages, setPage } = useEntrenador();
+    
+    const { query, handleSearch, handleFilter, entrenadorFilters, 
+        data, page, totalPages, setPage 
+    } = useEntrenador();
+
     return (
         <AdminLayout>
             <Breadcrumb

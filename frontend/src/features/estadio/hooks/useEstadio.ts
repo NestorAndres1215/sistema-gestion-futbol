@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getAniosEstadios, getEstadios } from "../services/estadio.service";
-
 import { useRouter } from "next/navigation";
 import { EstadioQueryState } from "../types/estadioQueryState.types";
 import { stadiumColumns } from "../constants/estadioColumns";

@@ -1,31 +1,25 @@
 ﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Application.Dto;
 
 public class ArbitrosDto
 {
     public string Nombre { get; set; } = string.Empty;
-    public string ApellidoPaterno { get; set; } = string.Empty;
-    public string? ApellidoMaterno { get; set; }
+    public string Apellido { get; set; } = string.Empty;
     public DateTime? FechaNacimiento { get; set; }
     public string PaisNacimiento { get; set; }=string.Empty;
     public string CiudadNacimiento { get; set; }= string.Empty;
-    public int? AlturaCm { get; set; }
-    public int? PesoKg { get; set; }
-    public string? PieDominante { get; set; }
     public IFormFile? Foto { get; set; }
-    public string EstadoPersona { get; set; } = "Activo";
-    public string EstadoArbitro { get; set; } = "Activo";
     public string? Categoria { get; set; }
-    public string? Especialidad { get; set; }
+    public string? RolArbitral { get; set; }
     public DateTime? FechaDebut { get; set; }
     public DateTime? FechaRetiro { get; set; }
-    public int AnosExperiencia { get; set; } = 0;
-    public int Nivel { get; set; } = 50;
-    public int Reputacion { get; set; } = 50;
-    public int PartidosDirigidos { get; set; } = 0;
+    public int Nivel { get; set; }
+    public int Reputacion { get; set; }
+    public int PartidosDirigidos { get; set; }
+    public int PrecisionDecisiones { get; set; }
+    public int TarjetasAmarillas { get; set; }
+    public int TarjetasRojas { get; set; }
+    public string? EstadoFisico { get; set; }
     public int PersonasId {get; set; }
 }

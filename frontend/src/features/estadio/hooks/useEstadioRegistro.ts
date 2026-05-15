@@ -47,14 +47,9 @@ export default function useEstadioRegistro() {
 
   const estadioToFormData = (form: any, foto: File | null) => {
     const formData = new FormData();
-    Object.entries(form).forEach(
-      ([key, value]) => {
-        formData.append(
-          key,
-          String(value)
-        );
-      }
-    );
+    Object.entries(form).forEach(([key, value]) => {
+      formData.append(key, String(value));
+    });
 
     if (foto) formData.append("Foto", foto);
 
@@ -76,72 +71,46 @@ export default function useEstadioRegistro() {
 
   };
 
-   const [paises, setPaises] = useState<any[]>([]);
-    const [ciudades, setCiudades] = useState<any[]>([]);
-    useEffect(() => {
+  const [paises, setPaises] = useState<any[]>([]);
+  const [ciudades, setCiudades] = useState<any[]>([]);
+  useEffect(() => {
 
-        const loadPaises = async () => {
+    const loadPaises = async () => {
 
-            try {
+      try {
+        const data = await getPaises();
+        setPaises(Array.isArray(data) ? data : []);
 
-                const data = await getPaises();
+      } catch (error) {
+        setPaises([]);
+      }
+    };
 
-                setPaises(
-                    Array.isArray(data) ? data : []
-                );
+    loadPaises();
+  }, []);
 
-            } catch (error) {
+  useEffect(() => {
 
-                console.error(error);
+    const loadCiudades = async () => {
 
-                setPaises([]);
+      if (!form.pais) {
+        setCiudades([]);
+        return;
+      }
 
-            }
+      try {
+        const data = await getCiudadesByPais(form.pais);
+        setCiudades(Array.isArray(data) ? data : []);
+      } catch (error) {
+        setCiudades([]);
+      }
+    };
 
-        };
-
-        loadPaises();
-
-    }, []);
-    useEffect(() => {
-
-        const loadCiudades = async () => {
-
-            if (!form.pais) {
-                setCiudades([]);
-                return;
-            }
-
-            try {
-
-                const data = await getCiudadesByPais(form.pais);
-
-                setCiudades(
-                    Array.isArray(data) ? data : []
-                );
-
-            } catch (error) {
-
-                console.error(error);
-
-                setCiudades([]);
-
-            }
-
-        };
-
-        loadCiudades();
-
-    }, [form.pais]);
+    loadCiudades();
+  }, [form.pais]);
 
   return {
-    paises,
-    ciudades,
-    form,
-    foto,
-    setFoto,
-    handleChange,
-    limpiarFormulario,
-    registrarEstadio,
+    paises, ciudades, form, foto,
+    setFoto, handleChange, limpiarFormulario, registrarEstadio,
   };
 }

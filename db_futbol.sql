@@ -4,14 +4,17 @@ GO
 USE FootballManagerSystem;
 GO
 
+-- TABLA ROLES
 CREATE TABLE Roles (
     Id INT PRIMARY KEY IDENTITY,
     Nombre NVARCHAR(50) NOT NULL
 );
 
+-- INSERTAR LOS ROLES
 INSERT INTO roles (nombre) 
-	VALUES ('Jugador'),('Entrenador'),('Admin'),('User');
+	VALUES ('Admin'),('User');
 
+-- TABLA USUARIOS
 CREATE TABLE Usuarios (
     Id INT PRIMARY KEY IDENTITY,
     Username NVARCHAR(100) NOT NULL,
@@ -22,6 +25,8 @@ CREATE TABLE Usuarios (
     CONSTRAINT FK_Usuarios_Roles FOREIGN KEY (RolId) REFERENCES Roles(Id)
 );
 
+--TABLA CATEGORIA
+
 CREATE TABLE Categorias (
     Id INT PRIMARY KEY IDENTITY,
     Nombre NVARCHAR(50) NOT NULL,
@@ -31,6 +36,8 @@ CREATE TABLE Categorias (
 
     CONSTRAINT UQ_Categorias_Nombre UNIQUE (Nombre)
 );
+
+-- TABLA ESTADIOS
 
 CREATE TABLE Estadios (
     Id INT PRIMARY KEY IDENTITY,
@@ -49,42 +56,7 @@ CREATE TABLE Estadios (
         CHECK (Estado IN ('Disponible', 'Mantenimiento', 'Suspendido','Cerrado'))
 );
 
-
-CREATE TABLE Personas (
-    Id INT PRIMARY KEY IDENTITY,
-
-    Nombre NVARCHAR(100) NOT NULL,             -- Nombres
-    ApellidoPaterno NVARCHAR(100) NOT NULL,   -- Primer apellido
-    ApellidoMaterno NVARCHAR(100) NULL,       -- Segundo apellido
-
-    FechaNacimiento DATE NULL,              -- Fecha nacimiento
-
-    PaisNacimientoId INT NULL,              -- País natal
-    CiudadNacimientoId INT NULL,            -- Ciudad natal
-
-    AlturaCm INT NULL,                      -- Altura
-    PesoKg INT NULL,                        -- Peso
-
-    PieDominante NVARCHAR(10) NULL,         -- Izquierdo/Derecho/Ambos
-
-    FotoUrl NVARCHAR(300) NULL,             -- Foto perfil
-
-    Estado NVARCHAR(20) DEFAULT 'Activo',
-    -- Activo / Inactivo / Retirado
-
-    FechaCreacion DATETIME DEFAULT GETDATE(),
-    FechaActualizacion DATETIME NULL,
-
-    FOREIGN KEY (PaisNacimientoId) REFERENCES Paises(Id),
-    FOREIGN KEY (CiudadNacimientoId) REFERENCES Ciudades(Id),
-
-    CONSTRAINT CK_Persona_Estado
-        CHECK (Estado IN ('Activo', 'Inactivo', 'Retirado')),
-
-    CONSTRAINT CK_PieDominante
-        CHECK (PieDominante IN ('Izquierdo', 'Derecho', 'Ambos'))
-);
-
+-- TABLA PAISES
 
 CREATE TABLE Paises (
     Id INT PRIMARY KEY IDENTITY,
@@ -92,177 +64,142 @@ CREATE TABLE Paises (
     CodigoISO NVARCHAR(10) NULL -- PER, ESP, BRA
 );
 
+-- CIUDADES
 
-
-
-
-CREATE TABLE Entrenadores (
-    Id INT PRIMARY KEY IDENTITY(1,1),
-
-    PersonaId INT NOT NULL,
-
-    EstiloJuego NVARCHAR(50) NULL,
-    Licencia NVARCHAR(50) NULL,
-
-    FechaDebut DATE NULL,
-    FechaRetiro DATE NULL,
-
-    AnosExperiencia INT DEFAULT 0,
-    Nivel INT DEFAULT 50,
-    Reputacion INT DEFAULT 50,
-
-    Salario DECIMAL(18,2) NULL,
-
-    Estado NVARCHAR(20) DEFAULT 'Activo',
-
-    FOREIGN KEY (PersonaId)
-        REFERENCES Personas(Id),
-
-    CONSTRAINT CK_Entrenador_Estado
-        CHECK (Estado IN ('Activo', 'Retirado')),
-
-    CONSTRAINT CK_Entrenador_Nivel
-        CHECK (Nivel BETWEEN 1 AND 100),
-
-    CONSTRAINT CK_Entrenador_Reputacion
-        CHECK (Reputacion BETWEEN 1 AND 100)
+CREATE TABLE Ciudades (
+    Id INT PRIMARY KEY IDENTITY,
+    Nombre NVARCHAR(100) NOT NULL,
+    PaisId INT NOT NULL,
+    FOREIGN KEY (PaisId) REFERENCES Paises(Id)
 );
 
+-- TABLA PERSONAS
+CREATE TABLE Personas (
+    Id INT PRIMARY KEY IDENTITY,
+    Nombre NVARCHAR(100) NOT NULL,
+    Apellido NVARCHAR(200) NOT NULL,
+    FechaNacimiento DATE NULL,
+    PaisNacimientoId INT NULL,
+    CiudadNacimientoId INT NULL,
+    FotoUrl NVARCHAR(300) NULL,
+    Estado NVARCHAR(20) DEFAULT 'Activo',
+    FechaCreacion DATETIME DEFAULT GETDATE(),
+    FechaActualizacion DATETIME NULL,
+
+    FOREIGN KEY (PaisNacimientoId) REFERENCES Paises(Id),
+    FOREIGN KEY (CiudadNacimientoId) REFERENCES Ciudades(Id),
+
+    CONSTRAINT CK_Persona_Estado
+        CHECK (Estado IN ('Activo', 'Inactivo', 'Retirado'))
+);
+
+-- TABLA ARBITROS
 
 CREATE TABLE Arbitros (
-Id INT PRIMARY KEY IDENTITY,
-     PersonaId INT NOT NULL,   
-
-    -- =========================
-    -- PERFIL ARBITRAL
-    -- =========================
+    Id INT PRIMARY KEY IDENTITY,
+    PersonaId INT NOT NULL UNIQUE,
     Categoria NVARCHAR(50) NULL,
-    -- FIFA / Nacional / Regional
-
-    Especialidad NVARCHAR(30) NULL,
-    -- Principal / VAR / Asistente
-
-    -- =========================
-    -- CARRERA
-    -- =========================
+    RolArbitral NVARCHAR(30) NULL,
     FechaDebut DATE NULL,
     FechaRetiro DATE NULL,
-
     AnosExperiencia INT DEFAULT 0,
-
     Nivel INT DEFAULT 50,
-
     Reputacion INT DEFAULT 50,
-
+    PrecisionDecisiones INT DEFAULT 50,
     PartidosDirigidos INT DEFAULT 0,
-
-    -- =========================
-    -- ESTADO
-    -- =========================
+    TarjetasAmarillas INT DEFAULT 0,
+    TarjetasRojas INT DEFAULT 0,
+    EstadoFisico NVARCHAR(20) DEFAULT 'Activo',
     Estado NVARCHAR(20) DEFAULT 'Activo',
 
-    -- =========================
-    -- RELACIÓN
-    -- =========================
     FOREIGN KEY (PersonaId)
         REFERENCES Personas(Id),
 
-    -- =========================
-    -- VALIDACIONES
-    -- =========================
     CONSTRAINT CK_Arbitro_Estado
         CHECK (Estado IN ('Activo', 'Retirado')),
 
-    CONSTRAINT CK_Arbitro_Especialidad
-        CHECK (
-            Especialidad IN (
-                'Principal',
-                'VAR',
-                'Asistente'
-            )
-        ),
+    CONSTRAINT CK_Arbitro_Rol
+        CHECK (RolArbitral IN ('Principal', 'VAR', 'Asistente')),
 
     CONSTRAINT CK_Arbitro_Nivel
         CHECK (Nivel BETWEEN 1 AND 100),
 
     CONSTRAINT CK_Arbitro_Reputacion
-        CHECK (Reputacion BETWEEN 1 AND 100)
+        CHECK (Reputacion BETWEEN 1 AND 100),
+
+    CONSTRAINT CK_Arbitro_Precision
+        CHECK (PrecisionDecisiones BETWEEN 1 AND 100)
 );
+
+-- TABLA ENTRENADORES
+
+CREATE TABLE Entrenadores (
+    Id INT PRIMARY KEY IDENTITY(1,1),  
+    PersonaId INT NOT NULL UNIQUE,  
+    EstiloJuego NVARCHAR(50) NULL,  
+    SistemaTactico NVARCHAR(30) NULL,  
+    Licencia NVARCHAR(50) NULL,  
+    FechaDebut DATE NULL,  
+    FechaRetiro DATE NULL,  
+    AnosExperiencia INT DEFAULT 0,  
+    Nivel INT DEFAULT 50,  
+    Reputacion INT DEFAULT 50,  
+    ManejoEquipo INT DEFAULT 50,  
+    Motivacion INT DEFAULT 50,  
+    Disciplina INT DEFAULT 50,  
+    Adaptabilidad INT DEFAULT 50,  
+    Estado NVARCHAR(20) DEFAULT 'Activo',  
+
+    FOREIGN KEY (PersonaId) REFERENCES Personas(Id),  
+    CONSTRAINT CK_Entrenador_Estado
+        CHECK (Estado IN ('Activo', 'Retirado')),  
+
+    CONSTRAINT CK_Entrenador_Nivel
+        CHECK (Nivel BETWEEN 1 AND 100),  
+
+    CONSTRAINT CK_Entrenador_Reputacion
+        CHECK (Reputacion BETWEEN 1 AND 100)  
+);
+
+-- TABLA JUGADORES
 
 CREATE TABLE Jugadores (
     Id INT PRIMARY KEY IDENTITY,
-     PersonaId INT NOT NULL,  
-
-    -- =========================
-    -- PERFIL FUTBOLÍSTICO
-    -- =========================
+    PersonaId INT NOT NULL,
     PosicionPrincipal NVARCHAR(50) NOT NULL,
-    -- Arquero / Defensa / Mediocampo / Delantero
-
     PosicionSecundaria NVARCHAR(50) NULL,
-
     PiernaHabil NVARCHAR(10) NULL,
-    -- Izquierda / Derecha / Ambas
-
-    -- =========================
-    -- CARRERA
-    -- =========================
+    AlturaCm INT NULL,
+    PesoKg INT NULL,
     FechaDebut DATE NULL,
-
     FechaRetiro DATE NULL,
-
     AnosExperiencia INT DEFAULT 0,
-
-    -- =========================
-    -- ESTADO
-    -- =========================
     Estado NVARCHAR(20) DEFAULT 'Activo',
-
     EstadoFisico NVARCHAR(30) DEFAULT 'Disponible',
-    -- Disponible / Lesionado / Suspendido
 
-    -- =========================
-    -- RELACIÓN
-    -- =========================
     FOREIGN KEY (PersonaId)
         REFERENCES Personas(Id),
 
-    -- =========================
-    -- VALIDACIONES
-    -- =========================
     CONSTRAINT CK_Jugador_Estado
         CHECK (Estado IN ('Activo', 'Retirado')),
 
     CONSTRAINT CK_Jugador_EstadoFisico
-        CHECK (
-            EstadoFisico IN (
-                'Disponible',
-                'Lesionado',
-                'Suspendido'
-            )
-        ),
+        CHECK (EstadoFisico IN ('Disponible', 'Lesionado', 'Suspendido')),
 
     CONSTRAINT CK_Jugador_Pierna
-        CHECK (
-            PiernaHabil IN (
-                'Izquierda',
-                'Derecha',
-                'Ambas'
-            )
-        )
+        CHECK (PiernaHabil IN ('Izquierda', 'Derecha', 'Ambas'))
 );
+
+
+--TABLA LESIONES
 
 CREATE TABLE Lesiones (
     Id INT PRIMARY KEY IDENTITY,
-
     JugadorId INT NOT NULL,
-
     Tipo NVARCHAR(50) NOT NULL,
     Gravedad NVARCHAR(20),
-
     FechaInicio DATE NOT NULL,
     FechaFin DATE NULL,
-
     Estado NVARCHAR(20) DEFAULT 'Activa',
 
     FOREIGN KEY (JugadorId)
@@ -274,6 +211,28 @@ CREATE TABLE Lesiones (
     CONSTRAINT CK_Lesion_Gravedad
         CHECK (Gravedad IN ('Leve', 'Moderada', 'Grave'))
 );
+
+-- TABLA PARAMETROS SISTEMA
+CREATE TABLE ParametrosSistema (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Clave NVARCHAR(100) NOT NULL UNIQUE,
+    Valor NVARCHAR(500) NOT NULL,
+    Nombre NVARCHAR(150) NOT NULL,
+    Descripcion NVARCHAR(300) NULL,
+    Categoria NVARCHAR(100) NULL,
+    TipoDato NVARCHAR(50) NOT NULL,
+    Estado NVARCHAR(20) NOT NULL DEFAULT 'ACTIVO',
+    Editable NVARCHAR(20) NOT NULL DEFAULT 'SI',
+    FechaCreacion DATETIME NOT NULL DEFAULT GETDATE(),
+    FechaActualizacion DATETIME NULL
+);
+
+
+INSERT INTO Ciudades (Nombre, PaisId)
+VALUES
+
+('Reggiolo', (SELECT Id FROM Paises WHERE Nombre = 'Italia'))
+
 
 INSERT INTO Paises (Nombre, CodigoISO)
 VALUES
@@ -479,404 +438,3 @@ VALUES
 ('Yibuti', 'DJI'),
 ('Zambia', 'ZMB'),
 ('Zimbabue', 'ZWE');
-
-CREATE TABLE Ciudades (
-    Id INT PRIMARY KEY IDENTITY,
-    Nombre NVARCHAR(100) NOT NULL,
-    PaisId INT NOT NULL,
-    FOREIGN KEY (PaisId) REFERENCES Paises(Id)
-);
-
-CREATE TABLE Ciudades (
-    Id INT PRIMARY KEY IDENTITY,
-    Nombre NVARCHAR(100) NOT NULL,
-    PaisId INT NOT NULL,
-    FOREIGN KEY (PaisId) REFERENCES Paises(Id)
-);
-(SELECT Id FROM Paises WHERE Nombre = 'Portugal')
-INSERT INTO Ciudades (Nombre, PaisId)
-VALUES
-('Coimbra', (SELECT Id FROM Paises WHERE Nombre = 'Portugal')),
-('Faro', (SELECT Id FROM Paises WHERE Nombre = 'Portugal')),
-('Braga', (SELECT Id FROM Paises WHERE Nombre = 'Portugal')),
-('Aveiro', (SELECT Id FROM Paises WHERE Nombre = 'Portugal')),
-('Setúbal', (SELECT Id FROM Paises WHERE Nombre = 'Portugal')),
-('Évora', (SELECT Id FROM Paises WHERE Nombre = 'Portugal')),
-('Guimarães', (SELECT Id FROM Paises WHERE Nombre = 'Portugal'));
-INSERT INTO Ciudades (Nombre, PaisId)
-VALUES
-
-('Reggiolo', (SELECT Id FROM Paises WHERE Nombre = 'Italia')),
-
-
-('Fráncfort', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
-('Colonia', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
-('Stuttgart', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
-('Düsseldorf', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
-('Dortmund', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
-('Leipzig', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
-('Bremen', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
-('Hanóver', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
-('Núremberg', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
-('Dresde', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
-('Barcelona', (62)),
-
--- Perú
-('Lima', (SELECT Id FROM Paises WHERE Nombre = 'Perú')),
-('Arequipa', (SELECT Id FROM Paises WHERE Nombre = 'Perú')),
-('Cusco', (SELECT Id FROM Paises WHERE Nombre = 'Perú')),
-
--- Argentina
-('Barcelona', (SELECT Id FROM Paises WHERE Nombre = 'España')),
-('Córdoba', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
-('Rosario', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
-
--- Brasil
-('São Paulo', (SELECT Id FROM Paises WHERE Nombre = 'Brasil')),
-('Rio de Janeiro', (SELECT Id FROM Paises WHERE Nombre = 'Brasil')),
-('Brasilia', (SELECT Id FROM Paises WHERE Nombre = 'Brasil')),
-
--- España
-('Madrid', (SELECT Id FROM Paises WHERE Nombre = 'España')),
-('Barcelona', (SELECT Id FROM Paises WHERE Nombre = 'España')),
-('Sevilla', (SELECT Id FROM Paises WHERE Nombre = 'España')),
-
--- Inglaterra
-('Londres', (SELECT Id FROM Paises WHERE Nombre = 'Inglaterra')),
-('Manchester', (SELECT Id FROM Paises WHERE Nombre = 'Inglaterra')),
-('Liverpool', (SELECT Id FROM Paises WHERE Nombre = 'Inglaterra')),
-
--- Escocia
-('Glasgow', (SELECT Id FROM Paises WHERE Nombre = 'Escocia')),
-('Edimburgo', (SELECT Id FROM Paises WHERE Nombre = 'Escocia')),
-
--- Gales
-('Cardiff', (SELECT Id FROM Paises WHERE Nombre = 'Gales')),
-('Swansea', (SELECT Id FROM Paises WHERE Nombre = 'Gales')),
-
--- Irlanda del Norte
-('Belfast', (SELECT Id FROM Paises WHERE Nombre = 'Irlanda del Norte')),
-
--- Francia
-('París', (SELECT Id FROM Paises WHERE Nombre = 'Francia')),
-('Marsella', (SELECT Id FROM Paises WHERE Nombre = 'Francia')),
-('Lyon', (SELECT Id FROM Paises WHERE Nombre = 'Francia')),
-
--- Alemania
-('Berlín', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
-('Múnich', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
-('Hamburgo', (SELECT Id FROM Paises WHERE Nombre = 'Alemania')),
-
--- Italia
-('Roma', (SELECT Id FROM Paises WHERE Nombre = 'Italia')),
-('Milán', (SELECT Id FROM Paises WHERE Nombre = 'Italia')),
-('Nápoles', (SELECT Id FROM Paises WHERE Nombre = 'Italia')),
-
--- Portugal
-('Lisboa', (SELECT Id FROM Paises WHERE Nombre = 'Portugal')),
-('Oporto', (SELECT Id FROM Paises WHERE Nombre = 'Portugal')),
-
--- Estados Unidos
-('New York', (SELECT Id FROM Paises WHERE Nombre = 'Estados Unidos')),
-('Los Angeles', (SELECT Id FROM Paises WHERE Nombre = 'Estados Unidos')),
-('Chicago', (SELECT Id FROM Paises WHERE Nombre = 'Estados Unidos')),
-
--- México
-('Ciudad de México', (SELECT Id FROM Paises WHERE Nombre = 'México')),
-('Guadalajara', (SELECT Id FROM Paises WHERE Nombre = 'México')),
-('Monterrey', (SELECT Id FROM Paises WHERE Nombre = 'México')),
-
--- Colombia
-('Bogotá', (SELECT Id FROM Paises WHERE Nombre = 'Colombia')),
-('Medellín', (SELECT Id FROM Paises WHERE Nombre = 'Colombia')),
-('Cali', (SELECT Id FROM Paises WHERE Nombre = 'Colombia')),
-
--- Chile
-('Santiago', (SELECT Id FROM Paises WHERE Nombre = 'Chile')),
-('Valparaíso', (SELECT Id FROM Paises WHERE Nombre = 'Chile')),
-
--- Uruguay
-('Montevideo', (SELECT Id FROM Paises WHERE Nombre = 'Uruguay')),
-
--- Paraguay
-('Asunción', (SELECT Id FROM Paises WHERE Nombre = 'Paraguay')),
-
--- Bolivia
-('La Paz', (SELECT Id FROM Paises WHERE Nombre = 'Bolivia')),
-('Santa Cruz', (SELECT Id FROM Paises WHERE Nombre = 'Bolivia')),
-
--- Ecuador
-('Quito', (SELECT Id FROM Paises WHERE Nombre = 'Ecuador')),
-('Guayaquil', (SELECT Id FROM Paises WHERE Nombre = 'Ecuador')),
-
--- Venezuela
-('Caracas', (SELECT Id FROM Paises WHERE Nombre = 'Venezuela')),
-('Maracaibo', (SELECT Id FROM Paises WHERE Nombre = 'Venezuela')),
-
--- Japón
-('Tokio', (SELECT Id FROM Paises WHERE Nombre = 'Japón')),
-('Osaka', (SELECT Id FROM Paises WHERE Nombre = 'Japón')),
-
--- Corea del Sur
-('Seúl', (SELECT Id FROM Paises WHERE Nombre = 'Corea del Sur')),
-('Busan', (SELECT Id FROM Paises WHERE Nombre = 'Corea del Sur')),
-
--- China
-('Beijing', (SELECT Id FROM Paises WHERE Nombre = 'China')),
-('Shanghái', (SELECT Id FROM Paises WHERE Nombre = 'China')),
-
--- Australia
-('Sídney', (SELECT Id FROM Paises WHERE Nombre = 'Australia')),
-('Melbourne', (SELECT Id FROM Paises WHERE Nombre = 'Australia')),
-
--- Marruecos
-('Casablanca', (SELECT Id FROM Paises WHERE Nombre = 'Marruecos')),
-('Rabat', (SELECT Id FROM Paises WHERE Nombre = 'Marruecos')),
-
--- Egipto
-('El Cairo', (SELECT Id FROM Paises WHERE Nombre = 'Egipto')),
-
--- Sudáfrica
-('Johannesburgo', (SELECT Id FROM Paises WHERE Nombre = 'Sudáfrica')),
-('Ciudad del Cabo', (SELECT Id FROM Paises WHERE Nombre = 'Sudáfrica')),
-
--- Nigeria
-('Lagos', (SELECT Id FROM Paises WHERE Nombre = 'Nigeria')),
-('Abuya', (SELECT Id FROM Paises WHERE Nombre = 'Nigeria')),
-
--- Camerún
-('Yaundé', (SELECT Id FROM Paises WHERE Nombre = 'Camerún')),
-('Duala', (SELECT Id FROM Paises WHERE Nombre = 'Camerún')),
-
--- Turquía
-('Estambul', (SELECT Id FROM Paises WHERE Nombre = 'Turquía')),
-('Ankara', (SELECT Id FROM Paises WHERE Nombre = 'Turquía')),
-
--- Rusia
-('Moscú', (SELECT Id FROM Paises WHERE Nombre = 'Rusia')),
-('San Petersburgo', (SELECT Id FROM Paises WHERE Nombre = 'Rusia')),
-
--- Ucrania
-('Kiev', (SELECT Id FROM Paises WHERE Nombre = 'Ucrania')),
-
--- Arabia Saudita
-('Riad', (SELECT Id FROM Paises WHERE Nombre = 'Arabia Saudita')),
-('Yeda', (SELECT Id FROM Paises WHERE Nombre = 'Arabia Saudita')),
-
--- Catar
-('Doha', (SELECT Id FROM Paises WHERE Nombre = 'Catar')),
-
--- Emiratos Árabes Unidos
-('Dubái', (SELECT Id FROM Paises WHERE Nombre = 'Emiratos Árabes Unidos')),
-('Abu Dabi', (SELECT Id FROM Paises WHERE Nombre = 'Emiratos Árabes Unidos')),
-
--- Kosovo
-('Pristina', (SELECT Id FROM Paises WHERE Nombre = 'Kosovo')),
-
--- Gibraltar
-('Gibraltar', (SELECT Id FROM Paises WHERE Nombre = 'Gibraltar')),
-
--- Puerto Rico
-('San Juan', (SELECT Id FROM Paises WHERE Nombre = 'Puerto Rico'));
-
-INSERT INTO Ciudades (Nombre, PaisId)
-VALUES
--- Afganistán
-('Kabul', (SELECT Id FROM Paises WHERE Nombre = 'Afganistán')),
-
--- Albania
-('Tirana', (SELECT Id FROM Paises WHERE Nombre = 'Albania')),
-
--- Andorra
-('Andorra la Vieja', (SELECT Id FROM Paises WHERE Nombre = 'Andorra')),
-
--- Angola
-('Luanda', (SELECT Id FROM Paises WHERE Nombre = 'Angola')),
-
--- Arabia Saudita
-('La Meca', (SELECT Id FROM Paises WHERE Nombre = 'Arabia Saudita')),
-
--- Argelia
-('Argel', (SELECT Id FROM Paises WHERE Nombre = 'Argelia')),
-
--- Armenia
-('Ereván', (SELECT Id FROM Paises WHERE Nombre = 'Armenia')),
-
--- Austria
-('Viena', (SELECT Id FROM Paises WHERE Nombre = 'Austria')),
-
--- Azerbaiyán
-('Bakú', (SELECT Id FROM Paises WHERE Nombre = 'Azerbaiyán')),
-
--- Bahamas
-('Nasáu', (SELECT Id FROM Paises WHERE Nombre = 'Bahamas')),
-
--- Bangladés
-('Daca', (SELECT Id FROM Paises WHERE Nombre = 'Bangladés')),
-
--- Baréin
-('Manama', (SELECT Id FROM Paises WHERE Nombre = 'Baréin')),
-
--- Bélgica
-('Bruselas', (SELECT Id FROM Paises WHERE Nombre = 'Bélgica')),
-('Brujas', (SELECT Id FROM Paises WHERE Nombre = 'Bélgica')),
-
--- Bielorrusia
-('Minsk', (SELECT Id FROM Paises WHERE Nombre = 'Bielorrusia')),
-
--- Bosnia y Herzegovina
-('Sarajevo', (SELECT Id FROM Paises WHERE Nombre = 'Bosnia y Herzegovina')),
-
--- Bulgaria
-('Sofía', (SELECT Id FROM Paises WHERE Nombre = 'Bulgaria')),
-
--- Canadá
-('Toronto', (SELECT Id FROM Paises WHERE Nombre = 'Canadá')),
-('Vancouver', (SELECT Id FROM Paises WHERE Nombre = 'Canadá')),
-
--- Costa Rica
-('San José', (SELECT Id FROM Paises WHERE Nombre = 'Costa Rica')),
-
--- Croacia
-('Zagreb', (SELECT Id FROM Paises WHERE Nombre = 'Croacia')),
-
--- Cuba
-('La Habana', (SELECT Id FROM Paises WHERE Nombre = 'Cuba')),
-
--- Dinamarca
-('Copenhague', (SELECT Id FROM Paises WHERE Nombre = 'Dinamarca')),
-
--- Eslovaquia
-('Bratislava', (SELECT Id FROM Paises WHERE Nombre = 'Eslovaquia')),
-
--- Eslovenia
-('Liubliana', (SELECT Id FROM Paises WHERE Nombre = 'Eslovenia')),
-
--- Estonia
-('Tallin', (SELECT Id FROM Paises WHERE Nombre = 'Estonia')),
-
--- Finlandia
-('Helsinki', (SELECT Id FROM Paises WHERE Nombre = 'Finlandia')),
-
--- Grecia
-('Atenas', (SELECT Id FROM Paises WHERE Nombre = 'Grecia')),
-
--- Hungría
-('Budapest', (SELECT Id FROM Paises WHERE Nombre = 'Hungría')),
-
--- India
-('Nueva Delhi', (SELECT Id FROM Paises WHERE Nombre = 'India')),
-('Mumbai', (SELECT Id FROM Paises WHERE Nombre = 'India')),
-
--- Indonesia
-('Yakarta', (SELECT Id FROM Paises WHERE Nombre = 'Indonesia')),
-
--- Irak
-('Bagdad', (SELECT Id FROM Paises WHERE Nombre = 'Irak')),
-
--- Irán
-('Teherán', (SELECT Id FROM Paises WHERE Nombre = 'Irán')),
-
--- Irlanda
-('Dublín', (SELECT Id FROM Paises WHERE Nombre = 'Irlanda')),
-
--- Islandia
-('Reikiavik', (SELECT Id FROM Paises WHERE Nombre = 'Islandia')),
-
--- Israel
-('Jerusalén', (SELECT Id FROM Paises WHERE Nombre = 'Israel')),
-('Tel Aviv', (SELECT Id FROM Paises WHERE Nombre = 'Israel')),
-
--- Jamaica
-('Kingston', (SELECT Id FROM Paises WHERE Nombre = 'Jamaica')),
-
--- Jordania
-('Amán', (SELECT Id FROM Paises WHERE Nombre = 'Jordania')),
-
--- Kazajistán
-('Astaná', (SELECT Id FROM Paises WHERE Nombre = 'Kazajistán')),
-
--- Kenia
-('Nairobi', (SELECT Id FROM Paises WHERE Nombre = 'Kenia')),
-
--- Kuwait
-('Ciudad de Kuwait', (SELECT Id FROM Paises WHERE Nombre = 'Kuwait')),
-
--- Letonia
-('Riga', (SELECT Id FROM Paises WHERE Nombre = 'Letonia')),
-
--- Líbano
-('Beirut', (SELECT Id FROM Paises WHERE Nombre = 'Líbano')),
-
--- Libia
-('Trípoli', (SELECT Id FROM Paises WHERE Nombre = 'Libia')),
-
--- Lituania
-('Vilna', (SELECT Id FROM Paises WHERE Nombre = 'Lituania')),
-
--- Luxemburgo
-('Luxemburgo', (SELECT Id FROM Paises WHERE Nombre = 'Luxemburgo')),
-
--- Malasia
-('Kuala Lumpur', (SELECT Id FROM Paises WHERE Nombre = 'Malasia')),
-
--- Marruecos
-('Marrakech', (SELECT Id FROM Paises WHERE Nombre = 'Marruecos')),
-
--- México
-('Puebla', (SELECT Id FROM Paises WHERE Nombre = 'México')),
-
--- Noruega
-('Oslo', (SELECT Id FROM Paises WHERE Nombre = 'Noruega')),
-
--- Países Bajos
-('Ámsterdam', (SELECT Id FROM Paises WHERE Nombre = 'Países Bajos')),
-('Róterdam', (SELECT Id FROM Paises WHERE Nombre = 'Países Bajos')),
-
--- Pakistán
-('Islamabad', (SELECT Id FROM Paises WHERE Nombre = 'Pakistán')),
-
--- Panamá
-('Ciudad de Panamá', (SELECT Id FROM Paises WHERE Nombre = 'Panamá')),
-
--- Polonia
-('Varsovia', (SELECT Id FROM Paises WHERE Nombre = 'Polonia')),
-('Cracovia', (SELECT Id FROM Paises WHERE Nombre = 'Polonia')),
-
--- República Checa
-('Praga', (SELECT Id FROM Paises WHERE Nombre = 'República Checa')),
-
--- República Dominicana
-('Santo Domingo', (SELECT Id FROM Paises WHERE Nombre = 'República Dominicana')),
-
--- Rumanía
-('Bucarest', (SELECT Id FROM Paises WHERE Nombre = 'Rumanía')),
-
--- Serbia
-('Belgrado', (SELECT Id FROM Paises WHERE Nombre = 'Serbia')),
-
--- Singapur
-('Singapur', (SELECT Id FROM Paises WHERE Nombre = 'Singapur')),
-
--- Suecia
-('Estocolmo', (SELECT Id FROM Paises WHERE Nombre = 'Suecia')),
-
--- Suiza
-('Zúrich', (SELECT Id FROM Paises WHERE Nombre = 'Suiza')),
-('Ginebra', (SELECT Id FROM Paises WHERE Nombre = 'Suiza')),
-
--- Tailandia
-('Bangkok', (SELECT Id FROM Paises WHERE Nombre = 'Tailandia')),
-
--- Túnez
-('Túnez', (SELECT Id FROM Paises WHERE Nombre = 'Túnez')),
-
--- Uruguay
-('Punta del Este', (SELECT Id FROM Paises WHERE Nombre = 'Uruguay')),
-
--- Venezuela
-('Valencia', (SELECT Id FROM Paises WHERE Nombre = 'Venezuela')),
-
--- Vietnam
-('Hanói', (SELECT Id FROM Paises WHERE Nombre = 'Vietnam')),
-('Ho Chi Minh', (SELECT Id FROM Paises WHERE Nombre = 'Vietnam'));

@@ -60,10 +60,5 @@ export default function useEstadioDetail() {
     }, [id]);
 
 
-
-
-    return {
-        estadio,
-        items,
-    }
+    return { estadio, items, }
 }

@@ -3,11 +3,7 @@ using Application.Dto;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
-using Domain.Enums;
 using Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Application.Services;
 
@@ -33,36 +29,25 @@ public class ArbitrosService : IArbitrosService
 
     public async Task<Arbitros> AddAsync(ArbitrosDto arbitros)
     {
-
         ValidarDto(arbitros);
-         string fotoUrl = await GuardarFotoAsync(arbitros);
-        var pais = await _paisRepo.GetByNombreAsync(arbitros.PaisNacimiento);
+    
+        string fotoUrl = await GuardarFotoAsync(arbitros);
 
-        if (pais == null)
-            throw new NotFoundException("El país no existe.");
+        var pais = await _paisRepo.GetByNombreAsync(arbitros.PaisNacimiento)
+            ?? throw new NotFoundException("El país no existe.");
 
-        var ciudad = await _ciudadRepo.GetByNombreAsync(arbitros.CiudadNacimiento);
-
-        if (ciudad == null)
-            throw new NotFoundException("La ciudad no existe.");
+        var ciudad = await _ciudadRepo.GetByNombreAsync(arbitros.CiudadNacimiento)
+            ?? throw new NotFoundException("La ciudad no existe.");
 
         var persona = new Personas
         {
             Nombre = arbitros.Nombre,
-            ApellidoPaterno = arbitros.ApellidoPaterno,
-            ApellidoMaterno = arbitros.ApellidoMaterno,
-
+            Apellido = arbitros.Apellido,
             FechaNacimiento = arbitros.FechaNacimiento,
-
             PaisNacimientoId = pais.Id,
             CiudadNacimientoId = ciudad.Id,
-
-            AlturaCm = arbitros.AlturaCm,
-            PesoKg = arbitros.PesoKg,
-
-            PieDominante = arbitros.PieDominante,
             FotoUrl = fotoUrl,
-
+            FechaCreacion = DateTime.Now,
             Estado = "Activo"
         };
 
@@ -71,17 +56,18 @@ public class ArbitrosService : IArbitrosService
         var arbitro = new Arbitros
         {
             PersonaId = personaCreada.Id,
-
             Categoria = arbitros.Categoria,
-            Especialidad = arbitros.Especialidad,
-
+            RolArbitral = arbitros.RolArbitral,
             FechaDebut = arbitros.FechaDebut,
             FechaRetiro = arbitros.FechaRetiro,
-
-            AnosExperiencia = arbitros.AnosExperiencia,
+            AnosExperiencia = CalcularAnosExperiencia(arbitros.FechaDebut),
             Nivel = arbitros.Nivel,
             Reputacion = arbitros.Reputacion,
-
+            PartidosDirigidos=0,
+            PrecisionDecisiones=0,
+            TarjetasAmarillas=0,
+            TarjetasRojas=0,
+            EstadoFisico="Activo",
             Estado = "Activo"
         };
 
@@ -90,7 +76,85 @@ public class ArbitrosService : IArbitrosService
         return arbitro;
     }
 
-    private async Task<string> GuardarFotoAsync( ArbitrosDto arbitros)
+
+
+    public async Task<PagedResult<Arbitros>> GetAllAsync(int page, int pageSize, string? search, string? categoria, string? pais, string? estado)
+    {
+        return await _repository.GetAllAsync(page, pageSize, search, categoria, pais, estado);
+    }
+
+    public async Task<Arbitros> GetByIdAsync(int id)
+    {
+       return await _repository.GetByIdAsync(id)
+         ?? throw new NotFoundException("Árbitro no encontrado");
+    }
+
+    public async  Task<Arbitros> UpdateAsync(int id, ArbitrosDto dto)
+    {
+        if (dto == null)
+            throw new BadRequestException("Datos inválidos");
+
+        ValidarDto(dto);
+
+        var arbitro = await _repository.GetByIdAsync(id)
+            ?? throw new NotFoundException($"No se encontró el árbitro con id {id}");
+
+        var persona = arbitro.Persona
+            ?? throw new NotFoundException("Persona no encontrada");
+
+        var pais = await _paisRepo.GetByNombreAsync(dto.PaisNacimiento)
+            ?? throw new NotFoundException("El país no existe");
+
+        var ciudad = await _ciudadRepo.GetByNombreAsync(dto.CiudadNacimiento)
+            ?? throw new NotFoundException("La ciudad no existe");
+
+
+        if (dto.Foto != null)
+            persona.FotoUrl = await GuardarFotoAsync(dto);
+
+
+        persona.Nombre = dto.Nombre;
+        persona.Apellido = dto.Apellido;
+        persona.FechaNacimiento = dto.FechaNacimiento;
+        persona.PaisNacimientoId = pais.Id;
+        persona.CiudadNacimientoId = ciudad.Id;
+        persona.FechaActualizacion = DateTime.Now;
+
+        await _personasService.UpdateAsync(persona);
+
+        arbitro.Categoria = dto.Categoria;
+        arbitro.RolArbitral = dto.RolArbitral;
+        arbitro.FechaDebut = dto.FechaDebut;
+        arbitro.FechaRetiro = dto.FechaRetiro;
+        arbitro.AnosExperiencia = CalcularAnosExperiencia(dto.FechaDebut);
+        arbitro.Nivel = dto.Nivel;
+        arbitro.Reputacion = dto.Reputacion;
+        arbitro.PartidosDirigidos= dto.PartidosDirigidos;
+        arbitro.PrecisionDecisiones=dto.PrecisionDecisiones;
+        arbitro.TarjetasAmarillas = dto.TarjetasAmarillas;
+        arbitro.TarjetasRojas = dto.TarjetasRojas;
+
+        await _repository.UpdateAsync(arbitro);
+
+        return arbitro;
+    }
+
+    private int CalcularAnosExperiencia(DateTime? fechaDebut)
+    {
+        if (!fechaDebut.HasValue)
+            return 0;
+
+        var hoy = DateTime.Today;
+        var fecha = fechaDebut.Value;
+
+        var anos = hoy.Year - fecha.Year;
+
+        if (fecha.Date > hoy.AddYears(-anos))
+            anos--;
+
+        return Math.Max(0, anos);
+    }
+    private async Task<string> GuardarFotoAsync(ArbitrosDto arbitros)
     {
         if (arbitros.Foto == null)
             return "";
@@ -125,125 +189,26 @@ public class ArbitrosService : IArbitrosService
         return $"/uploads/arbitros/{nombreArchivo}";
 
     }
-    private void ValidarDto(ArbitrosDto arbitros)
+    private void ValidarDto(ArbitrosDto dto)
     {
-        if (arbitros == null)
-            throw new BadRequestException(
-                "El cuerpo de la solicitud es obligatorio"
-            );
+        if (dto is null)
+            throw new BadRequestException("El cuerpo de la solicitud es obligatorio");
 
-        if (string.IsNullOrWhiteSpace(arbitros.Nombre))
-            throw new BadRequestException(
-                "El nombre es obligatorio"
-            );
+        if (string.IsNullOrWhiteSpace(dto.Nombre))
+            throw new BadRequestException("El nombre es obligatorio");
 
-        if (string.IsNullOrWhiteSpace(
-            arbitros.ApellidoPaterno))
-        {
-            throw new BadRequestException(
-                "El apellido paterno es obligatorio"
-            );
-        }
+        if (string.IsNullOrWhiteSpace(dto.PaisNacimiento))
+            throw new BadRequestException("El país es obligatorio");
 
-        if (string.IsNullOrWhiteSpace(
-            arbitros.PaisNacimiento))
-        {
-            throw new BadRequestException(
-                "El país es obligatorio"
-            );
-        }
+        if (string.IsNullOrWhiteSpace(dto.CiudadNacimiento))
+            throw new BadRequestException("La ciudad es obligatoria");
 
-        if (string.IsNullOrWhiteSpace(
-            arbitros.CiudadNacimiento))
-        {
-            throw new BadRequestException(
-                "La ciudad es obligatoria"
-            );
-        }
+        if (dto.FechaNacimiento > DateTime.Today)
+            throw new BadRequestException("La fecha de nacimiento no es válida");
 
-        if (
-            arbitros.FechaNacimiento >
-            DateTime.Now
-        )
-        {
-            throw new BadRequestException(
-                "La fecha de nacimiento no es válida"
-            );
-        }
-
-        if (
-            arbitros.FechaRetiro.HasValue &&
-            arbitros.FechaRetiro <
-            arbitros.FechaDebut
-        )
-        {
-            throw new BadRequestException(
-                "La fecha de retiro no puede ser menor al debut"
-            );
-        }
-    }
-
-    public async Task<PagedResult<Arbitros>> GetAllAsync(int page, int pageSize, string? search, string? categoria, string? pais, string? estado)
-    {
-        return await _repository.GetAllAsync(page, pageSize, search, categoria, pais, estado);
-    }
-
-    public async Task<Arbitros> GetByIdAsync(int id)
-    {
-       return await _repository.GetByIdAsync(id)
-         ?? throw new NotFoundException("Árbitro no encontrado");
-    }
-
-    public async  Task<Arbitros> UpdateAsync(int id, ArbitrosDto dto)
-    {
-        if (dto == null)
-            throw new BadRequestException("Datos inválidos");
-
-        ValidarDto(dto);
-
-        var arbitro = await _repository.GetByIdAsync(id);
-        if (arbitro == null)
-            throw new NotFoundException($"No se encontró el arbitro con id {id}");
-
-        var persona = arbitro.Persona;
-
-        if (persona == null)
-            throw new NotFoundException("Persona no encontrada");
-
-        var pais = await _paisRepo.GetByNombreAsync(dto.PaisNacimiento)
-            ?? throw new NotFoundException("El país no existe");
-
-        var ciudad = await _ciudadRepo.GetByNombreAsync(dto.CiudadNacimiento)
-            ?? throw new NotFoundException("La ciudad no existe");
-
-        if (dto.Foto != null)
-        {
-            persona.FotoUrl = await GuardarFotoAsync(dto);
-        }
-
-        persona.Nombre = dto.Nombre;
-        persona.ApellidoPaterno = dto.ApellidoPaterno;
-        persona.ApellidoMaterno = dto.ApellidoMaterno;
-        persona.FechaNacimiento = dto.FechaNacimiento;
-        persona.PaisNacimientoId = pais.Id;
-        persona.CiudadNacimientoId = ciudad.Id;
-        persona.AlturaCm = dto.AlturaCm;
-        persona.PesoKg = dto.PesoKg;
-        persona.PieDominante = dto.PieDominante;
-
-        await _personasService.UpdateAsync(persona);
-
-        arbitro.Categoria = dto.Categoria;
-        arbitro.Categoria = dto.Categoria;
-        arbitro.Especialidad = dto.Especialidad;
-        arbitro.FechaDebut = dto.FechaDebut;
-        arbitro.FechaRetiro = dto.FechaRetiro;
-        arbitro.AnosExperiencia = dto.AnosExperiencia;
-        arbitro.Nivel = dto.Nivel;
-        arbitro.Reputacion = dto.Reputacion;
-
-        await _repository.UpdateAsync(arbitro);
-
-        return arbitro;
+        if (dto.FechaRetiro.HasValue &&
+            dto.FechaDebut.HasValue &&
+            dto.FechaRetiro < dto.FechaDebut)
+            throw new BadRequestException("La fecha de retiro no puede ser menor al debut");
     }
 }

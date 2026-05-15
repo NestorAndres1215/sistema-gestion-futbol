@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/parametros")]
 [ApiController]
 public class ParametrosSistemaController : ControllerBase
 {
