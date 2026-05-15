@@ -4,12 +4,14 @@ import AdminLayout from "../../../../shared/components/layout/admin/layout";
 import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useEntrenadorRegistro from "@/features/entrenador/hooks/useEntrenadorRegistro";
+import { PIE_DOMINANTE_OPTIONS } from "@/shared/constants/pie-dominante.options";
+import { ESTILO_JUEGO_OPTIONS } from "@/shared/constants/estilo-juego.options";
+import { LICENCIAS_ENTRENADOR_OPTIONS } from "@/shared/constants/licencias-entrenador.options";
 export default function EntrenadorRegistroPage() {
 
     const {
         form, paises, ciudades,
         setFoto, handleChange, limpiarFormulario, registrarEntrenador,
-        piesDominantes, estilosJuego, licencias,
     } = useEntrenadorRegistro();
     
     return (
@@ -198,7 +200,7 @@ export default function EntrenadorRegistroPage() {
                                         value={form.pieDominante}
                                         onChange={(e) => handleChange("pieDominante", e.target.value)}
                                     >
-                                        {piesDominantes.map((item) => (
+                                        {PIE_DOMINANTE_OPTIONS.map((item) => (
                                             <option key={item.value} value={item.value}>
                                                 {item.label}
                                             </option>
@@ -218,7 +220,7 @@ export default function EntrenadorRegistroPage() {
                                         value={form.estiloJuego}
                                         onChange={(e) => handleChange("estiloJuego", e.target.value)}
                                     >
-                                        {estilosJuego.map((item) => (
+                                        {ESTILO_JUEGO_OPTIONS.map((item) => (
                                             <option key={item.value} value={item.value}>
                                                 {item.label}
                                             </option>
@@ -237,7 +239,7 @@ export default function EntrenadorRegistroPage() {
                                         value={form.licencia}
                                         onChange={(e) => handleChange("licencia", e.target.value)}
                                     >
-                                        {licencias.map((item) => (
+                                        {LICENCIAS_ENTRENADOR_OPTIONS.map((item) => (
                                             <option key={item.value} value={item.value}>
                                                 {item.label}
                                             </option>

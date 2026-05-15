@@ -4,6 +4,7 @@ import { getEntrenadores } from "../services/entrenador.service";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/shared/utils/date.utils";
+import { getPaises } from "@/shared/services/paises.service";
 
 
 export default function useEntrenador() {
@@ -18,7 +19,7 @@ export default function useEntrenador() {
     const [data, setData] = useState<any[]>([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-
+    const [paises, setPaises] = useState<any[]>([]);
     const pageSize = 15;
 
     const fetchData = async (q: EntrenadorQueryState, currentPage: number) => {
@@ -61,11 +62,35 @@ export default function useEntrenador() {
 
         setPage(1);
     };
+    useEffect(() => {
 
+        const loadPaises = async () => {
+
+            try {
+
+                const data = await getPaises();
+
+                setPaises(
+                    Array.isArray(data) ? data : []
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                setPaises([]);
+
+            }
+
+        };
+
+        loadPaises();
+
+    }, []);
     const entrenadorFilters = [
         {
             key: "estiloJuego",
-            placeholder: "Estilo de Juego",
+            placeholder: "Selecciona Estilo de Juego",
             options: [
                 { value: "Ofensivo", label: "Ofensivo" },
                 { value: "Defensivo", label: "Defensivo" },
@@ -77,19 +102,15 @@ export default function useEntrenador() {
         },
         {
             key: "pais",
-            placeholder: "País",
-            options: [
-                { value: "Perú", label: "Perú" },
-                { value: "Brasil", label: "Brasil" },
-                { value: "Argentina", label: "Argentina" },
-                { value: "Italia", label: "Italia" },
-                { value: "España", label: "España" },
-            ],
+            placeholder: "Selecciona Pais",
+            options: paises.map((p: any) => ({
+                value: p.nombre,
+                label: p.nombre,
+            })),
         },
-        
         {
             key: "estado",
-            placeholder: "Estado",
+            placeholder: "Selecciona Estado",
             options: [
                 { value: "Activo", label: "Activo" },
                 { value: "Retirado", label: "Retirado" },
@@ -99,7 +120,7 @@ export default function useEntrenador() {
 
 
     const entrenadorActions = {
-        
+
         onView: (u: any) =>
             router.push(`/admin/entrenadores/edicion/${u.id}`),
 

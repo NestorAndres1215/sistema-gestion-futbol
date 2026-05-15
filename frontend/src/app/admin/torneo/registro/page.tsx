@@ -6,6 +6,7 @@ import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useTorneoRegistro from "@/features/torneo/hooks/useTorneoRegistro";
 import { useEffect, useState } from "react";
+import { GENERO_OPTIONS } from "@/shared/constants/generos.options";
 
 export default function TorneoFormularioPage() {
 
@@ -99,8 +100,12 @@ export default function TorneoFormularioPage() {
                                         defaultValue=""
                                     >
                                         <option value="">Selecciona un género</option>
-                                        <option value="masculino">Masculino</option>
-                                        <option value="femenino">Femenino</option>
+
+                                        {GENERO_OPTIONS.map((g) => (
+                                            <option key={g.value} value={g.value}>
+                                                {g.label}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
                             </div>
@@ -130,7 +135,8 @@ export default function TorneoFormularioPage() {
                                     </select>
                                 </div>
                             </div>
-                        </div>     <div className="col-12 col-sm-6 col-lg-4">
+                        </div>
+                        <div className="col-12 col-sm-6 col-lg-4">
                             <div className={styles.field}>
                                 <label htmlFor="torneo-categoria" className={styles.label}>
                                     Categoría

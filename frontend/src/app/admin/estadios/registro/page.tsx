@@ -5,14 +5,15 @@ import AdminLayout from "@/shared/components/layout/admin/layout";
 import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useEstadioRegistro from "@/features/estadio/hooks/useEstadioRegistro";
-import { tiposCesped } from "@/features/estadio/constants/estadioOptions";
+import { TIPO_CESPED_OPTIONS } from "@/shared/constants/tipo-cesped.options";
+
 
 export default function EstadioRegistroPage() {
 
 
-    const { 
+    const {
         form, setFoto, handleChange, ciudades, paises,
-        limpiarFormulario, registrarEstadio 
+        limpiarFormulario, registrarEstadio
     } = useEstadioRegistro();
     return (
         <AdminLayout pageTitle="Estadios" pageSubtitle="Mantenimiento">
@@ -44,9 +45,7 @@ export default function EstadioRegistroPage() {
                                 placeholder="Nombre del estadio"
                                 className={styles.input}
                                 value={form.nombre}
-                                onChange={(e) =>
-                                    handleChange("nombre", e.target.value)
-                                }
+                                onChange={(e) => handleChange("nombre", e.target.value)}
                             />
 
                         </div>
@@ -66,9 +65,7 @@ export default function EstadioRegistroPage() {
                                 className={styles.input}
                                 placeholder="Descripción"
                                 value={form.descripcion}
-                                onChange={(e) =>
-                                    handleChange("descripcion", e.target.value)
-                                }
+                                onChange={(e) => handleChange("descripcion", e.target.value)}
                             />
 
                         </div>
@@ -101,9 +98,7 @@ export default function EstadioRegistroPage() {
                         </div>
 
                         <div className="col-12 col-md-6">
-
                             <div className={styles.field}>
-
                                 <label className={styles.label}>
                                     Año
                                 </label>
@@ -125,12 +120,10 @@ export default function EstadioRegistroPage() {
                     </div>
 
                     <div className="row g-3">
-
                         <div className="col-12 col-md-6">
                             <div className="d-flex flex-column gap-2 w-100">
-
                                 <label className={styles.label}>
-                                    País 
+                                    País
                                 </label>
 
                                 <div className={styles.inputWrap}>
@@ -158,9 +151,8 @@ export default function EstadioRegistroPage() {
 
                         <div className="col-12 col-md-6">
                             <div className="d-flex flex-column gap-2 w-100">
-
                                 <label className={styles.label}>
-                                    Ciudad 
+                                    Ciudad
                                 </label>
 
                                 <div className={styles.inputWrap}>
@@ -186,15 +178,11 @@ export default function EstadioRegistroPage() {
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <div className="row g-3">
-
                         <div className="col-12 col-md-6">
-
                             <div className={styles.field}>
-
                                 <label className={styles.label}>
                                     Latitud
                                 </label>
@@ -207,28 +195,17 @@ export default function EstadioRegistroPage() {
                                         placeholder="Latitud"
                                         className={styles.input}
                                         value={form.latitud}
-                                        onChange={(e) =>
-                                            handleChange(
-                                                "latitud",
-                                                e.target.value
-                                            )
-                                        }
+                                        onChange={(e) => handleChange("latitud", e.target.value)}
                                     />
-
                                 </div>
-
                             </div>
-
                         </div>
 
                         <div className="col-12 col-md-6">
-
                             <div className={styles.field}>
-
                                 <label className={styles.label}>
                                     Longitud
                                 </label>
-
                                 <div className={styles.inputWrap}>
 
                                     <input
@@ -237,91 +214,53 @@ export default function EstadioRegistroPage() {
                                         placeholder="Longitud"
                                         className={styles.input}
                                         value={form.longitud}
-                                        onChange={(e) =>
-                                            handleChange(
-                                                "longitud",
-                                                e.target.value
-                                            )
-                                        }
+                                        onChange={(e) => handleChange("longitud", e.target.value)}
                                     />
-
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
 
                     <div className="row g-3">
-
                         <div className="col-12 col-md-6">
-
                             <div className={styles.field}>
-
                                 <label className={styles.label}>
                                     Capacidad
                                 </label>
-
                                 <div className={styles.inputWrap}>
-
                                     <input
                                         type="number"
                                         placeholder="Capacidad"
                                         className={styles.input}
                                         value={form.capacidad}
-                                        onChange={(e) =>
-                                            handleChange(
-                                                "capacidad",
-                                                e.target.value
-                                            )
-                                        }
+                                        onChange={(e) => handleChange("capacidad", e.target.value)}
                                     />
-
                                 </div>
-
                             </div>
-
                         </div>
 
                         <div className="col-12 col-md-6">
-
                             <div className={styles.field}>
-
                                 <label className={styles.label}>
                                     Tipo de Césped
                                 </label>
-
                                 <div className={styles.inputWrap}>
-
                                     <select
                                         className={styles.input}
                                         value={form.tipoCesped}
-                                        onChange={(e) =>
-                                            handleChange(
-                                                "tipoCesped",
-                                                e.target.value
-                                            )
-                                        }
+                                        onChange={(e) => handleChange("tipoCesped", e.target.value)}
                                     >
 
-                                        {tiposCesped.map((item) => (
-                                            <option
-                                                key={item.value}
-                                                value={item.value}
-                                            >
+                                        {TIPO_CESPED_OPTIONS.map((item) => (
+                                            <option key={item.value} value={item.value}>
                                                 {item.label}
                                             </option>
                                         ))}
 
                                     </select>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
 
                     <div className={styles.field}>

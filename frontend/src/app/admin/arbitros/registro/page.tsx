@@ -5,15 +5,15 @@ import AdminLayout from "../../../../shared/components/layout/admin/layout";
 import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useArbitroRegistro from "@/features/arbitro/hooks/useArbitroRegistro";
+import { PIE_DOMINANTE_OPTIONS } from "@/shared/constants/pie-dominante.options";
+import { CATEGORIA_ARBITRO_OPTIONS } from "@/shared/constants/categoria-arbitro.options";
+import { ESPECIALIDAD_ARBITRO_OPTIONS } from "@/shared/constants/especialidad-arbitro.options";
 
 export default function ArbitroRegistro() {
 
 
     const {
-        piesDominantes,
         paises,
-        categorias,
-        especialidades,
         limpiarFormulario,
         registrarArbitro,
         handleChange,
@@ -217,7 +217,7 @@ export default function ArbitroRegistro() {
                                         value={form.pieDominante}
                                         onChange={(e) => handleChange("pieDominante", e.target.value)}
                                     >
-                                        {piesDominantes.map((item) => (
+                                        {PIE_DOMINANTE_OPTIONS.map((item) => (
                                             <option key={item.value} value={item.value}>
                                                 {item.label}
                                             </option>
@@ -239,9 +239,9 @@ export default function ArbitroRegistro() {
                                         onChange={(e) => handleChange("categoria", e.target.value)}
                                     >
                                         <option value="">Selecciona categoría</option>
-                                        {categorias.map((item) => (
-                                            <option key={item} value={item}>
-                                                {item}
+                                        {CATEGORIA_ARBITRO_OPTIONS.map((item) => (
+                                            <option key={item.value} value={item.value}>
+                                                {item.label}
                                             </option>
                                         ))}
                                     </select>
@@ -260,9 +260,9 @@ export default function ArbitroRegistro() {
                                         onChange={(e) => handleChange("especialidad", e.target.value)}
                                     >
                                         <option value="">Selecciona especialidad</option>
-                                        {especialidades.map((item) => (
-                                            <option key={item} value={item}>
-                                                {item}
+                                        {ESPECIALIDAD_ARBITRO_OPTIONS.map((item) => (
+                                            <option key={item.value} value={item.value}>
+                                                {item.label}
                                             </option>
                                         ))}
                                     </select>

@@ -31,43 +31,13 @@ export default function useEntrenadorRegistro() {
 
     const [foto, setFoto] = useState<File | null>(null);
 
-    const piesDominantes = [
-        { value: "", label: "Selecciona pie dominante" },
-        { value: "Derecho", label: "Derecho" },
-        { value: "Izquierdo", label: "Izquierdo" },
-    ];
-
-    const estilosJuego = [
-        { value: "", label: "Seleccionar" },
-        { value: "Ofensivo", label: "Ofensivo" },
-        { value: "Defensivo", label: "Defensivo" },
-        { value: "Posesión", label: "Posesión" },
-        { value: "Contraataque", label: "Contraataque" },
-        { value: "Presión Alta", label: "Presión Alta" },
-        { value: "Equilibrado", label: "Equilibrado" },
-    ];
-
-    const licencias = [
-        { value: "", label: "Seleccionar" },
-        { value: "Nacional", label: "Nacional" },
-        { value: "CONMEBOL", label: "CONMEBOL" },
-        { value: "UEFA A", label: "UEFA A" },
-        { value: "UEFA Pro", label: "UEFA Pro" },
-        { value: "FIFA Elite", label: "FIFA Elite" },
-    ];
-
-    const handleChange = (
-        key: string,
-        value: any
-    ) => {
-        setForm((prev) => ({
-            ...prev,
-            [key]: value,
-        }));
+    const handleChange = (key: string, value: any) => {
+        setForm((prev) => ({ ...prev, [key]: value, }));
     };
 
-       const [paises, setPaises] = useState<any[]>([]);
+    const [paises, setPaises] = useState<any[]>([]);
     const [ciudades, setCiudades] = useState<any[]>([]);
+
     useEffect(() => {
 
         const loadPaises = async () => {
@@ -75,17 +45,10 @@ export default function useEntrenadorRegistro() {
             try {
 
                 const data = await getPaises();
-
-                setPaises(
-                    Array.isArray(data) ? data : []
-                );
+                setPaises(Array.isArray(data) ? data : []);
 
             } catch (error) {
-
-                console.error(error);
-
                 setPaises([]);
-
             }
 
         };
@@ -93,31 +56,21 @@ export default function useEntrenadorRegistro() {
         loadPaises();
 
     }, []);
+
     useEffect(() => {
-
         const loadCiudades = async () => {
-
             if (!form.paisNacimiento) {
                 setCiudades([]);
                 return;
             }
 
             try {
-
                 const data = await getCiudadesByPais(form.paisNacimiento);
-
-                setCiudades(
-                    Array.isArray(data) ? data : []
-                );
+                setCiudades(Array.isArray(data) ? data : []);
 
             } catch (error) {
-
-                console.error(error);
-
                 setCiudades([]);
-
             }
-
         };
 
         loadCiudades();
@@ -153,16 +106,11 @@ export default function useEntrenadorRegistro() {
 
             const formData = new FormData();
 
-            Object.entries(form).forEach(
-                ([key, value]) => {
-                    formData.append(
-                        key,
-                        String(value)
-                    );
-                }
-            );
+            Object.entries(form).forEach(([key, value]) => {
+                formData.append(key, String(value));
+            });
 
-            
+
             if (foto) {
                 formData.append("Foto", foto);
             }
@@ -180,16 +128,7 @@ export default function useEntrenadorRegistro() {
     };
 
     return {
-        form,
-        foto,
-        setFoto,
-        paises,
-        ciudades,
-        handleChange,
-        limpiarFormulario,
-        registrarEntrenador,
-        piesDominantes,
-        estilosJuego,
-        licencias,
+        form, foto, paises, ciudades,
+        setFoto, handleChange, limpiarFormulario, registrarEntrenador,
     };
 }

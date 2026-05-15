@@ -3,6 +3,9 @@ import { ArbitroQueryState } from "../types/arbitroQueryState";
 import { getArbitros } from "../services/arbitro.service";
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/shared/utils/date.utils";
+import { getPaises } from "@/shared/services/paises.service";
+import { CATEGORIA_ARBITRO_OPTIONS } from "@/shared/constants/categoria-arbitro.options";
+import { ESTADO_GENERICO_OPTIONS } from "@/shared/constants/estado-generico.options";
 
 export default function useArbitro() {
     const router = useRouter();
@@ -16,7 +19,7 @@ export default function useArbitro() {
     const [data, setData] = useState<any[]>([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-
+    const [paises, setPaises] = useState<any[]>([]);
     const pageSize = 20;
 
     const fetchData = async (q: ArbitroQueryState, currentPage: number) => {
@@ -42,6 +45,31 @@ export default function useArbitro() {
         fetchData(query, page);
     }, [query, page]);
 
+    useEffect(() => {
+
+        const loadPaises = async () => {
+
+            try {
+                const data = await getPaises();
+
+                setPaises(
+                    Array.isArray(data) ? data : []
+                );
+
+            } catch (error) {
+
+                console.error(error);
+
+                setPaises([]);
+
+            }
+
+        };
+
+        loadPaises();
+
+    }, []);
+
     const handleSearch = (value: string) => {
         setQuery((prev) => ({
             ...prev,
@@ -63,30 +91,21 @@ export default function useArbitro() {
     const arbitroFilters = [
         {
             key: "categoria",
-            placeholder: "Categoría",
-            options: [
-                { value: "FIFA", label: "FIFA" },
-                { value: "Nacional", label: "Nacional" },
-                { value: "Regional", label: "Regional" },
-            ],
+            placeholder: "Selecciona Categoria",
+            options: CATEGORIA_ARBITRO_OPTIONS,
         },
         {
             key: "pais",
-            placeholder: "País",
-            options: [
-                { value: "Perú", label: "Perú" },
-                { value: "Brasil", label: "Brasil" },
-                { value: "Argentina", label: "Argentina" },
-                { value: "Italia", label: "Italia" },
-            ],
+            placeholder: "Selecciona Pais",
+            options: paises.map((p: any) => ({
+                value: p.nombre,
+                label: p.nombre,
+            })),
         },
         {
             key: "estado",
-            placeholder: "Estado",
-            options: [
-                { value: "Activo", label: "Activo" },
-                { value: "Retirado", label: "Retirado" },
-            ],
+            placeholder: "Selecciona  Estadio",
+            options: ESTADO_GENERICO_OPTIONS
         },
     ];
 
@@ -100,7 +119,7 @@ export default function useArbitro() {
 
     };
 
-  const arbitroColumns = [
+    const arbitroColumns = [
         {
             header: "ID",
             accessor: (row: any) => row.id,

@@ -1,7 +1,7 @@
 export const userFilters = [
     {
         key: "estado",
-        placeholder: "Estado",
+        placeholder: "Selecciona Estado",
         options: [
             { label: "Activo", value: "ACTIVO" },
             { label: "Inactivo", value: "INACTIVO" },
@@ -9,7 +9,7 @@ export const userFilters = [
     },
     {
         key: "rol",
-        placeholder: "Rol",
+        placeholder: "Selecciona Rol",
         options: [
             { label: "Admin", value: "admin" },
             { label: "Usuario", value: "user" },

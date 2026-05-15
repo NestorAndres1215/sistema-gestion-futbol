@@ -12,7 +12,8 @@ import useArbitro from "@/features/arbitro/hooks/useArbitro";
 
 export default function ArbitrosListarPage() {
     const router = useRouter();
-    const { query, data, page, totalPages, handleSearch, handleFilter, arbitroFilters, setPage } = useArbitro();
+    const { query, data, page, totalPages, 
+        handleSearch, handleFilter, arbitroFilters, setPage } = useArbitro();
 
     return (
         <AdminLayout>

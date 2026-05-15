@@ -4,6 +4,9 @@ import { getAniosEstadios, getEstadios } from "../services/estadio.service";
 import { useRouter } from "next/navigation";
 import { EstadioQueryState } from "../types/estadioQueryState.types";
 import { stadiumColumns } from "../constants/estadioColumns";
+import { getPaises } from "@/shared/services/paises.service";
+import { ESTADO_ESTADIO_OPTIONS } from "@/shared/constants/estado-estadio.options";
+import { TIPO_CESPED_OPTIONS } from "@/shared/constants/tipo-cesped.options";
 
 export default function useEstadio() {
 
@@ -11,6 +14,7 @@ export default function useEstadio() {
     const [data, setData] = useState<any[]>([]);
     const [anios, setAnios] = useState<number[]>([]);
     const [page, setPage] = useState(1);
+    const [paises, setPaises] = useState<any[]>([]);
     const [totalPages, setTotalPages] = useState(1);
     const pageSize = 15;
 
@@ -24,6 +28,7 @@ export default function useEstadio() {
 
     const fetchEstadios = async (q: EstadioQueryState, currentPage: number) => {
         try {
+            
             const res = await getEstadios({
                 page: currentPage,
                 pageSize,
@@ -35,9 +40,7 @@ export default function useEstadio() {
             });
 
             const lista = res?.items ?? res?.data ?? res;
-
             setData(Array.isArray(lista) ? lista : []);
-
             setTotalPages(res?.totalPages ?? 1);
 
         } catch (error) {
@@ -50,75 +53,60 @@ export default function useEstadio() {
         try {
             const res = await getAniosEstadios();
             const lista = res?.data ?? res;
-
             setAnios(Array.isArray(lista) ? lista : []);
         } catch (error) {
             setAnios([]);
         }
     };
 
+
     useEffect(() => {
-        fetchAnios();
+
+        const loadPaises = async () => {
+            try {
+                const data = await getPaises();
+                setPaises(Array.isArray(data) ? data : []);
+            } catch (error) {
+                setPaises([]);
+            }
+        };
+        loadPaises();
     }, []);
 
-    useEffect(() => {
-        fetchEstadios(query, page);
-    }, [query, page]);
+    useEffect(() => { fetchAnios(); }, []);
+
+    useEffect(() => { fetchEstadios(query, page); }, [query, page]);
 
     const handleSearch = (value: string) => {
-        setQuery((prev) => ({
-            ...prev,
-            search: value,
-        }));
-
+        setQuery((prev) => ({ ...prev, search: value, }));
         setPage(1);
     };
 
     const estadioFilters = [
         {
             key: "estado",
-            placeholder: "Estado",
-            options: [
-                { label: "Disponible", value: "Disponible" },
-                { label: "Mantenimiento", value: "Mantenimiento" },
-                { label: "Suspendido", value: "Suspendido" },
-                { label: "Cerrado", value: "Cerrado" },
-            ],
+            placeholder: "Selecciona Estado",
+            options: ESTADO_ESTADIO_OPTIONS,
         },
         {
             key: "pais",
-            placeholder: "País",
-            options: [
-                { label: "Perú", value: "Perú" },
-                { label: "Brasil", value: "Brasil" },
-                { label: "Argentina", value: "Argentina" },
-            ],
+            placeholder: "Selecciona Pais",
+            options: paises.map((p: any) => ({ value: p.nombre, label: p.nombre, })),
         },
         {
             key: "anio",
-            placeholder: "Año",
-            options: anios.map((a) => ({
-                label: a.toString(),
-                value: a.toString(),
-            })),
+            placeholder: "Selecciona Año",
+            options: anios.map((a) => ({ label: a.toString(), value: a.toString(), })),
         },
         {
             key: "tipoCesped",
-            placeholder: "Tipo de césped",
-            options: [
-                { label: "Natural", value: "Natural" },
-                { label: "Sintético", value: "Sintetico" },
-                { label: "Híbrido", value: "Hibrido" },
-            ],
+            placeholder: "Selecciona Tipo de césped",
+            options: TIPO_CESPED_OPTIONS,
         },
     ];
 
     const handleFilter = (filters: Record<string, any>) => {
-        setQuery((prev) => ({
-            ...prev,
-            ...filters,
-        }));
-
+        setQuery((prev) => ({ ...prev, ...filters, }));
         setPage(1);
     };
 
@@ -128,7 +116,6 @@ export default function useEstadio() {
 
         onEdit: (e: any) =>
             router.push(`/admin/estadios/edicion/${e.id}/editar`),
-
     };
 
     return {

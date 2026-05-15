@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
-
 import { getUsers, updateUserState } from "../services/usuario.service";
 import { userFilters } from "../constants/usuario-filters";
 import { SwalService } from "@/shared/lib/swal/swal.service";

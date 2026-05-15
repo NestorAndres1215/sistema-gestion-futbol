@@ -13,8 +13,7 @@ export default function useArbitroRegistro() {
         { value: "Izquierdo", label: "Izquierdo" },
     ];
 
-    const categorias = ["FIFA", "Nacional", "Regional"];
-    const especialidades = ["Principal", "VAR", "Asistente"];
+
 
     const [form, setForm] = useState({
         nombre: "",
@@ -158,8 +157,7 @@ export default function useArbitroRegistro() {
         piesDominantes,
         ciudades,
         paises,
-        categorias,
-        especialidades,
+
         limpiarFormulario,
         registrarArbitro,
         form,
