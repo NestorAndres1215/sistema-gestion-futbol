@@ -45,9 +45,7 @@ public class ArbitrosRepository : IArbitroRepository
                 a.Persona != null &&
                 (
                     a.Persona.Nombre.Contains(search) ||
-                    a.Persona.ApellidoPaterno.Contains(search) ||
-                    (a.Persona.ApellidoMaterno != null &&
-                     a.Persona.ApellidoMaterno.Contains(search))
+                    a.Persona.Apellido.Contains(search) 
                 )
             );
         }

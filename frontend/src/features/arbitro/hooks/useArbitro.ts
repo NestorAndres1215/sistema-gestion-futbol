@@ -130,7 +130,7 @@ export default function useArbitro() {
         },
         {
             header: "Apellido",
-            accessor: (row: any) => row.persona?.apellidoPaterno,
+            accessor: (row: any) => row.persona?.apellido,
         },
         {
             header: "Categoria",

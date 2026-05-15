@@ -48,23 +48,19 @@ public class PersonasService : IPersonasService
 
     public async Task<Personas?> GetByNombreCompletoAsync(
       string nombre,
-      string apellidoPaterno,
-      string apellidoMaterno
+      string apellido
   )
     {
         if (string.IsNullOrWhiteSpace(nombre))
             throw new BadRequestException("El nombre es obligatorio");
 
-        if (string.IsNullOrWhiteSpace(apellidoPaterno))
+        if (string.IsNullOrWhiteSpace(apellido))
             throw new BadRequestException("El apellido paterno es obligatorio");
 
-        if (string.IsNullOrWhiteSpace(apellidoMaterno))
-            throw new BadRequestException("El apellido materno es obligatorio");
 
         return await _repo.GetByNombreCompletoAsync(
             nombre,
-            apellidoPaterno,
-            apellidoMaterno
+            apellido
         );
     }
 

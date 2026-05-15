@@ -13,27 +13,18 @@ export default function useArbitroRegistro() {
         { value: "Izquierdo", label: "Izquierdo" },
     ];
 
-
-
     const [form, setForm] = useState({
         nombre: "",
-        apellidoPaterno: "",
-        apellidoMaterno: "",
+        apellido: "",
         fechaNacimiento: "",
         paisNacimiento: "",
         ciudadNacimiento: "",
-        alturaCm: "",
-        pesoKg: "",
-        pieDominante: "",
         categoria: "",
-        especialidad: "",
+        rolArbitral: "",
         fechaDebut: "",
-        fechaRetiro: "",
-        anosExperiencia: "",
         nivel: "",
         reputacion: "",
     });
-
 
     const [paises, setPaises] = useState<any[]>([]);
     const [ciudades, setCiudades] = useState<any[]>([]);
@@ -50,8 +41,6 @@ export default function useArbitroRegistro() {
                 );
 
             } catch (error) {
-
-                console.error(error);
 
                 setPaises([]);
 
@@ -102,19 +91,13 @@ export default function useArbitroRegistro() {
     const limpiarFormulario = () => {
         setForm({
             nombre: "",
-            apellidoPaterno: "",
-            apellidoMaterno: "",
+            apellido: "",
             fechaNacimiento: "",
             paisNacimiento: "",
             ciudadNacimiento: "",
-            alturaCm: "",
-            pesoKg: "",
-            pieDominante: "",
             categoria: "",
-            especialidad: "",
+            rolArbitral: "",
             fechaDebut: "",
-            fechaRetiro: "",
-            anosExperiencia: "",
             nivel: "",
             reputacion: "",
         });
@@ -140,6 +123,7 @@ export default function useArbitroRegistro() {
 
     const registrarArbitro = async () => {
         try {
+            console.log(form)
             const fd = arbitroToFormData(form, foto);
 
             await addArbitro(fd);

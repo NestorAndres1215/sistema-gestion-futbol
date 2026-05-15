@@ -39,15 +39,14 @@ public class PersonasRepository : IPersonasRepository
 
     public async Task<Personas?> GetByNombreCompletoAsync(
        string nombre,
-       string apellidoPaterno,
-       string apellidoMaterno
+       string apellido
+       
    )
     {
         return await _context.Personas
             .FirstOrDefaultAsync(p =>
                 p.Nombre == nombre &&
-                p.ApellidoPaterno == apellidoPaterno &&
-                p.ApellidoMaterno == apellidoMaterno
+                p.Apellido == apellido 
             );
     }
 

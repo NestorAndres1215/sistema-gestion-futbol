@@ -14,7 +14,6 @@ public interface IPersonasRepository
     Task<Personas?> GetByNombreAsync(string nombre);
     Task<Personas?> GetByNombreCompletoAsync(
         string nombre,
-        string apellidoPaterno,
-        string apellidoMaterno
+        string apellido
     );
 }

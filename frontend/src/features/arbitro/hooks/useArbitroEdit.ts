@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { getArbitroById, updateArbitro } from "../services/arbitro.service";
 import { formatDateInput } from "@/shared/utils/date.utils";
 import { SwalService } from "@/shared/lib/swal/swal.service";
+import { getCiudadesByPais } from "@/shared/services/ciudad.service";
+import { getPaises } from "@/shared/services/paises.service";
 
 export default function useArbitroEdit() {
   const params = useParams();
@@ -15,16 +17,17 @@ export default function useArbitroEdit() {
 
   const [form, setForm] = useState({
     nombre: "",
-    apellidoPaterno: "",
-    apellidoMaterno: "",
+    apellido: "",
+
     fechaNacimiento: "",
     paisNacimiento: "",
     ciudadNacimiento: "",
-    alturaCm: "",
-    pesoKg: "",
-    pieDominante: "",
+    partidosDirigidos: "",
+    precisionDecisiones: "",
+    tarjetasAmarillas: "",
+    tarjetasRojas: "",
     categoria: "",
-    especialidad: "",
+    rolArbitral: "",
     fechaDebut: "",
     fechaRetiro: "",
     anosExperiencia: "",
@@ -46,18 +49,19 @@ export default function useArbitroEdit() {
         const res = await getArbitroById(Number(id));
         if (!res) return;
         const persona = res.persona;
+        console.log(res)
         setForm({
           nombre: persona.nombre ?? "",
-          apellidoPaterno: persona.apellidoPaterno ?? "",
-          apellidoMaterno: persona.apellidoMaterno ?? "",
+          apellido: persona.apellido ?? "",
           fechaNacimiento: formatDateInput(persona.fechaNacimiento),
           paisNacimiento: persona.paisNacimiento.nombre ?? "",
           ciudadNacimiento: persona.ciudadNacimiento?.nombre ?? "",
-          alturaCm: persona.alturaCm?.toString() ?? "",
-          pesoKg: persona.pesoKg?.toString() ?? "",
-          pieDominante: persona.pieDominante ?? "",
+          partidosDirigidos:res.partidosDirigidos ?? "",
+          precisionDecisiones: res.precisionDecisiones ?? "",
+          tarjetasAmarillas:res.tarjetasAmarrillas ?? "", 
+          tarjetasRojas: res.tarjetasRojas??"",
           categoria: res.categoria ?? "",
-          especialidad: res.especialidad ?? "",
+          rolArbitral: res.rolArbitral ?? "",
           fechaDebut: formatDateInput(res.fechaDebut),
           fechaRetiro: res.fechaRetiro ?? "",
           anosExperiencia: res.anosExperiencia ?? "",
@@ -103,7 +107,47 @@ export default function useArbitroEdit() {
 
     return formData;
   };
+  const [paises, setPaises] = useState<any[]>([]);
+  const [ciudades, setCiudades] = useState<any[]>([]);
 
+  useEffect(() => {
+
+    const loadPaises = async () => {
+
+      try {
+
+        const data = await getPaises();
+        setPaises(Array.isArray(data) ? data : []);
+
+      } catch (error) {
+        setPaises([]);
+      }
+
+    };
+
+    loadPaises();
+
+  }, []);
+
+  useEffect(() => {
+    const loadCiudades = async () => {
+      if (!form.paisNacimiento) {
+        setCiudades([]);
+        return;
+      }
+
+      try {
+        const data = await getCiudadesByPais(form.paisNacimiento);
+        setCiudades(Array.isArray(data) ? data : []);
+
+      } catch (error) {
+        setCiudades([]);
+      }
+    };
+
+    loadCiudades();
+
+  }, [form.paisNacimiento]);
   const actualizarArbitro = async () => {
     try {
 
@@ -120,10 +164,12 @@ export default function useArbitroEdit() {
       SwalService.error(error.message);
     }
   }
+
+
   return {
     form,
     foto,
-    fotoPreview,
+    fotoPreview, paises, ciudades,
     handleFotoChange,
     handleChange,
     loading,

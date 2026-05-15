@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { getEntrenadorById, updateEntrenador } from "../services/entrenador.service";
 import { SwalService } from "@/shared/lib/swal/swal.service";
 import { formatDateInput } from "@/shared/utils/date.utils";
+import { getCiudadesByPais } from "@/shared/services/ciudad.service";
+import { getPaises } from "@/shared/services/paises.service";
 
 export default function useEntrenadorEdit() {
 
@@ -32,7 +34,47 @@ export default function useEntrenadorEdit() {
   const [loading, setLoading] = useState(true);
   const [foto, setFoto] = useState<File | null>(null);
   const [fotoPreview, setFotoPreview] = useState<string | null>(null);
+ const [paises, setPaises] = useState<any[]>([]);
+    const [ciudades, setCiudades] = useState<any[]>([]);
 
+    useEffect(() => {
+
+        const loadPaises = async () => {
+
+            try {
+
+                const data = await getPaises();
+                setPaises(Array.isArray(data) ? data : []);
+
+            } catch (error) {
+                setPaises([]);
+            }
+
+        };
+
+        loadPaises();
+
+    }, []);
+
+    useEffect(() => {
+        const loadCiudades = async () => {
+            if (!form.paisNacimiento) {
+                setCiudades([]);
+                return;
+            }
+
+            try {
+                const data = await getCiudadesByPais(form.paisNacimiento);
+                setCiudades(Array.isArray(data) ? data : []);
+
+            } catch (error) {
+                setCiudades([]);
+            }
+        };
+
+        loadCiudades();
+
+    }, [form.paisNacimiento]);
   useEffect(() => {
 
     const fetchEntrenador = async () => {
@@ -129,7 +171,7 @@ export default function useEntrenadorEdit() {
     form,
     loading,
     foto,
-    fotoPreview,
+    fotoPreview,paises, ciudades,
     handleChange,
     handleFotoChange,
     actualizarEntrenador

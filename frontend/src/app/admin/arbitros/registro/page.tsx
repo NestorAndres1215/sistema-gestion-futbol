@@ -44,69 +44,58 @@ export default function ArbitroRegistro() {
                 </div>
 
                 <form noValidate className={styles.form}>
-
-                    <div className="d-flex flex-column gap-2 w-100">
-                        <label className={styles.label}>Nombre</label>
-                        <div className={styles.inputWrap}>
-                            <input
-                                type="text"
-                                placeholder="Nombre del árbitro"
-                                className={styles.input}
-                                value={form.nombre}
-                                onChange={(e) =>
-                                    handleChange("nombre", e.target.value)}
-                            />
-                        </div>
-                    </div>
-
                     <div className="row g-3">
-
                         <div className="col-12 col-md-6">
                             <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Apellido Paterno</label>
+                                <label className={styles.label}>Nombre</label>
                                 <div className={styles.inputWrap}>
                                     <input
                                         type="text"
-                                        placeholder="Apellido paterno"
+                                        placeholder="Nombre del árbitro"
                                         className={styles.input}
-                                        value={form.apellidoPaterno}
-                                        onChange={(e) => handleChange("apellidoPaterno", e.target.value)}
+                                        value={form.nombre}
+                                        onChange={(e) => handleChange("nombre", e.target.value)}
+                                    />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div className="col-12 col-md-6">
+                            <div className="d-flex flex-column gap-2 w-100">
+                                <label className={styles.label}>Apellido </label>
+                                <div className={styles.inputWrap}>
+                                    <input
+                                        type="text"
+                                        placeholder="Apellido"
+                                        className={styles.input}
+                                        value={form.apellido}
+                                        onChange={(e) => handleChange("apellido", e.target.value)}
                                     />
                                 </div>
                             </div>
                         </div>
 
-                        <div className="col-12 col-md-6">
+
+                    </div>
+
+
+
+                    <div className="row g-3">
+                        <div className="col-12 col-md-4">
                             <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Apellido Materno</label>
+                                <label className={styles.label}>Fecha Nacimiento</label>
                                 <div className={styles.inputWrap}>
                                     <input
-                                        type="text"
-                                        placeholder="Apellido materno"
+                                        type="date"
                                         className={styles.input}
-                                        value={form.apellidoMaterno}
-                                        onChange={(e) => handleChange("apellidoMaterno", e.target.value)}
+                                        value={form.fechaNacimiento}
+                                        onChange={(e) => handleChange("fechaNacimiento", e.target.value)}
                                     />
                                 </div>
                             </div>
+
                         </div>
-
-                    </div>
-
-                    <div className="d-flex flex-column gap-2 w-100">
-                        <label className={styles.label}>Fecha Nacimiento</label>
-                        <div className={styles.inputWrap}>
-                            <input
-                                type="date"
-                                className={styles.input}
-                                value={form.fechaNacimiento}
-                                onChange={(e) => handleChange("fechaNacimiento", e.target.value)}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="row g-3">
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-4">
                             <div className="d-flex flex-column gap-2 w-100">
 
                                 <label className={styles.label}>
@@ -136,7 +125,7 @@ export default function ArbitroRegistro() {
                             </div>
                         </div>
 
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-4">
                             <div className="d-flex flex-column gap-2 w-100">
 
                                 <label className={styles.label}>
@@ -148,9 +137,7 @@ export default function ArbitroRegistro() {
                                     <select
                                         className={styles.input}
                                         value={form.ciudadNacimiento}
-                                        onChange={(e) =>
-                                            handleChange("ciudadNacimiento", e.target.value)
-                                        }
+                                        onChange={(e) => handleChange("ciudadNacimiento", e.target.value)}
                                         disabled={!form.paisNacimiento}
                                     >
                                         <option value="">
@@ -158,10 +145,7 @@ export default function ArbitroRegistro() {
                                         </option>
 
                                         {ciudades.map((ciudad) => (
-                                            <option
-                                                key={ciudad.id}
-                                                value={ciudad.nombre}
-                                            >
+                                            <option key={ciudad.id} value={ciudad.nombre}   >
                                                 {ciudad.nombre}
                                             </option>
                                         ))}
@@ -171,36 +155,7 @@ export default function ArbitroRegistro() {
                                 </div>
                             </div>
                         </div>
-                        {/* ALTURA - PESO */}
-                        <div className="col-12 col-md-6">
-                            <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Altura</label>
-                                <div className={styles.inputWrap}>
-                                    <input
-                                        type="number"
-                                        placeholder="Altura en cm"
-                                        className={styles.input}
-                                        value={form.alturaCm}
-                                        onChange={(e) => handleChange("alturaCm", e.target.value)}
-                                    />
-                                </div>
-                            </div>
-                        </div>
 
-                        <div className="col-12 col-md-6">
-                            <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Peso</label>
-                                <div className={styles.inputWrap}>
-                                    <input
-                                        type="number"
-                                        placeholder="Peso en kg"
-                                        className={styles.input}
-                                        value={form.pesoKg}
-                                        onChange={(e) => handleChange("pesoKg", e.target.value)}
-                                    />
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
 
@@ -209,20 +164,14 @@ export default function ArbitroRegistro() {
                         {/* PIE DOMINANTE */}
                         <div className="col-12 col-md-4">
                             <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Pie Dominante</label>
-
+                                <label className={styles.label}>Fecha Debut</label>
                                 <div className={styles.inputWrap}>
-                                    <select
+                                    <input
+                                        type="date"
                                         className={styles.input}
-                                        value={form.pieDominante}
-                                        onChange={(e) => handleChange("pieDominante", e.target.value)}
-                                    >
-                                        {PIE_DOMINANTE_OPTIONS.map((item) => (
-                                            <option key={item.value} value={item.value}>
-                                                {item.label}
-                                            </option>
-                                        ))}
-                                    </select>
+                                        value={form.fechaDebut}
+                                        onChange={(e) => handleChange("fechaDebut", e.target.value)}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -256,8 +205,8 @@ export default function ArbitroRegistro() {
                                 <div className={styles.inputWrap}>
                                     <select
                                         className={styles.input}
-                                        value={form.especialidad}
-                                        onChange={(e) => handleChange("especialidad", e.target.value)}
+                                        value={form.rolArbitral}
+                                        onChange={(e) => handleChange("rolArbitral", e.target.value)}
                                     >
                                         <option value="">Selecciona especialidad</option>
                                         {ESPECIALIDAD_ARBITRO_OPTIONS.map((item) => (
@@ -273,35 +222,11 @@ export default function ArbitroRegistro() {
                     </div>
 
 
-                    <div className="d-flex flex-column gap-2 w-100">
-                        <label className={styles.label}>Fecha Debut</label>
-                        <div className={styles.inputWrap}>
-                            <input
-                                type="date"
-                                className={styles.input}
-                                value={form.fechaDebut}
-                                onChange={(e) => handleChange("fechaDebut", e.target.value)}
-                            />
-                        </div>
-                    </div>
+
                     <div className="row g-3">
 
-                        <div className="col-12 col-md-4">
-                            <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Años Experiencia</label>
-                                <div className={styles.inputWrap}>
-                                    <input
-                                        type="number"
-                                        placeholder="Años dirigiendo"
-                                        className={styles.input}
-                                        value={form.anosExperiencia}
-                                        onChange={(e) => handleChange("anosExperiencia", e.target.value)}
-                                    />
-                                </div>
-                            </div>
-                        </div>
 
-                        <div className="col-12 col-md-4">
+                        <div className="col-12 col-md-6">
                             <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Nivel</label>
                                 <div className={styles.inputWrap}>
@@ -316,7 +241,7 @@ export default function ArbitroRegistro() {
                             </div>
                         </div>
 
-                        <div className="col-12 col-md-4">
+                        <div className="col-12 col-md-6">
                             <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Reputación</label>
                                 <div className={styles.inputWrap}>

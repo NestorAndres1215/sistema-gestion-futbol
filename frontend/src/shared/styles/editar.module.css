@@ -142,7 +142,28 @@
   background: rgba(110, 231, 183, 0.15);
   border-color: rgba(110, 231, 183, 0.4);
 }
+.input[type="select"],
+select.input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 38px;
+  cursor: pointer;
+}
 
+select.input option {
+  background: #1a1e28;
+  color: #f0f4f8;
+}
+
+select.input option:disabled {
+  color: #2d3748;
+}
+.inputWrap:focus-within select.input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236ee7b7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
 @media (max-width: 768px) {
   .layout {
     grid-template-columns: 1fr;

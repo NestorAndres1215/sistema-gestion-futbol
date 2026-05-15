@@ -2,7 +2,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { getArbitroById } from "../services/arbitro.service";
 
-type Arbitro = any; // ideal: reemplazar por tu tipo real
+type Arbitro = any;
 
 export default function useArbitroDetail() {
     const params = useParams();
@@ -87,7 +87,7 @@ export default function useArbitroDetail() {
         return [
             {
                 label: "Nombre Completo",
-                value: `${persona?.nombre ?? ""} ${persona?.apellidoPaterno ?? ""} ${persona?.apellidoMaterno ?? ""}`.trim(),
+                value: `${persona?.nombre ?? ""} ${persona?.apellido ?? ""} `.trim(),
             },
             ...items,
         ];

@@ -13,7 +13,6 @@ public interface IPersonasService
 
     Task<Personas?> GetByNombreCompletoAsync(
         string nombre,
-        string apellidoPaterno,
-        string apellidoMaterno
+        string apellido
     );
 }

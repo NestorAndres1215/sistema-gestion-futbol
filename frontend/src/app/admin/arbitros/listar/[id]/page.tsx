@@ -21,7 +21,7 @@ export default function ArbitroDetallePage() {
             {
                 arbitro && (
                     <DetailCard
-                        title={`${arbitro.persona.nombre} ${arbitro.persona.apellidoPaterno}`}
+                        title={`${arbitro.persona.nombre} ${arbitro.persona.apellido}`}
                         image={`https://localhost:7269${arbitro.persona.fotoUrl}`}
                         items={items}
                     />

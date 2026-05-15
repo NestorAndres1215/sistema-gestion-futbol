@@ -45,11 +45,7 @@ public class EntrenadoresRepository : IEntrenadoresRepository
                 e.Persona != null &&
                 (
                     e.Persona.Nombre.Contains(search) ||
-                    e.Persona.ApellidoPaterno.Contains(search) ||
-                    (
-                        e.Persona.ApellidoMaterno != null &&
-                        e.Persona.ApellidoMaterno.Contains(search)
-                    )
+                    e.Persona.Apellido.Contains(search) 
                 )
             );
         }

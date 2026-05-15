@@ -3,12 +3,13 @@ import useArbitroEdit from "@/features/arbitro/hooks/useArbitroEdit";
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import ActionButton from "@/shared/components/ui/button/button";
+import { ESPECIALIDAD_ARBITRO_OPTIONS } from "@/shared/constants/especialidad-arbitro.options";
 import styles from "@/shared/styles/editar.module.css";
 import { useRouter } from "next/navigation";
 export default function ArbitrosEditar() {
 
     const router = useRouter();
-    const { foto, form,
+    const { foto, form, paises, ciudades,
         fotoPreview, handleChange, actualizarArbitro,
         handleFotoChange, } = useArbitroEdit();
     return (
@@ -81,7 +82,7 @@ export default function ArbitrosEditar() {
                                     <label className={styles.label}>Apellido Paterno</label>
                                     <div className={styles.inputWrap}>
                                         <input
-                                            value={form.apellidoPaterno}
+                                            value={form.apellido}
                                             onChange={(e) => handleChange("apellidoPaterno", e.target.value)}
                                             className={styles.input}
                                         />
@@ -91,22 +92,7 @@ export default function ArbitrosEditar() {
 
                         </div>
 
-                        {/* APELLIDO MATERNO + FECHA NACIMIENTO */}
                         <div className="row g-3">
-
-                            <div className="col-12 col-md-6">
-                                <div className={styles.field}>
-                                    <label className={styles.label}>Apellido Materno</label>
-                                    <div className={styles.inputWrap}>
-                                        <input
-                                            value={form.apellidoMaterno}
-                                            onChange={(e) => handleChange("apellidoMaterno", e.target.value)}
-                                            className={styles.input}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
                             <div className="col-12 col-md-6">
                                 <div className={styles.field}>
                                     <label className={styles.label}>Fecha Nacimiento</label>
@@ -120,7 +106,19 @@ export default function ArbitrosEditar() {
                                     </div>
                                 </div>
                             </div>
-
+                            <div className="col-12 col-md-6">
+                                <div className={styles.field}>
+                                    <label className={styles.label}>Fecha Debut</label>
+                                    <div className={styles.inputWrap}>
+                                        <input
+                                            type="date"
+                                            value={form.fechaDebut}
+                                            onChange={(e) => handleChange("fechaDebut", e.target.value)}
+                                            className={styles.input}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         {/* PAÍS + CIUDAD */}
@@ -130,11 +128,19 @@ export default function ArbitrosEditar() {
                                 <div className={styles.field}>
                                     <label className={styles.label}>País</label>
                                     <div className={styles.inputWrap}>
-                                        <input
+                                        <select
+                                            className={styles.input}
                                             value={form.paisNacimiento}
                                             onChange={(e) => handleChange("paisNacimiento", e.target.value)}
-                                            className={styles.input}
-                                        />
+                                        >
+                                            <option value="">Seleccione un país</option>
+
+                                            {paises.map((pais) => (
+                                                <option key={pais.id} value={pais.nombre}>
+                                                    {pais.nombre}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -142,12 +148,23 @@ export default function ArbitrosEditar() {
                             <div className="col-12 col-md-6">
                                 <div className={styles.field}>
                                     <label className={styles.label}>Ciudad</label>
+
                                     <div className={styles.inputWrap}>
-                                        <input
-                                            value={form.ciudadNacimiento}
-                                            onChange={(e) => handleChange("ciudadNacimiento", e.target.value)}
+                                        <select
                                             className={styles.input}
-                                        />
+                                            value={form.ciudadNacimiento}
+                                            onChange={(e) =>
+                                                handleChange("ciudadNacimiento", e.target.value)
+                                            }
+                                        >
+                                            <option value="">Seleccione una ciudad</option>
+
+                                            {ciudades.map((ciudad) => (
+                                                <option key={ciudad.id} value={ciudad.nombre}>
+                                                    {ciudad.nombre}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -174,11 +191,18 @@ export default function ArbitrosEditar() {
                                 <div className={styles.field}>
                                     <label className={styles.label}>Especialidad</label>
                                     <div className={styles.inputWrap}>
-                                        <input
-                                            value={form.especialidad}
-                                            onChange={(e) => handleChange("especialidad", e.target.value)}
+                                        <select
                                             className={styles.input}
-                                        />
+                                            value={form.rolArbitral}
+                                            onChange={(e) => handleChange("rolArbitral", e.target.value)}
+                                        >
+                                            <option value="">Selecciona especialidad</option>
+                                            {ESPECIALIDAD_ARBITRO_OPTIONS.map((item) => (
+                                                <option key={item.value} value={item.value}>
+                                                    {item.label}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -188,70 +212,77 @@ export default function ArbitrosEditar() {
                         {/* EXPERIENCIA + NIVEL */}
                         <div className="row g-3">
 
-                            <div className="col-12 col-md-6">
-                                <div className={styles.field}>
-                                    <label className={styles.label}>Años de Experiencia</label>
-                                    <div className={styles.inputWrap}>
-                                        <input
-                                            type="number"
-                                            value={form.anosExperiencia}
-                                            onChange={(e) => handleChange("anosExperiencia", e.target.value)}
-                                            className={styles.input}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-12 col-md-6">
+                            <div className="col-12 col-md-4">
                                 <div className={styles.field}>
                                     <label className={styles.label}>Nivel</label>
+
                                     <div className={styles.inputWrap}>
-                                        <input
-                                            type="number"
-                                            value={form.nivel}
-                                            onChange={(e) => handleChange("nivel", e.target.value)}
+                                        <select
                                             className={styles.input}
-                                        />
+                                            value={form.nivel}
+                                            onChange={(e) =>
+                                                handleChange("nivel", Number(e.target.value))
+                                            }
+                                        >
+                                            <option value="">Seleccione nivel</option>
+
+                                            {Array.from({ length: 21 }, (_, i) => i * 5).map((val) => (
+                                                <option key={val} value={val}>
+                                                    {val}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-
-                        {/* REPUTACIÓN + FECHA DEBUT */}
-                        <div className="row g-3">
-
-                            <div className="col-12 col-md-6">
+                            <div className="col-12 col-md-4">
                                 <div className={styles.field}>
                                     <label className={styles.label}>Reputación</label>
+
                                     <div className={styles.inputWrap}>
-                                        <input
-                                            type="number"
+                                        <select
+                                            className={styles.input}
                                             value={form.reputacion}
-                                            onChange={(e) => handleChange("reputacion", e.target.value)}
-                                            className={styles.input}
-                                        />
+                                            onChange={(e) =>
+                                                handleChange("reputacion", Number(e.target.value))
+                                            }
+                                        >
+                                            <option value="">Seleccione reputación</option>
+
+                                            {Array.from({ length: 21 }, (_, i) => i * 5).map((val) => (
+                                                <option key={val} value={val}>
+                                                    {val}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="col-12 col-md-6">
+                            <div className="col-12 col-md-4">
                                 <div className={styles.field}>
-                                    <label className={styles.label}>Fecha Debut</label>
+                                    <label className={styles.label}>Precision Decisiones</label>
+
                                     <div className={styles.inputWrap}>
-                                        <input
-                                            type="date"
-                                            value={form.fechaDebut}
-                                            onChange={(e) => handleChange("fechaDebut", e.target.value)}
+                                        <select
                                             className={styles.input}
-                                        />
+                                            value={form.precisionDecisiones}
+                                            onChange={(e) =>
+                                                handleChange("precisionDecisiones", Number(e.target.value))
+                                            }
+                                        >
+                                            <option value="">Seleccione precision decisiones</option>
+
+                                            {Array.from({ length: 21 }, (_, i) => i * 5).map((val) => (
+                                                <option key={val} value={val}>
+                                                    {val}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
-                        {/* BOTONES */}
                         <div className="row g-2 mt-3">
 
                             <div className="col-12 col-sm-6">

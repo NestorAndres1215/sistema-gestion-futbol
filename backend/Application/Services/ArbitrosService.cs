@@ -109,8 +109,13 @@ public class ArbitrosService : IArbitrosService
             ?? throw new NotFoundException("La ciudad no existe");
 
 
-        if (dto.Foto != null)
+        if (dto.Foto != null && dto.Foto.Length > 0)
+        {
+            if (!string.IsNullOrEmpty(persona.FotoUrl))
+                EliminarFoto(persona.FotoUrl);
+
             persona.FotoUrl = await GuardarFotoAsync(dto);
+        }
 
 
         persona.Nombre = dto.Nombre;
@@ -138,7 +143,20 @@ public class ArbitrosService : IArbitrosService
 
         return arbitro;
     }
+    private void EliminarFoto(string fotoUrl)
+    {
+        if (string.IsNullOrEmpty(fotoUrl))
+            return;
 
+        var rutaFisica = Path.Combine(
+            Directory.GetCurrentDirectory(),
+            "wwwroot",
+            fotoUrl.TrimStart('/')
+        );
+
+        if (File.Exists(rutaFisica))
+            File.Delete(rutaFisica);
+    }
     private int CalcularAnosExperiencia(DateTime? fechaDebut)
     {
         if (!fechaDebut.HasValue)
@@ -156,7 +174,7 @@ public class ArbitrosService : IArbitrosService
     }
     private async Task<string> GuardarFotoAsync(ArbitrosDto arbitros)
     {
-        if (arbitros.Foto == null)
+        if (arbitros.Foto == null || arbitros.Foto.Length == 0)
             return "";
 
         var carpeta = Path.Combine(
@@ -176,8 +194,7 @@ public class ArbitrosService : IArbitrosService
             .Replace("\\", "")
             .ToLower();
 
-        var nombreArchivo =
-            $"{nombreBase}_{Guid.NewGuid()}{extension}";
+        var nombreArchivo = $"{nombreBase}_{Guid.NewGuid()}{extension}";
 
         var rutaCompleta = Path.Combine(carpeta, nombreArchivo);
 
@@ -187,8 +204,8 @@ public class ArbitrosService : IArbitrosService
         }
 
         return $"/uploads/arbitros/{nombreArchivo}";
-
     }
+
     private void ValidarDto(ArbitrosDto dto)
     {
         if (dto is null)

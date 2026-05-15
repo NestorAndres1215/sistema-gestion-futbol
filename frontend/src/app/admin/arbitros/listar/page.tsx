@@ -39,7 +39,7 @@ export default function ArbitrosListarPage() {
                 <CardList
                     data={data}
                     getTitle={(e) =>
-                        `${e.persona.nombre} ${e.persona.apellidoPaterno}`
+                        `${e.persona.nombre} ${e.persona.apellido}`
                     }
                     getSubtitle={(e) =>
                         `${e.persona.ciudadNacimiento?.nombre ?? "Sin ciudad"} - ${e.persona.paisNacimiento?.nombre ?? "Sin país"}`
