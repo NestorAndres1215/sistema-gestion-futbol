@@ -54,7 +54,7 @@ builder.Services.AddScoped<IPaisesRepository, PaisesRepository>();
 builder.Services.AddScoped<IPersonasRepository, PersonasRepository>();
 builder.Services.AddScoped<IArbitroRepository,ArbitrosRepository>();
 builder.Services.AddScoped<IEntrenadoresRepository, EntrenadoresRepository>();
-
+builder.Services.AddScoped<IParametrosSistemaRepository, ParametrosSistemaRepository>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
@@ -66,7 +66,7 @@ builder.Services.AddScoped<IPaisesService,PaisesService>();
 builder.Services.AddScoped<IPersonasService, PersonasService>();
 builder.Services.AddScoped<IArbitrosService,ArbitrosService>();
 builder.Services.AddScoped<IEntrenadoresService, EntrenadoresService>();
-
+builder.Services.AddScoped<IParametrosSistemaService, ParametrosSistemaService>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 builder.Services.AddEndpointsApiExplorer();

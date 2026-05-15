@@ -1,10 +1,7 @@
 ﻿using Application.Dto;
 using Application.Interfaces.Services;
-using Application.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 
 
 namespace FootballManagerSystem.API.Controllers;
@@ -34,7 +31,8 @@ public class AuthController : ControllerBase
             id = user.Id,
             email = user.Email,
             role = user.Rol,
-            nombre = user.Username
+            nombre = user.Username,
+            password=user.Password
         });
     }
 
@@ -58,6 +56,16 @@ public class AuthController : ControllerBase
     public async Task<IActionResult> Login(LoginDto dto)
     {
         var result = await _auth.Login(dto);
+        return Ok(result);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdatePassword(
+        int id,
+        [FromBody] PasswordDto dto)
+    {
+        var result = await _auth.UpsatePassword(id, dto);
+
         return Ok(result);
     }
 }

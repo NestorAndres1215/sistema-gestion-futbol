@@ -125,4 +125,38 @@ public class AuthService : IAuthService
 
         return await _repo.GetByIdAsync(userId);
     }
+
+    public async Task<Usuario> UpsatePassword(int id, PasswordDto dto)
+    {
+        var entity = await _repo.GetByIdAsync(id)
+            ?? throw new NotFoundException("Usuario no encontrado");
+
+        var passwordActualCorrecta = _hasher.Verify(
+            dto.PasswordActual,
+            entity.Password
+        );
+
+        if (!passwordActualCorrecta)
+            throw new BadRequestException(
+                "La contraseña actual es incorrecta"
+            );
+
+        if (dto.PasswordActual == dto.PasswordNueva)
+            throw new BadRequestException(
+                "La nueva contraseña no puede ser igual a la actual"
+            );
+
+        if (dto.PasswordNueva != dto.PasswordConfirmacion)
+            throw new BadRequestException(
+                "La confirmación de contraseña no coincide"
+            );
+
+        ValidatePassword(dto.PasswordNueva);
+
+        entity.Password = _hasher.Hash(dto.PasswordNueva);
+
+        await _repo.UpdateAsync(entity);
+
+        return entity;
+    }
 }
