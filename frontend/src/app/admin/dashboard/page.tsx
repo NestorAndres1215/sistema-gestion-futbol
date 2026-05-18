@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { authGuard } from "@/features/auth/guards/token.guard";
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import styles from "./dashboard-admin.module.css";
+import DashboardCard from "@/shared/components/charts/dashboard-card/dashboard-card";
 
 const METRICS = [
   { label: "Jugadores registrados", value: "247", delta: "+12 este mes", up: true, icon: "fa-solid fa-futbol", color: "green" },
@@ -70,29 +71,33 @@ export default function DashboardPage() {
     <AdminLayout pageTitle="Dashboard" pageSubtitle="Temporada 2025 / 2026">
       <div className="d-flex flex-column gap-3">
 
-        <section className="row g-3">
-          {METRICS.map((m) => (
-            <div key={m.label} className="col-12 col-sm-6 col-lg-3">
-              <div className={`${styles.metricCard} ${styles[m.color]}`}>
-
-                <div className="d-flex align-items-start justify-content-between mb-3">
-                  <span className={styles.metricLabel}>{m.label}</span>
-                  <div className={styles.metricIconWrap}>
-                    <i className={m.icon} />
-                  </div>
-                </div>
-
-                <div className={styles.metricValue}>{m.value}</div>
-
-                <div className={`${styles.metricDelta} ${m.up ? styles.deltaUp : styles.deltaDown}`}>
-                  <i className={`fa-solid ${m.up ? "fa-arrow-up" : "fa-arrow-down"}`} />
-                  {m.delta}
-                </div>
-
-              </div>
+     <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+          <div className="row g-3 mb-4">
+            <div className="col-12 col-md-6 col-lg-4">
+              <DashboardCard
+                title="Total Estadios"
+                value={12}
+                icon="fas fa-futbol"
+              />
             </div>
-          ))}
-        </section>
+
+            <div className="col-12 col-md-6 col-lg-4">
+              <DashboardCard
+                title="Países"
+                value={12}
+                icon="fas fa-globe-americas"
+              />
+            </div>
+
+            <div className="col-12 col-md-6 col-lg-4">
+              <DashboardCard
+                title="Promedio"
+                value={12}
+                icon="fas fa-chart-bar"
+              />
+            </div>
+          </div>
+        </div>
 
         <section className="row g-3">
 

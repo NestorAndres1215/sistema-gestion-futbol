@@ -1,6 +1,5 @@
 "use client";
 
-//import styles from "./custom-line-chart.module.css";
 import styles from "@/shared/styles/chart.module.css";
 import {
   ResponsiveContainer,

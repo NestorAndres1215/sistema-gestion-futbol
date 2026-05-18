@@ -39,8 +39,6 @@ export default function LoginPage() {
 
     return (
 
-
-
         <div className={styles.page}>
 
             <div className="d-flex align-items-center gap-3 mb-4">

@@ -1,21 +1,10 @@
 "use client";
 
 import DashboardCard from "@/shared/components/charts/dashboard-card/dashboard-card";
-
 import CustomBarChart from "@/shared/components/charts/custom-bart-chart/custom-bar-chart";
-
 import CustomPieChart from "@/shared/components/charts/custom-pie-chart/custom-pie-chart";
-
 import CustomLineChart from "@/shared/components/charts/custom-line-chart/custom-line-chart";
-
 import CustomAreaChart from "@/shared/components/charts/custom-area-chart/custom-area-chart";
-
-import CustomRadarChart from "@/shared/components/charts/custom-radar-chart/custom-radar-chart";
-
-import CustomScatterChart from "@/shared/components/charts/custom-scatter-chart/custom-scatter-chart";
-
-import CustomComposedChart from "@/shared/components/charts/custom-composed-chart/custom-composed-chart";
-
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import TeamStatusCard from "@/shared/components/charts/custom-team-status-card/custom-team-status-card";
 import useEstadioEstadisticas from "@/features/estadio/hooks/useEstadioEstadisticas";
