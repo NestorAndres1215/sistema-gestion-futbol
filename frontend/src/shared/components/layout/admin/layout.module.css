@@ -150,11 +150,6 @@
     justify-content: center;
 }
 
-.navIcon svg {
-    width: 16px;
-    height: 16px;
-}
-
 .navItemActive .navIcon {
     opacity: 1;
 }
@@ -181,20 +176,17 @@
   top: 0;
   left: var(--sidebar-w);
   right: 0;
-
   height: var(--topbar-h);
   z-index: 999;
-
   background: rgba(19, 22, 30, 0.95);
   backdrop-filter: blur(12px);
-
   border-bottom: 1px solid var(--border);
-
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 28px;
 }
+
 .pageTitle {
     font-family: var(--font-head);
     font-weight: 700;
@@ -217,49 +209,6 @@
     gap: 10px;
 }
 
-.searchBox {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--surface2);
-    border: 1px solid var(--border2);
-    border-radius: 8px;
-    padding: 0 12px;
-    height: 34px;
-    width: 200px;
-    transition: border-color var(--trans);
-}
-
-.searchBox:focus-within {
-    border-color: var(--accent);
-}
-
-.searchIcon {
-    display: flex;
-    align-items: center;
-    opacity: 0.4;
-    flex-shrink: 0;
-}
-
-.searchIcon svg {
-    width: 13px;
-    height: 13px;
-    stroke: var(--text2);
-}
-
-.searchInput {
-    background: none;
-    border: none;
-    outline: none;
-    color: var(--text);
-    font-size: 13px;
-    font-family: var(--font-body);
-    width: 100%;
-}
-
-.searchInput::placeholder {
-    color: var(--text3);
-}
 
 .iconBtn {
     width: 34px;

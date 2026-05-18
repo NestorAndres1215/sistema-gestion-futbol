@@ -11,16 +11,7 @@ export default function Topbar({ title, subtitle }: { title: string; subtitle: s
                 <div className={styles.pageSub}>{subtitle}</div>
             </div>
             <div className={styles.topbarRight}>
-                <div className={styles.searchBox}>
-                    <span className={styles.searchIcon}>
-                        <i className="fas fa-search"></i>
-                    </span>
-                    <input
-                        type="text"
-                        placeholder="Buscar..."
-                        className={styles.searchInput}
-                    />
-                </div>
+
                 <button
                     className={styles.iconBtn}
                     onClick={logout}
