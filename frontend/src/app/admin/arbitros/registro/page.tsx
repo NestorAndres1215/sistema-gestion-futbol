@@ -5,25 +5,18 @@ import AdminLayout from "../../../../shared/components/layout/admin/layout";
 import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useArbitroRegistro from "@/features/arbitro/hooks/useArbitroRegistro";
-import { PIE_DOMINANTE_OPTIONS } from "@/shared/constants/pie-dominante.options";
-import { CATEGORIA_ARBITRO_OPTIONS } from "@/shared/constants/categoria-arbitro.options";
+import { CATEGORIA_ARBITRO_OPTIONS } from "@/shared/constants/categoria.options";
 import { ESPECIALIDAD_ARBITRO_OPTIONS } from "@/shared/constants/especialidad-arbitro.options";
+import { maxFechaNacimiento } from "@/shared/utils/date.utils";
 
 export default function ArbitroRegistro() {
 
 
     const {
-        paises,
-        limpiarFormulario,
-        registrarArbitro,
-        handleChange,
-        ciudades,
-        form,
-        setFoto,
+        paises, ciudades, form,
+        limpiarFormulario, registrarArbitro,
+        handleChange, setFoto,
     } = useArbitroRegistro();
-
-
-
 
 
     return (
@@ -77,9 +70,6 @@ export default function ArbitroRegistro() {
 
 
                     </div>
-
-
-
                     <div className="row g-3">
                         <div className="col-12 col-md-4">
                             <div className="d-flex flex-column gap-2 w-100">
@@ -89,6 +79,7 @@ export default function ArbitroRegistro() {
                                         type="date"
                                         className={styles.input}
                                         value={form.fechaNacimiento}
+                                        max={maxFechaNacimiento}
                                         onChange={(e) => handleChange("fechaNacimiento", e.target.value)}
                                     />
                                 </div>
@@ -158,10 +149,7 @@ export default function ArbitroRegistro() {
 
 
                     </div>
-
                     <div className="row g-3">
-
-                        {/* PIE DOMINANTE */}
                         <div className="col-12 col-md-4">
                             <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Fecha Debut</label>
@@ -175,8 +163,6 @@ export default function ArbitroRegistro() {
                                 </div>
                             </div>
                         </div>
-
-                        {/* CATEGORÍA */}
                         <div className="col-12 col-md-4">
                             <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Categoría</label>
@@ -220,23 +206,27 @@ export default function ArbitroRegistro() {
                         </div>
 
                     </div>
-
-
-
                     <div className="row g-3">
-
-
                         <div className="col-12 col-md-6">
                             <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Nivel</label>
+
                                 <div className={styles.inputWrap}>
-                                    <input
-                                        type="number"
-                                        placeholder="1 - 100"
+                                    <select
                                         className={styles.input}
                                         value={form.nivel}
-                                        onChange={(e) => handleChange("nivel", e.target.value)}
-                                    />
+                                        onChange={(e) =>
+                                            handleChange("nivel", Number(e.target.value))
+                                        }
+                                    >
+                                        <option value="">1 - 100</option>
+
+                                        {Array.from({ length: 21 }, (_, i) => i * 5).map((val) => (
+                                            <option key={val} value={val}>
+                                                {val}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -244,20 +234,28 @@ export default function ArbitroRegistro() {
                         <div className="col-12 col-md-6">
                             <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Reputación</label>
+
                                 <div className={styles.inputWrap}>
-                                    <input
-                                        type="number"
-                                        placeholder="1 - 100"
+                                    <select
                                         className={styles.input}
                                         value={form.reputacion}
-                                        onChange={(e) => handleChange("reputacion", e.target.value)}
-                                    />
+                                        onChange={(e) =>
+                                            handleChange("reputacion", Number(e.target.value))
+                                        }
+                                    >
+                                        <option value="">1 - 100</option>
+
+                                        {Array.from({ length: 21 }, (_, i) => i * 5).map((val) => (
+                                            <option key={val} value={val}>
+                                                {val}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
                             </div>
                         </div>
 
                     </div>
-
                     <div className="d-flex flex-column gap-2 w-100">
                         <label className={styles.label}>Foto</label>
                         <div className={styles.inputWrap}>

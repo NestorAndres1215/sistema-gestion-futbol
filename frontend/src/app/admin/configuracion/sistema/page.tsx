@@ -8,6 +8,7 @@ import SearchBar from "@/shared/components/ui/search-bar/search-bar";
 import UseSistema from "@/features/configuracion/hooks/useSistema";
 import Table from "@/shared/components/ui/table/table";
 import Pagination from "@/shared/components/ui/pagination/pagination";
+import FilterBar from "@/shared/components/ui/filter-bar/filter-bar";
 
 export default function SistemaPage() {
     const router = useRouter();
@@ -18,7 +19,7 @@ export default function SistemaPage() {
     const { sistemasColumns, handleSearch, query,
         data,
         page,
-        totalPages,
+        totalPages, parametrosFilters,
         handleFilter,
         setPage,
         parametrosActions } = UseSistema();
@@ -35,18 +36,24 @@ export default function SistemaPage() {
 
 
             <SearchBar value={query.search} onSearch={handleSearch} />
-<div className="row mt-3 align-items-center">
+
+
+            <FilterBar
+                onChange={handleFilter}
+                selectFilters={parametrosFilters}
+            />
+            <div className="row mt-3 align-items-center">
 
 
 
-    <div className="col-md-4 ms-auto mb-4">
-        <ActionButton
-            mode="create"
-            onClick={registrar}
-        />
-    </div>
+                <div className="col-md-4 ms-auto mb-4">
+                    <ActionButton
+                        mode="create"
+                        onClick={registrar}
+                    />
+                </div>
 
-</div>
+            </div>
             <Table
                 data={data}
                 columns={sistemasColumns}

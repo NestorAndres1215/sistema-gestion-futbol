@@ -7,12 +7,6 @@ import { getCiudadesByPais } from "@/shared/services/ciudad.service";
 
 export default function useArbitroRegistro() {
     const router = useRouter();
-    const piesDominantes = [
-        { value: "", label: "Selecciona pie dominante" },
-        { value: "Derecho", label: "Derecho" },
-        { value: "Izquierdo", label: "Izquierdo" },
-    ];
-
     const [form, setForm] = useState({
         nombre: "",
         apellido: "",
@@ -28,6 +22,7 @@ export default function useArbitroRegistro() {
 
     const [paises, setPaises] = useState<any[]>([]);
     const [ciudades, setCiudades] = useState<any[]>([]);
+
     useEffect(() => {
 
         const loadPaises = async () => {
@@ -35,22 +30,16 @@ export default function useArbitroRegistro() {
             try {
 
                 const data = await getPaises();
-
-                setPaises(
-                    Array.isArray(data) ? data : []
-                );
+                setPaises(Array.isArray(data) ? data : []);
 
             } catch (error) {
-
                 setPaises([]);
-
             }
-
         };
 
         loadPaises();
-
     }, []);
+
     useEffect(() => {
 
         const loadCiudades = async () => {
@@ -61,25 +50,14 @@ export default function useArbitroRegistro() {
             }
 
             try {
-
                 const data = await getCiudadesByPais(form.paisNacimiento);
-
-                setCiudades(
-                    Array.isArray(data) ? data : []
-                );
-
+                setCiudades(Array.isArray(data) ? data : []);
             } catch (error) {
-
-                console.error(error);
-
                 setCiudades([]);
-
             }
-
         };
 
         loadCiudades();
-
     }, [form.paisNacimiento]);
 
 
@@ -123,9 +101,7 @@ export default function useArbitroRegistro() {
 
     const registrarArbitro = async () => {
         try {
-            console.log(form)
             const fd = arbitroToFormData(form, foto);
-
             await addArbitro(fd);
 
             SwalService.success("Árbitro registrado exitosamente");
@@ -137,11 +113,11 @@ export default function useArbitroRegistro() {
 
     };
 
+
     return {
-        piesDominantes,
+
         ciudades,
         paises,
-
         limpiarFormulario,
         registrarArbitro,
         form,

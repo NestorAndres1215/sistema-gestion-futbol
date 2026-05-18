@@ -13,68 +13,65 @@ export default function useEntrenadorEdit() {
 
   const [form, setForm] = useState({
     nombre: "",
-    apellidoPaterno: "",
-    apellidoMaterno: "",
+    apellido: "",
     fechaNacimiento: "",
     paisNacimiento: "",
     ciudadNacimiento: "",
-    alturaCm: "",
-    pesoKg: "",
-    pieDominante: "",
     estiloJuego: "",
     licencia: "",
     fechaDebut: "",
-    salario: "",
-    anosExperiencia: "",
     nivel: "",
     reputacion: "",
+    manejoEquipo: "",
+    motivacion: "",
+    disciplina: "",
+    adaptabilidad: "",
     personaId: "",
   });
 
-  const [loading, setLoading] = useState(true);
   const [foto, setFoto] = useState<File | null>(null);
   const [fotoPreview, setFotoPreview] = useState<string | null>(null);
- const [paises, setPaises] = useState<any[]>([]);
-    const [ciudades, setCiudades] = useState<any[]>([]);
+  const [paises, setPaises] = useState<any[]>([]);
+  const [ciudades, setCiudades] = useState<any[]>([]);
 
-    useEffect(() => {
+  useEffect(() => {
 
-        const loadPaises = async () => {
+    const loadPaises = async () => {
 
-            try {
+      try {
 
-                const data = await getPaises();
-                setPaises(Array.isArray(data) ? data : []);
+        const data = await getPaises();
+        setPaises(Array.isArray(data) ? data : []);
 
-            } catch (error) {
-                setPaises([]);
-            }
+      } catch (error) {
+        setPaises([]);
+      }
 
-        };
+    };
 
-        loadPaises();
+    loadPaises();
 
-    }, []);
+  }, []);
 
-    useEffect(() => {
-        const loadCiudades = async () => {
-            if (!form.paisNacimiento) {
-                setCiudades([]);
-                return;
-            }
+  useEffect(() => {
+    const loadCiudades = async () => {
+      if (!form.paisNacimiento) {
+        setCiudades([]);
+        return;
+      }
 
-            try {
-                const data = await getCiudadesByPais(form.paisNacimiento);
-                setCiudades(Array.isArray(data) ? data : []);
+      try {
+        const data = await getCiudadesByPais(form.paisNacimiento);
+        setCiudades(Array.isArray(data) ? data : []);
 
-            } catch (error) {
-                setCiudades([]);
-            }
-        };
+      } catch (error) {
+        setCiudades([]);
+      }
+    };
 
-        loadCiudades();
+    loadCiudades();
 
-    }, [form.paisNacimiento]);
+  }, [form.paisNacimiento]);
   useEffect(() => {
 
     const fetchEntrenador = async () => {
@@ -88,22 +85,20 @@ export default function useEntrenadorEdit() {
 
         setForm({
           nombre: persona.nombre ?? "",
-          apellidoPaterno: persona.apellidoPaterno ?? "",
-          apellidoMaterno: persona.apellidoMaterno ?? "",
+          apellido: persona.apellido ?? "",
           fechaNacimiento: formatDateInput(persona.fechaNacimiento),
-          paisNacimiento: persona.paisNacimiento.nombre ?? "",
+          paisNacimiento: persona.paisNacimiento?.nombre ?? "",
           ciudadNacimiento: persona.ciudadNacimiento?.nombre ?? "",
-          alturaCm: persona.alturaCm?.toString() ?? "",
-          pesoKg: persona.pesoKg?.toString() ?? "",
-          pieDominante: persona.pieDominante ?? "",
           estiloJuego: res.estiloJuego ?? "",
           licencia: res.licencia ?? "",
           fechaDebut: formatDateInput(res.fechaDebut),
-          salario: res.salario?.toString() ?? "",
-          anosExperiencia: res.anosExperiencia?.toString() ?? "",
           nivel: res.nivel?.toString() ?? "",
           reputacion: res.reputacion?.toString() ?? "",
-          personaId: res.persona.id,
+          manejoEquipo: res.manejoEquipo?.toString() ?? "",
+          motivacion: res.motivacion?.toString() ?? "",
+          disciplina: res.disciplina?.toString() ?? "",
+          adaptabilidad: res.adaptabilidad?.toString() ?? "",
+          personaId: res.persona?.id?.toString() ?? "",
         });
 
         setFotoPreview(persona.fotoUrl ?? null);
@@ -169,9 +164,9 @@ export default function useEntrenadorEdit() {
 
   return {
     form,
-    loading,
+   
     foto,
-    fotoPreview,paises, ciudades,
+    fotoPreview, paises, ciudades,
     handleChange,
     handleFotoChange,
     actualizarEntrenador

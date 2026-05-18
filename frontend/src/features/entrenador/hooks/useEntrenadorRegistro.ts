@@ -12,21 +12,16 @@ export default function useEntrenadorRegistro() {
 
     const [form, setForm] = useState({
         nombre: "",
-        apellidoPaterno: "",
-        apellidoMaterno: "",
+        apellido: "",
         fechaNacimiento: "",
         paisNacimiento: "",
         ciudadNacimiento: "",
-        alturaCm: "",
-        pesoKg: "",
-        pieDominante: "",
         estiloJuego: "",
         licencia: "",
         fechaDebut: "",
-        salario: "",
-        anosExperiencia: "",
         nivel: "",
         reputacion: "",
+        manejoEquipo: "",
     });
 
     const [foto, setFoto] = useState<File | null>(null);
@@ -80,21 +75,16 @@ export default function useEntrenadorRegistro() {
 
         setForm({
             nombre: "",
-            apellidoPaterno: "",
-            apellidoMaterno: "",
+            apellido: "",
             fechaNacimiento: "",
             paisNacimiento: "",
             ciudadNacimiento: "",
-            alturaCm: "",
-            pesoKg: "",
-            pieDominante: "",
             estiloJuego: "",
             licencia: "",
             fechaDebut: "",
-            salario: "",
-            anosExperiencia: "",
             nivel: "",
             reputacion: "",
+            manejoEquipo: "",
         });
 
         setFoto(null);

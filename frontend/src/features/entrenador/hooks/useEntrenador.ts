@@ -5,9 +5,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/shared/utils/date.utils";
 import { getPaises } from "@/shared/services/paises.service";
+import { ESTILO_JUEGO_OPTIONS } from "@/shared/constants/estilo-juego.options";
+import { ESTADO_SISTEMA_OPTIONS } from "@/shared/constants/estado-estadio.options";
 
 
 export default function useEntrenador() {
+    
     const router = useRouter();
     const [query, setQuery] = useState<EntrenadorQueryState>({
         search: "",
@@ -31,7 +34,6 @@ export default function useEntrenador() {
             });
 
             const lista = res?.items ?? res?.data ?? [];
-
             setData(Array.isArray(lista) ? lista : []);
             setTotalPages(res?.totalPages ?? 1);
 
@@ -46,22 +48,15 @@ export default function useEntrenador() {
     }, [query, page]);
 
     const handleSearch = (value: string) => {
-        setQuery((prev) => ({
-            ...prev,
-            search: value,
-        }));
-
+        setQuery((prev) => ({ ...prev, search: value, }));
         setPage(1);
     };
 
     const handleFilter = (filters: Partial<EntrenadorQueryState>) => {
-        setQuery((prev) => ({
-            ...prev,
-            ...filters,
-        }));
-
+        setQuery((prev) => ({ ...prev, ...filters, }));
         setPage(1);
     };
+
     useEffect(() => {
 
         const loadPaises = async () => {
@@ -69,36 +64,23 @@ export default function useEntrenador() {
             try {
 
                 const data = await getPaises();
-
-                setPaises(
-                    Array.isArray(data) ? data : []
-                );
+                setPaises(Array.isArray(data) ? data : []);
 
             } catch (error) {
-
-                console.error(error);
-
                 setPaises([]);
 
             }
-
         };
 
         loadPaises();
 
     }, []);
+
     const entrenadorFilters = [
         {
             key: "estiloJuego",
             placeholder: "Selecciona Estilo de Juego",
-            options: [
-                { value: "Ofensivo", label: "Ofensivo" },
-                { value: "Defensivo", label: "Defensivo" },
-                { value: "Posesión", label: "Posesión" },
-                { value: "Contraataque", label: "Contraataque" },
-                { value: "Presión Alta", label: "Presión Alta" },
-                { value: "Equilibrado", label: "Equilibrado" },
-            ],
+            options: ESTILO_JUEGO_OPTIONS,
         },
         {
             key: "pais",
@@ -111,10 +93,7 @@ export default function useEntrenador() {
         {
             key: "estado",
             placeholder: "Selecciona Estado",
-            options: [
-                { value: "Activo", label: "Activo" },
-                { value: "Retirado", label: "Retirado" },
-            ],
+            options: ESTADO_SISTEMA_OPTIONS,
         },
     ];
 
@@ -140,7 +119,7 @@ export default function useEntrenador() {
         },
         {
             header: "Apellido",
-            accessor: (row: any) => row.persona?.apellidoPaterno,
+            accessor: (row: any) => row.persona?.apellido,
         },
         {
             header: "Estilo de Juego",

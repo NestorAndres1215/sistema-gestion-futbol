@@ -22,7 +22,7 @@ export default function EntrenadorDetallePage() {
             {
                 entrenador && (
                     <DetailCard
-                        title={`${entrenador.persona.nombre} ${entrenador.persona.apellidoPaterno}`}
+                        title={`${entrenador.persona.nombre} ${entrenador.persona.apellido}`}
                         image={`https://localhost:7269${entrenador.persona.fotoUrl}`}
                         items={items}
                     />

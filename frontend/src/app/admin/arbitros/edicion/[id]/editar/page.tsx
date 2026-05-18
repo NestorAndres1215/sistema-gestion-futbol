@@ -121,7 +121,6 @@ export default function ArbitrosEditar() {
                             </div>
                         </div>
 
-                        {/* PAÍS + CIUDAD */}
                         <div className="row g-3">
 
                             <div className="col-12 col-md-6">
@@ -171,7 +170,7 @@ export default function ArbitrosEditar() {
 
                         </div>
 
-                        {/* CATEGORÍA + ESPECIALIDAD */}
+        
                         <div className="row g-3">
 
                             <div className="col-12 col-md-6">
@@ -209,7 +208,7 @@ export default function ArbitrosEditar() {
 
                         </div>
 
-                        {/* EXPERIENCIA + NIVEL */}
+             
                         <div className="row g-3">
 
                             <div className="col-12 col-md-4">

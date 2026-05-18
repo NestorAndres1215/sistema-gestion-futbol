@@ -3,6 +3,8 @@ import useEntrenadorEdit from "@/features/entrenador/hooks/useEntrenadorEdit";
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import ActionButton from "@/shared/components/ui/button/button";
+import { ESTILO_JUEGO_OPTIONS } from "@/shared/constants/estilo-juego.options";
+import { LICENCIAS_ENTRENADOR_OPTIONS } from "@/shared/constants/licencias-entrenador.options";
 import styles from "@/shared/styles/editar.module.css";
 import { useRouter } from "next/navigation";
 
@@ -13,7 +15,7 @@ export default function EntrenadorEditar() {
         form,
         fotoPreview,
         handleChange,
-        handleFotoChange,
+        handleFotoChange, paises, ciudades,
         actualizarEntrenador
     } = useEntrenadorEdit();
 
@@ -91,7 +93,7 @@ export default function EntrenadorEditar() {
                                     <div className={styles.inputWrap}>
                                         <input
                                             placeholder="Apellido paterno"
-                                            value={form.apellidoPaterno}
+                                            value={form.apellido}
                                             onChange={(e) => handleChange("apellidoPaterno", e.target.value)}
                                             className={styles.input}
                                         />
@@ -103,20 +105,7 @@ export default function EntrenadorEditar() {
 
                         <div className="row g-3">
 
-                            <div className="col-12 col-md-6">
-                                <div className={styles.field}>
-                                    <label className={styles.label}>Apellido Materno</label>
 
-                                    <div className={styles.inputWrap}>
-                                        <input
-                                            placeholder="Apellido materno"
-                                            value={form.apellidoMaterno}
-                                            onChange={(e) => handleChange("apellidoMaterno", e.target.value)}
-                                            className={styles.input}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
 
                             <div className="col-12 col-md-6">
                                 <div className={styles.field}>
@@ -132,128 +121,6 @@ export default function EntrenadorEditar() {
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-
-                        <div className="row g-3">
-
-                            <div className="col-12 col-md-6">
-                                <div className={styles.field}>
-                                    <label className={styles.label}>País Nacimiento</label>
-
-                                    <div className={styles.inputWrap}>
-                                        <input
-                                            placeholder="País"
-                                            value={form.paisNacimiento}
-                                            onChange={(e) => handleChange("paisNacimiento", e.target.value)}
-                                            className={styles.input}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-12 col-md-6">
-                                <div className={styles.field}>
-                                    <label className={styles.label}>Ciudad Nacimiento</label>
-
-                                    <div className={styles.inputWrap}>
-                                        <input
-                                            placeholder="Ciudad"
-                                            value={form.ciudadNacimiento}
-                                            onChange={(e) => handleChange("ciudadNacimiento", e.target.value)}
-                                            className={styles.input}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div className="row g-3">
-
-                            <div className="col-12 col-md-6">
-                                <div className={styles.field}>
-                                    <label className={styles.label}>Altura (cm)</label>
-
-                                    <div className={styles.inputWrap}>
-                                        <input
-                                            type="number"
-                                            value={form.alturaCm}
-                                            onChange={(e) => handleChange("alturaCm", e.target.value)}
-                                            className={styles.input}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-12 col-md-6">
-                                <div className={styles.field}>
-                                    <label className={styles.label}>Peso (kg)</label>
-
-                                    <div className={styles.inputWrap}>
-                                        <input
-                                            type="number"
-                                            value={form.pesoKg}
-                                            onChange={(e) => handleChange("pesoKg", e.target.value)}
-                                            className={styles.input}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div className="row g-3">
-
-                            <div className="col-12 col-md-6">
-                                <div className={styles.field}>
-                                    <label className={styles.label}>Pie Dominante</label>
-
-                                    <div className={styles.inputWrap}>
-                                        <input
-                                            placeholder="Derecho / Izquierdo"
-                                            value={form.pieDominante}
-                                            onChange={(e) => handleChange("pieDominante", e.target.value)}
-                                            className={styles.input}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-12 col-md-6">
-                                <div className={styles.field}>
-                                    <label className={styles.label}>Licencia</label>
-
-                                    <div className={styles.inputWrap}>
-                                        <input
-                                            placeholder="Licencia"
-                                            value={form.licencia}
-                                            onChange={(e) => handleChange("licencia", e.target.value)}
-                                            className={styles.input}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div className="row g-3">
-
-                            <div className="col-12 col-md-6">
-                                <div className={styles.field}>
-                                    <label className={styles.label}>Estilo de Juego</label>
-
-                                    <div className={styles.inputWrap}>
-                                        <input
-                                            placeholder="Estilo"
-                                            value={form.estiloJuego}
-                                            onChange={(e) => handleChange("estiloJuego", e.target.value)}
-                                            className={styles.input}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
                             <div className="col-12 col-md-6">
                                 <div className={styles.field}>
                                     <label className={styles.label}>Fecha Debut</label>
@@ -268,75 +135,245 @@ export default function EntrenadorEditar() {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
 
                         <div className="row g-3">
 
                             <div className="col-12 col-md-6">
                                 <div className={styles.field}>
-                                    <label className={styles.label}>Salario</label>
+                                    <label className={styles.label}>País Nacimiento</label>
 
                                     <div className={styles.inputWrap}>
-                                        <input
-                                            type="number"
-                                            value={form.salario}
-                                            onChange={(e) => handleChange("salario", e.target.value)}
+                                        <select
                                             className={styles.input}
-                                        />
+                                            value={form.paisNacimiento}
+                                            onChange={(e) => handleChange("paisNacimiento", e.target.value)}
+                                        >
+                                            <option value="">
+                                                Seleccione un país
+                                            </option>
+
+                                            {paises.map((pais) => (
+                                                <option key={pais.id} value={pais.nombre}           >
+                                                    {pais.nombre}
+                                                </option>
+                                            ))}
+
+                                        </select>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="col-12 col-md-6">
                                 <div className={styles.field}>
-                                    <label className={styles.label}>Años de Experiencia</label>
+                                    <label className={styles.label}>Ciudad Nacimiento</label>
 
                                     <div className={styles.inputWrap}>
-                                        <input
-                                            type="number"
-                                            value={form.anosExperiencia}
-                                            onChange={(e) => handleChange("anosExperiencia", e.target.value)}
+                                        <select
                                             className={styles.input}
-                                        />
+                                            value={form.ciudadNacimiento}
+                                            onChange={(e) => handleChange("ciudadNacimiento", e.target.value)}
+                                            disabled={!form.paisNacimiento}
+                                        >
+                                            <option value="">
+                                                Seleccione una ciudad
+                                            </option>
+
+                                            {ciudades.map((ciudad) => (
+                                                <option key={ciudad.id} value={ciudad.nombre}                >
+                                                    {ciudad.nombre}
+                                                </option>
+                                            ))}
+
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+
 
                         <div className="row g-3">
 
                             <div className="col-12 col-md-6">
+                                <div className={styles.field}>
+                                    <label className={styles.label}>Licencia</label>
+
+                                    <div className={styles.inputWrap}>
+                                          <select
+                                        className={styles.input}
+                                        value={form.licencia}
+                                        onChange={(e) => handleChange("licencia", e.target.value)}
+                                    >
+                                        {LICENCIAS_ENTRENADOR_OPTIONS.map((item) => (
+                                            <option key={item.value} value={item.value}>
+                                                {item.label}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-12 col-md-6">
+                                <div className={styles.field}>
+                                    <label className={styles.label}>Estilo de Juego</label>
+
+                                    <div className={styles.inputWrap}>
+                                        <select
+                                            className={styles.input}
+                                            value={form.estiloJuego}
+                                            onChange={(e) => handleChange("estiloJuego", e.target.value)}
+                                        >
+                                            {ESTILO_JUEGO_OPTIONS.map((item) => (
+                                                <option key={item.value} value={item.value}>
+                                                    {item.label}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className="row g-3">
+                            <div className="col-12 col-md-4">
                                 <div className={styles.field}>
                                     <label className={styles.label}>Nivel</label>
 
                                     <div className={styles.inputWrap}>
-                                        <input
-                                            type="number"
-                                            value={form.nivel}
-                                            onChange={(e) => handleChange("nivel", e.target.value)}
+                                        <select
                                             className={styles.input}
-                                        />
+                                            value={form.nivel}
+                                            onChange={(e) =>
+                                                handleChange("nivel", Number(e.target.value))
+                                            }
+                                        >
+                                            <option value="">Nivel</option>
+
+                                            {Array.from({ length: 21 }, (_, i) => i * 5).map((val) => (
+                                                <option key={val} value={val}>
+                                                    {val}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="col-12 col-md-6">
+                            <div className="col-12 col-md-4">
                                 <div className={styles.field}>
                                     <label className={styles.label}>Reputación</label>
 
                                     <div className={styles.inputWrap}>
-                                        <input
-                                            type="number"
-                                            value={form.reputacion}
-                                            onChange={(e) => handleChange("reputacion", e.target.value)}
+                                        <select
                                             className={styles.input}
-                                        />
+                                            value={form.reputacion}
+                                            onChange={(e) =>
+                                                handleChange("reputacion", Number(e.target.value))
+                                            }
+                                        >
+                                            <option value="">Reputación</option>
+
+                                            {Array.from({ length: 21 }, (_, i) => i * 5).map((val) => (
+                                                <option key={val} value={val}>
+                                                    {val}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
                                 </div>
                             </div>
+                            <div className="col-12 col-md-4">
+                                <div className={styles.field}>
+                                    <label className={styles.label}>Manejo de Equipo</label>
 
+                                    <div className={styles.inputWrap}>
+                                        <select
+                                            className={styles.input}
+                                            value={form.manejoEquipo}
+                                            onChange={(e) =>
+                                                handleChange("manejoEquipo", Number(e.target.value))
+                                            }
+                                        >
+                                            <option value="">Manejo</option>
+
+                                            {Array.from({ length: 21 }, (_, i) => i * 5).map((val) => (
+                                                <option key={val} value={val}>
+                                                    {val}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-12 col-md-4">
+                                <div className={styles.field}>
+                                    <label className={styles.label}>Motivación</label>
+
+                                    <div className={styles.inputWrap}>
+                                        <select
+                                            className={styles.input}
+                                            value={form.motivacion}
+                                            onChange={(e) =>
+                                                handleChange("motivacion", Number(e.target.value))
+                                            }
+                                        >
+                                            <option value="">Motivación</option>
+
+                                            {Array.from({ length: 21 }, (_, i) => i * 5).map((val) => (
+                                                <option key={val} value={val}>
+                                                    {val}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-12 col-md-4">
+                                <div className={styles.field}>
+                                    <label className={styles.label}>Disciplina</label>
+
+                                    <div className={styles.inputWrap}>
+                                        <select
+                                            className={styles.input}
+                                            value={form.disciplina}
+                                            onChange={(e) =>
+                                                handleChange("disciplina", Number(e.target.value))
+                                            }
+                                        >
+                                            <option value="">Disciplina</option>
+
+                                            {Array.from({ length: 21 }, (_, i) => i * 5).map((val) => (
+                                                <option key={val} value={val}>
+                                                    {val}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-12 col-md-4">
+                                <div className={styles.field}>
+                                    <label className={styles.label}>Adaptabilidad</label>
+
+                                    <div className={styles.inputWrap}>
+                                        <select
+                                            className={styles.input}
+                                            value={form.adaptabilidad}
+                                            onChange={(e) =>
+                                                handleChange("adaptabilidad", Number(e.target.value))
+                                            }
+                                        >
+                                            <option value="">Adaptabilidad</option>
+
+                                            {Array.from({ length: 21 }, (_, i) => i * 5).map((val) => (
+                                                <option key={val} value={val}>
+                                                    {val}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         {/* BOTONES */}

@@ -21,12 +21,12 @@ export const getParametrosById = async (id: number | string) => {
     return response;
 };
 
-export const addParametros = async (data: FormData) => {
+export const addParametros = async (data: any) => {
     const response = await api.post("/parametros", data);
     return response.data;
 };
 
-export const updateParametros = async (id: number, data: FormData) => {
+export const updateParametros = async (id: number, data: any) => {
     const response = await api.put(`/parametros/${id}`, data);
     return response.data;
 };

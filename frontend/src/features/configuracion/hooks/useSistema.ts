@@ -2,10 +2,14 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SistemaQueryState } from "../types/sistemaQueryState";
 import { getParametros } from "../services/parametros.service";
+import { ESTADO_SISTEMA_OPTIONS } from "@/shared/constants/estado-estadio.options";
+import { TIPO_DATO_OPTIONS } from "@/shared/constants/tipo-dato.options";
+import { CATEGORIA_PARAMETROS_OPTIONS } from "@/shared/constants/categoria.options";
 
 export default function UseSistema() {
 
     const router = useRouter();
+
     const [query, setQuery] = useState<SistemaQueryState>({
         search: "",
         categoria: "",
@@ -17,8 +21,11 @@ export default function UseSistema() {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const pageSize = 15;
+
+
     const fetchData = async (q: SistemaQueryState, currentPage: number) => {
         try {
+            
             const res = await getParametros({
                 ...q,
                 page: currentPage,
@@ -26,7 +33,6 @@ export default function UseSistema() {
             });
 
             const lista = res?.items ?? res?.data ?? [];
-
             setData(Array.isArray(lista) ? lista : []);
             setTotalPages(res?.totalPages ?? 1);
 
@@ -41,20 +47,12 @@ export default function UseSistema() {
     }, [query, page]);
 
     const handleSearch = (value: string) => {
-        setQuery((prev) => ({
-            ...prev,
-            search: value,
-        }));
-
+        setQuery((prev) => ({ ...prev, search: value, }));
         setPage(1);
     };
 
     const handleFilter = (filters: Partial<SistemaQueryState>) => {
-        setQuery((prev) => ({
-            ...prev,
-            ...filters,
-        }));
-
+        setQuery((prev) => ({ ...prev, ...filters, }));
         setPage(1);
     };
 
@@ -85,13 +83,33 @@ export default function UseSistema() {
             header: "Categoria",
             accessor: (row: any) => row.categoria,
         },
-                {
+        {
             header: "Tipo Dato",
             accessor: (row: any) => row.tipoDato,
         },
         {
             header: "Estado",
             accessor: (row: any) => row.estado,
+        },
+    ];
+
+    const parametrosFilters = [
+        {
+            key: "categoria",
+            placeholder: "Selecciona Categoría",
+            options: CATEGORIA_PARAMETROS_OPTIONS,
+        },
+
+        {
+            key: "tipoDato",
+            placeholder: "Selecciona Tipo de Dato",
+            options: TIPO_DATO_OPTIONS,
+        },
+
+        {
+            key: "estado",
+            placeholder: "Selecciona Estado",
+            options: ESTADO_SISTEMA_OPTIONS,
         },
     ];
 
@@ -102,6 +120,7 @@ export default function UseSistema() {
         totalPages,
         handleFilter,
         setPage,
+        parametrosFilters,
         parametrosActions
     }
 }

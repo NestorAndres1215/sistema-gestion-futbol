@@ -7,13 +7,14 @@ import useEntrenadorRegistro from "@/features/entrenador/hooks/useEntrenadorRegi
 import { PIE_DOMINANTE_OPTIONS } from "@/shared/constants/pie-dominante.options";
 import { ESTILO_JUEGO_OPTIONS } from "@/shared/constants/estilo-juego.options";
 import { LICENCIAS_ENTRENADOR_OPTIONS } from "@/shared/constants/licencias-entrenador.options";
+import { maxFechaNacimiento } from "@/shared/utils/date.utils";
 export default function EntrenadorRegistroPage() {
 
     const {
         form, paises, ciudades,
         setFoto, handleChange, limpiarFormulario, registrarEntrenador,
     } = useEntrenadorRegistro();
-    
+
     return (
         <AdminLayout>
             <Breadcrumb
@@ -28,73 +29,63 @@ export default function EntrenadorRegistroPage() {
                     </p>
                 </div>
                 <form noValidate className={styles.form}>
-                    <div className="d-flex flex-column gap-2 w-100">
-                        <label className={styles.label}>
-                            Nombre
-                        </label>
 
-                        <div className={styles.inputWrap}>
-
-                            <input
-                                type="text"
-                                placeholder="Nombre del estadio"
-                                className={styles.input}
-                                value={form.nombre}
-                                onChange={(e) =>
-                                    handleChange("nombre", e.target.value)}
-                            />
-
-                        </div>
-
-                    </div>
                     <div className="row g-3">
-
                         <div className="col-12 col-md-6">
                             <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Apellido Paterno</label>
+                                <label className={styles.label}>
+                                    Nombre
+                                </label>
+
+                                <div className={styles.inputWrap}>
+
+                                    <input
+                                        type="text"
+                                        placeholder="Nombre del estadio"
+                                        className={styles.input}
+                                        value={form.nombre}
+                                        onChange={(e) =>
+                                            handleChange("nombre", e.target.value)}
+                                    />
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div className="col-12 col-md-6">
+                            <div className="d-flex flex-column gap-2 w-100">
+                                <label className={styles.label}>Apellido </label>
                                 <div className={styles.inputWrap}>
                                     <input
                                         type="text"
                                         placeholder="Apellido paterno"
                                         className={styles.input}
-                                        value={form.apellidoPaterno}
-                                        onChange={(e) => handleChange("apellidoPaterno", e.target.value)}
+                                        value={form.apellido}
+                                        onChange={(e) => handleChange("apellido", e.target.value)}
                                     />
                                 </div>
                             </div>
                         </div>
 
-                        <div className="col-12 col-md-6">
+                    </div>
+
+                    <div className="row g-3">
+                        <div className="col-12 col-md-4">
                             <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Apellido Materno</label>
+                                <label className={styles.label}>Fecha Nacimiento</label>
                                 <div className={styles.inputWrap}>
                                     <input
-                                        type="text"
-                                        placeholder="Apellido materno"
+                                        type="date"
                                         className={styles.input}
-                                        value={form.apellidoMaterno}
-                                        onChange={(e) => handleChange("apellidoMaterno", e.target.value)}
+                                        max={maxFechaNacimiento}
+                                        value={form.fechaNacimiento}
+                                        onChange={(e) => handleChange("fechaNacimiento", e.target.value)}
                                     />
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-                    <div className="d-flex flex-column gap-2 w-100">
-                        <label className={styles.label}>Fecha Nacimiento</label>
-                        <div className={styles.inputWrap}>
-                            <input
-                                type="date"
-                                className={styles.input}
-                                value={form.fechaNacimiento}
-                                onChange={(e) => handleChange("fechaNacimiento", e.target.value)}
-                            />
-                        </div>
-                    </div>
-                    <div className="row g-3">
-
                         {/* PAÍS - CIUDAD */}
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-4">
                             <div className="d-flex flex-column gap-2 w-100">
 
                                 <label className={styles.label}>
@@ -124,7 +115,7 @@ export default function EntrenadorRegistroPage() {
                             </div>
                         </div>
 
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-4">
                             <div className="d-flex flex-column gap-2 w-100">
 
                                 <label className={styles.label}>
@@ -155,61 +146,23 @@ export default function EntrenadorRegistroPage() {
                             </div>
                         </div>
 
-                        {/* ALTURA - PESO */}
-                        <div className="col-12 col-md-6">
-                            <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Altura</label>
-                                <div className={styles.inputWrap}>
-                                    <input
-                                        type="number"
-                                        placeholder="Altura en cm"
-                                        className={styles.input}
-                                        value={form.alturaCm}
-                                        onChange={(e) => handleChange("alturaCm", e.target.value)}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-12 col-md-6">
-                            <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Peso</label>
-                                <div className={styles.inputWrap}>
-                                    <input
-                                        type="number"
-                                        placeholder="Peso en kg"
-                                        className={styles.input}
-                                        value={form.pesoKg}
-                                        onChange={(e) => handleChange("pesoKg", e.target.value)}
-                                    />
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                     <div className="row g-3">
-
-                        {/* PIE DOMINANTE */}
                         <div className="col-12 col-md-4">
                             <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Pie Dominante</label>
-
+                                <label className={styles.label}>Fecha Debut</label>
                                 <div className={styles.inputWrap}>
-                                    <select
+                                    <input
+                                        type="date"
                                         className={styles.input}
-                                        value={form.pieDominante}
-                                        onChange={(e) => handleChange("pieDominante", e.target.value)}
-                                    >
-                                        {PIE_DOMINANTE_OPTIONS.map((item) => (
-                                            <option key={item.value} value={item.value}>
-                                                {item.label}
-                                            </option>
-                                        ))}
-                                    </select>
+                                        value={form.fechaDebut}
+                                        onChange={(e) => handleChange("fechaDebut", e.target.value)}
+                                    />
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                         <div className="col-12 col-md-4">
                             <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>Estilo de Juego</label>
@@ -251,42 +204,6 @@ export default function EntrenadorRegistroPage() {
 
 
                     </div>
-
-                    <div className="row g-3">
-                        <div className="col-12 col-md-6">
-                            <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Fecha Debut</label>
-                                <div className={styles.inputWrap}>
-                                    <input
-                                        type="date"
-                                        className={styles.input}
-                                        value={form.fechaDebut}
-                                        onChange={(e) => handleChange("fechaDebut", e.target.value)}
-                                    />
-                                </div>
-                            </div>
-
-                        </div>
-                        <div className="col-12 col-md-6">
-
-                            <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Años de Experiencia</label>
-
-                                <div className={styles.inputWrap}>
-                                    <input
-                                        type="number"
-                                        placeholder="Años de Experiencia"
-                                        className={styles.input}
-                                        value={form.anosExperiencia}
-                                        onChange={(e) => handleChange("anosExperiencia", e.target.value)}
-                                        min={0}
-                                    />
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
                     <div className="row g-3">
 
                         <div className="col-12 col-md-4">
@@ -294,15 +211,21 @@ export default function EntrenadorRegistroPage() {
                                 <label className={styles.label}>Nivel</label>
 
                                 <div className={styles.inputWrap}>
-                                    <input
-                                        type="number"
-                                        placeholder="Nivel del entrenador"
+                                    <select
                                         className={styles.input}
                                         value={form.nivel}
-                                        onChange={(e) => handleChange("nivel", e.target.value)}
-                                        min={0}
-                                        max={100}
-                                    />
+                                        onChange={(e) =>
+                                            handleChange("nivel", Number(e.target.value))
+                                        }
+                                    >
+                                        <option value="">Nivel</option>
+
+                                        {Array.from({ length: 21 }, (_, i) => i * 5).map((val) => (
+                                            <option key={val} value={val}>
+                                                {val}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -312,34 +235,45 @@ export default function EntrenadorRegistroPage() {
                                 <label className={styles.label}>Reputación</label>
 
                                 <div className={styles.inputWrap}>
-                                    <input
-                                        type="number"
-                                        placeholder="Reputación del entrenador"
+                                    <select
                                         className={styles.input}
                                         value={form.reputacion}
-                                        onChange={(e) => handleChange("reputacion", e.target.value)}
-                                        min={0}
-                                        max={100}
-                                    />
+                                        onChange={(e) =>
+                                            handleChange("reputacion", Number(e.target.value))
+                                        }
+                                    >
+                                        <option value="">Reputación</option>
+
+                                        {Array.from({ length: 21 }, (_, i) => i * 5).map((val) => (
+                                            <option key={val} value={val}>
+                                                {val}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
                             </div>
                         </div>
 
                         <div className="col-12 col-md-4">
                             <div className="d-flex flex-column gap-2 w-100">
-                                <label className={styles.label}>Salario</label>
+                                <label className={styles.label}>Manejo de Equipo</label>
 
                                 <div className={styles.inputWrap}>
-                                    <input
-                                        type="number"
-
+                                    <select
                                         className={styles.input}
-                                        value={form.salario}
-                                        onChange={(e) => handleChange("salario", e.target.value)}
-                                        min={0}
-                                        step="0.01"
-                                        placeholder="0.00"
-                                    />
+                                        value={form.manejoEquipo}
+                                        onChange={(e) =>
+                                            handleChange("manejoEquipo", Number(e.target.value))
+                                        }
+                                    >
+                                        <option value="">Manejo del equipo</option>
+
+                                        {Array.from({ length: 21 }, (_, i) => i * 5).map((val) => (
+                                            <option key={val} value={val}>
+                                                {val}
+                                            </option>
+                                        ))}
+                                    </select>
                                 </div>
                             </div>
                         </div>

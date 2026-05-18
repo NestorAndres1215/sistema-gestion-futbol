@@ -14,3 +14,12 @@ export const formatDateInput = (date?: string) => {
   if (!date) return "";
   return date.split("T")[0];
 };
+
+
+const hoy = new Date();
+
+export const maxFechaNacimiento = new Date(
+    hoy.getFullYear() - 18,
+    hoy.getMonth(),
+    hoy.getDate()
+).toISOString().split("T")[0];
