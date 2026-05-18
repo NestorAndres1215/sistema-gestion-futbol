@@ -46,7 +46,7 @@ export default function CustomLineChart<T>({
       {title && (
         <div className={styles.cardHead}>
           <div className={styles.headIcon}>
-            <i className="ti ti-chart-line" />
+            <i className="fas fa-chart-line" />
           </div>
           <p className={styles.headTitle}>{title}</p>
         </div>

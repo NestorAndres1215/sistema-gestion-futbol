@@ -67,7 +67,7 @@ export default function CustomPieChart<T>({
       {title && (
         <div className={styles.cardHead}>
           <div className={styles.headIcon}>
-       <i className="fas fa-chart-pie"></i>
+            <i className="fas fa-chart-pie"></i>
           </div>
           <p className={styles.headTitle}>{title}</p>
         </div>

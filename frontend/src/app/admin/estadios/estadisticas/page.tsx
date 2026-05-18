@@ -18,99 +18,9 @@ import CustomComposedChart from "@/shared/components/charts/custom-composed-char
 
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import TeamStatusCard from "@/shared/components/charts/custom-team-status-card/custom-team-status-card";
+import useEstadioEstadisticas from "@/features/estadio/hooks/useEstadioEstadisticas";
 
-/* =========================================================
-   DATA
-========================================================= */
-interface StatusItem {
-    label: string;
-    value: number | string;
-    icon: string;
-    color?: "green" | "blue" | "purple" | "amber" | "red";
-}
-const ESTADO_EQUIPO: StatusItem[] = [
-    {
-        label: "Excelente",
-        value: "12",
-        icon: "fas fa-circle-check",
-        color: "green",
-    },
-    {
-        label: "Bueno",
-        value: "8",
-        icon: "fas fa-star",
-        color: "blue",
-    },
-    {
-        label: "Regular",
-        value: "4",
-        icon: "fas fa-triangle-exclamation",
-        color: "amber",
-    },
-];
-export const estadios = [
-    {
-        nombre: "Monumental",
-        capacidad: 80000,
-        pais: "Perú",
-        ciudad: "Lima",
-        tipoCesped: "Natural",
-        anio: 2000,
-        estado: "Disponible",
-    },
-    {
-        nombre: "Maracaná",
-        capacidad: 78000,
-        pais: "Brasil",
-        ciudad: "Río de Janeiro",
-        tipoCesped: "Natural",
-        anio: 1950,
-        estado: "Disponible",
-    },
-    {
-        nombre: "Santiago Bernabéu",
-        capacidad: 74000,
-        pais: "España",
-        ciudad: "Madrid",
-        tipoCesped: "Híbrido",
-        anio: 1947,
-        estado: "Remodelación",
-    },
-    {
-        nombre: "Camp Nou",
-        capacidad: 99000,
-        pais: "España",
-        ciudad: "Barcelona",
-        tipoCesped: "Natural",
-        anio: 1957,
-        estado: "Disponible",
-    },
-    {
-        nombre: "Wembley",
-        capacidad: 90000,
-        pais: "Inglaterra",
-        ciudad: "Londres",
-        tipoCesped: "Natural",
-        anio: 2007,
-        estado: "Disponible",
-    },
-    {
-        nombre: "Allianz Arena",
-        capacidad: 75000,
-        pais: "Alemania",
-        ciudad: "Múnich",
-        tipoCesped: "Híbrido",
-        anio: 2005,
-        estado: "Disponible",
-    },
-];
 
-const paises = [
-    { pais: "Perú", total: 10 },
-    { pais: "Brasil", total: 20 },
-    { pais: "España", total: 15 },
-    { pais: "Alemania", total: 8 },
-];
 
 const anios = [
     { anio: 2020, total: 5 },
@@ -119,20 +29,6 @@ const anios = [
     { anio: 2023, total: 18 },
 ];
 
-const tipoCesped = [
-    {
-        tipo: "Natural",
-        total: 18,
-    },
-    {
-        tipo: "Híbrido",
-        total: 7,
-    },
-    {
-        tipo: "Sintético",
-        total: 3,
-    },
-];
 
 const radarData = [
     {
@@ -204,6 +100,27 @@ const composedData = [
 ];
 
 export default function DashboardPage() {
+
+    const {
+        totalEstadios,
+        promedioCapacidad,
+        totalPaises,
+
+        paisesMasEstadios,
+        paisesMenosEstadios,
+
+        ciudadesMasEstadios,
+        ciudadesMenosEstadios,
+
+        estadiosMayorCapacidad,
+        estadiosMenorCapacidad,
+
+        estadiosMasAntiguos,
+        estadiosMasNuevos,
+        estadoItems,
+        tiposCesped
+    } = useEstadioEstadisticas();
+    console.log(estadiosMasAntiguos)
     return (
         <AdminLayout>
 
@@ -211,121 +128,120 @@ export default function DashboardPage() {
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
 
                     <div className="row g-3 mb-4">
-                        <div className="col-12 col-md-6 col-lg-3">
+                        <div className="col-12 col-md-6 col-lg-4">
                             <DashboardCard
                                 title="Total Estadios"
-                                value={25}
-                                icon="fas fa-users"
+                                value={totalEstadios}
+                                icon="fas fa-futbol"
                             />
                         </div>
 
-                        <div className="col-12 col-md-6 col-lg-3">
+                        <div className="col-12 col-md-6 col-lg-4">
                             <DashboardCard
                                 title="Países"
-                                value={12}
+                                value={totalPaises}
+                                icon="fas fa-globe-americas"
                             />
                         </div>
 
-                        <div className="col-12 col-md-6 col-lg-3">
-                            <DashboardCard
-                                title="Capacidad Total"
-                                value="1,250,000"
-                            />
-                        </div>
-
-                        <div className="col-12 col-md-6 col-lg-3">
+                        <div className="col-12 col-md-6 col-lg-4">
                             <DashboardCard
                                 title="Promedio"
-                                value="52,000"
+                                value={promedioCapacidad}
+                                icon="fas fa-chart-bar"
                             />
                         </div>
                     </div>
-
                 </div>
 
 
                 <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-
                     <div className="row g-3 mb-4">
-
-                        <div className="col-12 col-lg-4">
+                        <div className="col-12 col-lg-6">
                             <CustomBarChart
-                                title="Top Estadios"
-                                data={estadios}
+                                title="Paises con Más Estadios"
+                                data={paisesMasEstadios}
                                 xKey="nombre"
-                                dataKey="capacidad"
-                            />
-                        </div>
-
-                        <div className="col-12 col-lg-4">
-                            <CustomPieChart
-                                title="Estadios por País"
-                                data={paises}
-                                nameKey="pais"
-                                dataKey="total"
-                            />
-                        </div>
-
-                        <div className="col-12 col-lg-4">
-                            <CustomLineChart
-                                title="Estadios por Año"
-                                data={anios}
-                                xKey="anio"
-                                dataKey="total"
-                            />
-                        </div>
-                        <div className="col-12 col-lg-4">
-                            <CustomAreaChart
-                                title="Crecimiento de Estadios"
-                                data={anios}
-                                xKey="anio"
-                                dataKey="total"
-                            />
-                        </div>
-                        <div className="col-12 col-lg-4">
-                            <CustomRadarChart
-                                title="Nivel del Estadio"
-                                data={radarData}
-                                nameKey="estadistica"
                                 dataKey="valor"
                             />
                         </div>
-                        <div className="col-12 col-lg-4">
 
-                            <CustomScatterChart
-                                title="Capacidad vs Año"
-                                data={scatterData}
-                                xKey="anio"
-                                yKey="capacidad"
+                        <div className="col-12 col-lg-6">
+                            <CustomBarChart
+                                title="Paises con Menos Estadios"
+                                data={paisesMenosEstadios}
+                                xKey="nombre"
+                                dataKey="valor"
+                            />
+                        </div>
+                    </div>
+                    <div className="row g-3 mb-4">
+                        <div className="col-12 col-lg-6">
+                            <CustomBarChart
+                                title="Ciudad con Más Estadios"
+                                data={ciudadesMasEstadios}
+                                xKey="nombre"
+                                dataKey="valor"
                             />
                         </div>
 
-                        <div className="col-12 col-lg-4">
-                            <CustomComposedChart
-                                title="Análisis General"
-                                data={composedData}
-                                xKey="anio"
-                                barKey="estadios"
-                                lineKey="crecimiento"
-                                areaKey="capacidad"
+                        <div className="col-12 col-lg-6">
+                            <CustomBarChart
+                                title="Ciudad con Menos Estadios"
+                                data={ciudadesMenosEstadios}
+                                xKey="nombre"
+                                dataKey="valor"
                             />
                         </div>
-                        <div className="col-12 col-lg-4">
+                    </div>
+                    <div className="row g-3 mb-4">
+                        <div className="col-12 col-lg-6">
                             <CustomPieChart
-                                title="Tipo de Césped"
-                                data={tipoCesped}
-                                nameKey="tipo"
-                                dataKey="total"
+                                title="Tipos de Cesped"
+                                data={tiposCesped}
+                                nameKey="nombre"
+                                dataKey="valor"
                             />
                         </div>
+                        <div className="col-12 col-lg-6">
+                            <TeamStatusCard
+                                title="Estado de Estadios"
+                                icon="fas fa-futbol"
+                                items={estadoItems}
+                            />
+                        </div>
+                    </div>
+                    <div className="row g-3 mb-4">
+
+
+                        <div className="col-12 col-lg-12">
+
+
+                            <CustomLineChart
+                                title="Estadios por Año"
+                                data={estadiosMayorCapacidad}
+                                xKey="nombre"
+                                dataKey="valor"
+                            />
+
+                        </div>
+
+
+                        <CustomAreaChart
+                            title="Estadios Mas Antigua"
+                            data={estadiosMasAntiguos}
+                            xKey="nombre"
+                            dataKey="valor"
+                        />
+
                     </div>
 
                 </div>
 
                 <div className="mb-3">
-                    <TeamStatusCard items={ESTADO_EQUIPO} />
+
                 </div>
-               
+
 
             </div>
 

@@ -45,7 +45,7 @@ export default function CustomBarChart<T>({
       {title && (
         <div className={styles.cardHead}>
           <div className={styles.headIcon}>
-            <i className="ti ti-chart-bar" />
+            <i className="fas fa-chart-bar" />
           </div>
           <p className={styles.headTitle}>{title}</p>
         </div>
@@ -69,6 +69,7 @@ export default function CustomBarChart<T>({
             />
 
             <YAxis
+              allowDecimals={false}
               tick={{ fill: "#4a5568", fontSize: 11, fontFamily: "DM Mono" }}
               axisLine={false}
               tickLine={false}
@@ -99,7 +100,7 @@ export default function CustomBarChart<T>({
             <defs>
               <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#6ee7b7" stopOpacity={0.9} />
-               
+
               </linearGradient>
             </defs>
 

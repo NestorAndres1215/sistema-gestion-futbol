@@ -8,16 +8,26 @@ interface StatusItem {
 }
 
 interface Props {
+  title?: string;
+  icon?: string;
   items: StatusItem[];
 }
 
-export default function TeamStatusCard({ items }: Props) {
+export default function TeamStatusCard({
+  title = "Estado del equipo",
+  icon = "fa-solid fa-shield-halved",
+  items
+}: Props) {
   return (
-    <div className={`${styles.card} `}>
+    <div className={styles.card}>
 
       <div className={styles.cardHead}>
+        <div className={styles.headIcon}>
+          <i className={icon} />
+        </div>
+
         <div className={styles.cardTitle}>
-          <i className="fa-solid fa-shield-halved" /> Estado del equipo
+          {title}
         </div>
       </div>
 
@@ -25,13 +35,21 @@ export default function TeamStatusCard({ items }: Props) {
         {items.map((s) => (
           <div key={s.label} className={styles.row}>
 
-            <div className={`${styles.icon} ${styles[s.color ?? "green"]}`}>
+            <div
+              className={`${styles.icon} ${
+                styles[s.color ?? "green"]
+              }`}
+            >
               <i className={s.icon} />
             </div>
 
-            <span className={styles.label}>{s.label}</span>
+            <span className={styles.label}>
+              {s.label}
+            </span>
 
-            <span className={styles.value}>{s.value}</span>
+            <span className={styles.value}>
+              {s.value}
+            </span>
 
           </div>
         ))}

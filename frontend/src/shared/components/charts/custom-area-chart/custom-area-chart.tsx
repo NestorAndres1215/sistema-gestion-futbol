@@ -45,7 +45,7 @@ export default function CustomAreaChart<T>({
       {title && (
         <div className={styles.cardHead}>
           <div className={styles.headIcon}>
-            <i className="ti ti-chart-area" />
+            <i className="fas fa-chart-area" />
           </div>
           <p className={styles.headTitle}>{title}</p>
         </div>

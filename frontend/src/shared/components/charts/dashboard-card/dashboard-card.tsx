@@ -8,11 +8,7 @@ interface DashboardCardProps {
   icon?: string;
 }
 
-export default function DashboardCard({
-  title,
-  value,
-  icon,
-}: DashboardCardProps) {
+export default function DashboardCard({ title, value, icon, }: DashboardCardProps) {
   return (
     <div className={styles.card}>
       <div className="d-flex align-items-start justify-content-between mb-3">

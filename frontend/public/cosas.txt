@@ -495,3 +495,34 @@ const EQUIPOS_CHECKBOX = [
                 title="Registro de Torneos"
                 onClick={() => console.log("clubes")}
             />
+
+
+                                    <div className="col-12 col-lg-4">
+                            <CustomRadarChart
+                                title="Nivel del Estadio"
+                                data={radarData}
+                                nameKey="estadistica"
+                                dataKey="valor"
+                            />
+                        </div>
+                                                <div className="col-12 col-lg-4">
+                            <CustomComposedChart
+                                title="Análisis General"
+                                data={composedData}
+                                xKey="anio"
+                                barKey="estadios"
+                                lineKey="crecimiento"
+                                areaKey="capacidad"
+                            />
+                        </div>
+
+
+                        <div className="col-12 col-lg-4">
+
+                            <CustomScatterChart
+                                title="Capacidad vs Año"
+                                data={scatterData}
+                                xKey="anio"
+                                yKey="capacidad"
+                            />
+                        </div>

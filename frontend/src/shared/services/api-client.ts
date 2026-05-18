@@ -1,7 +1,25 @@
-
 export const API_URL = "https://localhost:7269/api";
 
-const request = async (url: string, options: RequestInit = {}) => {
+const buildQuery = (params?: Record<string, any>) => {
+  if (!params) return "";
+
+  const query = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      query.append(key, String(value));
+    }
+  });
+
+  const queryString = query.toString();
+
+  return queryString ? `?${queryString}` : "";
+};
+
+const request = async (
+  url: string,
+  options: RequestInit = {}
+) => {
   const match = document.cookie.match(/(^| )token=([^;]+)/);
   const token = match ? match[2] : null;
 
@@ -25,8 +43,8 @@ const request = async (url: string, options: RequestInit = {}) => {
   });
 
   if (!res.ok) {
-
     const errorData = await res.json();
+
     throw {
       message: errorData.Message
     };
@@ -35,9 +53,12 @@ const request = async (url: string, options: RequestInit = {}) => {
   return res.json();
 };
 
-
 export const api = {
-  get: (url: string) => request(url),
+  get: (
+    url: string,
+    params?: Record<string, any>
+  ) =>
+    request(`${url}${buildQuery(params)}`),
 
   post: (
     url: string,
@@ -46,9 +67,10 @@ export const api = {
   ) =>
     request(url, {
       method: "POST",
-      body: body instanceof FormData
-        ? body
-        : JSON.stringify(body),
+      body:
+        body instanceof FormData
+          ? body
+          : JSON.stringify(body),
       ...options
     }),
 
@@ -59,9 +81,10 @@ export const api = {
   ) =>
     request(url, {
       method: "PUT",
-      body: body instanceof FormData
-        ? body
-        : JSON.stringify(body),
+      body:
+        body instanceof FormData
+          ? body
+          : JSON.stringify(body),
       ...options
     }),
 
