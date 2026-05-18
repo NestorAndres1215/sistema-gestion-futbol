@@ -22,5 +22,17 @@ public interface IArbitrosService
 
     Task<AverageDto> ObtenerPrecisionPromedioAsync();
 
-    Task<AverageDto> ObtenerReputacionPromedioAsync();
+    Task<List<ItemDto>> ObtenerArbitrosPorPaisAsync();
+    Task<List<ItemDto>> ObtenerArbitrosConMasPartidosAsync(int cantidad);
+    Task<List<ItemDto>> ObtenerRolArbitralAsync();
+    Task<List<ItemDto>> ObtenerEstadoFisicoAsync();
+    Task<List<ItemDto>> ObtenerDebutsPorAnioAsync();
+    Task<List<ItemDto>> ObtenerArbitrosConMejorNivelAsync(int cantidad);
+    Task<List<ItemDto>> ObtenerArbitrosActivosVsRetiradosAsync();
+    Task<AverageDto> ObtenerEdadPromedioAsync();
+    Task<List<ItemDto>> ObtenerPromedioTarjetasAsync();
+    Task<List<ItemDto>> ObtenerTopExperienciaAsync(int cantidad);
+
+    Task<List<ItemDto>> ObtenerTopReputacionAsync(int cantidad);
+
 }

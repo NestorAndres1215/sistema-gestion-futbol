@@ -268,4 +268,64 @@ public class ArbitrosService : IArbitrosService
             Promedio = await _repository.ObtenerReputacionPromedioAsync()
         };
     }
+    // Service
+
+    public async Task<List<ItemDto>> ObtenerArbitrosPorPaisAsync()
+    {
+        return await _repository.ObtenerArbitrosPorPaisAsync();
+    }
+
+
+    public async Task<List<ItemDto>> ObtenerArbitrosConMasPartidosAsync(int cantidad)
+    {
+        return await _repository.ObtenerArbitrosConMasPartidosAsync(cantidad);
+    }
+
+    public async Task<List<ItemDto>> ObtenerRolArbitralAsync()
+    {
+        return await _repository.ObtenerRolArbitralAsync();
+    }
+
+    public async Task<List<ItemDto>> ObtenerEstadoFisicoAsync()
+    {
+        return await _repository.ObtenerEstadoFisicoAsync();
+    }
+
+    public async Task<List<ItemDto>> ObtenerDebutsPorAnioAsync()
+    {
+        return await _repository.ObtenerDebutsPorAnioAsync();
+    }
+
+    public async Task<List<ItemDto>> ObtenerArbitrosConMejorNivelAsync(int cantidad)
+    {
+        return await _repository.ObtenerArbitrosConMejorNivelAsync(cantidad);
+    }
+
+    public async Task<List<ItemDto>> ObtenerArbitrosActivosVsRetiradosAsync()
+    {
+        return await _repository.ObtenerArbitrosActivosVsRetiradosAsync();
+    }
+
+    public async Task<AverageDto> ObtenerEdadPromedioAsync()
+    {
+        return new AverageDto
+        {
+            Promedio = await _repository.ObtenerEdadPromedioAsync()
+        };
+    }
+
+    public async Task<List<ItemDto>> ObtenerPromedioTarjetasAsync()
+    {
+        return await _repository.ObtenerPromedioTarjetasAsync();
+    }
+
+    public async Task<List<ItemDto>> ObtenerTopExperienciaAsync(int cantidad)
+    {
+        return await _repository.ObtenerTopExperienciaAsync(cantidad);
+    }
+
+    public async Task<List<ItemDto>> ObtenerTopReputacionAsync(int cantidad)
+    {
+        return await _repository.ObtenerTopReputacionAsync(cantidad);
+    }
 }

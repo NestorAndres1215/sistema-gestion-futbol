@@ -71,9 +71,71 @@ public class ArbitroController : ControllerBase
         return Ok(await _service.ObtenerPrecisionPromedioAsync());
     }
 
-    [HttpGet("reputacion-promedio")]
-    public async Task<ActionResult<AverageDto>> ObtenerReputacionPromedio()
+
+    [HttpGet("arbitros-por-pais")]
+    public async Task<IActionResult> ObtenerArbitrosPorPais()
     {
-        return Ok(await _service.ObtenerReputacionPromedioAsync());
+        return Ok(await _service.ObtenerArbitrosPorPaisAsync());
+    }
+
+
+    [HttpGet("arbitros-mas-partidos")]
+    public async Task<IActionResult> ObtenerArbitrosConMasPartidos([FromQuery] int cantidad = 5)
+    {
+        return Ok(await _service.ObtenerArbitrosConMasPartidosAsync(cantidad));
+    }
+
+    [HttpGet("rol-arbitral")]
+    public async Task<IActionResult> ObtenerRolArbitral()
+    {
+        return Ok(await _service.ObtenerRolArbitralAsync());
+    }
+
+    [HttpGet("estado-fisico")]
+    public async Task<IActionResult> ObtenerEstadoFisico()
+    {
+        return Ok(await _service.ObtenerEstadoFisicoAsync());
+    }
+
+    [HttpGet("debuts-por-anio")]
+    public async Task<IActionResult> ObtenerDebutsPorAnio()
+    {
+        return Ok(await _service.ObtenerDebutsPorAnioAsync());
+    }
+
+    [HttpGet("mejor-nivel")]
+    public async Task<IActionResult> ObtenerArbitrosConMejorNivel([FromQuery] int cantidad = 5)
+    {
+        return Ok(await _service.ObtenerArbitrosConMejorNivelAsync(cantidad));
+    }
+
+    [HttpGet("activos-vs-retirados")]
+    public async Task<IActionResult> ObtenerArbitrosActivosVsRetirados()
+    {
+        return Ok(await _service.ObtenerArbitrosActivosVsRetiradosAsync());
+    }
+
+    [HttpGet("edad-promedio")]
+    public async Task<IActionResult> ObtenerEdadPromedio()
+    {
+        return Ok(await _service.ObtenerEdadPromedioAsync());
+    }
+
+    [HttpGet("promedio-tarjetas")]
+    public async Task<IActionResult> ObtenerPromedioTarjetas()
+    {
+        return Ok(await _service.ObtenerPromedioTarjetasAsync());
+    }
+
+    [HttpGet("top-experiencia")]
+    public async Task<IActionResult> ObtenerTopExperiencia([FromQuery] int cantidad = 5)
+    {
+        return Ok(await _service.ObtenerTopExperienciaAsync(cantidad));
+    }
+
+    [HttpGet("top-reputacion")]
+    public async Task<IActionResult> ObtenerTopReputacion([FromQuery] int cantidad = 5)
+    {
+        return Ok(await _service.ObtenerTopReputacionAsync(cantidad));
     }
 }
