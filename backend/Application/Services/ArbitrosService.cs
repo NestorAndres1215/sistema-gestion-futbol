@@ -1,5 +1,6 @@
 ﻿using Application.Common.Exceptions;
 using Application.Dto;
+using Application.Dto.estadisticas;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
@@ -227,5 +228,44 @@ public class ArbitrosService : IArbitrosService
             dto.FechaDebut.HasValue &&
             dto.FechaRetiro < dto.FechaDebut)
             throw new BadRequestException("La fecha de retiro no puede ser menor al debut");
+    }
+
+
+    public async Task<AverageDto> ObtenerTotalArbitrosAsync()
+    {
+        var total = await _repository.ObtenerTotalArbitrosAsync();
+
+        return new AverageDto
+        {
+            Promedio = total
+        };
+    }
+
+    public async Task<AverageDto> ObtenerArbitrosActivosAsync()
+    {
+        var total = await _repository.ObtenerArbitrosActivosAsync();
+
+        return new AverageDto
+        {
+            Promedio = total
+        };
+    }
+
+    public async Task<AverageDto> ObtenerPrecisionPromedioAsync()
+    {
+        var promedio = await _repository.ObtenerPrecisionPromedioAsync();
+
+        return new AverageDto
+        {
+            Promedio = promedio
+        };
+    }
+
+    public async Task<AverageDto> ObtenerReputacionPromedioAsync()
+    {
+        return new AverageDto
+        {
+            Promedio = await _repository.ObtenerReputacionPromedioAsync()
+        };
     }
 }

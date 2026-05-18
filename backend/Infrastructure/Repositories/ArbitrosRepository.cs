@@ -99,4 +99,27 @@ public class ArbitrosRepository : IArbitroRepository
         await _context.SaveChangesAsync();
         return arbitros;
     }
+
+    public async Task<int> ObtenerTotalArbitrosAsync()
+    {
+        return await _context.Arbitros.CountAsync();
+    }
+
+    public async Task<int> ObtenerArbitrosActivosAsync()
+    {
+        return await _context.Arbitros
+            .CountAsync(a => a.Estado == "Activo");
+    }
+
+    public async Task<double> ObtenerPrecisionPromedioAsync()
+    {
+        return await _context.Arbitros
+            .AverageAsync(a => a.PrecisionDecisiones);
+    }
+
+    public async Task<double> ObtenerReputacionPromedioAsync()
+    {
+        return await _context.Arbitros
+            .AverageAsync(a => a.Reputacion);
+    }
 }

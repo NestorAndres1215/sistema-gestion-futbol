@@ -1,4 +1,5 @@
 ﻿using Application.Dto;
+using Application.Dto.estadisticas;
 using Application.Interfaces.Services;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -49,5 +50,30 @@ public class ArbitroController : ControllerBase
     public async Task<IActionResult> GetById(int id)
     {
         return Ok(await _service.GetByIdAsync(id));
+    }
+    // Controller
+
+    [HttpGet("total-arbitros")]
+    public async Task<ActionResult<AverageDto>> ObtenerTotalArbitros()
+    {
+        return Ok(await _service.ObtenerTotalArbitrosAsync());
+    }
+
+    [HttpGet("arbitros-activos")]
+    public async Task<ActionResult<AverageDto>> ObtenerArbitrosActivos()
+    {
+        return Ok(await _service.ObtenerArbitrosActivosAsync());
+    }
+
+    [HttpGet("precision-promedio")]
+    public async Task<ActionResult<AverageDto>> ObtenerPrecisionPromedio()
+    {
+        return Ok(await _service.ObtenerPrecisionPromedioAsync());
+    }
+
+    [HttpGet("reputacion-promedio")]
+    public async Task<ActionResult<AverageDto>> ObtenerReputacionPromedio()
+    {
+        return Ok(await _service.ObtenerReputacionPromedioAsync());
     }
 }
