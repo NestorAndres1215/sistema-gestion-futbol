@@ -215,6 +215,7 @@ export default function DashboardPage() {
                             <DashboardCard
                                 title="Total Estadios"
                                 value={25}
+                                icon="fas fa-users"
                             />
                         </div>
 

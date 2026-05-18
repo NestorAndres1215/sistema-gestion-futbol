@@ -26,18 +26,15 @@
   width: 34px;
   height: 34px;
   border-radius: 9px;
+  background: rgba(110, 231, 183, 0.08);
+  border: 1px solid rgba(110, 231, 183, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 15px;
+  color: #6ee7b7;
   flex-shrink: 0;
 }
-
-.green  .metricIconWrap { background: rgba(110,231,183,0.12); color: #6ee7b7; }
-.blue   .metricIconWrap { background: rgba(96,165,250,0.12);  color: #60a5fa; }
-.amber  .metricIconWrap { background: rgba(251,191,36,0.12);  color: #fbbf24; }
-.red    .metricIconWrap { background: rgba(248,113,113,0.12); color: #f87171; }
-.purple .metricIconWrap { background: rgba(167,139,250,0.12); color: #a78bfa; }
 
 .metricValue {
   font-family: 'Syne', sans-serif;

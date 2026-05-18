@@ -15,7 +15,7 @@ export default function DashboardCard({
 }: DashboardCardProps) {
   return (
     <div className={styles.card}>
-      <div className={styles.top}>
+      <div className="d-flex align-items-start justify-content-between mb-3">
         <p className={styles.title}>{title}</p>
         {icon && (
           <div className={styles.iconWrap}>
