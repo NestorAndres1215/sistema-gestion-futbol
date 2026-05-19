@@ -1,6 +1,5 @@
 "use client";
 
-//import styles from "./custom-line-chart.module.css";
 import styles from "@/shared/styles/chart.module.css";
 import {
   ResponsiveContainer,
@@ -68,7 +67,7 @@ export default function CustomPieChart<T>({
       {title && (
         <div className={styles.cardHead}>
           <div className={styles.headIcon}>
-            <i className="fas fa-chart-pie"></i>
+            <i className="fas fa-chart-pie" />
           </div>
           <p className={styles.headTitle}>{title}</p>
         </div>
@@ -96,7 +95,6 @@ export default function CustomPieChart<T>({
             </Pie>
 
             <Tooltip content={<CustomTooltip />} />
-
             <Legend content={<CustomLegend />} />
 
           </PieChart>

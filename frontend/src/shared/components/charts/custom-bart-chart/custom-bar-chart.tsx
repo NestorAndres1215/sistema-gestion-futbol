@@ -1,6 +1,5 @@
 "use client";
 
-//import styles from "./custom-line-chart.module.css";
 import styles from "@/shared/styles/chart.module.css";
 import {
   ResponsiveContainer,
@@ -11,6 +10,7 @@ import {
   YAxis,
   Tooltip,
   Legend,
+  ReferenceLine,
 } from "recharts";
 
 interface Props<T> {
@@ -54,7 +54,14 @@ export default function CustomBarChart<T>({
 
       <div className={styles.chartWrap} style={{ height }}>
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
+          <BarChart data={data} margin={{ top: 20, right: 10, left: -10, bottom: 0 }}>
+
+            <defs>
+              <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#6ee7b7" stopOpacity={0.9} />
+                <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.6} />
+              </linearGradient>
+            </defs>
 
             <CartesianGrid
               strokeDasharray="3 3"
@@ -76,6 +83,8 @@ export default function CustomBarChart<T>({
               tickLine={false}
             />
 
+            <ReferenceLine y={0} stroke="rgba(255,255,255,0.06)" />
+
             <Tooltip
               content={<CustomTooltip />}
               cursor={{ fill: "rgba(110,231,183,0.05)" }}
@@ -96,14 +105,13 @@ export default function CustomBarChart<T>({
               dataKey={dataKey as string}
               fill="url(#barGradient)"
               radius={[6, 6, 0, 0]}
+              label={{
+                position: "top",
+                fill: "#4a5568",
+                fontSize: 10,
+                fontFamily: "DM Mono",
+              }}
             />
-
-            <defs>
-              <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#6ee7b7" stopOpacity={0.9} />
-
-              </linearGradient>
-            </defs>
 
           </BarChart>
         </ResponsiveContainer>
