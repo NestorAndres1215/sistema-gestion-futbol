@@ -16,9 +16,9 @@ public interface IArbitrosService
     Task<Arbitros> AddAsync(ArbitrosDto arbitros);
     Task<Arbitros> UpdateAsync(int id,ArbitrosDto arbitros);
     Task<Arbitros> GetByIdAsync(int id);
-    Task<AverageDto> ObtenerTotalArbitrosAsync();
+    Task<TotalCountDto> ObtenerTotalArbitrosAsync();
 
-    Task<AverageDto> ObtenerArbitrosActivosAsync();
+    Task<TotalCountDto> ObtenerArbitrosActivosAsync();
 
     Task<AverageDto> ObtenerPrecisionPromedioAsync();
 

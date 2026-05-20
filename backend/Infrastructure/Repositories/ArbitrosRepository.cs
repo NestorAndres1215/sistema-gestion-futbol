@@ -192,14 +192,27 @@ public class ArbitrosRepository : IArbitroRepository
 
     public async Task<List<ItemDto>> ObtenerEstadoFisicoAsync()
     {
-        return await _context.Arbitros
+        var datos = await _context.Arbitros
             .GroupBy(a => a.EstadoFisico)
-            .Select(g => new ItemDto
+            .Select(g => new
             {
-                nombre = g.Key!,
-                valor = g.Count()
+                Estado = g.Key,
+                Cantidad = g.Count()
             })
             .ToListAsync();
+
+        var estados = new List<string>
+    {
+        "Activo",
+        "Fatigado",
+        "Lesionado"
+    };
+
+        return estados.Select(e => new ItemDto
+        {
+            nombre = e,
+            valor = datos.FirstOrDefault(x => x.Estado == e)?.Cantidad ?? 0
+        }).ToList();
     }
 
     public async Task<List<ItemDto>> ObtenerDebutsPorAnioAsync()

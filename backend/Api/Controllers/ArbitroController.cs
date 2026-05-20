@@ -54,7 +54,7 @@ public class ArbitroController : ControllerBase
     // Controller
 
     [HttpGet("total-arbitros")]
-    public async Task<ActionResult<AverageDto>> ObtenerTotalArbitros()
+    public async Task<ActionResult<TotalCountDto>> ObtenerTotalArbitros()
     {
         return Ok(await _service.ObtenerTotalArbitrosAsync());
     }

@@ -231,23 +231,23 @@ public class ArbitrosService : IArbitrosService
     }
 
 
-    public async Task<AverageDto> ObtenerTotalArbitrosAsync()
+    public async Task<TotalCountDto> ObtenerTotalArbitrosAsync()
     {
         var total = await _repository.ObtenerTotalArbitrosAsync();
 
-        return new AverageDto
+        return new TotalCountDto
         {
-            Promedio = total
+            Total = total
         };
     }
 
-    public async Task<AverageDto> ObtenerArbitrosActivosAsync()
+    public async Task<TotalCountDto> ObtenerArbitrosActivosAsync()
     {
         var total = await _repository.ObtenerArbitrosActivosAsync();
 
-        return new AverageDto
+        return new TotalCountDto
         {
-            Promedio = total
+            Total = total
         };
     }
 
