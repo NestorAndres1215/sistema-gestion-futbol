@@ -6,7 +6,6 @@ export const addEstadio = async (data: FormData) => {
   return response.data;
 };
 
-
 export const updateEstadio = async (id: number, data: FormData) => {
   const response = await api.put(`/estadios/${id}`, data);
   return response.data;
@@ -27,7 +26,6 @@ export const getEstadios = async ({ page = 1, pageSize = 10, search = "", tipoCe
   if (estado) params.append("estado", estado);
 
   const response = await api.get(`/estadios?${params.toString()}`);
-
   return response;
 };
 
@@ -121,17 +119,11 @@ export const getEstadiosMasNuevos = async (cantidad?: number) => {
 };
 
 export const getDistribucionEstado = async () => {
-  const response = await api.get(
-    `/estadios/distribucion-estado`
-  );
-
+  const response = await api.get(`/estadios/distribucion-estado`);
   return response;
 };
 
 export const getTiposCesped = async () => {
-  const response = await api.get(
-    `/estadios/tipos-cesped`
-  );
-
+  const response = await api.get(`/estadios/tipos-cesped`);
   return response;
 };

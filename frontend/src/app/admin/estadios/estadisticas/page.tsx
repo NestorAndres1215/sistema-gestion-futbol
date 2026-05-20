@@ -8,6 +8,7 @@ import CustomAreaChart from "@/shared/components/charts/custom-area-chart/custom
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import TeamStatusCard from "@/shared/components/charts/custom-team-status-card/custom-team-status-card";
 import useEstadioEstadisticas from "@/features/estadio/hooks/useEstadioEstadisticas";
+import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 
 export default function DashboardPage() {
 
@@ -22,7 +23,12 @@ export default function DashboardPage() {
 
     return (
         <AdminLayout>
-
+            <Breadcrumb
+                items={[
+                    { label: "Estadios", href: "/admin/estadios" },
+                    { label: "Estadisticas" },
+                ]}
+            />
             <div className="grid gap-6">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
                     <div className="row g-3 mb-4">
@@ -114,7 +120,7 @@ export default function DashboardPage() {
 
 
                             <CustomLineChart
-                                title="Estadios por Año"
+                                title="Estadios mayor capacidad"
                                 data={estadiosMayorCapacidad}
                                 xKey="nombre"
                                 dataKey="valor"
