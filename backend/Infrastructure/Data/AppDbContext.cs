@@ -22,5 +22,7 @@ public class AppDbContext : DbContext
     public DbSet<Jugadores> Jugadores { get; set; }
     public DbSet<Entrenadores> Entrenadores { get; set; }
     public DbSet<ParametrosSistema> ParametrosSistema { get; set; }
+    public DbSet<Selecciones> Selecciones { get; set; }
+    public DbSet<SeleccionEstadio> SeleccionEstadio { get; set; }
 
 }

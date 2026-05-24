@@ -35,6 +35,7 @@ public class AuthService : IAuthService
 
         if (existingUser != null)
             throw new BadRequestException("El nombre de usuario ya existe");
+
         ValidatePassword(dto.Password);
 
 

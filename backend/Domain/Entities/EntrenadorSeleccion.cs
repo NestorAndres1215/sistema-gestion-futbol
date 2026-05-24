@@ -1,0 +1,16 @@
+﻿
+namespace Domain.Entities;
+
+public class EntrenadorSeleccion
+{
+    public int Id { get; set; }
+    public int EntrenadorId { get; set; }
+    public int SeleccionId { get; set; }
+    public string Cargo { get; set; } = string.Empty;
+    public DateTime FechaInicio { get; set; }
+    public DateTime? FechaFin {  get; set; }
+    public Entrenadores Entrenadores { get; set; }
+    public Selecciones Selecciones { get; set; }
+
+
+}

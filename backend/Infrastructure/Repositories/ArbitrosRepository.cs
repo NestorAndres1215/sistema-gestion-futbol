@@ -25,12 +25,12 @@ public class ArbitrosRepository : IArbitroRepository
     }
 
     public async Task<PagedResult<Arbitros>> GetAllAsync(
-    int page,
-    int pageSize,
-    string? search,
-    string? categoria,
-    string? pais,
-    string? estado)
+        int page,
+        int pageSize,
+        string? search,
+        string? categoria,
+        string? pais,
+        string? estado)
     {
         var query = _context.Arbitros
            .Include(a => a.Persona)

@@ -5,6 +5,7 @@ using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
 
+
 namespace Application.Services;
 
 public class EstadioService : IEstadioService
@@ -28,27 +29,19 @@ public class EstadioService : IEstadioService
         {
             Nombre = dto.Nombre,
             Descripcion = dto.Descripcion ?? "",
-
             FechaApertura = dto.FechaApertura,
             Anio = dto.Anio,
-
             Ciudad = dto.Ciudad,
             Pais = dto.Pais,
-
             Latitud = dto.Latitud,
             Longitud = dto.Longitud,
-
             Capacidad = dto.Capacidad,
-
             TipoCesped = dto.TipoCesped,
             FotoUrl = fotoUrl,
-
             Estado = "Disponible",
             FechaCreacion = DateTime.Now
         };
-
-            await _repository.AddAsync(estadio);
-            return estadio;
+            return await _repository.AddAsync(estadio);
  
     }
 
@@ -123,17 +116,20 @@ public class EstadioService : IEstadioService
 
     public async Task<List<int>> GetAniosAsync()
     {
-       return await _repository.GetAniosAsync();
+        return await _repository.GetAniosAsync()
+            ?? throw new NotFoundException("Anios no encontrado");
     }
 
     public async  Task<Estadio?> GetByIdAsync(int id)
     {
-        return await _repository.GetByIdAsync(id);
+        return await _repository.GetByIdAsync(id)
+            ?? throw new NotFoundException("Estadio no encontrado");
     }
 
     public async Task<Estadio?> GetByNombreAsync(string nombre)
     {
-        return await _repository.GetByNombreAsync(nombre);
+        return await _repository.GetByNombreAsync(nombre)
+            ?? throw new NotFoundException("Estadio no encontrado");
     }
 
     public async Task<Estadio> UpdateAsync(int id, EstadioDTo estadioDTo)

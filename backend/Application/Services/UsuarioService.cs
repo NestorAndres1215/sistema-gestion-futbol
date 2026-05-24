@@ -22,26 +22,8 @@ public class UsuarioService : IUsuarioService
             ?? throw new NotFoundException("Usuario no encontrado");
     }
 
-    public async Task<PagedResult<Usuario>> GetAllAsync(
-        int page,
-        int pageSize,
-        string? search,
-        string? estado,
-        string? rol
-    )
+    public async Task<PagedResult<Usuario>> GetAllAsync( int page,int pageSize,string? search, string? estado,string? rol)
     {
-
-        page = page < 1 ? 1 : page;
-        pageSize = pageSize < 1 ? 10 : pageSize;
-
-        if (pageSize > 100)
-            pageSize = 100;
-
-        search = search?.Trim();
-        estado = estado?.Trim();
-
-        if (!string.IsNullOrEmpty(estado))
-            estado = estado.ToUpper();
 
         return await _repo.GetAllAsync(page, pageSize, search, estado,rol);
     }
@@ -57,11 +39,12 @@ public class UsuarioService : IUsuarioService
         var entity = await _repo.GetByIdAsync(id)
             ?? throw new NotFoundException("Usuario no encontrado");
 
+        await ValidarDuplicadosAsync(id, user);
+
         entity.Username = user.Username;
         entity.Email = user.Email;
 
         return await _repo.UpdateAsync(entity);
- 
     }
 
     public async Task<Usuario> UpdateEstadoAsync(int id)
@@ -76,5 +59,23 @@ public class UsuarioService : IUsuarioService
         return await _repo.UpdateAsync(entity);
     }
 
+    private async Task ValidarDuplicadosAsync(int id, UsuarioDto user)
+    {
+        if (string.IsNullOrWhiteSpace(user.Username))
+            throw new BadRequestException("Username requerido");
+
+        if (string.IsNullOrWhiteSpace(user.Email))
+            throw new BadRequestException("Email requerido");
+
+        var existeUsername = await _repo.GetByUsernameAsync(user.Username);
+
+        if (existeUsername != null && existeUsername.Id != id)
+            throw new BadRequestException("El username ya está en uso");
+
+        var existeEmail = await _repo.GetByEmailAsync(user.Email);
+
+        if (existeEmail != null && existeEmail.Id != id)
+            throw new BadRequestException("El email ya está en uso");
+    }
 
 }   

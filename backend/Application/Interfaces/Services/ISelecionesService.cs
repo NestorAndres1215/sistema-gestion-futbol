@@ -1,0 +1,19 @@
+﻿using Application.Dto;
+using Domain.Entities;
+
+namespace Application.Interfaces.Services;
+
+public interface ISelecionesService
+{
+    Task<PagedResult<Selecciones>> GetAllAsync(int page,
+        int pageSize,
+        string? search,
+        string? confederacion,
+        string? estado);
+    Task<Selecciones> AddAsync(SeleccionesDto selecciones);
+    Task<Selecciones> UpdateAsync(int id,SeleccionesDto selecciones);
+    Task<Selecciones?> GetByIdAsync(int id);
+    Task<Selecciones?> GetByNombreAsync(string nombre);
+    Task<Selecciones?> GetByClaveAsync(string clave);
+    Task<Selecciones?> GetByConfederacionAsync(string confederacion);
+}
