@@ -22,7 +22,14 @@
 
 .imagePerfil {
   width: 100%;
-  height: 250px;
+  height: 350px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.imageSeleccion {
+  width: 100%;
+  height: 265px;
   overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -78,13 +85,12 @@
 
 @media (max-width: 768px) {
 
-
   .imageStadium {
     height: 140px;
   }
 
   .imagePerfil {
-    height: 300px;
+    height: 320px;
   }
 
   .title {
@@ -100,7 +106,11 @@
   }
 
   .imagePerfil {
-    height: 320px;
+    height: 400px;
+    
+  }
+  .imageSeleccion {
+    height: 300px;
   }
 
 }

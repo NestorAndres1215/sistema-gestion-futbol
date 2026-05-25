@@ -29,23 +29,14 @@ export default function EstadiosListaPage() {
             />
 
             <div className="container mt-3">
-                <SearchBar
-                    value={query.search}
-                    onSearch={handleSearch}
-                />
-
-                <FilterBar
-                    onChange={handleFilter}
-                    selectFilters={estadioFilters}
-                />
+                <SearchBar value={query.search} onSearch={handleSearch} />
+                <FilterBar onChange={handleFilter} selectFilters={estadioFilters} />
 
                 <CardList
                     data={data}
                     getTitle={(e) => e.nombre}
                     getSubtitle={(e) => `${e.ciudad} - ${e.pais}`}
-                    getImage={(e) =>
-                        e.fotoUrl ? `https://localhost:7269${e.fotoUrl}` : null
-                    }
+                    getImage={(e) => e.fotoUrl ? `https://localhost:7269${e.fotoUrl}` : null}
                     imageClassName={styles.imageStadium}
                     onDetail={(e) => router.push(`/admin/estadios/listar/${e.id}`)}
                 />
