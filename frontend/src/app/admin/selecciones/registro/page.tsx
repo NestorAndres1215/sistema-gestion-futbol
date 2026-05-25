@@ -90,15 +90,15 @@ export default function SeleccionRegistro() {
                                 <label className={styles.label}>
                                     Confederacion
                                 </label>
-                                
+
                                 <div className={styles.inputWrap}>
-                                    
+
                                     <select
                                         className={styles.input}
                                         value={form.confederacion}
                                         onChange={(e) => handleChange("confederacion", e.target.value)}
                                     >
-     <option value="">
+                                        <option value="">
                                             Seleccione un país
                                         </option>
                                         {CONFEDERACION_OPTIONS.map((item) => (

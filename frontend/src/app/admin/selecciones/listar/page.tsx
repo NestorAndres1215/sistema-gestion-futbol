@@ -32,7 +32,7 @@ export default function SeleccionListarPage() {
                     getSubtitle={(e) => `${e.confederacion} `}
                     getImage={(e) => e.escudoUrl ? `https://localhost:7269${e.escudoUrl}` : null}
                     imageClassName={styles.imageSeleccion}
-                    onDetail={(e) => router.push(`/admin/estadios/listar/${e.id}`)}
+                    onDetail={(e) => router.push(`/admin/selecciones/listar/${e.id}`)}
                 />
                 <Pagination
                     currentPage={page}
