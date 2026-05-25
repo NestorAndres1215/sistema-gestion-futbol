@@ -29,7 +29,6 @@ export default function RegisterPage() {
             </div>
 
             <div className={styles.card}>
-
                 <div className="mb-4">
 
                     <div className={styles.cardTitle}>
@@ -99,7 +98,6 @@ export default function RegisterPage() {
                             </button>
 
                         </div>
-
                     </div>
 
                     <div className="d-flex flex-column gap-3">
@@ -110,11 +108,8 @@ export default function RegisterPage() {
                             onClick={() => window.history.back()} />
 
                     </div>
-
                 </form>
-
             </div>
-
         </div>
     );
 }

@@ -4,7 +4,6 @@ import AdminLayout from "../../../../shared/components/layout/admin/layout";
 import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useEntrenadorRegistro from "@/features/entrenador/hooks/useEntrenadorRegistro";
-import { PIE_DOMINANTE_OPTIONS } from "@/shared/constants/pie-dominante.options";
 import { ESTILO_JUEGO_OPTIONS } from "@/shared/constants/estilo-juego.options";
 import { LICENCIAS_ENTRENADOR_OPTIONS } from "@/shared/constants/licencias-entrenador.options";
 import { maxFechaNacimiento } from "@/shared/utils/date.utils";

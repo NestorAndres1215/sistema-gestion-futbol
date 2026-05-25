@@ -1,4 +1,4 @@
-CREATE DATABASE FootballManagerSystem;
+ÔªøCREATE DATABASE FootballManagerSystem;
 GO
 
 USE FootballManagerSystem;
@@ -127,8 +127,6 @@ CREATE TABLE Arbitros (
     CONSTRAINT CK_Arbitro_Reputacion
         CHECK (Reputacion BETWEEN 1 AND 100),
 
-    CONSTRAINT CK_Arbitro_Precision
-        CHECK (PrecisionDecisiones BETWEEN 1 AND 100)
 );
 
 -- TABLA ENTRENADORES
@@ -231,12 +229,12 @@ CREATE TABLE ParametrosSistema (
 INSERT INTO Ciudades (Nombre, PaisId)
 VALUES
 
-('Reggiolo', (SELECT Id FROM Paises WHERE Nombre = 'Italia'))
+('P≈Çock', (SELECT Id FROM Paises WHERE Nombre = 'Polonia'))
 
 
 INSERT INTO Paises (Nombre, CodigoISO)
 VALUES
-('Afganist·n', 'AFG'),
+('Afganist√°n', 'AFG'),
 ('Albania', 'ALB'),
 ('Alemania', 'DEU'),
 ('Andorra', 'AND'),
@@ -249,14 +247,14 @@ VALUES
 ('Aruba', 'ABW'),
 ('Australia', 'AUS'),
 ('Austria', 'AUT'),
-('Azerbaiy·n', 'AZE'),
+('Azerbaiy√°n', 'AZE'),
 ('Bahamas', 'BHS'),
-('BangladÈs', 'BGD'),
+('Banglad√©s', 'BGD'),
 ('Barbados', 'BRB'),
-('BarÈin', 'BHR'),
-('BÈlgica', 'BEL'),
+('Bar√©in', 'BHR'),
+('B√©lgica', 'BEL'),
 ('Belice', 'BLZ'),
-('BenÌn', 'BEN'),
+('Ben√≠n', 'BEN'),
 ('Bermudas', 'BMU'),
 ('Bielorrusia', 'BLR'),
 ('Birmania', 'MMR'),
@@ -264,15 +262,15 @@ VALUES
 ('Bosnia y Herzegovina', 'BIH'),
 ('Botsuana', 'BWA'),
 ('Brasil', 'BRA'),
-('BrunÈi', 'BRN'),
+('Brun√©i', 'BRN'),
 ('Bulgaria', 'BGR'),
 ('Burkina Faso', 'BFA'),
 ('Burundi', 'BDI'),
-('But·n', 'BTN'),
+('But√°n', 'BTN'),
 ('Cabo Verde', 'CPV'),
 ('Camboya', 'KHM'),
-('Camer˙n', 'CMR'),
-('Canad·', 'CAN'),
+('Camer√∫n', 'CMR'),
+('Canad√°', 'CAN'),
 ('Catar', 'QAT'),
 ('Chad', 'TCD'),
 ('Chile', 'CHL'),
@@ -292,20 +290,20 @@ VALUES
 ('Ecuador', 'ECU'),
 ('Egipto', 'EGY'),
 ('El Salvador', 'SLV'),
-('Emiratos ¡rabes Unidos', 'ARE'),
+('Emiratos √Årabes Unidos', 'ARE'),
 ('Eritrea', 'ERI'),
 ('Escocia', 'SCO'),
 ('Eslovaquia', 'SVK'),
 ('Eslovenia', 'SVN'),
-('EspaÒa', 'ESP'),
+('Espa√±a', 'ESP'),
 ('Estados Unidos', 'USA'),
 ('Estonia', 'EST'),
-('EtiopÌa', 'ETH'),
+('Etiop√≠a', 'ETH'),
 ('Filipinas', 'PHL'),
 ('Finlandia', 'FIN'),
 ('Fiyi', 'FJI'),
 ('Francia', 'FRA'),
-('GabÛn', 'GAB'),
+('Gab√≥n', 'GAB'),
 ('Gales', 'WAL'),
 ('Gambia', 'GMB'),
 ('Georgia', 'GEO'),
@@ -318,16 +316,16 @@ VALUES
 ('Guyana', 'GUY'),
 ('Guinea', 'GIN'),
 ('Guinea Ecuatorial', 'GNQ'),
-('Guinea-Bis·u', 'GNB'),
-('HaitÌ', 'HTI'),
+('Guinea-Bis√°u', 'GNB'),
+('Hait√≠', 'HTI'),
 ('Honduras', 'HND'),
 ('Hong Kong', 'HKG'),
-('HungrÌa', 'HUN'),
+('Hungr√≠a', 'HUN'),
 ('India', 'IND'),
 ('Indonesia', 'IDN'),
 ('Inglaterra', 'ENG'),
 ('Irak', 'IRQ'),
-('Ir·n', 'IRN'),
+('Ir√°n', 'IRN'),
 ('Irlanda', 'IRL'),
 ('Irlanda del Norte', 'NIR'),
 ('Islandia', 'ISL'),
@@ -335,17 +333,17 @@ VALUES
 ('Israel', 'ISR'),
 ('Italia', 'ITA'),
 ('Jamaica', 'JAM'),
-('JapÛn', 'JPN'),
+('Jap√≥n', 'JPN'),
 ('Jordania', 'JOR'),
-('Kazajist·n', 'KAZ'),
+('Kazajist√°n', 'KAZ'),
 ('Kenia', 'KEN'),
-('Kirguist·n', 'KGZ'),
+('Kirguist√°n', 'KGZ'),
 ('Kosovo', 'XKX'),
 ('Kuwait', 'KWT'),
 ('Laos', 'LAO'),
 ('Lesoto', 'LSO'),
 ('Letonia', 'LVA'),
-('LÌbano', 'LBN'),
+('L√≠bano', 'LBN'),
 ('Liberia', 'LBR'),
 ('Libia', 'LBY'),
 ('Liechtenstein', 'LIE'),
@@ -357,50 +355,50 @@ VALUES
 ('Malasia', 'MYS'),
 ('Malaui', 'MWI'),
 ('Maldivas', 'MDV'),
-('MalÌ', 'MLI'),
+('Mal√≠', 'MLI'),
 ('Malta', 'MLT'),
 ('Marruecos', 'MAR'),
 ('Mauricio', 'MUS'),
 ('Mauritania', 'MRT'),
-('MÈxico', 'MEX'),
+('M√©xico', 'MEX'),
 ('Moldavia', 'MDA'),
-('MÛnaco', 'MCO'),
+('M√≥naco', 'MCO'),
 ('Mongolia', 'MNG'),
 ('Montenegro', 'MNE'),
 ('Mozambique', 'MOZ'),
 ('Namibia', 'NAM'),
 ('Nepal', 'NPL'),
 ('Nicaragua', 'NIC'),
-('NÌger', 'NER'),
+('N√≠ger', 'NER'),
 ('Nigeria', 'NGA'),
 ('Noruega', 'NOR'),
 ('Nueva Caledonia', 'NCL'),
 ('Nueva Zelanda', 'NZL'),
-('Om·n', 'OMN'),
-('PaÌses Bajos', 'NLD'),
-('Pakist·n', 'PAK'),
+('Om√°n', 'OMN'),
+('Pa√≠ses Bajos', 'NLD'),
+('Pakist√°n', 'PAK'),
 ('Palestina', 'PSE'),
-('Panam·', 'PAN'),
-('Pap˙a Nueva Guinea', 'PNG'),
+('Panam√°', 'PAN'),
+('Pap√∫a Nueva Guinea', 'PNG'),
 ('Paraguay', 'PRY'),
-('Per˙', 'PER'),
+('Per√∫', 'PER'),
 ('Polonia', 'POL'),
 ('Portugal', 'PRT'),
 ('Puerto Rico', 'PRI'),
-('Rep˙blica Centroafricana', 'CAF'),
-('Rep˙blica Checa', 'CZE'),
-('Rep˙blica del Congo', 'COG'),
-('Rep˙blica Democr·tica del Congo', 'COD'),
-('Rep˙blica Dominicana', 'DOM'),
+('Rep√∫blica Centroafricana', 'CAF'),
+('Rep√∫blica Checa', 'CZE'),
+('Rep√∫blica del Congo', 'COG'),
+('Rep√∫blica Democr√°tica del Congo', 'COD'),
+('Rep√∫blica Dominicana', 'DOM'),
 ('Ruanda', 'RWA'),
-('RumanÌa', 'ROU'),
+('Ruman√≠a', 'ROU'),
 ('Rusia', 'RUS'),
 ('Samoa', 'WSM'),
-('San CristÛbal y Nieves', 'KNA'),
+('San Crist√≥bal y Nieves', 'KNA'),
 ('San Marino', 'SMR'),
 ('San Vicente y las Granadinas', 'VCT'),
-('Santa LucÌa', 'LCA'),
-('Santo TomÈ y PrÌncipe', 'STP'),
+('Santa Luc√≠a', 'LCA'),
+('Santo Tom√© y Pr√≠ncipe', 'STP'),
 ('Senegal', 'SEN'),
 ('Serbia', 'SRB'),
 ('Seychelles', 'SYC'),
@@ -409,27 +407,27 @@ VALUES
 ('Siria', 'SYR'),
 ('Somalia', 'SOM'),
 ('Sri Lanka', 'LKA'),
-('Sud·frica', 'ZAF'),
-('Sud·n', 'SDN'),
-('Sud·n del Sur', 'SSD'),
+('Sud√°frica', 'ZAF'),
+('Sud√°n', 'SDN'),
+('Sud√°n del Sur', 'SSD'),
 ('Suecia', 'SWE'),
 ('Suiza', 'CHE'),
 ('Surinam', 'SUR'),
 ('Tailandia', 'THA'),
-('Taiw·n', 'TWN'),
+('Taiw√°n', 'TWN'),
 ('Tanzania', 'TZA'),
-('Tayikist·n', 'TJK'),
+('Tayikist√°n', 'TJK'),
 ('Timor Oriental', 'TLS'),
 ('Togo', 'TGO'),
 ('Tonga', 'TON'),
 ('Trinidad y Tobago', 'TTO'),
-('T˙nez', 'TUN'),
-('Turkmenist·n', 'TKM'),
-('TurquÌa', 'TUR'),
+('T√∫nez', 'TUN'),
+('Turkmenist√°n', 'TKM'),
+('Turqu√≠a', 'TUR'),
 ('Ucrania', 'UKR'),
 ('Uganda', 'UGA'),
 ('Uruguay', 'URY'),
-('Uzbekist·n', 'UZB'),
+('Uzbekist√°n', 'UZB'),
 ('Vanuatu', 'VUT'),
 ('Vaticano', 'VAT'),
 ('Venezuela', 'VEN'),
@@ -438,3 +436,73 @@ VALUES
 ('Yibuti', 'DJI'),
 ('Zambia', 'ZMB'),
 ('Zimbabue', 'ZWE');
+
+CREATE TABLE Selecciones (
+    Id INT PRIMARY KEY IDENTITY,
+
+    Nombre NVARCHAR(100) NOT NULL,
+    Confederacion NVARCHAR(50) NOT NULL,
+    Clave NVARCHAR(100) UNIQUE,
+	Seudonimo  NVARCHAR(100),
+    CodigoFIFA CHAR(3) UNIQUE,
+    Pais NVARCHAR(100),
+    BanderaUrl NVARCHAR(500),
+    EscudoUrl NVARCHAR(500),
+
+    Estado VARCHAR(20) DEFAULT 'Activo',
+
+    FechaCreacion DATETIME DEFAULT GETDATE(),
+    FechaActualizacion DATETIME NULL
+);
+
+CREATE TABLE SeleccionEstadio (
+    Id INT PRIMARY KEY IDENTITY,
+
+    SeleccionId INT NOT NULL,
+    EstadioId INT NOT NULL,
+
+    Tipo VARCHAR(20) DEFAULT 'Principal',
+
+    FOREIGN KEY (SeleccionId)
+        REFERENCES Selecciones(Id),
+
+    FOREIGN KEY (EstadioId)
+        REFERENCES Estadios(Id)
+);
+
+CREATE TABLE EntrenadorSeleccion (
+    Id INT PRIMARY KEY IDENTITY,
+
+    EntrenadorId INT NOT NULL,
+    SeleccionId INT NOT NULL,
+
+    Cargo NVARCHAR(50),
+
+    FechaInicio DATE,
+    FechaFin DATE,
+
+    FOREIGN KEY (EntrenadorId)
+        REFERENCES Entrenadores(Id),
+
+    FOREIGN KEY (SeleccionId)
+        REFERENCES Selecciones(Id)
+);
+
+CREATE TABLE EstadisticasEntrenadorSeleccion (
+    Id INT PRIMARY KEY IDENTITY,
+    EntrenadorSeleccionId INT NOT NULL,
+    PartidosDirigidos INT DEFAULT 0,
+    Victorias INT DEFAULT 0,
+    Empates INT DEFAULT 0,
+    Derrotas INT DEFAULT 0,
+	 GolesFavor INT DEFAULT 0,
+    GolesContra INT DEFAULT 0,
+
+    TitulosGanados INT DEFAULT 0,
+
+    FOREIGN KEY (EntrenadorSeleccionId)
+        REFERENCES EntrenadorSeleccion(Id),
+
+    CONSTRAINT UQ_EntrenadorSeleccion
+        UNIQUE (EntrenadorSeleccionId)
+);
