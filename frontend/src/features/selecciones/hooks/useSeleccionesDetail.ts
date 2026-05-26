@@ -13,7 +13,6 @@ export default function useSeleccionesDetail() {
 
         const fetchSeleccion = async () => {
             const res = await getSeleccionById(Number(params.id));
-            console.log(res)
             setSeleccion(res);
         };
 
@@ -41,6 +40,18 @@ export default function useSeleccionesDetail() {
                 label: "Seudonimo",
                 value: seleccion.seudonimo,
             },
+            {
+                label: "Estadio",
+                value: "Estadio Nacional"
+            },
+            {
+                label: "Entrenador Actual",
+                value: "Jose Perez"
+            },
+            {
+                label: "Capitan Actual",
+                value: "Jose Perez"
+            }
         ]
         : [];
 

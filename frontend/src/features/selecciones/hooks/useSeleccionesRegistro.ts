@@ -64,23 +64,16 @@ export default function useEntrenadorRegistro() {
                 );
 
                 setPaises(filtrados.filter(Boolean));
-                
+
             } catch {
-
                 setPaises([]);
-
             }
-
         };
 
         loadPaises();
 
     }, []);
-    const seleccionToFormData = (
-        form: any,
-        bandera: File | null,
-        escudo: File | null
-    ) => {
+    const seleccionToFormData = (form: any, bandera: File | null, escudo: File | null) => {
 
         const formData = new FormData();
 
@@ -103,17 +96,11 @@ export default function useEntrenadorRegistro() {
 
         try {
 
-            const fd = seleccionToFormData(
-                form,
-                bandera,
-                escudo
-            );
+            const fd = seleccionToFormData(form, bandera, escudo);
 
             await addSelecciones(fd);
 
-            SwalService.success(
-                "Selección registrada exitosamente"
-            );
+            SwalService.success("Selección registrada exitosamente");
 
             router.push("/admin/selecciones");
 
@@ -125,10 +112,8 @@ export default function useEntrenadorRegistro() {
 
     };
     return {
-        registrarSeleccion,
-        setBandera, setEscudo,
-        paises,
-        form, handleChange,
-        limpiarFormulario
+        registrarSeleccion, setBandera, setEscudo,
+        handleChange, limpiarFormulario,
+        paises, form
     }
 }

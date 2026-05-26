@@ -1,6 +1,6 @@
 .container {
   background: #13161e;
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 14px;
   overflow: hidden;
 }
@@ -10,7 +10,7 @@
   align-items: center;
   gap: 8px;
   padding: 16px 20px 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .headIcon {
@@ -44,12 +44,12 @@
   color: #2d3748;
   padding: 10px 12px 10px 20px;
   text-align: left;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   white-space: nowrap;
 }
 
 .table tbody tr {
-  border-bottom: 1px solid rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   transition: background 0.1s ease;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .table tbody tr:hover {
-  background: rgba(255,255,255,0.02);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .table tbody td {
@@ -78,8 +78,31 @@
   font-weight: 600;
 }
 
-.posBadge { font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 5px; letter-spacing: 0.05em; }
-.posDEL { background: rgba(248,113,113,0.12); color: #f87171; }
-.posMED { background: rgba(96,165,250,0.12);  color: #60a5fa; }
-.posDEF { background: rgba(251,191,36,0.12);  color: #fbbf24; }
-.posPOR { background: rgba(167,139,250,0.12); color: #a78bfa; }
+.posBadge {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 5px;
+  letter-spacing: 0.05em;
+}
+
+.posDEL {
+  background: rgba(248, 113, 113, 0.12);
+  color: #f87171;
+}
+
+.posMED {
+  background: rgba(96, 165, 250, 0.12);
+  color: #60a5fa;
+}
+
+.posDEF {
+  background: rgba(251, 191, 36, 0.12);
+  color: #fbbf24;
+}
+
+.posPOR {
+  background: rgba(167, 139, 250, 0.12);
+  color: #a78bfa;
+}

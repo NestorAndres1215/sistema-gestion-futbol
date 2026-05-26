@@ -12,11 +12,13 @@ export default function useSelecciones() {
     const [totalPages, setTotalPages] = useState(1);
     const pageSize = 15;
     const [data, setData] = useState<any[]>([]);
+
     const [query, setQuery] = useState<SeleccionQueryState>({
         search: "",
         confederacion: "",
         estado: "",
     });
+
     const confederacionFilters = [
         {
             key: "confederacion",
@@ -57,8 +59,9 @@ export default function useSelecciones() {
     };
 
     useEffect(() => { fetchSelecciones(query, page); }, [query, page]);
+
     return {
-        data,
-        handleSearch, query, page, totalPages, setPage, confederacionFilters, handleFilter
+        data, query, page, totalPages, confederacionFilters,
+        handleSearch, setPage, handleFilter
     }
 }
