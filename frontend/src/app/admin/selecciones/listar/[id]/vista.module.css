@@ -1,0 +1,107 @@
+.card {
+    background: #13161e;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.15s ease;
+}
+
+.card:hover {
+    border-color: rgba(110, 231, 183, 0.25);
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px;
+  background: #0f1117;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cardName {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: #f0f4f8;
+  margin: 0 0 3px;
+  letter-spacing: -0.01em;
+}
+
+.imgWrap {
+    width: 100%;
+    background: #0d0f17;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.image {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: rgba(110, 231, 183, 0.06);
+    border: 2px solid rgba(110, 231, 183, 0.15);
+    padding: 8px;
+}
+
+.title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: #f0f4f8;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.divider {
+    width: 36px;
+    height: 3px;
+    border-radius: 99px;
+    background: linear-gradient(90deg, #6ee7b7, #3b82f6);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 24px;
+}
+
+.item {
+    background: #0f1117;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 11px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    transition: border-color 0.15s ease;
+}
+
+.item:hover {
+    border-color: rgba(110, 231, 183, 0.2);
+}
+
+.label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #4a5568;
+}
+
+.value {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #f0f4f8;
+    margin: 0;
+}
+
+
+
