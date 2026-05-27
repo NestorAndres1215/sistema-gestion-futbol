@@ -111,9 +111,6 @@ export default function useArbitro() {
 
     const arbitroActions = {
 
-        onView: (u: any) =>
-            router.push(`/admin/arbitros/edicion/${u.id}`),
-
         onEdit: (u: any) =>
             router.push(`/admin/arbitros/edicion/${u.id}/editar`),
 

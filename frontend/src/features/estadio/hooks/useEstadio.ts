@@ -110,9 +110,6 @@ export default function useEstadio() {
     };
 
     const estadioActions = {
-        onView: (e: any) =>
-            router.push(`/admin/estadios/edicion/${e.id}`),
-
         onEdit: (e: any) =>
             router.push(`/admin/estadios/edicion/${e.id}/editar`),
     };

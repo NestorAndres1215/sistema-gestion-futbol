@@ -13,9 +13,6 @@ export const useLogin = () => {
     const registrar = () => {
         router.push("/auth/register");
     }
-
-
-    
     return { submitLogin, registrar};
 };
 

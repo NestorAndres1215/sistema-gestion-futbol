@@ -21,32 +21,24 @@ export default function useRegisterUser() {
         try {
 
             await addUser(form);
-
             SwalService.success("Usuario registrado exitosamente");
-
             router.back();
-
         }
         catch (error: any) {
-
             SwalService.error(error.message);
-
         }
     };
+
     const limpiarForm = () => {
         setForm({
             username: "",
             email: "",
             password: "",
-        }
-
-        );
+        });
     };
+
     return {
-        form,
-        handleChange,
-        registrar, limpiarForm,
-        showPassword,
-        setShowPassword
+        form, showPassword,
+        handleChange, registrar, limpiarForm, setShowPassword
     }
 }

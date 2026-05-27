@@ -4,10 +4,11 @@ import AdminLayout from "@/shared/components/layout/admin/layout";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import ActionButton from "@/shared/components/ui/button/button";
 import useUsuarioEdit from "@/features/usuario/hooks/useUsuarioEdit";
-import router from "next/router";
-import styles from "@/shared/styles/form.module.css";
-export default function UsuarioDetallePage() {
 
+import styles from "@/shared/styles/form.module.css";
+import { useRouter } from "next/navigation";
+export default function UsuarioDetallePage() {
+ const router = useRouter();
   const {
     form, handleSubmit,
     handleChange, breadcrumbUsuarioEdit

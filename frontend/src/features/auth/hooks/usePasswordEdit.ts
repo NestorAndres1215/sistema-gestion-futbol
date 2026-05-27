@@ -39,24 +39,17 @@ export default function UsePasswordEdit() {
     const cambiarPassword = async () => {
 
         try {
-
-            console.log(form);
-
             await updatePassword(user.id, form);
             SwalService.success("Contraseña actualizar exitosamente");
-
             router.back();
-
         } catch (error: any) {
-
             SwalService.error(error.message);
-
         }
     };
 
     return {
-        cambiarPassword, limpiarForm, handleChange,setShowPasswords,
-        showPasswords, user,form
+        cambiarPassword, limpiarForm, handleChange, setShowPasswords,
+        showPasswords, user, form
 
     }
 }

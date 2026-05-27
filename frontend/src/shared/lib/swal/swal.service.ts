@@ -38,6 +38,20 @@ export const SwalService = {
     });
   },
 
+  loading: (message = "Cargando...") => {
+    return SwalTheme.fire({
+      title: message,
+      allowOutsideClick: false,
+      didOpen: () => {
+        SwalTheme.showLoading();
+      }
+    });
+  },
+
+  close: () => {
+    SwalTheme.close();
+  },
+
   confirm: async (message: string, title = "¿Estás seguro?") => {
     const result = await SwalTheme.fire({
       icon: "warning",

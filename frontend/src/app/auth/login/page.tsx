@@ -6,6 +6,7 @@ import { useLogin } from "@/features/auth/hooks/useLogin";
 import { useAuthRedirect } from "@/features/auth/hooks/useAuthRedirect";
 import styles from "@/features/auth/styles/login.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
+import { SwalService } from "@/shared/lib/swal/swal.service";
 
 export default function LoginPage() {
     const router = useRouter();
@@ -13,6 +14,8 @@ export default function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+
     const { submitLogin, registrar } = useLogin();
 
     useAuthRedirect();
@@ -20,19 +23,32 @@ export default function LoginPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const data = await submitLogin(email, password);
+        try {
+            setLoading(true);
 
-        const role = data.rol;
-        const user = data.username;
+            SwalService.loading("Iniciando sesión...");
 
-        document.cookie = `token=${data.token}; path=/`;
-        document.cookie = `role=${role}; path=/`;
-        document.cookie = `user=${user}; path=/`;
+            const data = await submitLogin(email, password);
 
-        if (role === "admin") {
-            router.replace("/admin/dashboard");
-        } else {
-            router.replace("/user/dashboard");
+            const role = data.rol;
+            const user = data.username;
+
+            document.cookie = `token=${data.token}; path=/`;
+            document.cookie = `role=${role}; path=/`;
+            document.cookie = `user=${user}; path=/`;
+
+            SwalService.close();
+
+            if (role === "admin") {
+                router.replace("/admin/dashboard");
+            } else {
+                router.replace("/user/dashboard");
+            }
+
+        } catch (error) {
+            SwalService.error("Correo o contraseña incorrectos");
+        } finally {
+            setLoading(false);
         }
     };
 

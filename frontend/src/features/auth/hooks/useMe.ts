@@ -9,14 +9,11 @@ export const useMe = () => {
         const fetchUser = async () => {
             try {
                 const data = await getMe();
-                console.log("ME RESPONSE:", data); // 🔥 IMPORTANTE
                 setUser(data);
             } catch (err) {
-                console.log("ERROR ME:", err);
                 setError(err);
             }
         };
-
         fetchUser();
     }, []);
 

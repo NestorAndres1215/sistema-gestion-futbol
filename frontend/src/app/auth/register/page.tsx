@@ -6,11 +6,8 @@ import ActionButton from "@/shared/components/ui/button/button";
 
 export default function RegisterPage() {
     const {
-        form,
-        handleChange,
-        registrar,
-        showPassword,
-        setShowPassword
+        form, showPassword,
+        handleChange, registrar, setShowPassword
     } = useRegisterUser();
 
     return (
@@ -50,9 +47,7 @@ export default function RegisterPage() {
                         <div className={styles.inputWrap}>
                             <input
                                 value={form.username}
-                                onChange={(e) =>
-                                    handleChange("username", e.target.value)
-                                }
+                                onChange={(e) => handleChange("username", e.target.value)}
                                 placeholder="Ingrese usuario"
                                 className={styles.input}
                             />
