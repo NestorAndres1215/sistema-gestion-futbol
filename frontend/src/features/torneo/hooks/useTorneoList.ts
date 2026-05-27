@@ -9,13 +9,7 @@ export default function useTorneoLista(tipo: string, categoria: string) {
 
     useEffect(() => {
         const fetchTorneos = async () => {
-            const res = await getTorneos({
-                page,
-                pageSize,
-                tipo: categoria,
-                tipoParticipante: tipo,
-            });
-
+            const res = await getTorneos({ page, pageSize, tipo: categoria, tipoParticipante: tipo, });
             setData(res);
         };
 

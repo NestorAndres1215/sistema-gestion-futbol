@@ -3,9 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getUsers, updateUserState } from "../services/usuario.service";
-import { userFilters } from "../constants/usuario-filters";
 import { SwalService } from "@/shared/lib/swal/swal.service";
-
 
 export function useUsers() {
   const router = useRouter();
@@ -63,13 +61,10 @@ export function useUsers() {
   };
 
   const userColumns = [
-    { header: "ID", accessor: "id" },
-    { header: "Usuario", accessor: "username" },
-    { header: "Email", accessor: "email" },
-    {
-      header: "Rol",
-      accessor: (u: any) => u.rol?.nombre,
-    },
+    { header: "ID", accessor: (row: any) => row.id, },
+    { header: "Usuario", accessor: (row: any) => row.username, },
+    { header: "Email", accessor: (row: any) => row.email, },
+    { header: "Rol", accessor: (u: any) => u.rol.nombre, },
   ];
 
   const userActions = {
@@ -78,22 +73,33 @@ export function useUsers() {
     onDelete: (u: any) => handleDelete(u),
   };
 
+  const userFilters = [
+    {
+      key: "estado",
+      placeholder: "Selecciona Estado",
+      options: [
+        { label: "Activo", value: "ACTIVO" },
+        { label: "Inactivo", value: "INACTIVO" },
+      ],
+    },
+    {
+      key: "rol",
+      placeholder: "Selecciona Rol",
+      options: [
+        { label: "Admin", value: "admin" },
+        { label: "Usuario", value: "user" },
+      ],
+    },
+  ];
+
   const breadcrumbUsuario = [
     { label: "Usuario" },
   ];
 
   return {
-    data,
-    page,
-    setPage,
-    query,
-    setQuery,
-    handleSearch,
-    handleFilter,
-    userColumns,
-    userActions,
-    userFilters,
-    breadcrumbUsuario
+    data, query, page,
+    userColumns, userActions, userFilters, breadcrumbUsuario,
+    setPage, setQuery, handleSearch, handleFilter,
   };
 
 }

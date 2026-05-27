@@ -25,13 +25,8 @@ export default function UseSistema() {
 
     const fetchData = async (q: SistemaQueryState, currentPage: number) => {
         try {
-            
-            const res = await getParametros({
-                ...q,
-                page: currentPage,
-                pageSize,
-            });
 
+            const res = await getParametros({ ...q, page: currentPage, pageSize });
             const lista = res?.items ?? res?.data ?? [];
             setData(Array.isArray(lista) ? lista : []);
             setTotalPages(res?.totalPages ?? 1);
@@ -67,30 +62,12 @@ export default function UseSistema() {
     };
 
     const sistemasColumns = [
-        {
-            header: "ID",
-            accessor: (row: any) => row.id,
-        },
-        {
-            header: "Clave",
-            accessor: (row: any) => row.clave,
-        },
-        {
-            header: "Nombre",
-            accessor: (row: any) => row.nombre,
-        },
-        {
-            header: "Categoria",
-            accessor: (row: any) => row.categoria,
-        },
-        {
-            header: "Tipo Dato",
-            accessor: (row: any) => row.tipoDato,
-        },
-        {
-            header: "Estado",
-            accessor: (row: any) => row.estado,
-        },
+        { header: "ID", accessor: (row: any) => row.id, },
+        { header: "Clave", accessor: (row: any) => row.clave, },
+        { header: "Nombre", accessor: (row: any) => row.nombre, },
+        { header: "Categoria", accessor: (row: any) => row.categoria, },
+        { header: "Tipo Dato", accessor: (row: any) => row.tipoDato, },
+        { header: "Estado", accessor: (row: any) => row.estado, },
     ];
 
     const parametrosFilters = [
@@ -114,13 +91,8 @@ export default function UseSistema() {
     ];
 
     return {
-        sistemasColumns, handleSearch, query,
-        data,
-        page,
-        totalPages,
-        handleFilter,
-        setPage,
-        parametrosFilters,
-        parametrosActions
+        sistemasColumns, query, data, page,
+        parametrosFilters, totalPages, parametrosActions,
+        handleFilter, handleSearch, setPage
     }
 }

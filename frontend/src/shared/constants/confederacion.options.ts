@@ -1,5 +1,4 @@
 export const CONFEDERACION_OPTIONS = [
-
   { value: "CONMEBOL", label: "CONMEBOL" },
   { value: "UEFA", label: "UEFA" },
   { value: "CONCACAF", label: "CONCACAF" },

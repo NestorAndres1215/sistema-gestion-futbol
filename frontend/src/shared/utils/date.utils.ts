@@ -11,8 +11,8 @@ export const formatDate = (date?: string) => {
 };
 
 export const formatDateInput = (date?: string) => {
-  if (!date) return "";
-  return date.split("T")[0];
+    if (!date) return "";
+    return date.split("T")[0];
 };
 
 

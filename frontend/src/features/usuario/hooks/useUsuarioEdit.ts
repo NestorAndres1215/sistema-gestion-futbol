@@ -46,9 +46,7 @@ export default function useUsuarioEdit() {
       await updateUser(Number(id), form);
       router.push("/admin/usuario");
     } catch (error: any) {
-      SwalService.error(
-        error?.response?.data?.message || error?.message || "Error inesperado"
-      );
+      SwalService.error(error.message);
     }
   };
 
@@ -62,12 +60,8 @@ export default function useUsuarioEdit() {
     : "??";
 
   return {
-    initials,
-    form,
-    handleSubmit,
-    id,
-    handleChange,
-    breadcrumbUsuarioEdit,
+    initials, id, form, breadcrumbUsuarioEdit,
+    handleSubmit, handleChange,
   }
 
 }

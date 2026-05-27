@@ -60,9 +60,7 @@ export default function useTorneoRegistro(tipo: string) {
     };
 
     return {
-        categorias,
-        formRef,
-        limpiarFormulario,
-        registrarTorneo
+        categorias, formRef,
+        limpiarFormulario, registrarTorneo
     };
 }

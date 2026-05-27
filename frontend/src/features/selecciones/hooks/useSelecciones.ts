@@ -1,6 +1,7 @@
 import { CONFEDERACION_OPTIONS } from "@/shared/constants/confederacion.options";
 import { useEffect, useState } from "react";
 import { getSelecciones } from "../services/selecciones.service";
+import { useRouter } from "next/navigation";
 
 type SeleccionQueryState = {
     search: string;
@@ -12,7 +13,7 @@ export default function useSelecciones() {
     const [totalPages, setTotalPages] = useState(1);
     const pageSize = 15;
     const [data, setData] = useState<any[]>([]);
-
+    const router = useRouter();
     const [query, setQuery] = useState<SeleccionQueryState>({
         search: "",
         confederacion: "",
@@ -58,10 +59,22 @@ export default function useSelecciones() {
         }
     };
 
-    useEffect(() => { fetchSelecciones(query, page); }, [query, page]);
+    const seleccionColumns = [
+        { header: "ID", accessor: (row: any) => row.id, },
+        { header: "Nombre", accessor: (row: any) => row.nombre, },
+        { header: "Codigo FIFA", accessor: (row: any) => row.codigoFIFA, },
+        { header: "Confederacion", accessor: (row: any) => row.confederacion, },
+    ];
 
+    useEffect(() => { fetchSelecciones(query, page); }, [query, page]);
+    const seleccionActions = {
+
+        onEdit: (u: any) =>
+            router.push(`/admin/entrenadores/edicion/${u.id}/editar`),
+
+    };
     return {
-        data, query, page, totalPages, confederacionFilters,
+        data, query, page, totalPages, confederacionFilters, seleccionColumns, seleccionActions,
         handleSearch, setPage, handleFilter
     }
 }

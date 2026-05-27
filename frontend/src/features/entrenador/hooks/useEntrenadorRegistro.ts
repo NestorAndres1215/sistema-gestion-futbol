@@ -71,6 +71,7 @@ export default function useEntrenadorRegistro() {
         loadCiudades();
 
     }, [form.paisNacimiento]);
+    
     const limpiarFormulario = () => {
 
         setForm({
@@ -90,21 +91,22 @@ export default function useEntrenadorRegistro() {
         setFoto(null);
     };
 
+    const estadioToFormData = (form: any, foto: File | null) => {
+        const formData = new FormData();
+        Object.entries(form).forEach(([key, value]) => {
+            formData.append(key, String(value));
+        });
+
+        if (foto) formData.append("Foto", foto);
+
+        return formData;
+    };
+
     const registrarEntrenador = async () => {
 
         try {
 
-            const formData = new FormData();
-
-            Object.entries(form).forEach(([key, value]) => {
-                formData.append(key, String(value));
-            });
-
-
-            if (foto) {
-                formData.append("Foto", foto);
-            }
-
+            const formData = estadioToFormData(form, foto);
             await addEntrenador(formData);
             SwalService.success("Estadio registrado exitosamente");
             limpiarFormulario();

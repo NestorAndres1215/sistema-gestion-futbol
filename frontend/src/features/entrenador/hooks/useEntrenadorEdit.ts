@@ -72,6 +72,7 @@ export default function useEntrenadorEdit() {
     loadCiudades();
 
   }, [form.paisNacimiento]);
+
   useEffect(() => {
 
     const fetchEntrenador = async () => {
@@ -113,10 +114,7 @@ export default function useEntrenadorEdit() {
   }, [params?.id]);
 
   const handleChange = (key: string, value: any) => {
-    setForm((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+    setForm((prev) => ({ ...prev, [key]: value, }));
   };
 
   const handleFotoChange = (file: File | null) => {
@@ -163,12 +161,7 @@ export default function useEntrenadorEdit() {
   };
 
   return {
-    form,
-   
-    foto,
-    fotoPreview, paises, ciudades,
-    handleChange,
-    handleFotoChange,
-    actualizarEntrenador
+    form, foto, fotoPreview, paises, ciudades,
+    handleChange, handleFotoChange, actualizarEntrenador
   };
 }

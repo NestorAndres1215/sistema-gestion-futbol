@@ -10,7 +10,7 @@ import { ESTADO_SISTEMA_OPTIONS } from "@/shared/constants/estado-estadio.option
 
 
 export default function useEntrenador() {
-    
+
     const router = useRouter();
     const [query, setQuery] = useState<EntrenadorQueryState>({
         search: "",
@@ -62,13 +62,11 @@ export default function useEntrenador() {
         const loadPaises = async () => {
 
             try {
-
                 const data = await getPaises();
                 setPaises(Array.isArray(data) ? data : []);
 
             } catch (error) {
                 setPaises([]);
-
             }
         };
 
@@ -106,46 +104,18 @@ export default function useEntrenador() {
     };
 
     const entrenadorColumns = [
-        {
-            header: "ID",
-            accessor: (row: any) => row.id,
-        },
-        {
-            header: "Nombre",
-            accessor: (row: any) => row.persona?.nombre,
-        },
-        {
-            header: "Apellido",
-            accessor: (row: any) => row.persona?.apellido,
-        },
-        {
-            header: "Estilo de Juego",
-            accessor: (row: any) => row.estiloJuego,
-        },
-        {
-            header: "País",
-            accessor: (row: any) => row.persona?.paisNacimiento?.nombre,
-        },
-        {
-            header: "Fecha de Debut",
-            accessor: (row: any) => formatDate(row.fechaDebut),
-        },
-        {
-            header: "Estado",
-            accessor: (row: any) => row.estado,
-        },
+        { header: "ID", accessor: (row: any) => row.id, },
+        { header: "Nombre", accessor: (row: any) => row.persona?.nombre, },
+        { header: "Apellido", accessor: (row: any) => row.persona?.apellido, },
+        { header: "Estilo de Juego", accessor: (row: any) => row.estiloJuego, },
+        { header: "País", accessor: (row: any) => row.persona?.paisNacimiento?.nombre, },
+        { header: "Fecha de Debut", accessor: (row: any) => formatDate(row.fechaDebut), },
+        { header: "Estado", accessor: (row: any) => row.estado, },
     ];
 
     return {
-        query,
-        data,
-        page,
-        totalPages,
-        handleSearch,
-        handleFilter,
-        setPage,
-        entrenadorFilters,
-        entrenadorActions,
-        entrenadorColumns,
+        query, data, page, totalPages,
+        handleSearch, handleFilter, setPage,
+        entrenadorFilters, entrenadorActions, entrenadorColumns,
     }
 }

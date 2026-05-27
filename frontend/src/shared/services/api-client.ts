@@ -16,18 +16,13 @@ const buildQuery = (params?: Record<string, any>) => {
   return queryString ? `?${queryString}` : "";
 };
 
-const request = async (
-  url: string,
-  options: RequestInit = {}
-) => {
+const request = async (url: string, options: RequestInit = {}) => {
   const match = document.cookie.match(/(^| )token=([^;]+)/);
   const token = match ? match[2] : null;
 
   const isFormData = options.body instanceof FormData;
 
-  const headers: any = {
-    ...(options.headers || {})
-  };
+  const headers: any = { ...(options.headers || {}) };
 
   if (!isFormData) {
     headers["Content-Type"] = "application/json";
@@ -45,9 +40,7 @@ const request = async (
   if (!res.ok) {
     const errorData = await res.json();
 
-    throw {
-      message: errorData.Message
-    };
+    throw { message: errorData.Message };
   }
 
   return res.json();

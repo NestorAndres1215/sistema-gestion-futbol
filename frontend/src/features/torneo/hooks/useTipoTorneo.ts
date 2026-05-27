@@ -14,9 +14,7 @@ export default function useTipoTorneo() {
     }, []);
 
     const irATorneo = (categoria: string) => {
-        router.push(
-            `/admin/torneo/listar?tipo=${tipo}&categoria=${categoria}`
-        );
+        router.push(`/admin/torneo/listar?tipo=${tipo}&categoria=${categoria}`);
     };
 
     const irFormulario = () => {
@@ -24,8 +22,6 @@ export default function useTipoTorneo() {
     };
 
     return {
-        tipo,
-        irATorneo,
-        irFormulario
+        tipo, irATorneo, irFormulario
     };
 }

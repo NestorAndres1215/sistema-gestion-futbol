@@ -12,7 +12,6 @@ export default function useTorneo() {
     };
 
     return {
-        tipo,
-        handleSelectTipo
+        tipo, handleSelectTipo
     }
 }
