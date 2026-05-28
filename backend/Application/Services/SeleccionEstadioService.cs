@@ -72,4 +72,9 @@ public class SeleccionEstadioService:ISeleccionEstadioService
 
         return await _repository.UpdateAsync(entity);
     }
+
+    public async Task<List<SeleccionEstadio>> ListarPorSeleccionId(int seleccionId)
+    {
+        return await _repository.ListarPorSeleccionId(seleccionId);
+    }
 }

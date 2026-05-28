@@ -46,4 +46,10 @@ public class SeleccionEstadioController : ControllerBase
         return Ok(await _service.UpdateAsync(id, seleccionEstadioDto));
     }
 
+    [HttpGet("seleccion/{seleccionId}")]
+    public async Task<IActionResult> ListarPorSeleccionId(int seleccionId)
+    {
+        return Ok(await _service.ListarPorSeleccionId(seleccionId));
+    }
+
 }

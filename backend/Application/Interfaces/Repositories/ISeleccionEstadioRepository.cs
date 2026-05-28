@@ -5,6 +5,7 @@ namespace Application.Interfaces.Repositories;
 
 public interface ISeleccionEstadioRepository
 {
+    Task<List<SeleccionEstadio>> ListarPorSeleccionId(int seleccionId);
     Task<PagedResult<SeleccionEstadio>> GetAllAsync(
         int page,
         int pageSize,

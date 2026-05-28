@@ -1,7 +1,6 @@
 ﻿using Application.Dto;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
-using Domain.Enums;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,10 +47,10 @@ public class SeleccionEstadioRepository:ISeleccionEstadioRepository
         var total = await query.CountAsync();
 
         var data = await query
-            .OrderByDescending(a => a.Id)
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+         .OrderBy(a => a.Seleccion.Nombre)
+         .Skip((page - 1) * pageSize)
+         .Take(pageSize)
+         .ToListAsync();
 
         return new PagedResult<SeleccionEstadio>
         {
@@ -69,6 +68,15 @@ public class SeleccionEstadioRepository:ISeleccionEstadioRepository
             .Include(x => x.Estadio)
             .AsNoTracking()
             .SingleOrDefaultAsync(x => x.Id == id);
+    }
+
+    public async Task<List<SeleccionEstadio>> ListarPorSeleccionId(int seleccionId)
+    {
+        return await _context.SeleccionEstadio
+            .Include(x => x.Seleccion)
+            .Include(x => x.Estadio)
+            .Where(x => x.SeleccionId == seleccionId)
+            .ToListAsync();
     }
 
     public async Task<SeleccionEstadio> UpdateAsync(SeleccionEstadio seleccionEstadio)

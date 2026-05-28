@@ -61,7 +61,7 @@ public class SeleccionRepository:ISeleccionRepository
         var total = await query.CountAsync();
 
         var items = await query
-            .OrderBy(x => x.Id)
+            .OrderBy(x => x.Nombre)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();

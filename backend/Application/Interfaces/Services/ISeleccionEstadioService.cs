@@ -13,4 +13,5 @@ public interface ISeleccionEstadioService
     Task<SeleccionEstadio> AddAsync(SeleccionEstadioDto seleccionEstadioDto);
     Task<SeleccionEstadio> UpdateAsync(int id, SeleccionEstadioDto seleccionEstadioDto);
     Task<SeleccionEstadio?> GetByIdAsync(int id);
+    Task<List<SeleccionEstadio>> ListarPorSeleccionId(int seleccionId);
 }
