@@ -147,8 +147,10 @@ public class EstadioRepository : IEstadioRepository
 
     public async Task<double> ObtenerPromedioCapacidadAsync()
     {
-        return await _context.Estadios
+        var promedio = await _context.Estadios
             .AverageAsync(e => e.Capacidad);
+
+        return Math.Round(promedio, 2);
     }
 
     public async Task<int> ObtenerTotalPaisesConEstadiosAsync()
