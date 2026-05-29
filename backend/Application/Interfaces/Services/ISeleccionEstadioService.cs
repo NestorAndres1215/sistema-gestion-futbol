@@ -1,4 +1,5 @@
 ﻿using Application.Dto;
+using Application.Dto.selecciones;
 using Domain.Entities;
 
 namespace Application.Interfaces.Services;
@@ -10,8 +11,9 @@ public interface ISeleccionEstadioService
     int pageSize,
     string? search,
     string? seleccion);
-    Task<SeleccionEstadio> AddAsync(SeleccionEstadioDto seleccionEstadioDto);
-    Task<SeleccionEstadio> UpdateAsync(int id, SeleccionEstadioDto seleccionEstadioDto);
+    Task<SeleccionEstadio> AddAsync(SeleccionEstadioRequest seleccionEstadioDto);
+    Task<SeleccionEstadio> UpdateAsync(int id, SeleccionEstadioRequest seleccionEstadioDto);
     Task<SeleccionEstadio?> GetByIdAsync(int id);
-    Task<List<SeleccionEstadio>> ListarPorSeleccionId(int seleccionId);
+    Task<PagedResult<SeleccionEstadioResponse>> ListarPorSeleccion(int page, int pageSize, string? seleccion);
+    Task<List<string>> GetEstadioAsync(string seleccion);
 }

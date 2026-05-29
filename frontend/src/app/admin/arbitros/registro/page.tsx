@@ -6,7 +6,7 @@ import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useArbitroRegistro from "@/features/arbitro/hooks/useArbitroRegistro";
 import { CATEGORIA_ARBITRO_OPTIONS } from "@/shared/constants/categoria.options";
-import { ESPECIALIDAD_ARBITRO_OPTIONS } from "@/shared/constants/especialidad-arbitro.options";
+import { ESPECIALIDAD_ARBITRO_OPTIONS } from "@/shared/constants/arbitro.options";
 import { maxFechaNacimiento } from "@/shared/utils/date.utils";
 
 export default function ArbitroRegistro() {

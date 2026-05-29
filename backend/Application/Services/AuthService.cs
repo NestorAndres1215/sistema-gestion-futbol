@@ -1,5 +1,6 @@
 ﻿using Application.Common.Exceptions;
 using Application.Dto;
+using Application.Dto.auth;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
@@ -66,7 +67,7 @@ public class AuthService : IAuthService
         }
     }
 
-    public async Task<AuthResponseDto> Login(LoginDto dto)
+    public async Task<AuthResponse> Login(LoginRequest dto)
     {
         var user = await _repo.GetByEmailAsync(dto.Email);
 
@@ -79,7 +80,7 @@ public class AuthService : IAuthService
         if (user.Estado != Estado.Activo)
             throw new UnauthorizedException("Usuario bloqueado o Inactivo");
 
-        return new AuthResponseDto
+        return new AuthResponse
         {
             Username = user.Username,
             Token = _jwt.GenerateToken(user.Id, user.Email, user.Rol.Nombre),
@@ -127,7 +128,7 @@ public class AuthService : IAuthService
         return await _repo.GetByIdAsync(userId);
     }
 
-    public async Task<Usuario> UpsatePassword(int id, PasswordDto dto)
+    public async Task<Usuario> UpsatePassword(int id, PasswordRequest dto)
     {
         var entity = await _repo.GetByIdAsync(id)
             ?? throw new NotFoundException("Usuario no encontrado");

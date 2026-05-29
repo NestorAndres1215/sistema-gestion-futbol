@@ -1,5 +1,6 @@
 ﻿using Application.Common.Exceptions;
 using Application.Dto;
+using Application.Dto.selecciones;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
@@ -22,7 +23,7 @@ public class SeleccionEstadioService:ISeleccionEstadioService
         _seleccionRepository = seleccionRepository;
     }
 
-    public async Task<SeleccionEstadio> AddAsync(SeleccionEstadioDto seleccionEstadioDto)
+    public async Task<SeleccionEstadio> AddAsync(SeleccionEstadioRequest seleccionEstadioDto)
     {
 
         var  seleccion = await _seleccionRepository.GetByNombreAsync(seleccionEstadioDto.Seleccion)
@@ -34,8 +35,8 @@ public class SeleccionEstadioService:ISeleccionEstadioService
 
         var seleccionEstadio = new SeleccionEstadio
         {
-            Estadio = estadio,
-            Seleccion = seleccion,
+            EstadioId = estadio.Id,
+            SeleccionId = seleccion.Id,
             Tipo = seleccionEstadioDto.Tipo
         };
 
@@ -53,7 +54,7 @@ public class SeleccionEstadioService:ISeleccionEstadioService
           ?? throw new NotFoundException("Seleccion Estadio no encontrado");
     }
 
-    public async Task<SeleccionEstadio> UpdateAsync(int id, SeleccionEstadioDto seleccionEstadioDto)
+    public async Task<SeleccionEstadio> UpdateAsync(int id, SeleccionEstadioRequest seleccionEstadioDto)
     {
         var entity = await _repository.GetByIdAsync(id)
             ?? throw new NotFoundException("La relación selección-estadio no existe.");
@@ -73,8 +74,38 @@ public class SeleccionEstadioService:ISeleccionEstadioService
         return await _repository.UpdateAsync(entity);
     }
 
-    public async Task<List<SeleccionEstadio>> ListarPorSeleccionId(int seleccionId)
+    public async Task<PagedResult<SeleccionEstadioResponse>> ListarPorSeleccion(
+        int page,
+        int pageSize,
+        string? seleccion)
     {
-        return await _repository.ListarPorSeleccionId(seleccionId);
+        var result = await _repository.ListarPorSeleccion(
+            page,
+            pageSize,
+            seleccion
+        );
+
+        return new PagedResult<SeleccionEstadioResponse>
+        {
+            Items = result.Items.Select(x => new SeleccionEstadioResponse
+            {
+                Id = x.Id,
+                Seleccion = x.Seleccion.Nombre,
+                Estadio = x.Estadio.Nombre,
+                Ciudad = x.Estadio.Ciudad,
+                Capacidad = x.Estadio.Capacidad,
+                Tipo = x.Tipo
+            }).ToList(),
+
+            TotalCount = result.TotalCount,
+            Page = result.Page,
+            PageSize = result.PageSize
+        };
+    }
+
+
+    public async Task<List<string>> GetEstadioAsync(string seleccion)
+    {
+        return await _repository.GetEstadioAsync(seleccion);
     }
 }

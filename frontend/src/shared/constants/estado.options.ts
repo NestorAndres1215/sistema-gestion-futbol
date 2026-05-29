@@ -5,6 +5,7 @@ export const ESTADO_ESTADIO_OPTIONS = [
     { label: "Remodelación", value: "Remodelación" },
     { label: "Cerrado", value: "Cerrado" },
 ];
+
 export const ESTADO_GENERICO_OPTIONS = [
     { value: "Activo", label: "Activo" },
     { value: "Retirado", label: "Retirado" },

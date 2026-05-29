@@ -31,6 +31,8 @@ export const getSeleccionByNombre = async (nombre: string) => {
     return response;
 };
 
+
+
 export const getSeleccionByClave = async (clave: string) => {
     const response = await api.get(`/selecciones/clave/${clave}`);
     return response;

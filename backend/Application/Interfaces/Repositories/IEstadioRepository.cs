@@ -12,6 +12,7 @@ public interface IEstadioRepository
     Task<Estadio?> GetByIdAsync(int id);
     Task<Estadio?> GetByNombreAsync(string nombre);
     Task<List<int>> GetAniosAsync();
+    Task<List<Estadio>> GetByPaisAsync(string pais);
     Task<int> ObtenerTotalEstadiosAsync();
     Task<double> ObtenerPromedioCapacidadAsync();
     Task<int> ObtenerTotalPaisesConEstadiosAsync();

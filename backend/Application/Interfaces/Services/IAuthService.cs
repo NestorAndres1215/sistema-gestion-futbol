@@ -1,4 +1,5 @@
 ﻿using Application.Dto;
+using Application.Dto.auth;
 using System.Security.Claims;
 
 
@@ -8,8 +9,8 @@ public interface IAuthService
 {
     Task<Usuario> Register(RegisterDto dto);
     Task<Usuario> RegisterAdmin(RegisterDto dto);
-    Task<Usuario> UpsatePassword(int id,PasswordDto dto);
-    Task<AuthResponseDto> Login(LoginDto dto);
+    Task<Usuario> UpsatePassword(int id,PasswordRequest dto);
+    Task<AuthResponse> Login(LoginRequest dto);
     Task<Usuario?> GetCurrentUserFromClaims(ClaimsPrincipal user);
 
 }

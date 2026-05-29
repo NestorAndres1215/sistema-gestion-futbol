@@ -34,6 +34,11 @@ export const getEstadioById = async (id: number | string) => {
   return response;
 };
 
+export const getEstadioByPais = async (pais: string) => {
+  const response = await api.get(`/estadios/pais/${pais}`);
+  return response;
+};
+
 export const getAniosEstadios = async () => {
   const response = await api.get(`/estadios/anio`);
   return response;

@@ -1,4 +1,5 @@
 ﻿using Application.Dto;
+using Application.Dto.selecciones;
 using Domain.Entities;
 
 namespace Application.Interfaces.Services;
@@ -10,8 +11,8 @@ public interface ISelecionesService
         string? search,
         string? confederacion,
         string? estado);
-    Task<Selecciones> AddAsync(SeleccionesDto selecciones);
-    Task<Selecciones> UpdateAsync(int id,SeleccionesDto selecciones);
+    Task<Selecciones> AddAsync(SeleccionesRequest selecciones);
+    Task<Selecciones> UpdateAsync(int id,SeleccionesRequest selecciones);
     Task<Selecciones?> GetByIdAsync(int id);
     Task<Selecciones?> GetByNombreAsync(string nombre);
     Task<Selecciones?> GetByClaveAsync(string clave);

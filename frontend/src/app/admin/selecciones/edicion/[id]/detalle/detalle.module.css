@@ -1,0 +1,245 @@
+.card {
+    background: #13161e;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 0.15s ease;
+    min-height: 750px;
+    display: flex;
+    flex-direction: column;
+}
+.card:hover {
+    border-color: rgba(110, 231, 183, 0.25);
+}
+
+.cardHead {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 24px;
+    background: #0f1117;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+
+.cardName {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #f0f4f8;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -0.01em;
+}
+
+.cardIcon {
+    color: #6ee7b7;
+    font-size: 15px;
+    width: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    padding: 30px;
+}
+
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.tabla thead th {
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #2d3748;
+    padding: 0 8px 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tabla tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: background 0.1s;
+
+}
+
+.tabla tbody tr:last-child {
+    border-bottom: none;
+}
+
+.colFecha {
+    width: 190px;
+    min-width: 190px;
+}
+
+.tabla tbody tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.tabla tbody td {
+    padding: 10px 8px 10px 0;
+    color: #8892a4;
+    text-align: center;
+    vertical-align: middle;
+}
+
+
+.label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #6b7280;
+}
+
+
+.inputWrap {
+  display: flex;
+  align-items: center;
+  background: #1a1e28;
+  border: 1.5px solid rgba(255, 255, 255, 0.06);
+  border-radius: 9px;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.inputWrap:focus-within {
+  border-color: rgba(110, 231, 183, 0.4);
+  box-shadow: 0 0 0 3px rgba(110, 231, 183, 0.08);
+}
+
+.icon {
+  padding: 0 0 0 14px;
+  font-size: 13px;
+  color: #374151;
+  transition: color 0.2s;
+}
+
+.inputWrap:focus-within .icon {
+  color: #6ee7b7;
+}
+
+.input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 11px 14px;
+  color: #f0f4f8;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.input::placeholder {
+  color: #2d3748;
+}
+
+
+.input[type="select"],
+select.input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 38px;
+  cursor: pointer;
+}
+
+select.input option {
+  background: #1a1e28;
+  color: #f0f4f8;
+}
+
+select.input option:disabled {
+  color: #2d3748;
+}
+.inputWrap:focus-within select.input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236ee7b7' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+.input[type="date"] {
+  color-scheme: dark;
+  cursor: pointer;
+}
+
+.input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.4);
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+
+.inputWrap:focus-within .input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.6) sepia(1) saturate(3) hue-rotate(100deg);
+}
+
+.input[type="file"] {
+  cursor: pointer;
+  padding: 10px 14px;
+  color: #4a5568;
+}
+
+.input[type="file"]::file-selector-button {
+  background: rgba(110, 231, 183, 0.08);
+  border: 1.5px solid rgba(110, 231, 183, 0.2);
+  border-radius: 7px;
+  color: #6ee7b7;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 6px 12px;
+  margin-right: 12px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.input[type="file"]::file-selector-button:hover {
+  background: rgba(110, 231, 183, 0.15);
+  border-color: rgba(110, 231, 183, 0.4);
+}
+
+.inputWrap:focus-within .input[type="file"]::file-selector-button {
+  background: rgba(110, 231, 183, 0.15);
+  border-color: rgba(110, 231, 183, 0.4);
+}
+
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.toggleBtn {
+  padding: 0 14px;
+  min-height: 44px;
+  background: transparent;
+  border: none;
+  color: #374151;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s ease;
+  flex-shrink: 0;
+}
+ 
+.toggleBtn:hover {
+  color: #6ee7b7;
+}

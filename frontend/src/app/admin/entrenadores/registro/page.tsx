@@ -5,8 +5,9 @@ import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useEntrenadorRegistro from "@/features/entrenador/hooks/useEntrenadorRegistro";
 import { ESTILO_JUEGO_OPTIONS } from "@/shared/constants/estilo-juego.options";
-import { LICENCIAS_ENTRENADOR_OPTIONS } from "@/shared/constants/licencias-entrenador.options";
+
 import { maxFechaNacimiento } from "@/shared/utils/date.utils";
+import { LICENCIAS_ENTRENADOR_OPTIONS } from "@/shared/constants/arbitro.options";
 export default function EntrenadorRegistroPage() {
 
     const {
@@ -172,6 +173,9 @@ export default function EntrenadorRegistroPage() {
                                         value={form.estiloJuego}
                                         onChange={(e) => handleChange("estiloJuego", e.target.value)}
                                     >
+                                        <option value="">
+                                            Seleccione estilo de juego
+                                        </option>
                                         {ESTILO_JUEGO_OPTIONS.map((item) => (
                                             <option key={item.value} value={item.value}>
                                                 {item.label}
@@ -191,6 +195,9 @@ export default function EntrenadorRegistroPage() {
                                         value={form.licencia}
                                         onChange={(e) => handleChange("licencia", e.target.value)}
                                     >
+                                        <option value="">
+                                            Seleccione Licencia
+                                        </option>
                                         {LICENCIAS_ENTRENADOR_OPTIONS.map((item) => (
                                             <option key={item.value} value={item.value}>
                                                 {item.label}

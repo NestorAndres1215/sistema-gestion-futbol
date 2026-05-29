@@ -3,7 +3,7 @@ import useArbitroEdit from "@/features/arbitro/hooks/useArbitroEdit";
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import ActionButton from "@/shared/components/ui/button/button";
-import { ESPECIALIDAD_ARBITRO_OPTIONS } from "@/shared/constants/especialidad-arbitro.options";
+import { ESPECIALIDAD_ARBITRO_OPTIONS } from "@/shared/constants/arbitro.options";
 import styles from "@/shared/styles/editar.module.css";
 import { useRouter } from "next/navigation";
 export default function ArbitrosEditar() {
@@ -60,8 +60,6 @@ export default function ArbitrosEditar() {
                     </div>
 
                     <form noValidate className="d-flex flex-column gap-3 p-3 p-md-4">
-
-                        {/* NOMBRE + APELLIDO PATERNO */}
                         <div className="row g-3">
 
                             <div className="col-12 col-md-6">

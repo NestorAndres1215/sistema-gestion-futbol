@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getUsers, updateUserState } from "../services/usuario.service";
 import { SwalService } from "@/shared/lib/swal/swal.service";
+import { ESTADO_SISTEMA_OPTIONS } from "@/shared/constants/estado.options";
 
 export function useUsers() {
   const router = useRouter();
@@ -77,10 +78,7 @@ export function useUsers() {
     {
       key: "estado",
       placeholder: "Selecciona Estado",
-      options: [
-        { label: "Activo", value: "ACTIVO" },
-        { label: "Inactivo", value: "INACTIVO" },
-      ],
+      options: ESTADO_SISTEMA_OPTIONS,
     },
     {
       key: "rol",

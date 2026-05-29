@@ -70,12 +70,12 @@ public class SeleccionEstadioRepository:ISeleccionEstadioRepository
             .SingleOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<List<SeleccionEstadio>> ListarPorSeleccionId(int seleccionId)
+    public async Task<List<SeleccionEstadio>> ListarPorSeleccionNombre(string nombre)
     {
         return await _context.SeleccionEstadio
             .Include(x => x.Seleccion)
             .Include(x => x.Estadio)
-            .Where(x => x.SeleccionId == seleccionId)
+            .Where(x => x.Seleccion.Nombre == nombre)
             .ToListAsync();
     }
 
@@ -84,5 +84,47 @@ public class SeleccionEstadioRepository:ISeleccionEstadioRepository
         _context.SeleccionEstadio.Update(seleccionEstadio);
         await _context.SaveChangesAsync();
         return seleccionEstadio;
+    }
+
+    public async Task<PagedResult<SeleccionEstadio>> ListarPorSeleccion(
+        int page,
+        int pageSize,
+        string? seleccion)
+    {
+        var query = _context.SeleccionEstadio
+            .Include(x => x.Seleccion)
+            .Include(x => x.Estadio)
+            .AsQueryable();
+
+        if (!string.IsNullOrEmpty(seleccion))
+        {
+            query = query.Where(x => x.Seleccion.Nombre == seleccion);
+        }
+
+        var totalCount = await query.CountAsync();
+
+        var items = await query
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return new PagedResult<SeleccionEstadio>
+        {
+            Items = items,
+            TotalCount = totalCount,
+            Page = page,
+            PageSize = pageSize
+        };
+    }
+
+    public async Task<List<string>> GetEstadioAsync(string seleccion)
+    {
+        return await _context.SeleccionEstadio
+            .Include(x => x.Estadio)
+            .Include(x => x.Seleccion)
+            .Where(x => x.Seleccion.Nombre == seleccion)
+            .Select(x => x.Estadio.Nombre)
+            .Distinct()
+            .ToListAsync();
     }
 }

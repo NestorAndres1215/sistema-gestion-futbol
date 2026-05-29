@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { formatDate } from "@/shared/utils/date.utils";
 import { getPaises } from "@/shared/services/paises.service";
 import { CATEGORIA_ARBITRO_OPTIONS } from "@/shared/constants/categoria.options";
-import { ESTADO_GENERICO_OPTIONS } from "@/shared/constants/estado-estadio.options";
+import { ESTADO_GENERICO_OPTIONS } from "@/shared/constants/estado.options";
 
 export default function useArbitro() {
     const router = useRouter();

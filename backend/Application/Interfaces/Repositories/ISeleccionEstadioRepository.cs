@@ -5,7 +5,10 @@ namespace Application.Interfaces.Repositories;
 
 public interface ISeleccionEstadioRepository
 {
-    Task<List<SeleccionEstadio>> ListarPorSeleccionId(int seleccionId);
+    Task<PagedResult<SeleccionEstadio>> ListarPorSeleccion(
+        int page,
+        int pageSize,
+        string? seleccion);
     Task<PagedResult<SeleccionEstadio>> GetAllAsync(
         int page,
         int pageSize,
@@ -14,4 +17,5 @@ public interface ISeleccionEstadioRepository
     Task<SeleccionEstadio> AddAsync(SeleccionEstadio seleccionEstadio);
     Task<SeleccionEstadio> UpdateAsync(SeleccionEstadio seleccionEstadio);
     Task<SeleccionEstadio?> GetByIdAsync(int id);
+    Task<List<string>> GetEstadioAsync(string seleccion);
 }

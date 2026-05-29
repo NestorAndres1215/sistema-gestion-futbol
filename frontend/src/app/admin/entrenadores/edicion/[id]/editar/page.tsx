@@ -3,8 +3,9 @@ import useEntrenadorEdit from "@/features/entrenador/hooks/useEntrenadorEdit";
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import ActionButton from "@/shared/components/ui/button/button";
+import { LICENCIAS_ENTRENADOR_OPTIONS } from "@/shared/constants/arbitro.options";
 import { ESTILO_JUEGO_OPTIONS } from "@/shared/constants/estilo-juego.options";
-import { LICENCIAS_ENTRENADOR_OPTIONS } from "@/shared/constants/licencias-entrenador.options";
+
 import styles from "@/shared/styles/editar.module.css";
 import { useRouter } from "next/navigation";
 
@@ -199,17 +200,20 @@ export default function EntrenadorEditar() {
                                     <label className={styles.label}>Licencia</label>
 
                                     <div className={styles.inputWrap}>
-                                          <select
-                                        className={styles.input}
-                                        value={form.licencia}
-                                        onChange={(e) => handleChange("licencia", e.target.value)}
-                                    >
-                                        {LICENCIAS_ENTRENADOR_OPTIONS.map((item) => (
-                                            <option key={item.value} value={item.value}>
-                                                {item.label}
+                                        <select
+                                            className={styles.input}
+                                            value={form.licencia}
+                                            onChange={(e) => handleChange("licencia", e.target.value)}
+                                        >
+                                            <option value="">
+                                                Seleccione Licencia
                                             </option>
-                                        ))}
-                                    </select>
+                                            {LICENCIAS_ENTRENADOR_OPTIONS.map((item) => (
+                                                <option key={item.value} value={item.value}>
+                                                    {item.label}
+                                                </option>
+                                            ))}
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -223,6 +227,9 @@ export default function EntrenadorEditar() {
                                             value={form.estiloJuego}
                                             onChange={(e) => handleChange("estiloJuego", e.target.value)}
                                         >
+                                            <option value="">
+                                                Seleccione estilo de juego
+                                            </option>
                                             {ESTILO_JUEGO_OPTIONS.map((item) => (
                                                 <option key={item.value} value={item.value}>
                                                     {item.label}

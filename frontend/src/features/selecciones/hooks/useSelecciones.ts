@@ -70,9 +70,9 @@ export default function useSelecciones() {
     const seleccionActions = {
 
         onEdit: (u: any) =>
-            router.push(`/admin/selecciones/edicion/${u.id}/editar`),
+            router.push(`/admin/selecciones/edicion/${u.nombre}/editar`),
         onView: (u: any) =>
-            router.push(`/admin/selecciones/edicion/${u.id}/detalle`),
+            router.push(`/admin/selecciones/edicion/${u.nombre}/detalle`),
 
     };
     return {

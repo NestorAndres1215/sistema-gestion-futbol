@@ -125,6 +125,14 @@ public class EstadioRepository : IEstadioRepository
             .FirstOrDefaultAsync(x => x.Nombre == nombre);
     }
 
+    public async Task<List<Estadio>> GetByPaisAsync(string pais)
+    {
+        return await _context.Estadios
+            .AsNoTracking()
+            .Where(x => x.Pais == pais)
+            .ToListAsync();
+    }
+
     public async Task<Estadio> UpdateAsync(Estadio estadio)
     {
         _context.Estadios.Update(estadio);

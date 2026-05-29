@@ -1,10 +1,8 @@
-﻿
+﻿using Microsoft.AspNetCore.Http;
 
-using Microsoft.AspNetCore.Http;
+namespace Application.Dto.selecciones;
 
-namespace Application.Dto;
-
-public class SeleccionesDto
+public class SeleccionesRequest
 {
     public string Nombre { get; set; } = string.Empty;
     public string Confederacion { get; set; } = string.Empty;

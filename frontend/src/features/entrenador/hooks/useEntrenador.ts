@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { formatDate } from "@/shared/utils/date.utils";
 import { getPaises } from "@/shared/services/paises.service";
 import { ESTILO_JUEGO_OPTIONS } from "@/shared/constants/estilo-juego.options";
-import { ESTADO_SISTEMA_OPTIONS } from "@/shared/constants/estado-estadio.options";
+import { ESTADO_SISTEMA_OPTIONS } from "@/shared/constants/estado.options";
 
 
 export default function useEntrenador() {
@@ -83,10 +83,7 @@ export default function useEntrenador() {
         {
             key: "pais",
             placeholder: "Selecciona Pais",
-            options: paises.map((p: any) => ({
-                value: p.nombre,
-                label: p.nombre,
-            })),
+            options: paises.map((p: any) => ({ value: p.nombre, label: p.nombre, })),
         },
         {
             key: "estado",

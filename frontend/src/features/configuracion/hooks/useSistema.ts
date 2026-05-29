@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SistemaQueryState } from "../types/sistemaQueryState";
 import { getParametros } from "../services/parametros.service";
-import { ESTADO_SISTEMA_OPTIONS } from "@/shared/constants/estado-estadio.options";
+import { ESTADO_SISTEMA_OPTIONS } from "@/shared/constants/estado.options";
 import { TIPO_DATO_OPTIONS } from "@/shared/constants/tipo-dato.options";
 import { CATEGORIA_PARAMETROS_OPTIONS } from "@/shared/constants/categoria.options";
 

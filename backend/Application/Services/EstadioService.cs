@@ -131,6 +131,10 @@ public class EstadioService : IEstadioService
         return await _repository.GetByNombreAsync(nombre)
             ?? throw new NotFoundException("Estadio no encontrado");
     }
+    public async Task<List<Estadio>> GetByPaisAsync(string pais)
+    {
+        return await _repository.GetByPaisAsync(pais);
+    }
 
     public async Task<Estadio> UpdateAsync(int id, EstadioDTo estadioDTo)
     {

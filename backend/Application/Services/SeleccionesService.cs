@@ -1,5 +1,6 @@
 ﻿using Application.Common.Exceptions;
 using Application.Dto;
+using Application.Dto.selecciones;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
@@ -16,7 +17,7 @@ public class SeleccionesService : ISelecionesService
         _repo = repo;
     }
 
-    public async Task<Selecciones> AddAsync(SeleccionesDto seleccionesdto)
+    public async Task<Selecciones> AddAsync(SeleccionesRequest seleccionesdto)
     {
       
         await ValidarDuplicadosAsync(seleccionesdto);
@@ -69,7 +70,7 @@ public class SeleccionesService : ISelecionesService
             ?? throw new NotFoundException("Seleccion no encontrado");
     }
 
-    public async Task<Selecciones> UpdateAsync(int id, SeleccionesDto seleccionesdto)
+    public async Task<Selecciones> UpdateAsync(int id, SeleccionesRequest seleccionesdto)
     {
         var seleccion = await _repo.GetByIdAsync(id)
             ?? throw new NotFoundException("La selección no existe");
@@ -94,7 +95,7 @@ public class SeleccionesService : ISelecionesService
         return await _repo.UpdateAsync(seleccion);
     }
 
-    private async Task ValidarDuplicadosAsync(SeleccionesDto dto, int? id = null)
+    private async Task ValidarDuplicadosAsync(SeleccionesRequest dto, int? id = null)
     {
         var existeNombre = await _repo.GetByNombreAsync(dto.Nombre);
         if (existeNombre != null && existeNombre.Id != id)
@@ -113,7 +114,7 @@ public class SeleccionesService : ISelecionesService
             throw new BadRequestException("El país ya tiene una selección registrada");
     }
 
-    private async Task<(string banderaUrl, string escudoUrl)> GuardarArchivosAsync(SeleccionesDto seleccionesDto)
+    private async Task<(string banderaUrl, string escudoUrl)> GuardarArchivosAsync(SeleccionesRequest seleccionesDto)
     {
         var carpetaBase = Path.Combine(
             Directory.GetCurrentDirectory(),

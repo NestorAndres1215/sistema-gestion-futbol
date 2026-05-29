@@ -1,5 +1,10 @@
+export const ESPECIALIDAD_ARBITRO_OPTIONS = [
+    { value: "Principal", label: "Principal" },
+    { value: "VAR", label: "VAR" },
+    { value: "Asistente", label: "Asistente" },
+];
+
 export const LICENCIAS_ENTRENADOR_OPTIONS = [
-    { value: "", label: "Seleccionar licencia" },
     { value: "Nacional", label: "Nacional" },
     { value: "CONMEBOL", label: "CONMEBOL" },
     { value: "UEFA A", label: "UEFA A" },

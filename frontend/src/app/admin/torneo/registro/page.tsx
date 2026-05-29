@@ -29,14 +29,8 @@ export default function TorneoFormularioPage() {
         <AdminLayout>
             <Breadcrumb
                 items={[
-                    {
-                        label: "Selección de Torneo",
-                        href: "/admin/torneo",
-                    },
-                    {
-                        label: "Tipo de Torneo",
-                        href: `/admin/torneo/tipo-torneo?tipo=${tipo}`,
-                    },
+                    { label: "Selección de Torneo", href: "/admin/torneo", },
+                    { label: "Tipo de Torneo", href: `/admin/torneo/tipo-torneo?tipo=${tipo}`, },
                     { label: "Formulario" },
                 ]}
             />
@@ -128,10 +122,11 @@ export default function TorneoFormularioPage() {
                                             Selecciona tipo de torneo
                                         </option>
 
-                                        <option value="copa_nacional">Copa Nacional</option>
-                                        <option value="copa_internacional">Copa Internacional</option>
-                                        <option value="ligas">Ligas</option>
-                                        <option value="temporada">Temporada</option>
+                                        {TIPO_TORNEO_OPTIONS.map((item) => (
+                                            <option key={item.value} value={item.value}>
+                                                {item.label}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
                             </div>

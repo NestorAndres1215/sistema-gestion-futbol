@@ -1,8 +1,6 @@
-﻿
+﻿namespace Application.Dto.auth;
 
-namespace Application.Dto;
-
-public class LoginDto
+public class LoginRequest
 {
     public required string Email { get; set; }
     public required string Password { get; set; }

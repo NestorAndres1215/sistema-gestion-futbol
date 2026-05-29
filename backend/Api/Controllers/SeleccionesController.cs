@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.selecciones;
 using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,14 +30,14 @@ public class SeleccionesController : ControllerBase
 
     [HttpPost]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> Registrar([FromForm] SeleccionesDto seleccionesDto)
+    public async Task<IActionResult> Registrar([FromForm] SeleccionesRequest seleccionesDto)
     {
         return Ok(await _service.AddAsync(seleccionesDto));
     }
 
     [HttpPut("{id}")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> Actualizar(int id, [FromForm] SeleccionesDto seleccionesDto )
+    public async Task<IActionResult> Actualizar(int id, [FromForm] SeleccionesRequest seleccionesDto )
     {
         return Ok(await _service.UpdateAsync(id, seleccionesDto));
     }

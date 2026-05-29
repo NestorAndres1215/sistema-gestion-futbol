@@ -1,4 +1,5 @@
 ﻿using Application.Dto;
+using Application.Dto.auth;
 using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -53,7 +54,7 @@ public class AuthController : ControllerBase
 
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login(LoginDto dto)
+    public async Task<IActionResult> Login(LoginRequest dto)
     {
         var result = await _auth.Login(dto);
         return Ok(result);
@@ -62,7 +63,7 @@ public class AuthController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdatePassword(
         int id,
-        [FromBody] PasswordDto dto)
+        [FromBody] PasswordRequest dto)
     {
         var result = await _auth.UpsatePassword(id, dto);
 

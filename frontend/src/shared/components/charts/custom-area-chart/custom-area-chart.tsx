@@ -1,16 +1,8 @@
 "use client";
 
 import styles from "@/shared/styles/chart.module.css";
-import {
-  ResponsiveContainer,
-  AreaChart,
-  Area,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-} from "recharts";
+import { Area, AreaChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+
 
 interface Props<T> {
   data: T[];
@@ -32,13 +24,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-export default function CustomAreaChart<T>({
-  data,
-  title,
-  xKey,
-  dataKey,
-  height = 350,
-}: Props<T>) {
+export default function CustomAreaChart<T>({ data, title, xKey, dataKey, height = 350, }: Props<T>) {
   return (
     <div className={styles.card}>
 

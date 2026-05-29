@@ -5,7 +5,7 @@ import AdminLayout from "@/shared/components/layout/admin/layout";
 import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useEstadioRegistro from "@/features/estadio/hooks/useEstadioRegistro";
-import { TIPO_CESPED_OPTIONS } from "@/shared/constants/tipo-cesped.options";
+import { TIPO_CESPED_OPTIONS } from "@/shared/constants/estadio.options";
 
 
 export default function EstadioRegistroPage() {
@@ -250,7 +250,9 @@ export default function EstadioRegistroPage() {
                                         value={form.tipoCesped}
                                         onChange={(e) => handleChange("tipoCesped", e.target.value)}
                                     >
-
+                                            <option value="">
+                                                Seleccione Tipo Cesped
+                                            </option>
                                         {TIPO_CESPED_OPTIONS.map((item) => (
                                             <option key={item.value} value={item.value}>
                                                 {item.label}

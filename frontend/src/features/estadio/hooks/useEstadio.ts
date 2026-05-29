@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { getAniosEstadios, getEstadios } from "../services/estadio.service";
 import { useRouter } from "next/navigation";
 import { EstadioQueryState } from "../types/estadioQueryState.types";
-import { stadiumColumns } from "../constants/estadioColumns";
+
 import { getPaises } from "@/shared/services/paises.service";
-import { ESTADO_ESTADIO_OPTIONS } from "@/shared/constants/estado-estadio.options";
-import { TIPO_CESPED_OPTIONS } from "@/shared/constants/tipo-cesped.options";
+import { ESTADO_ESTADIO_OPTIONS } from "@/shared/constants/estado.options";
+import { TIPO_CESPED_OPTIONS } from "@/shared/constants/estadio.options";
 
 export default function useEstadio() {
 
@@ -27,7 +27,7 @@ export default function useEstadio() {
 
     const fetchEstadios = async (q: EstadioQueryState, currentPage: number) => {
         try {
-            
+
             const res = await getEstadios({
                 page: currentPage,
                 pageSize,
@@ -113,6 +113,14 @@ export default function useEstadio() {
         onEdit: (e: any) =>
             router.push(`/admin/estadios/edicion/${e.id}/editar`),
     };
+
+    const stadiumColumns = [
+        { header: "ID", accessor: (row: any) => row.id, },
+        { header: "Nombre", accessor: (row: any) => row.nombre, },
+        { header: "Pais", accessor: (row: any) => row.pais, },
+        { header: "Ciudad", accessor: (row: any) => row.ciudad, },
+        { header: "Capacidad", accessor: (row: any) => row.capacidad, },
+    ];
 
     return {
         estadioActions, stadiumColumns, data, query, handleSearch,

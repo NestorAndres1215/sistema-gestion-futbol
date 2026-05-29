@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.selecciones;
 using Application.Interfaces.Services;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -35,21 +35,31 @@ public class SeleccionEstadioController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add([FromBody] SeleccionEstadioDto seleccionEstadio)
+    public async Task<IActionResult> Add([FromBody] SeleccionEstadioRequest seleccionEstadio)
     {
         return Ok(await _service.AddAsync(seleccionEstadio));
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] SeleccionEstadioDto seleccionEstadioDto)
+    public async Task<IActionResult> Update(int id, [FromBody] SeleccionEstadioRequest seleccionEstadioDto)
     {
         return Ok(await _service.UpdateAsync(id, seleccionEstadioDto));
     }
 
-    [HttpGet("seleccion/{seleccionId}")]
-    public async Task<IActionResult> ListarPorSeleccionId(int seleccionId)
+    [HttpGet("seleccion")]
+    public async Task<IActionResult> ListarPorSeleccionId(
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10,
+        [FromQuery] string? seleccion=null)
     {
-        return Ok(await _service.ListarPorSeleccionId(seleccionId));
+        return Ok(await _service.ListarPorSeleccion(page,pageSize,seleccion));
+    }
+
+    [HttpGet("estadios")]
+    public async Task<IActionResult> GetEstadios(
+        [FromQuery] string seleccion)
+    {
+        return Ok(await _service.GetEstadioAsync(seleccion));
     }
 
 }

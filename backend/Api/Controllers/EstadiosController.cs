@@ -51,6 +51,12 @@ public class EstadiosController : ControllerBase
         return Ok(await _service.GetByIdAsync(id));
     }
 
+    [HttpGet("pais/{pais}")]
+    public async Task<IActionResult> GetByPais(string pais)
+    {
+        return Ok(await _service.GetByPaisAsync(pais));
+    }
+
     [HttpGet("anio")]
     public async Task<IActionResult> GetAniosAsync()
     {

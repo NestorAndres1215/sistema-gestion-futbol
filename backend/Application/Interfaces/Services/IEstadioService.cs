@@ -11,6 +11,7 @@ public interface IEstadioService
     Task<Estadio> UpdateAsync(int id,EstadioDTo estadioDTo);
     Task<PagedResult<Estadio>> GetAllAsync(int page,int pageSize,string? search,string? tipoCesped,string? pais,int? anio, string? estado);
     Task<Estadio?> GetByIdAsync(int id);
+    Task<List<Estadio>> GetByPaisAsync(string pais);
     Task<Estadio?> GetByNombreAsync(string nombre);
     Task<List<int>> GetAniosAsync();
     Task<TotalCountDto> ObtenerTotalEstadiosAsync();
