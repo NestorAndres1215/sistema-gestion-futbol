@@ -7,9 +7,15 @@ import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import styles from "./vista.module.css";
 import Pagination from "@/shared/components/ui/pagination/pagination";
 import { useState } from "react";
+import { useParams } from "next/navigation";
+import Table from "@/shared/components/ui/table/table";
 
 export default function EntrenadorDetallePage() {
-    const { seleccion, items } = useSeleccionesDetail();
+
+    const params = useParams();
+    const seleccionPais = params.id as string;
+    const { items, seleccion, estadioColumns, estadio, setPageEstadio,
+        pageEstadio, totalPagesEstadio } = useSeleccionesDetail(seleccionPais);
 
     const JUGADORES_ACTUALES: any[] = [];
     const [page, setPage] = useState(1);
@@ -162,6 +168,19 @@ export default function EntrenadorDetallePage() {
                             <p className={styles.cardName}>
                                 Historial de Estadios
                             </p>
+                        </div>
+                        <div className="container my-4 ">
+                            <Table
+                                data={estadio}
+                                columns={estadioColumns}
+                                showActions
+
+                            />
+                            <Pagination
+                                currentPage={pageEstadio}
+                                totalPages={totalPagesEstadio}
+                                onPageChange={(p) => setPageEstadio(p)}
+                            />
                         </div>
                     </div>
                 </div>

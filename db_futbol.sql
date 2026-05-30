@@ -228,8 +228,27 @@ CREATE TABLE ParametrosSistema (
 
 INSERT INTO Ciudades (Nombre, PaisId)
 VALUES
-
-('Płock', (SELECT Id FROM Paises WHERE Nombre = 'Polonia'))
+('Avellaneda', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('La Plata', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Lanús', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Mendoza', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Santa Fe', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Banfield', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('San Miguel de Tucumán', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Quilmes', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Santiago del Estero', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Liniers', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('La Paternal', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Parque Patricios', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Junín', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Mar del Plata', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Vicente López', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Florencio Varela', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Sarandí', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Rafaela', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('San Juan', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Resistencia', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
+('Corrientes', (SELECT Id FROM Paises WHERE Nombre = 'Argentina'));
 
 
 INSERT INTO Paises (Nombre, CodigoISO)

@@ -1,18 +1,22 @@
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getSeleccionById } from "../services/selecciones.service";
+import { getSeleccionByNombre } from "../services/selecciones.service";
+import { getSeleccionEstadiosBySeleccion } from "@/features/selecciones-estadio/services/seleccionEstadio.service";
 
 
-export default function useSeleccionesDetail() {
+export default function useSeleccionesDetail(seleccionPais: string) {
 
     const params = useParams();
 
     const [seleccion, setSeleccion] = useState<any>(null);
-
+    const [estadio, setEstadio] = useState<any[]>([]);
+    const [pageEstadio, setPageEstadio] = useState(1);
+    const [pageSizeEstadio] = useState(5);
+    const [totalPagesEstadio, setTotalPagesEstadio] = useState(1);
     useEffect(() => {
 
         const fetchSeleccion = async () => {
-            const res = await getSeleccionById(Number(params.id));
+            const res = await getSeleccionByNombre(seleccionPais);
             setSeleccion(res);
         };
 
@@ -20,7 +24,34 @@ export default function useSeleccionesDetail() {
             fetchSeleccion();
         }
 
-    }, [params.id]);
+    }, [params.id, seleccionPais]);
+
+    useEffect(() => {
+
+        const fetchEstadio = async () => {
+
+            const response = await getSeleccionEstadiosBySeleccion({
+                page: pageEstadio,
+                pageSize: pageSizeEstadio,
+                seleccion: seleccionPais
+            });
+
+            setEstadio(response.items);
+            setTotalPagesEstadio(response.totalPages);
+        };
+
+        if (params.id) {
+            fetchEstadio();
+        }
+
+    }, [params.id, pageEstadio, seleccionPais]);
+
+    const estadioColumns = [
+        { header: "ID", accessor: (row: any) => row.id, },
+        { header: "Estadio", accessor: (row: any) => row.estadio, },
+        { header: "Ciudad", accessor: (row: any) => row.ciudad, },
+        { header: "Capacidad", accessor: (row: any) => row.capacidad.toLocaleString() },
+    ];
 
     const items = seleccion
         ? [
@@ -34,6 +65,6 @@ export default function useSeleccionesDetail() {
         ]
         : [];
 
-    return { items, seleccion }
+    return { items, seleccion, estadioColumns, estadio, pageEstadio, pageSizeEstadio, totalPagesEstadio, setPageEstadio }
 
 }
