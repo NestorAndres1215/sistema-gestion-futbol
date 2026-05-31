@@ -1,6 +1,6 @@
 ﻿namespace Application.Common.Models;
 
-public class ApiErrorDto
+public class ApiErrorResponse
 {
     public string? Message { get; set; }
     public int Status { get; set; }

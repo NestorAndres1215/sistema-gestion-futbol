@@ -1,9 +1,8 @@
-﻿
-using Domain.Entities;
+﻿using Domain.Entities;
 
-namespace Application.Dto;
+namespace Application.Dto.selecciones;
 
-public class EstadisticasEntrenadorSeleccionDto
+public class SeleccionEntrenadorEstadisticasRequest
 {
     public int EntrenadorSeleccion { get; set; }
     public int PartidosDirigidos { get; set; }

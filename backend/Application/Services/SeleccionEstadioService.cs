@@ -50,8 +50,7 @@ public class SeleccionEstadioService:ISeleccionEstadioService
 
     public async Task<SeleccionEstadio?> GetByIdAsync(int id)
     {
-        return await _repository.GetByIdAsync(id)
-          ?? throw new NotFoundException("Seleccion Estadio no encontrado");
+        return await _repository.GetByIdAsync(id);
     }
 
     public async Task<SeleccionEstadio> UpdateAsync(int id, SeleccionEstadioRequest seleccionEstadioDto)

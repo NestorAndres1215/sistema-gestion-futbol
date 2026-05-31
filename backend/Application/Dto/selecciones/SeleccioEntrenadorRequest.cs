@@ -1,6 +1,6 @@
-﻿namespace Application.Dto;
+﻿namespace Application.Dto.selecciones;
 
-public class EntrenadorSeleccionDto
+public class SeleccioEntrenadorRequest
 {
     public string Entrenador { get; set; } = string.Empty;
     public string Seleccion { get; set; } = string.Empty;

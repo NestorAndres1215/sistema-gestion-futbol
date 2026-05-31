@@ -18,4 +18,5 @@ public interface IEntrenadoresRepository
     Task<Entrenadores> AddAsync(Entrenadores entrenadores);
     Task<Entrenadores> UpdateAsync(Entrenadores entrenadores);
     Task<Entrenadores?> GetByIdAsync(int id);
+    Task<Entrenadores?> GetByNombreAsync(string nombre);
 }

@@ -70,15 +70,6 @@ public class SeleccionEstadioRepository:ISeleccionEstadioRepository
             .SingleOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<List<SeleccionEstadio>> ListarPorSeleccionNombre(string nombre)
-    {
-        return await _context.SeleccionEstadio
-            .Include(x => x.Seleccion)
-            .Include(x => x.Estadio)
-            .Where(x => x.Seleccion.Nombre == nombre)
-            .ToListAsync();
-    }
-
     public async Task<SeleccionEstadio> UpdateAsync(SeleccionEstadio seleccionEstadio)
     {
         _context.SeleccionEstadio.Update(seleccionEstadio);

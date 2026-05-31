@@ -100,6 +100,17 @@ public class EntrenadoresRepository : IEntrenadoresRepository
             .SingleOrDefaultAsync(x => x.Id == id);
     }
 
+    public async Task<Entrenadores?> GetByNombreAsync(string nombre)
+    {
+        return await _context.Entrenadores
+            .Include(x => x.Persona)
+                .ThenInclude(p => p.CiudadNacimiento)
+            .Include(x => x.Persona)
+                .ThenInclude(p => p.PaisNacimiento)
+            .AsNoTracking()
+            .SingleOrDefaultAsync(x => x.Persona.Nombre== nombre);
+    }
+
     public async Task<Entrenadores> UpdateAsync(Entrenadores entrenadores)
     {
         _context.Entrenadores.Update(entrenadores);

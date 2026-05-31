@@ -40,7 +40,7 @@ public class ExceptionMiddleware
 
         context.Response.StatusCode = statusCode;
 
-        var response = new ApiErrorDto
+        var response = new ApiErrorResponse
         {
             Message = ex.Message,
             Status = statusCode,
