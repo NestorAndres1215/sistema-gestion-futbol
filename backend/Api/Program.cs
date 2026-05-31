@@ -57,6 +57,7 @@ builder.Services.AddScoped<IEntrenadoresRepository, EntrenadoresRepository>();
 builder.Services.AddScoped<IParametrosSistemaRepository, ParametrosSistemaRepository>();
 builder.Services.AddScoped<ISeleccionRepository,SeleccionRepository>();
 builder.Services.AddScoped<ISeleccionEstadioRepository, SeleccionEstadioRepository>();
+builder.Services.AddScoped<IEntrenadorSeleccionRepository, EntrenadorSeleccionRepository>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
@@ -71,6 +72,7 @@ builder.Services.AddScoped<IEntrenadoresService, EntrenadoresService>();
 builder.Services.AddScoped<IParametrosSistemaService, ParametrosSistemaService>();
 builder.Services.AddScoped<ISelecionesService,SeleccionesService>();
 builder.Services.AddScoped<ISeleccionEstadioService, SeleccionEstadioService>();
+builder.Services.AddScoped<IEntrenadorSeleccionService,EntrenadorSeleccionService>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 builder.Services.AddEndpointsApiExplorer();
