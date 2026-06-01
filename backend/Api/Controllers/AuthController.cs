@@ -1,5 +1,4 @@
-﻿using Application.Dto;
-using Application.Dto.auth;
+﻿using Application.Dto.auth;
 using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +37,7 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterDto dto)
+    public async Task<IActionResult> Register(RegisterUsuarioRequest dto)
     {
         var result = await _auth.Register(dto);
         return Ok(result);
@@ -46,7 +45,7 @@ public class AuthController : ControllerBase
 
 
     [HttpPost("register/admin")]
-    public async Task<IActionResult> RegisterAdmin(RegisterDto dto)
+    public async Task<IActionResult> RegisterAdmin(RegisterUsuarioRequest dto)
     {
         var result = await _auth.RegisterAdmin(dto);
         return Ok(result);

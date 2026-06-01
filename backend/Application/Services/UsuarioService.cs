@@ -1,5 +1,6 @@
 ﻿using Application.Common.Exceptions;
-using Application.Dto;
+using Application.Dto.auth;
+using Application.Dto.config;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Enums;
@@ -34,7 +35,7 @@ public class UsuarioService : IUsuarioService
             ?? throw new NotFoundException("Usuario no encontrado");
     }
 
-    public async Task<Usuario> UpdateAsync(int id, UsuarioDto user)
+    public async Task<Usuario> UpdateAsync(int id, UsuarioRequest user)
     {
         var entity = await _repo.GetByIdAsync(id)
             ?? throw new NotFoundException("Usuario no encontrado");
@@ -59,7 +60,7 @@ public class UsuarioService : IUsuarioService
         return await _repo.UpdateAsync(entity);
     }
 
-    private async Task ValidarDuplicadosAsync(int id, UsuarioDto user)
+    private async Task ValidarDuplicadosAsync(int id, UsuarioRequest user)
     {
         if (string.IsNullOrWhiteSpace(user.Username))
             throw new BadRequestException("Username requerido");

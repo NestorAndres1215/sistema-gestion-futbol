@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.config;
 using Application.Dto.estadisticas;
 using Domain.Entities;
 
@@ -16,16 +16,16 @@ public interface IEstadioRepository
     Task<int> ObtenerTotalEstadiosAsync();
     Task<double> ObtenerPromedioCapacidadAsync();
     Task<int> ObtenerTotalPaisesConEstadiosAsync();
-    Task<List<ItemDto>> ObtenerPaisesConMasEstadiosAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerPaisesConMenosEstadiosAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerCiudadesConMasEstadiosAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerCiudadesConMenosEstadiosAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerDistribucionPorEstadoAsync();
-    Task<List<ItemDto>> ObtenerDistribucionTipoCespedAsync();
-    Task<List<ItemDto>> ObtenerMayorCapacidadAsync(int capacidad);
-    Task<List<ItemDto>> ObtenerMenorCapacidadAsync(int capacidad);
-    Task<List<ItemDto>> ObtenerEstadiosMasAntiguosAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerEstadiosMasNuevosAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerPaisesConMasEstadiosAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerPaisesConMenosEstadiosAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerCiudadesConMasEstadiosAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerCiudadesConMenosEstadiosAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerDistribucionPorEstadoAsync();
+    Task<List<ItemResponse>> ObtenerDistribucionTipoCespedAsync();
+    Task<List<ItemResponse>> ObtenerMayorCapacidadAsync(int capacidad);
+    Task<List<ItemResponse>> ObtenerMenorCapacidadAsync(int capacidad);
+    Task<List<ItemResponse>> ObtenerEstadiosMasAntiguosAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerEstadiosMasNuevosAsync(int cantidad);
 
 
 }

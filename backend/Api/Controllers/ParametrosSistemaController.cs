@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.config;
 using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -38,14 +38,14 @@ public class ParametrosSistemaController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register([FromBody] ParametrosSistemaDto dto)
+    public async Task<IActionResult> Register([FromBody] ParametrosSistemaRequest dto)
     {
         var result = await _service.AddAsync(dto);
         return Ok(result);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdatePassword( int id, [FromBody] ParametrosSistemaDto dto)
+    public async Task<IActionResult> UpdatePassword( int id, [FromBody] ParametrosSistemaRequest dto)
     {
         var result = await _service.UpdateAsync(id, dto);
 

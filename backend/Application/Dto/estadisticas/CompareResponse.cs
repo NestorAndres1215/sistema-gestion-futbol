@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 
 namespace Application.Dto.estadisticas;
 
-public class CompareDto
+public class CompareResponse
 {
     public string Nombre { get; set; } = string.Empty;
 

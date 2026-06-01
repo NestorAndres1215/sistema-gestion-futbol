@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.config;
 using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -31,11 +31,18 @@ public class CategoriaController : ControllerBase
         return Ok(await _service.GetByIdAsync(id));
     }
 
+    [HttpGet("nombre")]
+    public async Task<IActionResult> GetByNombre([FromQuery] string nombre)
+    {
+        return Ok(await _service.GetByNombreAsync(nombre));
+    }
+
     [HttpPost]
-    public async Task<IActionResult> Add([FromBody] CategoriaDto categoria)
+    public async Task<IActionResult> Add([FromBody] CategoriaRequest categoria)
     {
         return Ok(await _service.AddAsync(categoria));
     }
+
 
 
 }

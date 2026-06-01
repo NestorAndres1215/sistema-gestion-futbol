@@ -1,5 +1,6 @@
 ﻿using Application.Common.Exceptions;
 using Application.Dto;
+using Application.Dto.config;
 using Application.Dto.estadisticas;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
@@ -191,72 +192,72 @@ public class EstadioService : IEstadioService
         return estadio;
     }
 
-    public async Task<TotalCountDto> ObtenerTotalEstadiosAsync()
+    public async Task<TotalCountResponse> ObtenerTotalEstadiosAsync()
     {
         var total = await _repository.ObtenerTotalEstadiosAsync();
 
-        return new TotalCountDto
+        return new TotalCountResponse
         {
             Total = total
         };
     }
 
-    public async Task<AverageDto> ObtenerPromedioCapacidadAsync()
+    public async Task<AverageResponse> ObtenerPromedioCapacidadAsync()
     {
         var promedio = await _repository.ObtenerPromedioCapacidadAsync();
 
-        return new AverageDto
+        return new AverageResponse
         {
             Promedio = promedio
         };
     }
 
-    public async Task<TotalCountDto> ObtenerTotalPaisesConEstadiosAsync()
+    public async Task<TotalCountResponse> ObtenerTotalPaisesConEstadiosAsync()
     {
         var total = await _repository.ObtenerTotalPaisesConEstadiosAsync();
 
-        return new TotalCountDto
+        return new TotalCountResponse
         {
             Total = total
         };
     }
-    public async Task<List<ItemDto>> ObtenerPaisesConMasEstadiosAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerPaisesConMasEstadiosAsync(int cantidad)
     {
         return await _repository.ObtenerPaisesConMasEstadiosAsync(cantidad);
     }
-    public async Task<List<ItemDto>> ObtenerPaisesConMenosEstadiosAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerPaisesConMenosEstadiosAsync(int cantidad)
     {
         return await _repository.ObtenerPaisesConMenosEstadiosAsync(cantidad);
     }
-    public async Task<List<ItemDto>> ObtenerCiudadesConMasEstadiosAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerCiudadesConMasEstadiosAsync(int cantidad)
     {
         return await _repository.ObtenerCiudadesConMasEstadiosAsync(cantidad);
     }
-    public async Task<List<ItemDto>> ObtenerCiudadesConMenosEstadiosAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerCiudadesConMenosEstadiosAsync(int cantidad)
     {
         return await _repository.ObtenerCiudadesConMenosEstadiosAsync(cantidad);
     }
-    public async Task<List<ItemDto>> ObtenerDistribucionPorEstadoAsync()
+    public async Task<List<ItemResponse>> ObtenerDistribucionPorEstadoAsync()
     {
         return await _repository.ObtenerDistribucionPorEstadoAsync();
     }
-    public async Task<List<ItemDto>> ObtenerDistribucionTipoCespedAsync()
+    public async Task<List<ItemResponse>> ObtenerDistribucionTipoCespedAsync()
     {
         return await _repository.ObtenerDistribucionTipoCespedAsync();
     }
-    public async Task<List<ItemDto>> ObtenerMayorCapacidadAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerMayorCapacidadAsync(int cantidad)
     {
         return await _repository.ObtenerMayorCapacidadAsync(cantidad);
     }
-    public async Task<List<ItemDto>> ObtenerMenorCapacidadAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerMenorCapacidadAsync(int cantidad)
     {
         return await _repository.ObtenerMenorCapacidadAsync(cantidad);
     }
-    public async Task<List<ItemDto>> ObtenerEstadiosMasAntiguosAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerEstadiosMasAntiguosAsync(int cantidad)
     {
         return await _repository.ObtenerEstadiosMasAntiguosAsync(cantidad);
     }
-    public async Task<List<ItemDto>> ObtenerEstadiosMasNuevosAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerEstadiosMasNuevosAsync(int cantidad)
     {
         return await _repository.ObtenerEstadiosMasNuevosAsync(cantidad);
     }

@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.torneo;
 using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +38,7 @@ public class TorneoController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add([FromBody] TorneoDto torneoDto)
+    public async Task<IActionResult> Add([FromBody] TorneoRequest torneoDto)
     {
         return Ok(await _service.AddAsync(torneoDto));
     }

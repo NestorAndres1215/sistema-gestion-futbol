@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.config;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;
@@ -26,12 +26,8 @@ public class ParametrosSistemaRepository:IParametrosSistemaRepository
     }
 
     public async Task<PagedResult<ParametrosSistema>> GetAllAsync(
-        int page,
-        int pageSize,
-        string? search,
-        string? categoria,
-        string? tipoDato,
-        string? estado)
+        int page, int pageSize, string? search, 
+        string? categoria, string? tipoDato, string? estado)
     {
         var query = _context.ParametrosSistema
             .AsNoTracking()

@@ -1,5 +1,6 @@
 ﻿using Application.Common.Exceptions;
-using Application.Dto;
+using Application.Dto.config;
+using Application.Dto.torneo;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
@@ -17,7 +18,7 @@ public class TorneoService : ITorneoService
         _usuarioRepository = usuarioRepository;
     }
 
-    public async Task<Torneo> AddAsync(TorneoDto dto)
+    public async Task<Torneo> AddAsync(TorneoRequest dto)
     {
         Validate(dto);
 
@@ -40,8 +41,7 @@ public class TorneoService : ITorneoService
         return await _repo.AddAsync(torneo);
     }
 
-
-    private void Validate(TorneoDto dto)
+    private void Validate(TorneoRequest dto)
     {
         if (dto == null)
             throw new BadRequestException("El cuerpo es obligatorio");
@@ -62,7 +62,7 @@ public class TorneoService : ITorneoService
             throw new BadRequestException("Usuario creador obligatorio");
     }
 
-    private async Task ValidarReglasAsync(TorneoDto dto)
+    private async Task ValidarReglasAsync(TorneoRequest dto)
     {
         var existe = await _repo.GetByNombreAsync(dto.nombre);
 
@@ -92,7 +92,7 @@ public class TorneoService : ITorneoService
             ?? throw new NotFoundException("Torneo no encontrada");
     }
 
-    public async Task<Torneo> UpdateAsync(int id, TorneoDto dto)
+    public async Task<Torneo> UpdateAsync(int id, TorneoRequest dto)
     {
         var torneo = await _repo.GetByIdAsync(id)
             ?? throw new NotFoundException("Torneo no encontrado");

@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.config;
 using Application.Dto.estadisticas;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
@@ -126,11 +126,11 @@ public class ArbitrosRepository : IArbitroRepository
 
     // Repository
 
-    public async Task<List<ItemDto>> ObtenerArbitrosPorPaisAsync()
+    public async Task<List<ItemResponse>> ObtenerArbitrosPorPaisAsync()
     {
         return await _context.Arbitros
             .GroupBy(a => a.Persona.PaisNacimiento!.Nombre)
-            .Select(g => new ItemDto
+            .Select(g => new ItemResponse
             {
                 nombre = g.Key,
                 valor = g.Count()
@@ -139,12 +139,12 @@ public class ArbitrosRepository : IArbitroRepository
             .ToListAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerTopExperienciaAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerTopExperienciaAsync(int cantidad)
     {
         return await _context.Arbitros
             .OrderByDescending(a => a.AnosExperiencia)
             .Take(cantidad)
-            .Select(a => new ItemDto
+            .Select(a => new ItemResponse
             {
                 nombre = a.Persona.Nombre + " " + a.Persona.Apellido,
                 valor = a.AnosExperiencia
@@ -152,12 +152,12 @@ public class ArbitrosRepository : IArbitroRepository
             .ToListAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerTopReputacionAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerTopReputacionAsync(int cantidad)
     {
         return await _context.Arbitros
             .OrderByDescending(a => a.Reputacion)
             .Take(cantidad)
-            .Select(a => new ItemDto
+            .Select(a => new ItemResponse
             {
                 nombre = a.Persona.Nombre + " " + a.Persona.Apellido,
                 valor = a.Reputacion
@@ -165,12 +165,12 @@ public class ArbitrosRepository : IArbitroRepository
             .ToListAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerArbitrosConMasPartidosAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerArbitrosConMasPartidosAsync(int cantidad)
     {
         return await _context.Arbitros
             .OrderByDescending(a => a.PartidosDirigidos)
             .Take(cantidad)
-            .Select(a => new ItemDto
+            .Select(a => new ItemResponse
             {
                 nombre = a.Persona.Nombre + " " + a.Persona.Apellido,
                 valor = a.PartidosDirigidos
@@ -178,11 +178,11 @@ public class ArbitrosRepository : IArbitroRepository
             .ToListAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerRolArbitralAsync()
+    public async Task<List<ItemResponse>> ObtenerRolArbitralAsync()
     {
         return await _context.Arbitros
             .GroupBy(a => a.RolArbitral)
-            .Select(g => new ItemDto
+            .Select(g => new ItemResponse
             {
                 nombre = g.Key!,
                 valor = g.Count()
@@ -190,7 +190,7 @@ public class ArbitrosRepository : IArbitroRepository
             .ToListAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerEstadoFisicoAsync()
+    public async Task<List<ItemResponse>> ObtenerEstadoFisicoAsync()
     {
         var datos = await _context.Arbitros
             .GroupBy(a => a.EstadoFisico)
@@ -208,19 +208,19 @@ public class ArbitrosRepository : IArbitroRepository
         "Lesionado"
     };
 
-        return estados.Select(e => new ItemDto
+        return estados.Select(e => new ItemResponse
         {
             nombre = e,
             valor = datos.FirstOrDefault(x => x.Estado == e)?.Cantidad ?? 0
         }).ToList();
     }
 
-    public async Task<List<ItemDto>> ObtenerDebutsPorAnioAsync()
+    public async Task<List<ItemResponse>> ObtenerDebutsPorAnioAsync()
     {
         return await _context.Arbitros
             .Where(a => a.FechaDebut.HasValue)
             .GroupBy(a => a.FechaDebut!.Value.Year)
-            .Select(g => new ItemDto
+            .Select(g => new ItemResponse
             {
                 nombre = g.Key.ToString(),
                 valor = g.Count()
@@ -229,12 +229,12 @@ public class ArbitrosRepository : IArbitroRepository
             .ToListAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerArbitrosConMejorNivelAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerArbitrosConMejorNivelAsync(int cantidad)
     {
         return await _context.Arbitros
             .OrderByDescending(a => a.Nivel)
             .Take(cantidad)
-            .Select(a => new ItemDto
+            .Select(a => new ItemResponse
             {
                 nombre = a.Persona.Nombre + " " + a.Persona.Apellido,
                 valor = a.Nivel
@@ -242,11 +242,11 @@ public class ArbitrosRepository : IArbitroRepository
             .ToListAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerArbitrosActivosVsRetiradosAsync()
+    public async Task<List<ItemResponse>> ObtenerArbitrosActivosVsRetiradosAsync()
     {
         return await _context.Arbitros
             .GroupBy(a => a.Estado)
-            .Select(g => new ItemDto
+            .Select(g => new ItemResponse
             {
                 nombre = g.Key,
                 valor = g.Count()
@@ -261,17 +261,17 @@ public class ArbitrosRepository : IArbitroRepository
                 DateTime.Now.Year - a.Persona.FechaNacimiento!.Value.Year);
     }
 
-    public async Task<List<ItemDto>> ObtenerPromedioTarjetasAsync()
+    public async Task<List<ItemResponse>> ObtenerPromedioTarjetasAsync()
     {
-        return new List<ItemDto>
+        return new List<ItemResponse>
     {
-        new ItemDto
+        new ItemResponse
         {
             nombre = "Amarillas",
             valor = (int) await _context.Arbitros
                 .AverageAsync(a => a.TarjetasAmarillas)
         },
-        new ItemDto
+        new ItemResponse
         {
             nombre = "Rojas",
             valor = (int)await _context.Arbitros

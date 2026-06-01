@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.config;
 using Domain.Entities;
 
 
@@ -16,7 +16,7 @@ public interface IParametrosSistemaService
         string? estado);
     Task<ParametrosSistema?> GetByIdAsync(int id);
     Task<ParametrosSistema?> GetByClaveAsync(string clave);
-    Task<ParametrosSistema> AddAsync(ParametrosSistemaDto parametro);
-    Task<ParametrosSistema> UpdateAsync(int id,ParametrosSistemaDto parametro);
+    Task<ParametrosSistema> AddAsync(ParametrosSistemaRequest parametro);
+    Task<ParametrosSistema> UpdateAsync(int id,ParametrosSistemaRequest parametro);
 
 }

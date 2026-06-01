@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.config;
 using Application.Dto.estadisticas;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
@@ -162,11 +162,11 @@ public class EstadioRepository : IEstadioRepository
     }
 
     // Países con más estadios
-    public async Task<List<ItemDto>> ObtenerPaisesConMasEstadiosAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerPaisesConMasEstadiosAsync(int cantidad)
     {
         return await _context.Estadios
             .GroupBy(e => e.Pais)
-            .Select(g => new ItemDto
+            .Select(g => new ItemResponse
             {
                 nombre = g.Key,
                 valor = g.Count()
@@ -177,11 +177,11 @@ public class EstadioRepository : IEstadioRepository
     }
 
     // Países con menos estadios
-    public async Task<List<ItemDto>> ObtenerPaisesConMenosEstadiosAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerPaisesConMenosEstadiosAsync(int cantidad)
     {
         return await _context.Estadios
             .GroupBy(e => e.Pais)
-            .Select(g => new ItemDto
+            .Select(g => new ItemResponse
             {
                 nombre = g.Key,
                 valor = g.Count()
@@ -192,11 +192,11 @@ public class EstadioRepository : IEstadioRepository
     }
 
     // Ciudades con más estadios
-    public async Task<List<ItemDto>> ObtenerCiudadesConMasEstadiosAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerCiudadesConMasEstadiosAsync(int cantidad)
     {
         return await _context.Estadios
             .GroupBy(e => e.Ciudad)
-            .Select(g => new ItemDto
+            .Select(g => new ItemResponse
             {
                 nombre = g.Key,
                 valor = g.Count()
@@ -207,11 +207,11 @@ public class EstadioRepository : IEstadioRepository
     }
 
     // Ciudades con menos estadios
-    public async Task<List<ItemDto>> ObtenerCiudadesConMenosEstadiosAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerCiudadesConMenosEstadiosAsync(int cantidad)
     {
         return await _context.Estadios
             .GroupBy(e => e.Ciudad)
-            .Select(g => new ItemDto
+            .Select(g => new ItemResponse
             {
                 nombre = g.Key,
                 valor = g.Count()
@@ -221,7 +221,7 @@ public class EstadioRepository : IEstadioRepository
             .ToListAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerDistribucionPorEstadoAsync()
+    public async Task<List<ItemResponse>> ObtenerDistribucionPorEstadoAsync()
     {
         var estados = new List<string>
             {
@@ -241,14 +241,14 @@ public class EstadioRepository : IEstadioRepository
             })
             .ToListAsync();
 
-        return estados.Select(estado => new ItemDto
+        return estados.Select(estado => new ItemResponse
         {
             nombre = estado,
             valor = data.FirstOrDefault(x => x.Estado == estado)?.Total ?? 0
         }).ToList();
     }
 
-    public async Task<List<ItemDto>> ObtenerDistribucionTipoCespedAsync()
+    public async Task<List<ItemResponse>> ObtenerDistribucionTipoCespedAsync()
     {
         var tipos = new List<string>
             {
@@ -266,7 +266,7 @@ public class EstadioRepository : IEstadioRepository
             })
             .ToListAsync();
 
-        return tipos.Select(tipo => new ItemDto
+        return tipos.Select(tipo => new ItemResponse
         {
             nombre = tipo,
             valor = data.FirstOrDefault(x => x.Tipo == tipo)?.Total ?? 0
@@ -274,12 +274,12 @@ public class EstadioRepository : IEstadioRepository
     }
 
     // Repository
-    public async Task<List<ItemDto>> ObtenerMayorCapacidadAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerMayorCapacidadAsync(int cantidad)
     {
         return await _context.Estadios
             .OrderByDescending(e => e.Capacidad)
             .Take(cantidad)
-            .Select(e => new ItemDto
+            .Select(e => new ItemResponse
             {
                 nombre = e.Nombre,
                 valor = e.Capacidad
@@ -287,12 +287,12 @@ public class EstadioRepository : IEstadioRepository
             .ToListAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerMenorCapacidadAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerMenorCapacidadAsync(int cantidad)
     {
         return await _context.Estadios
             .OrderBy(e => e.Capacidad)
             .Take(cantidad)
-            .Select(e => new ItemDto
+            .Select(e => new ItemResponse
             {
                 nombre = e.Nombre,
                 valor = e.Capacidad
@@ -300,13 +300,13 @@ public class EstadioRepository : IEstadioRepository
             .ToListAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerEstadiosMasAntiguosAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerEstadiosMasAntiguosAsync(int cantidad)
     {
         return await _context.Estadios
             .Where(e => e.FechaApertura.HasValue)
             .OrderBy(e => e.FechaApertura)
             .Take(cantidad)
-            .Select(e => new ItemDto
+            .Select(e => new ItemResponse
             {
                 nombre = e.Nombre,
                 valor = e.FechaApertura!.Value.Year
@@ -314,13 +314,13 @@ public class EstadioRepository : IEstadioRepository
             .ToListAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerEstadiosMasNuevosAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerEstadiosMasNuevosAsync(int cantidad)
     {
         return await _context.Estadios
             .Where(e => e.FechaApertura.HasValue)
             .OrderByDescending(e => e.FechaApertura)
             .Take(cantidad)
-            .Select(e => new ItemDto
+            .Select(e => new ItemResponse
             {
                 nombre = e.Nombre,
                 valor = e.FechaApertura!.Value.Year

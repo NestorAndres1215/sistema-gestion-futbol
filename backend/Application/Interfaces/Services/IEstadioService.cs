@@ -1,4 +1,5 @@
 ﻿using Application.Dto;
+using Application.Dto.config;
 using Application.Dto.estadisticas;
 using Domain.Entities;
 
@@ -14,18 +15,18 @@ public interface IEstadioService
     Task<List<Estadio>> GetByPaisAsync(string pais);
     Task<Estadio?> GetByNombreAsync(string nombre);
     Task<List<int>> GetAniosAsync();
-    Task<TotalCountDto> ObtenerTotalEstadiosAsync();
-    Task<AverageDto> ObtenerPromedioCapacidadAsync();
-    Task<TotalCountDto> ObtenerTotalPaisesConEstadiosAsync();
-    Task<List<ItemDto>> ObtenerPaisesConMasEstadiosAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerPaisesConMenosEstadiosAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerCiudadesConMasEstadiosAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerCiudadesConMenosEstadiosAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerDistribucionPorEstadoAsync();
-    Task<List<ItemDto>> ObtenerDistribucionTipoCespedAsync();
-    Task<List<ItemDto>> ObtenerMayorCapacidadAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerMenorCapacidadAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerEstadiosMasAntiguosAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerEstadiosMasNuevosAsync(int cantidad);
+    Task<TotalCountResponse> ObtenerTotalEstadiosAsync();
+    Task<AverageResponse> ObtenerPromedioCapacidadAsync();
+    Task<TotalCountResponse> ObtenerTotalPaisesConEstadiosAsync();
+    Task<List<ItemResponse>> ObtenerPaisesConMasEstadiosAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerPaisesConMenosEstadiosAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerCiudadesConMasEstadiosAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerCiudadesConMenosEstadiosAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerDistribucionPorEstadoAsync();
+    Task<List<ItemResponse>> ObtenerDistribucionTipoCespedAsync();
+    Task<List<ItemResponse>> ObtenerMayorCapacidadAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerMenorCapacidadAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerEstadiosMasAntiguosAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerEstadiosMasNuevosAsync(int cantidad);
 
 }

@@ -1,5 +1,5 @@
 ﻿using Application.Common.Exceptions;
-using Application.Dto;
+using Application.Dto.config;
 using Application.Dto.selecciones;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;

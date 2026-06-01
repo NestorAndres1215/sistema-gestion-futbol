@@ -1,4 +1,5 @@
-﻿using Application.Dto;
+﻿using Application.Dto.config;
+using Application.Dto.torneo;
 using Domain.Entities;
 
 namespace Application.Interfaces.Services;
@@ -11,8 +12,8 @@ public interface ITorneoService
         string? tipo,
         string? tipoParticipante,
         string? estado);
-    Task<Torneo> AddAsync(TorneoDto torneo);
-    Task<Torneo> UpdateAsync(int id ,TorneoDto torneo);
+    Task<Torneo> AddAsync(TorneoRequest torneo);
+    Task<Torneo> UpdateAsync(int id ,TorneoRequest torneo);
     Task<Torneo> GetByIdAsync(int id);
     Task<Torneo> GetByNombreAsync(string nombre);
 }

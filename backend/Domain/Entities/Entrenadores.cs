@@ -22,5 +22,5 @@ public class Entrenadores
     public int Disciplina { get; set; } = 50;
     public int Adaptabilidad { get; set; } = 50;
     public string Estado { get; set; } = "Activo";
-    public virtual Personas? Persona { get; set; }
+    public  Personas? Persona { get; set; }
 }

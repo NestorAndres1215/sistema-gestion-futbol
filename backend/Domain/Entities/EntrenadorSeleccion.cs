@@ -9,8 +9,8 @@ public class EntrenadorSeleccion
     public string Cargo { get; set; } = string.Empty;
     public DateTime FechaInicio { get; set; }
     public DateTime? FechaFin {  get; set; }
-    public Entrenadores Entrenadores { get; set; }
-    public Selecciones Selecciones { get; set; }
+    public Entrenadores Entrenador { get; set; }
+    public Selecciones Seleccion { get; set; }
 
 
 }

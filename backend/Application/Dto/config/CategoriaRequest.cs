@@ -1,6 +1,6 @@
-﻿namespace Application.Dto;
+﻿namespace Application.Dto.config;
 
-public class CategoriaDto
+public class CategoriaRequest
 {
     public string nombre {get;set; } = string.Empty;
     public string descripcion { get; set; }= string.Empty;

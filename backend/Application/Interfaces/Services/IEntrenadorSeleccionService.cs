@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.config;
 using Application.Dto.selecciones;
 using Domain.Entities;
 

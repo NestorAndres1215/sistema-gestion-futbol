@@ -1,5 +1,5 @@
 ﻿using Application.Common.Exceptions;
-using Application.Dto;
+using Application.Dto.config;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
@@ -16,7 +16,7 @@ public class ParametrosSistemaService : IParametrosSistemaService
         _repository = repository;
     }
 
-    public async Task<ParametrosSistema> AddAsync(ParametrosSistemaDto parametro )
+    public async Task<ParametrosSistema> AddAsync(ParametrosSistemaRequest parametro )
     {
         await ValidarParametro(parametro);
 
@@ -53,7 +53,7 @@ public class ParametrosSistemaService : IParametrosSistemaService
             ?? throw new NotFoundException("Parametro no encontrado");
     }
 
-    public async Task<ParametrosSistema> UpdateAsync(int id, ParametrosSistemaDto parametro)
+    public async Task<ParametrosSistema> UpdateAsync(int id, ParametrosSistemaRequest parametro)
     {
         var entity = await _repository.GetByIdAsync(id);
 
@@ -76,7 +76,7 @@ public class ParametrosSistemaService : IParametrosSistemaService
     }
 
 
-    private async Task ValidarParametro( ParametrosSistemaDto parametro,int? idExcluir = null)
+    private async Task ValidarParametro( ParametrosSistemaRequest parametro,int? idExcluir = null)
     {
         if (string.IsNullOrWhiteSpace(parametro.Clave))
             throw new Exception("La clave es obligatoria");

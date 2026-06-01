@@ -1,6 +1,4 @@
-﻿
-
-using Application.Dto;
+﻿using Application.Dto.config;
 using Application.Dto.estadisticas;
 using Domain.Entities;
 
@@ -16,15 +14,15 @@ public interface IArbitroRepository
     Task<int> ObtenerArbitrosActivosAsync();
     Task<double> ObtenerPrecisionPromedioAsync();
     Task<double> ObtenerReputacionPromedioAsync();
-    Task<List<ItemDto>> ObtenerArbitrosPorPaisAsync();
-    Task<List<ItemDto>> ObtenerArbitrosConMasPartidosAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerRolArbitralAsync();
-    Task<List<ItemDto>> ObtenerEstadoFisicoAsync();
-    Task<List<ItemDto>> ObtenerDebutsPorAnioAsync();
-    Task<List<ItemDto>> ObtenerArbitrosConMejorNivelAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerArbitrosActivosVsRetiradosAsync();
+    Task<List<ItemResponse>> ObtenerArbitrosPorPaisAsync();
+    Task<List<ItemResponse>> ObtenerArbitrosConMasPartidosAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerRolArbitralAsync();
+    Task<List<ItemResponse>> ObtenerEstadoFisicoAsync();
+    Task<List<ItemResponse>> ObtenerDebutsPorAnioAsync();
+    Task<List<ItemResponse>> ObtenerArbitrosConMejorNivelAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerArbitrosActivosVsRetiradosAsync();
     Task<double> ObtenerEdadPromedioAsync();
-    Task<List<ItemDto>> ObtenerPromedioTarjetasAsync();
-    Task<List<ItemDto>> ObtenerTopExperienciaAsync(int cantidad);
-    Task<List<ItemDto>> ObtenerTopReputacionAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerPromedioTarjetasAsync();
+    Task<List<ItemResponse>> ObtenerTopExperienciaAsync(int cantidad);
+    Task<List<ItemResponse>> ObtenerTopReputacionAsync(int cantidad);
 }

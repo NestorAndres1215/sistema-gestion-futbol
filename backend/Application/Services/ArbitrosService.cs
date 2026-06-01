@@ -1,5 +1,6 @@
 ﻿using Application.Common.Exceptions;
 using Application.Dto;
+using Application.Dto.config;
 using Application.Dto.estadisticas;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
@@ -231,100 +232,100 @@ public class ArbitrosService : IArbitrosService
     }
 
 
-    public async Task<TotalCountDto> ObtenerTotalArbitrosAsync()
+    public async Task<TotalCountResponse> ObtenerTotalArbitrosAsync()
     {
         var total = await _repository.ObtenerTotalArbitrosAsync();
 
-        return new TotalCountDto
+        return new TotalCountResponse
         {
             Total = total
         };
     }
 
-    public async Task<TotalCountDto> ObtenerArbitrosActivosAsync()
+    public async Task<TotalCountResponse> ObtenerArbitrosActivosAsync()
     {
         var total = await _repository.ObtenerArbitrosActivosAsync();
 
-        return new TotalCountDto
+        return new TotalCountResponse
         {
             Total = total
         };
     }
 
-    public async Task<AverageDto> ObtenerPrecisionPromedioAsync()
+    public async Task<AverageResponse> ObtenerPrecisionPromedioAsync()
     {
         var promedio = await _repository.ObtenerPrecisionPromedioAsync();
 
-        return new AverageDto
+        return new AverageResponse
         {
             Promedio = promedio
         };
     }
 
-    public async Task<AverageDto> ObtenerReputacionPromedioAsync()
+    public async Task<AverageResponse> ObtenerReputacionPromedioAsync()
     {
-        return new AverageDto
+        return new AverageResponse
         {
             Promedio = await _repository.ObtenerReputacionPromedioAsync()
         };
     }
     // Service
 
-    public async Task<List<ItemDto>> ObtenerArbitrosPorPaisAsync()
+    public async Task<List<ItemResponse>> ObtenerArbitrosPorPaisAsync()
     {
         return await _repository.ObtenerArbitrosPorPaisAsync();
     }
 
 
-    public async Task<List<ItemDto>> ObtenerArbitrosConMasPartidosAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerArbitrosConMasPartidosAsync(int cantidad)
     {
         return await _repository.ObtenerArbitrosConMasPartidosAsync(cantidad);
     }
 
-    public async Task<List<ItemDto>> ObtenerRolArbitralAsync()
+    public async Task<List<ItemResponse>> ObtenerRolArbitralAsync()
     {
         return await _repository.ObtenerRolArbitralAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerEstadoFisicoAsync()
+    public async Task<List<ItemResponse>> ObtenerEstadoFisicoAsync()
     {
         return await _repository.ObtenerEstadoFisicoAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerDebutsPorAnioAsync()
+    public async Task<List<ItemResponse>> ObtenerDebutsPorAnioAsync()
     {
         return await _repository.ObtenerDebutsPorAnioAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerArbitrosConMejorNivelAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerArbitrosConMejorNivelAsync(int cantidad)
     {
         return await _repository.ObtenerArbitrosConMejorNivelAsync(cantidad);
     }
 
-    public async Task<List<ItemDto>> ObtenerArbitrosActivosVsRetiradosAsync()
+    public async Task<List<ItemResponse>> ObtenerArbitrosActivosVsRetiradosAsync()
     {
         return await _repository.ObtenerArbitrosActivosVsRetiradosAsync();
     }
 
-    public async Task<AverageDto> ObtenerEdadPromedioAsync()
+    public async Task<AverageResponse> ObtenerEdadPromedioAsync()
     {
-        return new AverageDto
+        return new AverageResponse
         {
             Promedio = await _repository.ObtenerEdadPromedioAsync()
         };
     }
 
-    public async Task<List<ItemDto>> ObtenerPromedioTarjetasAsync()
+    public async Task<List<ItemResponse>> ObtenerPromedioTarjetasAsync()
     {
         return await _repository.ObtenerPromedioTarjetasAsync();
     }
 
-    public async Task<List<ItemDto>> ObtenerTopExperienciaAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerTopExperienciaAsync(int cantidad)
     {
         return await _repository.ObtenerTopExperienciaAsync(cantidad);
     }
 
-    public async Task<List<ItemDto>> ObtenerTopReputacionAsync(int cantidad)
+    public async Task<List<ItemResponse>> ObtenerTopReputacionAsync(int cantidad)
     {
         return await _repository.ObtenerTopReputacionAsync(cantidad);
     }

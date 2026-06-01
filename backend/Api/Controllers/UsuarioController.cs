@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.auth;
 using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -44,7 +44,7 @@ public class UsuarioController : ControllerBase
 
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] UsuarioDto user)
+    public async Task<IActionResult> Update(int id, [FromBody] UsuarioRequest user)
     {
         return Ok(await _service.UpdateAsync(id, user));
     }

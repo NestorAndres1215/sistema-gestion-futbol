@@ -1,6 +1,6 @@
-﻿namespace Application.Dto;
+﻿namespace Application.Dto.auth;
 
-public class UsuarioDto
+public class UsuarioRequest
 {
     public required string Username { get; set; }
 

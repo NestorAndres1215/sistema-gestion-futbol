@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.config;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;

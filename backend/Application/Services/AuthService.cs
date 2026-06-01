@@ -1,5 +1,4 @@
 ﻿using Application.Common.Exceptions;
-using Application.Dto;
 using Application.Dto.auth;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
@@ -25,7 +24,7 @@ public class AuthService : IAuthService
         _jwt = jwt;
     }
 
-    public async Task<Usuario> Register(RegisterDto dto)
+    public async Task<Usuario> Register(RegisterUsuarioRequest dto)
     {
         var existingEmail = await _repo.GetByEmailAsync(dto.Email);
 
@@ -88,7 +87,7 @@ public class AuthService : IAuthService
         };
     }
 
-    public async Task<Usuario> RegisterAdmin(RegisterDto dto)
+    public async Task<Usuario> RegisterAdmin(RegisterUsuarioRequest dto)
     {
         var existingEmail = await _repo.GetByEmailAsync(dto.Email);
 
@@ -99,6 +98,7 @@ public class AuthService : IAuthService
 
         if (existingUser != null)
             throw new BadRequestException("El nombre de usuario ya existe");
+
         ValidatePassword(dto.Password);
 
 
@@ -133,25 +133,16 @@ public class AuthService : IAuthService
         var entity = await _repo.GetByIdAsync(id)
             ?? throw new NotFoundException("Usuario no encontrado");
 
-        var passwordActualCorrecta = _hasher.Verify(
-            dto.PasswordActual,
-            entity.Password
-        );
+        var passwordActualCorrecta = _hasher.Verify(dto.PasswordActual, entity.Password);
 
         if (!passwordActualCorrecta)
-            throw new BadRequestException(
-                "La contraseña actual es incorrecta"
-            );
+            throw new BadRequestException( "La contraseña actual es incorrecta");
 
         if (dto.PasswordActual == dto.PasswordNueva)
-            throw new BadRequestException(
-                "La nueva contraseña no puede ser igual a la actual"
-            );
+            throw new BadRequestException("La nueva contraseña no puede ser igual a la actual");
 
         if (dto.PasswordNueva != dto.PasswordConfirmacion)
-            throw new BadRequestException(
-                "La confirmación de contraseña no coincide"
-            );
+            throw new BadRequestException("La confirmación de contraseña no coincide");
 
         ValidatePassword(dto.PasswordNueva);
 

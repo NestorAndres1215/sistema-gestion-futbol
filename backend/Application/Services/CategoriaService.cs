@@ -1,5 +1,5 @@
 ﻿using Application.Common.Exceptions;
-using Application.Dto;
+using Application.Dto.config;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
@@ -15,7 +15,7 @@ public class CategoriaService : ICategoriaService
         _repo = repo;
     }
 
-    public async Task<Categoria> AddAsync(CategoriaDto categoriaDto)
+    public async Task<Categoria> AddAsync(CategoriaRequest categoriaDto)
     {
 
         var existe = await _repo.GetByNombreAsync(categoriaDto.nombre);

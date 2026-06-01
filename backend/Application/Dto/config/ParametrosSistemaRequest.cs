@@ -1,6 +1,6 @@
-﻿namespace Application.Dto;
+﻿namespace Application.Dto.config;
 
-public class ParametrosSistemaDto
+public class ParametrosSistemaRequest
 {
     public string Clave { get; set; } = string.Empty;
     public string Valor { get; set; } = string.Empty;

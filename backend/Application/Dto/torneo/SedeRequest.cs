@@ -1,7 +1,6 @@
-﻿
-namespace Application.Dto;
+﻿namespace Application.Dto.torneo;
 
-public class SedeDto
+public class SedeRequest
 {
     public required string sede { get; set; }
     public bool principal { get; set; }

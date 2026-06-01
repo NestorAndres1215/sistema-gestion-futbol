@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.config;
 using Application.Dto.selecciones;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
@@ -27,8 +27,8 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
     public async Task<EntrenadorSeleccion?> GetByIdAsync(int id)
     {
         return await _context.EntrenadorSeleccion
-            .Include(x => x.Selecciones)
-            .Include(x => x.Entrenadores)
+            .Include(x => x.Seleccion)
+            .Include(x => x.Entrenador)
             .AsNoTracking()
             .SingleOrDefaultAsync(x => x.Id == id);
     }
@@ -38,10 +38,12 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
     public async Task<List<string>> GetEntrenadoresAsync(string seleccion)
     {
         return await _context.EntrenadorSeleccion
-            .Include(x => x.Entrenadores)
-            .Include(x => x.Selecciones)
-            .Where(x => x.Selecciones.Nombre == seleccion)
-            .Select(x => x.Entrenadores.Persona.Nombre + " " + x.Entrenadores.Persona.Apellido)
+            .Include(x => x.Entrenador)
+            .Include(x => x.Seleccion)
+            .Where(x => x.Seleccion != null && x.Seleccion.Nombre == seleccion)
+            .Select(x => x.Entrenador != null && x.Entrenador.Persona != null 
+                ? x.Entrenador.Persona.Nombre + " " + x.Entrenador.Persona.Apellido 
+                : string.Empty)
             .Distinct()
             .OrderBy(x => x)
             .ToListAsync();
@@ -55,14 +57,14 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
         string? seleccion)
     {
         var query = _context.EntrenadorSeleccion
-            .Include(x => x.Selecciones)
-            .Include(x => x.Entrenadores)
+            .Include(x => x.Seleccion)
+            .Include(x => x.Entrenador)
                 .ThenInclude(x => x.Persona)
             .AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(seleccion))
         {
-            query = query.Where(x => x.Selecciones.Nombre == seleccion);
+            query = query.Where(x => x.Seleccion.Nombre == seleccion);
         }
 
         var totalCount = await query.CountAsync();
@@ -73,9 +75,9 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
             .Select(x => new SeleccionEntrenadorResponse
             {
                 Id = x.Id,
-                Seleccion = x.Selecciones.Nombre,
-                EntrenadorNombre = x.Entrenadores.Persona.Nombre,
-                EntrenadorApellido = x.Entrenadores.Persona.Apellido,
+                Seleccion = x.Seleccion.Nombre,
+                EntrenadorNombre = x.Entrenador.Persona.Nombre,
+                EntrenadorApellido = x.Entrenador.Persona.Apellido,
                 Cargo = x.Cargo,
                 FechaInicio = x.FechaInicio,
                 FechaFin = x.FechaFin
@@ -94,9 +96,9 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
     public async Task<List<EntrenadorSeleccion>> ListarPorSeleccionNombre(string nombre)
     {
         return await _context.EntrenadorSeleccion
-            .Include(x => x.Selecciones)
-            .Include(x => x.Entrenadores)
-            .Where(x => x.Selecciones.Nombre == nombre)
+            .Include(x => x.Seleccion)
+            .Include(x => x.Entrenador)
+            .Where(x => x.Seleccion.Nombre == nombre)
             .ToListAsync();
     }
 

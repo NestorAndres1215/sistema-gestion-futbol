@@ -1,7 +1,6 @@
-﻿
-namespace Application.Dto;
+﻿namespace Application.Dto.torneo;
 
-public class TorneoDto
+public class TorneoRequest
 {
     public required string nombre { get; set; }
     public required string tipo { get; set; }

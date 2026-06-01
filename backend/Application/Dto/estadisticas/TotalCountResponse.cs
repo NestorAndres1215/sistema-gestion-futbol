@@ -1,6 +1,6 @@
 ﻿namespace Application.Dto.estadisticas;
 
-public class TotalCountDto
+public class TotalCountResponse
 {
     public int Total { get; set; }
 }
