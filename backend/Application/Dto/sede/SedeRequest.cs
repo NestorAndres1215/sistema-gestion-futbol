@@ -1,4 +1,4 @@
-﻿namespace Application.Dto.torneo;
+﻿namespace Application.Dto.sede;
 
 public class SedeRequest
 {

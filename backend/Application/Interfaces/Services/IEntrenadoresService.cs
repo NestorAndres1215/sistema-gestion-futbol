@@ -13,8 +13,8 @@ public interface IEntrenadoresService
       int page, int pageSize, string? search,
       string? estiloJuego, string? pais, string? estado);
 
-    Task<Entrenadores> AddAsync(EntrenadoresDto entrenadores);
-    Task<Entrenadores> UpdateAsync(int id, EntrenadoresDto entrenadores);
+    Task<Entrenadores> AddAsync(EntrenadoresRequest entrenadores);
+    Task<Entrenadores> UpdateAsync(int id, EntrenadoresRequest entrenadores);
     Task<Entrenadores> GetByIdAsync(int id);
 
 

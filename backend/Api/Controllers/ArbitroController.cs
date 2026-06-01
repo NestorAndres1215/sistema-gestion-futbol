@@ -19,14 +19,14 @@ public class ArbitroController : ControllerBase
 
     [HttpPost]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> Registrar([FromForm] ArbitrosDto dto)
+    public async Task<IActionResult> Registrar([FromForm] ArbitrosRequest dto)
     {
         return Ok(await _service.AddAsync(dto));
     }
 
     [HttpPut("{id}")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> Actualizar(int id, [FromForm] ArbitrosDto dto)
+    public async Task<IActionResult> Actualizar(int id, [FromForm] ArbitrosRequest dto)
     {
         return Ok(await _service.UpdateAsync(id, dto));
     }

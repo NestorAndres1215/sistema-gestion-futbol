@@ -2,7 +2,7 @@
 
 public class PasswordRequest
 {
-    public string PasswordActual { get; set; } = string.Empty;
-    public string PasswordNueva { get; set; } = string.Empty;
-    public string PasswordConfirmacion {  get; set; } = string.Empty;
+    public required string PasswordActual { get; set; } = string.Empty;
+    public required string PasswordNueva { get; set; } = string.Empty;
+    public required string PasswordConfirmacion {  get; set; } = string.Empty;
 }

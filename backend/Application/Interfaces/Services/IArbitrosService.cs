@@ -11,8 +11,8 @@ namespace Application.Interfaces.Services;
 public interface IArbitrosService
 {
     Task<PagedResult<Arbitros>> GetAllAsync(int page,int pageSize, string? search,string? categoria, string? pais,string? estado);
-    Task<Arbitros> AddAsync(ArbitrosDto arbitros);
-    Task<Arbitros> UpdateAsync(int id,ArbitrosDto arbitros);
+    Task<Arbitros> AddAsync(ArbitrosRequest arbitros);
+    Task<Arbitros> UpdateAsync(int id,ArbitrosRequest arbitros);
     Task<Arbitros> GetByIdAsync(int id);
     Task<TotalCountResponse> ObtenerTotalArbitrosAsync();
     Task<TotalCountResponse> ObtenerArbitrosActivosAsync();

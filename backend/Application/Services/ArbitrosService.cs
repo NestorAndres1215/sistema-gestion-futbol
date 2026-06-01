@@ -29,7 +29,7 @@ public class ArbitrosService : IArbitrosService
     }
 
 
-    public async Task<Arbitros> AddAsync(ArbitrosDto arbitros)
+    public async Task<Arbitros> AddAsync(ArbitrosRequest arbitros)
     {
         ValidarDto(arbitros);
     
@@ -91,7 +91,7 @@ public class ArbitrosService : IArbitrosService
          ?? throw new NotFoundException("Árbitro no encontrado");
     }
 
-    public async  Task<Arbitros> UpdateAsync(int id, ArbitrosDto dto)
+    public async  Task<Arbitros> UpdateAsync(int id, ArbitrosRequest dto)
     {
         if (dto == null)
             throw new BadRequestException("Datos inválidos");
@@ -174,7 +174,7 @@ public class ArbitrosService : IArbitrosService
 
         return Math.Max(0, anos);
     }
-    private async Task<string> GuardarFotoAsync(ArbitrosDto arbitros)
+    private async Task<string> GuardarFotoAsync(ArbitrosRequest arbitros)
     {
         if (arbitros.Foto == null || arbitros.Foto.Length == 0)
             return "";
@@ -208,7 +208,7 @@ public class ArbitrosService : IArbitrosService
         return $"/uploads/arbitros/{nombreArchivo}";
     }
 
-    private void ValidarDto(ArbitrosDto dto)
+    private void ValidarDto(ArbitrosRequest dto)
     {
         if (dto is null)
             throw new BadRequestException("El cuerpo de la solicitud es obligatorio");

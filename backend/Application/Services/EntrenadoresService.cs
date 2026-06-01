@@ -30,7 +30,7 @@ public class EntrenadoresService : IEntrenadoresService
         _ciudadRepo = ciudadRepo;
     }
 
-    public async Task<Entrenadores> AddAsync(EntrenadoresDto entrenadores)
+    public async Task<Entrenadores> AddAsync(EntrenadoresRequest entrenadores)
     {
         ValidateEntrenador(entrenadores);
 
@@ -83,7 +83,7 @@ public class EntrenadoresService : IEntrenadoresService
         return entrenador;
     }
 
-    private void ValidateEntrenador(EntrenadoresDto dto)
+    private void ValidateEntrenador(EntrenadoresRequest dto)
     {
         if (dto == null)
             throw new BadRequestException("Datos inválidos");
@@ -103,7 +103,7 @@ public class EntrenadoresService : IEntrenadoresService
         if (dto.FechaDebut != null && dto.FechaDebut < dto.FechaNacimiento)
             throw new BadRequestException("La fecha de debut no puede ser menor a la fecha de nacimiento");
     }
-    private async Task<string> GuardarFotoAsync(EntrenadoresDto entrenadoresDto)
+    private async Task<string> GuardarFotoAsync(EntrenadoresRequest entrenadoresDto)
     {
         if (entrenadoresDto.Foto == null)
             return "";
@@ -164,7 +164,7 @@ public class EntrenadoresService : IEntrenadoresService
             ?? throw new NotFoundException("Entrenador no encontrado");
     }
 
-    public async Task<Entrenadores> UpdateAsync(int id, EntrenadoresDto dto)
+    public async Task<Entrenadores> UpdateAsync(int id, EntrenadoresRequest dto)
     {
         if (dto is null)
             throw new BadRequestException("Datos inválidos");

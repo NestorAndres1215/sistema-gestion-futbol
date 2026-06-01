@@ -20,7 +20,7 @@ public class EstadioService : IEstadioService
     }
 
 
-    public async Task<Estadio> AddAsync(EstadioDTo dto)
+    public async Task<Estadio> AddAsync(EstadioRequest dto)
     {
 
         ValidarDto(dto);
@@ -46,7 +46,7 @@ public class EstadioService : IEstadioService
  
     }
 
-    private async Task<string> GuardarFotoAsync(EstadioDTo dto)
+    private async Task<string> GuardarFotoAsync(EstadioRequest dto)
     {
         if (dto.Foto == null)
             return "";
@@ -82,7 +82,7 @@ public class EstadioService : IEstadioService
 
     }
 
-    private void ValidarDto(EstadioDTo dto)
+    private void ValidarDto(EstadioRequest dto)
     {
         if (dto == null)
             throw new BadRequestException(nameof(dto));
@@ -137,7 +137,7 @@ public class EstadioService : IEstadioService
         return await _repository.GetByPaisAsync(pais);
     }
 
-    public async Task<Estadio> UpdateAsync(int id, EstadioDTo estadioDTo)
+    public async Task<Estadio> UpdateAsync(int id, EstadioRequest estadioDTo)
     {
         var estadio = await _repository.GetByIdAsync(id);
 

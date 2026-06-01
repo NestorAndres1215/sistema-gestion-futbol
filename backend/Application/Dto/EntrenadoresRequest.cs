@@ -5,13 +5,13 @@ using System.Text;
 
 namespace Application.Dto;
 
-public class EntrenadoresDto
+public class EntrenadoresRequest
 {
-    public string Nombre { get; set; } = string.Empty;
-    public string Apellido { get; set; } = string.Empty;
+    public required string Nombre { get; set; } = string.Empty;
+    public required string Apellido { get; set; } = string.Empty;
     public DateTime? FechaNacimiento { get; set; }
-    public string PaisNacimiento { get; set; } = string.Empty;
-    public string CiudadNacimiento { get; set; } = string.Empty;
+    public required string PaisNacimiento { get; set; } = string.Empty;
+    public required string CiudadNacimiento { get; set; } = string.Empty;
     public IFormFile? Foto { get; set; }
     public string? EstiloJuego { get; set; }
     public string? Licencia { get; set; }

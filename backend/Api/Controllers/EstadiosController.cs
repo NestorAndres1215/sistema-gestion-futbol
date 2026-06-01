@@ -17,7 +17,7 @@ public class EstadiosController : ControllerBase
 
     [HttpPost]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> Registrar([FromForm] EstadioDTo dto)
+    public async Task<IActionResult> Registrar([FromForm] EstadioRequest dto)
     { 
         return Ok(await _service.AddAsync(dto));
     }
@@ -25,7 +25,7 @@ public class EstadiosController : ControllerBase
 
     [HttpPut("{id}")]
     [Consumes("multipart/form-data")]
-    public async Task<IActionResult> Update(int id, [FromForm] EstadioDTo dto)
+    public async Task<IActionResult> Update(int id, [FromForm] EstadioRequest dto)
     {
         return Ok(await _service.UpdateAsync(id, dto));
     }
