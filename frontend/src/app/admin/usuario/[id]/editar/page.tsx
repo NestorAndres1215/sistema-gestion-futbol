@@ -8,10 +8,10 @@ import useUsuarioEdit from "@/features/usuario/hooks/useUsuarioEdit";
 import styles from "@/shared/styles/form.module.css";
 import { useRouter } from "next/navigation";
 export default function UsuarioDetallePage() {
- const router = useRouter();
+  const router = useRouter();
   const {
-    form, handleSubmit,
-    handleChange, breadcrumbUsuarioEdit
+    form, breadcrumbUsuarioEdit,
+    handleChange, handleSubmit,
   } = useUsuarioEdit();
 
   return (

@@ -63,7 +63,7 @@ export default function ArbitrosEditar() {
                         <div className="row g-3">
 
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Nombre</label>
                                     <div className={styles.inputWrap}>
                                         <input
@@ -76,7 +76,7 @@ export default function ArbitrosEditar() {
                             </div>
 
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Apellido Paterno</label>
                                     <div className={styles.inputWrap}>
                                         <input
@@ -92,7 +92,7 @@ export default function ArbitrosEditar() {
 
                         <div className="row g-3">
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Fecha Nacimiento</label>
                                     <div className={styles.inputWrap}>
                                         <input
@@ -105,7 +105,7 @@ export default function ArbitrosEditar() {
                                 </div>
                             </div>
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Fecha Debut</label>
                                     <div className={styles.inputWrap}>
                                         <input
@@ -122,7 +122,7 @@ export default function ArbitrosEditar() {
                         <div className="row g-3">
 
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>País</label>
                                     <div className={styles.inputWrap}>
                                         <select
@@ -143,7 +143,7 @@ export default function ArbitrosEditar() {
                             </div>
 
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Ciudad</label>
 
                                     <div className={styles.inputWrap}>
@@ -168,11 +168,11 @@ export default function ArbitrosEditar() {
 
                         </div>
 
-        
+
                         <div className="row g-3">
 
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Categoría</label>
                                     <div className={styles.inputWrap}>
                                         <input
@@ -185,7 +185,7 @@ export default function ArbitrosEditar() {
                             </div>
 
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Especialidad</label>
                                     <div className={styles.inputWrap}>
                                         <select
@@ -206,11 +206,11 @@ export default function ArbitrosEditar() {
 
                         </div>
 
-             
+
                         <div className="row g-3">
 
                             <div className="col-12 col-md-4">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Nivel</label>
 
                                     <div className={styles.inputWrap}>
@@ -233,7 +233,7 @@ export default function ArbitrosEditar() {
                                 </div>
                             </div>
                             <div className="col-12 col-md-4">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Reputación</label>
 
                                     <div className={styles.inputWrap}>
@@ -256,7 +256,7 @@ export default function ArbitrosEditar() {
                                 </div>
                             </div>
                             <div className="col-12 col-md-4">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Precision Decisiones</label>
 
                                     <div className={styles.inputWrap}>

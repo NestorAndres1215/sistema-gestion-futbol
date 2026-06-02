@@ -1,5 +1,5 @@
-﻿using Application.Dto;
-using Application.Dto.estadisticas;
+﻿using Application.Dto.estadisticas;
+using Application.Dto.personas;
 using Application.Interfaces.Services;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;

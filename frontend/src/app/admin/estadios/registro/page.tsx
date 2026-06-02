@@ -33,7 +33,7 @@ export default function EstadioRegistroPage() {
                 </div>
 
                 <form noValidate className={styles.form}>
-                    <div className={styles.field}>
+                    <div className="d-flex flex-column gap-2 w-100">
                         <label className={styles.label}>
                             Nombre
                         </label>
@@ -52,7 +52,7 @@ export default function EstadioRegistroPage() {
 
                     </div>
 
-                    <div className={styles.field}>
+                    <div className="d-flex flex-column gap-2 w-100">
 
                         <label className={styles.label}>
                             Descripción
@@ -76,7 +76,7 @@ export default function EstadioRegistroPage() {
 
                         <div className="col-12 col-md-6">
 
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
 
                                 <label className={styles.label}>
                                     Fecha de Apertura
@@ -98,7 +98,7 @@ export default function EstadioRegistroPage() {
                         </div>
 
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>
                                     Año
                                 </label>
@@ -182,7 +182,7 @@ export default function EstadioRegistroPage() {
 
                     <div className="row g-3">
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>
                                     Latitud
                                 </label>
@@ -202,7 +202,7 @@ export default function EstadioRegistroPage() {
                         </div>
 
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>
                                     Longitud
                                 </label>
@@ -223,7 +223,7 @@ export default function EstadioRegistroPage() {
 
                     <div className="row g-3">
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>
                                     Capacidad
                                 </label>
@@ -240,7 +240,7 @@ export default function EstadioRegistroPage() {
                         </div>
 
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>
                                     Tipo de Césped
                                 </label>
@@ -250,9 +250,9 @@ export default function EstadioRegistroPage() {
                                         value={form.tipoCesped}
                                         onChange={(e) => handleChange("tipoCesped", e.target.value)}
                                     >
-                                            <option value="">
-                                                Seleccione Tipo Cesped
-                                            </option>
+                                        <option value="">
+                                            Seleccione Tipo Cesped
+                                        </option>
                                         {TIPO_CESPED_OPTIONS.map((item) => (
                                             <option key={item.value} value={item.value}>
                                                 {item.label}
@@ -265,7 +265,7 @@ export default function EstadioRegistroPage() {
                         </div>
                     </div>
 
-                    <div className={styles.field}>
+                    <div className="d-flex flex-column gap-2 w-100">
 
                         <label className={styles.label}>
                             Foto

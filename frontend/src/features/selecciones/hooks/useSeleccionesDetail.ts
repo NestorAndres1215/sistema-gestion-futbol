@@ -65,6 +65,9 @@ export default function useSeleccionesDetail(seleccionPais: string) {
         ]
         : [];
 
-    return { items, seleccion, estadioColumns, estadio, pageEstadio, pageSizeEstadio, totalPagesEstadio, setPageEstadio }
+    return {
+        items, seleccion, estadioColumns, estadio, pageEstadio,
+        pageSizeEstadio, totalPagesEstadio, setPageEstadio
+    }
 
 }

@@ -1,5 +1,5 @@
-﻿using Application.Dto;
-using Application.Dto.config;
+﻿using Application.Dto.config;
+using Application.Dto.personas;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;

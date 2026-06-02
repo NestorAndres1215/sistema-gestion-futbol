@@ -1,7 +1,7 @@
 ﻿using Application.Common.Exceptions;
-using Application.Dto;
 using Application.Dto.config;
 using Application.Dto.estadisticas;
+using Application.Dto.personas;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;

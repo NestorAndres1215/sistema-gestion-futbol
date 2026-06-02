@@ -27,13 +27,9 @@ public class EstadioRepository : IEstadioRepository
     }
 
     public async Task<PagedResult<Estadio>> GetAllAsync(
-        int page,
-        int pageSize,
-        string? search,
-        string? tipoCesped,
-        string? pais,
-        int? anio,
-        string? estado)
+        int page, int pageSize,
+        string? search, string? tipoCesped, string? pais,
+        int? anio, string? estado)
     {
         var query = _context.Estadios
             .AsNoTracking()
@@ -273,7 +269,6 @@ public class EstadioRepository : IEstadioRepository
         }).ToList();
     }
 
-    // Repository
     public async Task<List<ItemResponse>> ObtenerMayorCapacidadAsync(int cantidad)
     {
         return await _context.Estadios

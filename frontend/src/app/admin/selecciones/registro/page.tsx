@@ -86,7 +86,7 @@ export default function SeleccionRegistro() {
                             </div>
                         </div>
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
                                 <label className={styles.label}>
                                     Confederacion
                                 </label>
@@ -112,7 +112,7 @@ export default function SeleccionRegistro() {
                             </div>
                         </div>
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
 
                                 <label className={styles.label}>
                                     Seleccionar Bandera
@@ -125,12 +125,8 @@ export default function SeleccionRegistro() {
                                         className={styles.input}
                                         accept="image/*"
                                         onChange={(e) => {
-
                                             if (e.target.files?.[0]) {
-
-                                                setBandera(
-                                                    e.target.files[0]
-                                                );
+                                                setBandera(e.target.files[0]);
                                             }
                                         }}
                                     />
@@ -140,7 +136,7 @@ export default function SeleccionRegistro() {
                             </div>
                         </div>
                         <div className="col-12 col-md-6">
-                            <div className={styles.field}>
+                            <div className="d-flex flex-column gap-2 w-100">
 
                                 <label className={styles.label}>
                                     Seleccionar Escudo
@@ -153,12 +149,8 @@ export default function SeleccionRegistro() {
                                         className={styles.input}
                                         accept="image/*"
                                         onChange={(e) => {
-
                                             if (e.target.files?.[0]) {
-
-                                                setEscudo(
-                                                    e.target.files[0]
-                                                );
+                                                setEscudo(e.target.files[0]);
                                             }
                                         }}
                                     />

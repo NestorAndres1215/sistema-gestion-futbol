@@ -1,4 +1,4 @@
-﻿using Application.Dto;
+﻿using Application.Dto.personas;
 using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 

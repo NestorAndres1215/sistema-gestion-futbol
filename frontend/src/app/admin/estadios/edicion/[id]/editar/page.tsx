@@ -11,11 +11,8 @@ export default function EstadioEditarPage() {
   const router = useRouter();
 
   const {
-    form,
-    handleChange,
-    actualizarEstadio,
-    handleFotoChange,
-    fotoPreview,
+    form, fotoPreview,
+    handleChange, actualizarEstadio, handleFotoChange,
   } = useEstadioEdit();
 
 
@@ -69,12 +66,12 @@ export default function EstadioEditarPage() {
             <p className={styles.cardName}>Editar Estadio</p>
           </div>
 
-          <form noValidate  className="d-flex flex-column gap-3 p-3 p-md-4">
+          <form noValidate className="d-flex flex-column gap-3 p-3 p-md-4">
 
             <div className="row g-3">
 
               <div className="col-12 col-md-6">
-                <div className={styles.field}>
+                <div className="d-flex flex-column gap-2 w-100">
                   <label className={styles.label}>Nombre</label>
 
                   <div className={styles.inputWrap}>
@@ -91,7 +88,7 @@ export default function EstadioEditarPage() {
               </div>
 
               <div className="col-12 col-md-6">
-                <div className={styles.field}>
+                <div className="d-flex flex-column gap-2 w-100">
                   <label className={styles.label}>Ciudad</label>
 
                   <div className={styles.inputWrap}>
@@ -109,7 +106,7 @@ export default function EstadioEditarPage() {
 
             </div>
 
-            <div className={styles.field}>
+            <div className="d-flex flex-column gap-2 w-100">
               <label className={styles.label}>Descripción</label>
               <div className={styles.inputWrap}>
                 <textarea
@@ -125,7 +122,7 @@ export default function EstadioEditarPage() {
             <div className="row g-3">
 
               <div className="col-12 col-md-6">
-                <div className={styles.field}>
+                <div className="d-flex flex-column gap-2 w-100">
                   <label className={styles.label}>País</label>
 
                   <div className={styles.inputWrap}>
@@ -142,7 +139,7 @@ export default function EstadioEditarPage() {
               </div>
 
               <div className="col-12 col-md-6">
-                <div className={styles.field}>
+                <div className="d-flex flex-column gap-2 w-100">
                   <label className={styles.label}>Capacidad</label>
 
                   <div className={styles.inputWrap}>
@@ -164,7 +161,7 @@ export default function EstadioEditarPage() {
             <div className="row g-3">
 
               <div className="col-12 col-md-6">
-                <div className={styles.field}>
+                <div className="d-flex flex-column gap-2 w-100">
                   <label className={styles.label}>
                     Fecha Apertura
                   </label>
@@ -173,12 +170,7 @@ export default function EstadioEditarPage() {
                     <input
                       type="date"
                       value={form.fechaApertura}
-                      onChange={(e) =>
-                        handleChange(
-                          "fechaApertura",
-                          e.target.value
-                        )
-                      }
+                      onChange={(e) => handleChange("fechaApertura", e.target.value)}
                       className={styles.input}
                     />
                   </div>
@@ -186,7 +178,7 @@ export default function EstadioEditarPage() {
               </div>
 
               <div className="col-12 col-md-6">
-                <div className={styles.field}>
+                <div className="d-flex flex-column gap-2 w-100">
                   <label className={styles.label}>Año</label>
 
                   <div className={styles.inputWrap}>
@@ -194,9 +186,7 @@ export default function EstadioEditarPage() {
                       placeholder="Año"
                       type="number"
                       value={form.anio}
-                      onChange={(e) =>
-                        handleChange("anio", e.target.value)
-                      }
+                      onChange={(e) => handleChange("anio", e.target.value)}
                       className={styles.input}
                     />
                   </div>
@@ -205,7 +195,7 @@ export default function EstadioEditarPage() {
 
             </div>
 
-            <div className={styles.field}>
+            <div className="d-flex flex-column gap-2 w-100">
               <label className={styles.label}>Tipo de Césped</label>
               <div className={styles.inputWrap}>
                 <input
@@ -220,7 +210,7 @@ export default function EstadioEditarPage() {
             <div className="row g-3">
 
               <div className="col-12 col-md-6">
-                <div className={styles.field}>
+                <div className="d-flex flex-column gap-2 w-100">
                   <label className={styles.label}>Latitud</label>
 
                   <div className={styles.inputWrap}>
@@ -237,7 +227,7 @@ export default function EstadioEditarPage() {
               </div>
 
               <div className="col-12 col-md-6">
-                <div className={styles.field}>
+                <div className="d-flex flex-column gap-2 w-100">
                   <label className={styles.label}>Longitud</label>
 
                   <div className={styles.inputWrap}>

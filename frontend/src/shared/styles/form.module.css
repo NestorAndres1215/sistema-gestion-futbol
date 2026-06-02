@@ -38,12 +38,6 @@
   padding: 24px;
 }
 
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
 .label {
   font-family: 'DM Mono', monospace;
   font-size: 10.5px;

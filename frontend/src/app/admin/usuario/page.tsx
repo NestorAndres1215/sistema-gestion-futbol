@@ -12,9 +12,8 @@ import { useUsers } from "@/features/usuario/hooks/useUsuarios";
 
 export default function UsuarioPage() {
   const {
-    data, page, setPage, query,
-    handleSearch, handleFilter, breadcrumbUsuario, userColumns,
-    userActions, userFilters,
+    data, page, query, breadcrumbUsuario, userColumns, userActions, userFilters,
+    handleSearch, handleFilter, setPage,
   } = useUsers();
 
   return (

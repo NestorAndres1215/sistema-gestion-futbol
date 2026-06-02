@@ -73,7 +73,7 @@ export default function EntrenadorEditar() {
                         <div className="row g-3">
 
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Nombre</label>
 
                                     <div className={styles.inputWrap}>
@@ -88,7 +88,7 @@ export default function EntrenadorEditar() {
                             </div>
 
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Apellido Paterno</label>
 
                                     <div className={styles.inputWrap}>
@@ -105,11 +105,8 @@ export default function EntrenadorEditar() {
                         </div>
 
                         <div className="row g-3">
-
-
-
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Fecha Nacimiento</label>
 
                                     <div className={styles.inputWrap}>
@@ -123,7 +120,7 @@ export default function EntrenadorEditar() {
                                 </div>
                             </div>
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Fecha Debut</label>
 
                                     <div className={styles.inputWrap}>
@@ -141,7 +138,7 @@ export default function EntrenadorEditar() {
                         <div className="row g-3">
 
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>País Nacimiento</label>
 
                                     <div className={styles.inputWrap}>
@@ -166,7 +163,7 @@ export default function EntrenadorEditar() {
                             </div>
 
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Ciudad Nacimiento</label>
 
                                     <div className={styles.inputWrap}>
@@ -196,7 +193,7 @@ export default function EntrenadorEditar() {
                         <div className="row g-3">
 
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Licencia</label>
 
                                     <div className={styles.inputWrap}>
@@ -218,7 +215,7 @@ export default function EntrenadorEditar() {
                                 </div>
                             </div>
                             <div className="col-12 col-md-6">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Estilo de Juego</label>
 
                                     <div className={styles.inputWrap}>
@@ -244,7 +241,7 @@ export default function EntrenadorEditar() {
 
                         <div className="row g-3">
                             <div className="col-12 col-md-4">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Nivel</label>
 
                                     <div className={styles.inputWrap}>
@@ -267,7 +264,7 @@ export default function EntrenadorEditar() {
                                 </div>
                             </div>
                             <div className="col-12 col-md-4">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Reputación</label>
 
                                     <div className={styles.inputWrap}>
@@ -290,7 +287,7 @@ export default function EntrenadorEditar() {
                                 </div>
                             </div>
                             <div className="col-12 col-md-4">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Manejo de Equipo</label>
 
                                     <div className={styles.inputWrap}>
@@ -313,7 +310,7 @@ export default function EntrenadorEditar() {
                                 </div>
                             </div>
                             <div className="col-12 col-md-4">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Motivación</label>
 
                                     <div className={styles.inputWrap}>
@@ -336,7 +333,7 @@ export default function EntrenadorEditar() {
                                 </div>
                             </div>
                             <div className="col-12 col-md-4">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Disciplina</label>
 
                                     <div className={styles.inputWrap}>
@@ -359,16 +356,14 @@ export default function EntrenadorEditar() {
                                 </div>
                             </div>
                             <div className="col-12 col-md-4">
-                                <div className={styles.field}>
+                                <div className="d-flex flex-column gap-2 w-100">
                                     <label className={styles.label}>Adaptabilidad</label>
 
                                     <div className={styles.inputWrap}>
                                         <select
                                             className={styles.input}
                                             value={form.adaptabilidad}
-                                            onChange={(e) =>
-                                                handleChange("adaptabilidad", Number(e.target.value))
-                                            }
+                                            onChange={(e) => handleChange("adaptabilidad", Number(e.target.value))}
                                         >
                                             <option value="">Adaptabilidad</option>
 
