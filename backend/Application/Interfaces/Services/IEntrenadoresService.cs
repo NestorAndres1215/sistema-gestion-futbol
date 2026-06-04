@@ -1,5 +1,5 @@
 ﻿using Application.Dto.config;
-using Application.Dto.personas;
+using Application.Dto.entrenadores;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -16,6 +16,6 @@ public interface IEntrenadoresService
     Task<Entrenadores> AddAsync(EntrenadoresRequest entrenadores);
     Task<Entrenadores> UpdateAsync(int id, EntrenadoresRequest entrenadores);
     Task<Entrenadores> GetByIdAsync(int id);
-
+    Task<List<EntrenadorComboRequest>> GetComboAsync();
 
 }

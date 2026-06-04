@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.Dto.personas;
+namespace Application.Dto.entrenadores;
 
 public class EntrenadoresRequest
 {

@@ -5,11 +5,17 @@ import { addSeleccionEstadio, getSeleccionEstadioByEstadio, getSeleccionEstadios
 
 export default function useSeleccionEstadioDetalle(seleccionId: string) {
 
-    const [form, setForm] = useState({
+    const [formEstadio, setFormEstadio] = useState({
         estadio: "",
         tipo: ""
     });
 
+    const [formEntrenador, setFormEntrenador] = useState({
+        entrenador: "",
+        fechaInicio: "",
+        fechaFin: ""
+    });
+    
     const [editando, setEditando] = useState(false);
     const [idEditar, setIdEditar] = useState<number | null>(null);
     const [seleccionEstadios, setSeleccionEstadios] = useState<any[]>([]);
@@ -24,7 +30,7 @@ export default function useSeleccionEstadioDetalle(seleccionId: string) {
     ]);
 
     const handleChange = (name: string, value: string) => {
-        setForm(prev => ({
+        setFormEstadio(prev => ({
             ...prev,
             [name]: value
         }));
@@ -57,7 +63,7 @@ export default function useSeleccionEstadioDetalle(seleccionId: string) {
     };
 
     const limpiarFormulario = async () => {
-        setForm({ estadio: "", tipo: "" });
+        setFormEstadio({ estadio: "", tipo: "" });
 
         setEditando(false);
         setIdEditar(null);
@@ -73,7 +79,7 @@ export default function useSeleccionEstadioDetalle(seleccionId: string) {
     const registrar = async () => {
         try {
 
-            const payload = { Seleccion: seleccionId, Estadio: form.estadio, Tipo: form.tipo };
+            const payload = { Seleccion: seleccionId, Estadio: formEstadio.estadio, Tipo: formEstadio.tipo };
             await addSeleccionEstadio(payload);
             await limpiarFormulario();
             await recargarSeleccionEstadios();
@@ -90,7 +96,7 @@ export default function useSeleccionEstadioDetalle(seleccionId: string) {
         if (!idEditar) return;
 
         try {
-            const payload = { Seleccion: seleccionId, Estadio: form.estadio, Tipo: form.tipo };
+            const payload = { Seleccion: seleccionId, Estadio: formEstadio.estadio, Tipo: formEstadio.tipo };
             await updateSeleccionEstadio(idEditar, payload);
 
             await recargarSeleccionEstadios();
@@ -131,7 +137,7 @@ export default function useSeleccionEstadioDetalle(seleccionId: string) {
                 : [{ value: "SUPLENTE", label: "SUPLENTE" }]
         );
 
-        setForm({ estadio: item.estadio, tipo: item.tipo });
+        setFormEstadio({ estadio: item.estadio, tipo: item.tipo });
 
         setIdEditar(item.id);
         setEditando(true);
@@ -172,7 +178,7 @@ export default function useSeleccionEstadioDetalle(seleccionId: string) {
     ];
 
     return {
-        form, estadio, editando, page, totalPages, seleccionEstadios, tipoSeleccionEstadio, seleccionColumns,
+        formEstadio, estadio, editando, page, totalPages, seleccionEstadios, tipoSeleccionEstadio, seleccionColumns,
         handleChange, registrar, actualizar, limpiarFormulario, setPage, seleccionActions
     };
 }

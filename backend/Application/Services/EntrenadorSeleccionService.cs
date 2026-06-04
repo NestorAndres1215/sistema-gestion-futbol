@@ -28,7 +28,7 @@ public class EntrenadorSeleccionService : IEntrenadorSeleccionService
         var seleccion = await _seleccionRepository.GetByNombreAsync(seleccioEntrenadorRequest.Seleccion)
          ?? throw new NotFoundException("La Seleccion no existe.");
 
-        var entrenador = await _entrenadoresRepository.GetByNombreAsync(seleccioEntrenadorRequest.Entrenador)
+        var entrenador = await _entrenadoresRepository.GetByIdAsync(seleccioEntrenadorRequest.Entrenador)
           ?? throw new NotFoundException("El Entrenador no existe.");
 
         if (seleccioEntrenadorRequest.FechaFin.HasValue && 
@@ -41,7 +41,7 @@ public class EntrenadorSeleccionService : IEntrenadorSeleccionService
         {
             EntrenadorId = entrenador.Id,
             SeleccionId = seleccion.Id,
-            Cargo = seleccioEntrenadorRequest.Cargo,
+            Cargo = "Principal",
             FechaInicio = seleccioEntrenadorRequest.FechaInicio,
             FechaFin = seleccioEntrenadorRequest.FechaFin,
         };
@@ -79,7 +79,7 @@ public class EntrenadorSeleccionService : IEntrenadorSeleccionService
         var seleccion = await _seleccionRepository.GetByNombreAsync(seleccioEntrenadorRequest.Seleccion)
             ?? throw new NotFoundException("La Selección no existe.");
 
-        var entrenador = await _entrenadoresRepository.GetByNombreAsync(seleccioEntrenadorRequest.Entrenador)
+        var entrenador = await _entrenadoresRepository.GetByIdAsync(seleccioEntrenadorRequest.Entrenador)
             ?? throw new NotFoundException("El Entrenador no existe.");
 
         if (seleccioEntrenadorRequest.FechaFin.HasValue &&

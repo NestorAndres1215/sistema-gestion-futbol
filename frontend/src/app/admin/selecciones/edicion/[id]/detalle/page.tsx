@@ -18,7 +18,7 @@ export default function DetalleSeleccionPage() {
 
 
     const {
-        form, estadio, editando, page, totalPages, seleccionEstadios, tipoSeleccionEstadio,
+        formEstadio, estadio, editando, page, totalPages, seleccionEstadios, tipoSeleccionEstadio,
         handleChange, registrar, actualizar, limpiarFormulario, setPage, seleccionActions, seleccionColumns
     } = useSeleccionEstadioDetalle(seleccionId);
 
@@ -50,7 +50,7 @@ export default function DetalleSeleccionPage() {
                                 <div className={styles.inputWrap}>
                                     <select
                                         className={styles.input}
-                                        value={form.estadio}
+                                        value={formEstadio.estadio}
                                         onChange={(e) => handleChange("estadio", e.target.value)}
                                     >
                                         <option value="">
@@ -74,7 +74,7 @@ export default function DetalleSeleccionPage() {
 
                                     <select
                                         className={styles.input}
-                                        value={form.tipo}
+                                        value={formEstadio.tipo}
                                         onChange={(e) => handleChange("tipo", e.target.value)}
                                     >
                                         <option value="">
@@ -135,6 +135,35 @@ export default function DetalleSeleccionPage() {
                                 Formulario de Entrenadores
                             </p>
                         </div>
+                        <div className={styles.form}>
+                            <div className="d-flex flex-column gap-2 w-100">
+                                <label className={styles.label}>
+                                    Entrenadores
+                                </label>
+
+                                <div className={styles.inputWrap}>
+                                    <select
+                                        className={styles.input}
+                                        value={formEstadio.estadio}
+                                        onChange={(e) => handleChange("estadio", e.target.value)}
+                                    >
+                                        <option value="">
+                                            Seleccione un estadio
+                                        </option>
+
+                                        {estadio.map((item) => (
+                                            <option key={item.id} value={item.nombre}   >
+                                                {item.nombre}
+                                            </option>
+                                        ))}
+                                    </select>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
                 <div className="col-12 col-md-6">

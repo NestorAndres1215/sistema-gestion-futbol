@@ -1,5 +1,6 @@
-﻿using Application.Dto.personas;
+﻿using Application.Dto.entrenadores;
 using Application.Interfaces.Services;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -50,4 +51,11 @@ public class EntrenadoresController : ControllerBase
     {
         return Ok(await _service.GetByIdAsync(id));
     }
+
+    [HttpGet("combo")]
+    public async Task<IActionResult> GetCombo()
+    {
+        return Ok(await _service.GetComboAsync());
+    }
+
 }

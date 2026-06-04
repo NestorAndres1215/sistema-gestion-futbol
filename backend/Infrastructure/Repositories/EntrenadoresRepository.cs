@@ -1,4 +1,5 @@
 ﻿using Application.Dto.config;
+using Application.Dto.entrenadores;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;
@@ -107,6 +108,19 @@ public class EntrenadoresRepository : IEntrenadoresRepository
                 .ThenInclude(p => p.PaisNacimiento)
             .AsNoTracking()
             .SingleOrDefaultAsync(x => x.Persona.Nombre== nombre);
+    }
+
+    public async Task<List<EntrenadorComboRequest>> GetComboAsync()
+    {
+        return await _context.Entrenadores
+           .Where(x => x.Estado == "Activo")
+           .Select(x => new EntrenadorComboRequest
+           {
+               Id = x.Id,
+               NombreCompleto = x.Persona.Nombre + " " + x.Persona.Apellido
+           })
+           .OrderBy(x => x.NombreCompleto)
+           .ToListAsync();
     }
 
     public async Task<Entrenadores> UpdateAsync(Entrenadores entrenadores)

@@ -1,7 +1,7 @@
 ﻿
 using Application.Common.Exceptions;
 using Application.Dto.config;
-using Application.Dto.personas;
+using Application.Dto.entrenadores;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
@@ -210,4 +210,10 @@ public class EntrenadoresService : IEntrenadoresService
 
         return entrenador;
     }
+
+    public async Task<List<EntrenadorComboRequest>> GetComboAsync()
+    {
+        return await _repository.GetComboAsync();
+    }
+
 }

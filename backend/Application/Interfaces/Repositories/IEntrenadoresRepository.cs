@@ -1,8 +1,6 @@
 ﻿using Application.Dto.config;
+using Application.Dto.entrenadores;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Application.Interfaces.Repositories;
 
@@ -19,4 +17,5 @@ public interface IEntrenadoresRepository
     Task<Entrenadores> UpdateAsync(Entrenadores entrenadores);
     Task<Entrenadores?> GetByIdAsync(int id);
     Task<Entrenadores?> GetByNombreAsync(string nombre);
+    Task<List<EntrenadorComboRequest>> GetComboAsync();
 }
