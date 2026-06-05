@@ -1,5 +1,6 @@
 ﻿using Application.Common.Exceptions;
 using Application.Dto.config;
+using Application.Dto.entrenadores;
 using Application.Dto.selecciones;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
@@ -26,15 +27,33 @@ public class EntrenadorSeleccionService : IEntrenadorSeleccionService
     public async Task<EntrenadorSeleccion> AddAsync(SeleccioEntrenadorRequest seleccioEntrenadorRequest)
     {
         var seleccion = await _seleccionRepository.GetByNombreAsync(seleccioEntrenadorRequest.Seleccion)
-         ?? throw new NotFoundException("La Seleccion no existe.");
+            ?? throw new NotFoundException("La Selección no existe.");
 
         var entrenador = await _entrenadoresRepository.GetByIdAsync(seleccioEntrenadorRequest.Entrenador)
-          ?? throw new NotFoundException("El Entrenador no existe.");
+            ?? throw new NotFoundException("El Entrenador no existe.");
 
-        if (seleccioEntrenadorRequest.FechaFin.HasValue && 
+        if (seleccioEntrenadorRequest.FechaFin.HasValue &&
             seleccioEntrenadorRequest.FechaFin.Value < seleccioEntrenadorRequest.FechaInicio)
         {
             throw new BadRequestException("La fecha de fin no puede ser menor que la fecha de inicio.");
+        }
+
+        var existeContrato = await _repository.ExisteCruceFechasAsync(
+            seleccion.Id,
+            seleccioEntrenadorRequest.FechaInicio,
+            seleccioEntrenadorRequest.FechaFin);
+
+        if (existeContrato)
+        {
+            throw new BadRequestException("Ya existe un entrenador registrado para ese período.");
+        }
+
+        string estado = "Activo";
+
+        if (seleccioEntrenadorRequest.FechaFin.HasValue &&
+            seleccioEntrenadorRequest.FechaFin.Value.Date < DateTime.Today)
+        {
+            estado = "Inactivo";
         }
 
         var entrenadorSeleccion = new EntrenadorSeleccion
@@ -44,6 +63,7 @@ public class EntrenadorSeleccionService : IEntrenadorSeleccionService
             Cargo = "Principal",
             FechaInicio = seleccioEntrenadorRequest.FechaInicio,
             FechaFin = seleccioEntrenadorRequest.FechaFin,
+            Estado = estado
         };
 
         return await _repository.AddAsync(entrenadorSeleccion);
@@ -54,9 +74,9 @@ public class EntrenadorSeleccionService : IEntrenadorSeleccionService
         return await _repository.GetByIdAsync(id);
     }
 
-    public async Task<List<string>> GetEntrenadoresAsync(string seleccion)
+    public async Task<List<EntrenadorSelectResponse>> GetEntrenadoresAsync()
     {
-        return await _repository.GetEntrenadoresAsync(seleccion);
+        return await _repository.GetEntrenadoresAsync();
     }
 
     public async Task<PagedResult<SeleccionEntrenadorResponse>> ListarPorSeleccion( int page, int pageSize, string? seleccion)
@@ -88,11 +108,44 @@ public class EntrenadorSeleccionService : IEntrenadorSeleccionService
             throw new BadRequestException("La fecha de fin no puede ser menor que la fecha de inicio.");
         }
 
+        var existeCruce = await _repository.ExisteCruceFechasActualizarAsync(
+            seleccion.Id,
+            seleccioEntrenadorRequest.FechaInicio,
+            seleccioEntrenadorRequest.FechaFin,
+            id);
+
+        if (existeCruce)
+        {
+            throw new BadRequestException("Ya existe un entrenador registrado para ese período.");
+        }
+
         entrenadorSeleccion.EntrenadorId = entrenador.Id;
         entrenadorSeleccion.SeleccionId = seleccion.Id;
         entrenadorSeleccion.Cargo = seleccioEntrenadorRequest.Cargo;
         entrenadorSeleccion.FechaInicio = seleccioEntrenadorRequest.FechaInicio;
         entrenadorSeleccion.FechaFin = seleccioEntrenadorRequest.FechaFin;
+
+        entrenadorSeleccion.Estado =
+            seleccioEntrenadorRequest.FechaFin.HasValue &&
+            seleccioEntrenadorRequest.FechaFin.Value.Date < DateTime.Today
+                ? "Inactivo"
+                : "Activo";
+
+        return await _repository.UpdateAsync(entrenadorSeleccion);
+    }
+
+    public async Task<EntrenadorSeleccion> DespedirAsync(int id)
+    {
+        var entrenadorSeleccion = await _repository.GetByIdAsync(id)
+            ?? throw new NotFoundException("La relación entrenador-selección no existe.");
+
+        if (entrenadorSeleccion.Estado == "Inactivo")
+        {
+            throw new BadRequestException("El entrenador ya está inactivo.");
+        }
+
+        entrenadorSeleccion.Estado = "Inactivo";
+        entrenadorSeleccion.FechaFin = DateTime.Today;
 
         return await _repository.UpdateAsync(entrenadorSeleccion);
     }

@@ -1,4 +1,6 @@
-﻿namespace Application.Dto.selecciones;
+﻿using Domain.Enums;
+
+namespace Application.Dto.selecciones;
 
 public class SeleccionEntrenadorResponse
 {
@@ -9,5 +11,6 @@ public class SeleccionEntrenadorResponse
     public string Cargo { get; set; } = string.Empty;
     public DateTime FechaInicio { get; set; }
     public DateTime? FechaFin { get; set; }
+    public string Estado { get; set; } = string.Empty;
 
 }

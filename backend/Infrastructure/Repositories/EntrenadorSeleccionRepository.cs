@@ -1,4 +1,5 @@
 ﻿using Application.Dto.config;
+using Application.Dto.entrenadores;
 using Application.Dto.selecciones;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
@@ -35,17 +36,19 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
 
 
 
-    public async Task<List<string>> GetEntrenadoresAsync(string seleccion)
+    public async Task<List<EntrenadorSelectResponse>> GetEntrenadoresAsync()
     {
         return await _context.EntrenadorSeleccion
-            .Include(x => x.Entrenador)
-            .Include(x => x.Seleccion)
-            .Where(x => x.Seleccion != null && x.Seleccion.Nombre == seleccion)
-            .Select(x => x.Entrenador != null && x.Entrenador.Persona != null 
-                ? x.Entrenador.Persona.Nombre + " " + x.Entrenador.Persona.Apellido 
-                : string.Empty)
+            .Where(x => x.Entrenador != null
+                        && x.Entrenador.Persona != null
+                        && x.Estado == "Activo")
+            .Select(x => new EntrenadorSelectResponse
+            {
+                Id = x.Id,
+                NombreCompleto = x.Entrenador.Persona.Nombre + " " + x.Entrenador.Persona.Apellido
+            })
             .Distinct()
-            .OrderBy(x => x)
+            .OrderBy(x => x.NombreCompleto)
             .ToListAsync();
     }
 
@@ -80,7 +83,8 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
                 EntrenadorApellido = x.Entrenador.Persona.Apellido,
                 Cargo = x.Cargo,
                 FechaInicio = x.FechaInicio,
-                FechaFin = x.FechaFin
+                FechaFin = x.FechaFin,
+                Estado =x.Estado
             })
             .ToListAsync();
 
@@ -107,5 +111,33 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
         _context.EntrenadorSeleccion.Update(entrenadorSeleccion);
         await _context.SaveChangesAsync();
         return entrenadorSeleccion;
+    }
+
+    public async Task<bool> ExisteCruceFechasAsync(
+        int seleccionId,
+        DateTime fechaInicio,
+        DateTime? fechaFin)
+    {
+        return await _context.EntrenadorSeleccion
+            .AnyAsync(x =>
+                x.SeleccionId == seleccionId &&
+                fechaFin.HasValue &&
+                fechaInicio <= x.FechaFin &&
+                fechaFin.Value >= x.FechaInicio);
+    }
+
+    public async Task<bool> ExisteCruceFechasActualizarAsync(
+        int seleccionId,
+        DateTime fechaInicio,
+        DateTime? fechaFin,
+        int idExcluir)
+    {
+        return await _context.EntrenadorSeleccion
+            .AnyAsync(x =>
+                x.Id != idExcluir &&
+                x.SeleccionId == seleccionId &&
+                fechaFin.HasValue &&
+                fechaInicio <= x.FechaFin &&
+                fechaFin.Value >= x.FechaInicio);
     }
 }

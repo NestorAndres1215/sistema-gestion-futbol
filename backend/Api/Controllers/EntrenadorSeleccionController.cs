@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/entrenador-seleccion")]
 [ApiController]
 public class EntrenadorSeleccionController : ControllerBase
 {
@@ -41,9 +41,9 @@ public class EntrenadorSeleccionController : ControllerBase
     }
 
     [HttpGet("entrenadores")]
-    public async Task<IActionResult> GetEntrenadores([FromQuery] string seleccion)
+    public async Task<IActionResult> GetEntrenadores()
     {
-        return Ok(await _service.GetEntrenadoresAsync(seleccion));
+        return Ok(await _service.GetEntrenadoresAsync());
     }
 
     [HttpGet("selecciones")]
@@ -52,4 +52,9 @@ public class EntrenadorSeleccionController : ControllerBase
         return Ok(await _service.ListarPorSeleccionNombre(nombre));
     }
 
+    [HttpPut("despedir/{id}")]
+    public async Task<IActionResult> Despedir(int id)
+    {
+        return Ok(await _service.DespedirAsync(id));
+    }
 }

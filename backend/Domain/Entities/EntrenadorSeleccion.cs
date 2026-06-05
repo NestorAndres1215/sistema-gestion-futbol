@@ -7,6 +7,7 @@ public class EntrenadorSeleccion
     public int EntrenadorId { get; set; }
     public int SeleccionId { get; set; }
     public string Cargo { get; set; } = string.Empty;
+    public string Estado { get; set; } = "Activo";
     public DateTime FechaInicio { get; set; }
     public DateTime? FechaFin {  get; set; }
     public Entrenadores Entrenador { get; set; }

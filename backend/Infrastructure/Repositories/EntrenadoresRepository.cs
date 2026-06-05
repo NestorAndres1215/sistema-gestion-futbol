@@ -112,15 +112,20 @@ public class EntrenadoresRepository : IEntrenadoresRepository
 
     public async Task<List<EntrenadorComboRequest>> GetComboAsync()
     {
+        var entrenadoresSeleccionados = _context.EntrenadorSeleccion
+            .Where(x => x.Estado == "Activo")
+            .Select(x => x.EntrenadorId);
+
         return await _context.Entrenadores
-           .Where(x => x.Estado == "Activo")
-           .Select(x => new EntrenadorComboRequest
-           {
-               Id = x.Id,
-               NombreCompleto = x.Persona.Nombre + " " + x.Persona.Apellido
-           })
-           .OrderBy(x => x.NombreCompleto)
-           .ToListAsync();
+            .Where(x => x.Estado == "Activo" &&
+                        !entrenadoresSeleccionados.Contains(x.Id))
+            .Select(x => new EntrenadorComboRequest
+            {
+                Id = x.Id,
+                NombreCompleto = x.Persona.Nombre + " " + x.Persona.Apellido
+            })
+            .OrderBy(x => x.NombreCompleto)
+            .ToListAsync();
     }
 
     public async Task<Entrenadores> UpdateAsync(Entrenadores entrenadores)

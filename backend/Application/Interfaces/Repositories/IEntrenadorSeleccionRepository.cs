@@ -1,4 +1,5 @@
 ﻿using Application.Dto.config;
+using Application.Dto.entrenadores;
 using Application.Dto.selecciones;
 using Domain.Entities;
 
@@ -13,6 +14,17 @@ public interface IEntrenadorSeleccionRepository
     Task<EntrenadorSeleccion> AddAsync(EntrenadorSeleccion entrenadorSeleccion);
     Task<EntrenadorSeleccion> UpdateAsync(EntrenadorSeleccion entrenadorSeleccion);
     Task<EntrenadorSeleccion?> GetByIdAsync(int id);
-    Task<List<string>> GetEntrenadoresAsync(string seleccion);
+    Task<List<EntrenadorSelectResponse>> GetEntrenadoresAsync();
     Task<List<EntrenadorSeleccion>> ListarPorSeleccionNombre(string nombre);
+    Task<bool> ExisteCruceFechasAsync(
+        int seleccionId,
+        DateTime fechaInicio,
+        DateTime? fechaFin);
+
+     Task<bool> ExisteCruceFechasActualizarAsync(
+        int seleccionId,
+        DateTime fechaInicio,
+        DateTime? fechaFin,
+        int idExcluir);
+
 }
