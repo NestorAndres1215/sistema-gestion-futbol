@@ -1,6 +1,7 @@
 .wrapper {
   width: 100%;
   overflow-x: auto;
+  overflow-y: hidden; /* 👈 clave */
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.06);
   background: #13161e;
@@ -56,12 +57,11 @@
 }
 
 .empty {
-  padding: 48px 18px;
+  padding: 24px 18px; /* menos padding = menos expansión */
   text-align: center;
   color: #2d3748;
   font-size: 13px;
   font-family: 'DM Mono', 'Courier New', monospace;
-  display: flex;
 }
 
 .empty i {

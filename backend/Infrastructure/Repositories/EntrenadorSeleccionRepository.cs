@@ -70,6 +70,9 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
             query = query.Where(x => x.Seleccion.Nombre == seleccion);
         }
 
+        // 🔥 ORDEN DESCENDENTE POR FECHA INICIO
+        query = query.OrderByDescending(x => x.FechaInicio);
+
         var totalCount = await query.CountAsync();
 
         var items = await query
@@ -84,7 +87,7 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
                 Cargo = x.Cargo,
                 FechaInicio = x.FechaInicio,
                 FechaFin = x.FechaFin,
-                Estado =x.Estado
+                Estado = x.Estado
             })
             .ToListAsync();
 

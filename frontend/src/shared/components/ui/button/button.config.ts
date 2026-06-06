@@ -31,7 +31,11 @@ export const config = {
         icon: "fa-solid fa-xmark",
         style: styles.cancelar,
     },
-
+    cerrar: {
+        text: "Cerrar",
+        icon: "fa-solid fa-xmark",
+        style: styles.cancelar,
+    },
     volver: {
         text: "Volver",
         icon: "fa-solid fa-arrow-left",
@@ -47,4 +51,5 @@ export const config = {
         icon: "fa-solid fa-right-to-bracket",
         style: styles.login,
     },
+
 };

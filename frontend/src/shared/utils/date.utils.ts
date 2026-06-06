@@ -3,11 +3,9 @@ export const formatDate = (date?: string) => {
 
     const d = new Date(date);
 
-    const day = String(d.getDate()).padStart(2, "0");
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    const year = d.getFullYear();
-
-    return `${day}-${month}-${year}`;
+    return `${String(d.getDate()).padStart(2, "0")}-${String(
+        d.getMonth() + 1
+    ).padStart(2, "0")}-${d.getFullYear()}`;
 };
 
 export const formatDateInput = (date?: string) => {
@@ -15,11 +13,22 @@ export const formatDateInput = (date?: string) => {
     return date.split("T")[0];
 };
 
+const today = new Date();
 
-const hoy = new Date();
+export const fechaHoy = today.toISOString().split("T")[0];
+
+export const fechaManana = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() + 1
+)
+    .toISOString()
+    .split("T")[0];
 
 export const maxFechaNacimiento = new Date(
-    hoy.getFullYear() - 18,
-    hoy.getMonth(),
-    hoy.getDate()
-).toISOString().split("T")[0];
+    today.getFullYear() - 18,
+    today.getMonth(),
+    today.getDate()
+)
+    .toISOString()
+    .split("T")[0];

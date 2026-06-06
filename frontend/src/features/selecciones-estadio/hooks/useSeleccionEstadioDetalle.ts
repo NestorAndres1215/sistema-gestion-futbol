@@ -10,11 +10,7 @@ export default function useSeleccionEstadioDetalle(seleccionId: string) {
         tipo: ""
     });
 
-    const [formEntrenador, setFormEntrenador] = useState({
-        entrenador: "",
-        fechaInicio: "",
-        fechaFin: ""
-    });
+
     
     const [editando, setEditando] = useState(false);
     const [idEditar, setIdEditar] = useState<number | null>(null);

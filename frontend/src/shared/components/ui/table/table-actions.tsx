@@ -30,6 +30,14 @@ export default function TableActions<T>(props: any) {
           <i className="fa-regular fa-trash-can" />
         </button>
       )}
+      {actions.onFire && row.estado === "Activo" && (
+        <button
+          className={`${styles.actionBtn} ${styles.actionDelete}`}
+          onClick={() => actions.onFire(row)}
+        >
+          <i className="fa-solid fa-gavel" />
+        </button>
+      )}
     </div>
   );
 }

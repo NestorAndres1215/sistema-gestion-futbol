@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import {
-  getEstadioById,
-  updateEstadio
-} from "../services/estadio.service";
-
+import { getEstadioById, updateEstadio } from "../services/estadio.service";
 import { formatDateInput } from "@/shared/utils/date.utils";
 import { SwalService } from "@/shared/lib/swal/swal.service";
 

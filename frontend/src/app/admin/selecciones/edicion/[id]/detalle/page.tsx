@@ -11,16 +11,32 @@ import { SwalService } from "@/shared/lib/swal/swal.service";
 import Pagination from "@/shared/components/ui/pagination/pagination";
 import useSeleccionEstadioDetalle from "@/features/selecciones-estadio/hooks/useSeleccionEstadioDetalle";
 import Table from "@/shared/components/ui/table/table";
+import useSeleccionEntrenadorDetalle from "@/features/selecciones-estadio/hooks/useSeleccionEntrenadorDetalle";
+import { fechaHoy, fechaManana } from "@/shared/utils/date.utils";
+import SelectModal from "@/shared/components/ui/select-modal/select-modal";
 
 export default function DetalleSeleccionPage() {
     const params = useParams();
     const seleccionId = params.id as string;
 
+    const [openModal, setOpenModal] = useState(false);
+    const {
+        formEstadio, estadio, editando, page,
+        totalPages, seleccionEstadios, tipoSeleccionEstadio,
+        seleccionActions, seleccionColumns,
+        handleChange, registrar, actualizar, limpiarFormulario, setPage
+    } = useSeleccionEstadioDetalle(seleccionId);
 
     const {
-        formEstadio, estadio, editando, page, totalPages, seleccionEstadios, tipoSeleccionEstadio,
-        handleChange, registrar, actualizar, limpiarFormulario, setPage, seleccionActions, seleccionColumns
-    } = useSeleccionEstadioDetalle(seleccionId);
+        entrenadores, formEntrenador, seleccionEntrenadores, entrenadorColumns,
+        entrenadorActions, totalPagesEntrenador, pageEntrenador, setFormEntrenador,
+        handleChangeEntrenador, registrarEntrenador, setPageEntrenador
+    } = useSeleccionEntrenadorDetalle(seleccionId);
+
+    const selected = entrenadores.find(
+        (e: any) => e.id === formEntrenador.entrenador
+    );
+
 
     return (
         <AdminLayout>
@@ -140,29 +156,65 @@ export default function DetalleSeleccionPage() {
                                 <label className={styles.label}>
                                     Entrenadores
                                 </label>
+                                <div className={styles.inputWrap}>
+                                    <button
+                                        type="button"
+                                        className={styles.input}
+                                        onClick={() => setOpenModal(true)}
+                                    >
+                                        {selected?.nombreCompleto || "Seleccione un entrenador"}
+                                    </button>
+                                </div>
+                                {/* MODAL */}
+                                <SelectModal
+                                    open={openModal}
+                                    title="Seleccionar entrenador"
+                                    data={entrenadores}
+                                    getLabel={(e: any) => e.nombreCompleto}
+                                    getValue={(e: any) => e.id}
+                                    onClose={() => setOpenModal(false)}
+                                    onSelect={(id) => {
+                                        setFormEntrenador((prev) => ({ ...prev, entrenador: Number(id) }));
+                                        setOpenModal(false);
+                                    }}
+                                />
+
+                                <label className={styles.label}>
+                                    Fecha de Inicio
+                                </label>
 
                                 <div className={styles.inputWrap}>
-                                    <select
-                                        className={styles.input}
-                                        value={formEstadio.estadio}
-                                        onChange={(e) => handleChange("estadio", e.target.value)}
-                                    >
-                                        <option value="">
-                                            Seleccione un estadio
-                                        </option>
 
-                                        {estadio.map((item) => (
-                                            <option key={item.id} value={item.nombre}   >
-                                                {item.nombre}
-                                            </option>
-                                        ))}
-                                    </select>
+                                    <input
+                                        type="date"
+                                        className={styles.input}
+                                        value={formEntrenador.fechaInicio}
+                                        onChange={(e) => handleChangeEntrenador("fechaInicio", e.target.value)}
+                                    />
 
                                 </div>
 
-                            </div>
-                        </div>
+                                <label className={styles.label}>
+                                    Fecha de Final
+                                </label>
 
+                                <div className={styles.inputWrap}>
+
+                                    <input
+                                        type="date"
+                                        className={styles.input}
+                                        value={formEntrenador.fechaFin}
+                                        onChange={(e) => handleChangeEntrenador("fechaFin", e.target.value)}
+                                    />
+
+                                </div>
+                                <div className="mt-4">
+                                    <ActionButton mode="create" onClick={registrarEntrenador} />
+                                </div>
+                            </div>
+
+
+                        </div>
 
                     </div>
                 </div>
@@ -174,19 +226,18 @@ export default function DetalleSeleccionPage() {
                                 Entrenadores
                             </p>
                         </div>
-                        <div className={styles.form}>
-                            <div className={styles.tablaWrap}>
-                                <table className={styles.tabla}>
-                                    <thead>
-                                        <tr>
-                                            <th>N°</th>
-                                            <th>Entrenador</th>
-                                            <th>Fecha Inicio</th>
-                                            <th>Fecha Final</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
+                        <div className="container my-4 ">
+                            <Table
+                                data={seleccionEntrenadores}
+                                columns={entrenadorColumns}
+                                showActions
+                                actions={entrenadorActions}
+                            />
+                            <Pagination
+                                currentPage={pageEntrenador}
+                                totalPages={totalPagesEntrenador}
+                                onPageChange={(p) => setPageEntrenador(p)}
+                            />
                         </div>
                     </div>
                 </div>
