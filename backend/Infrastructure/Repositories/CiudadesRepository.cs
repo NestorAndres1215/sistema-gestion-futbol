@@ -66,4 +66,20 @@ public class CiudadesRepository : ICiudadesRepository
             .OrderBy(x => x.Nombre)
             .FirstOrDefaultAsync(x => x.Nombre == nombre);
     }
+
+    public async Task<bool> ExisteCiudadEnPaisAsync(string nombre, int paisId)
+    {
+        return await _context.Ciudades
+            .AnyAsync(c => c.Nombre == nombre && c.PaisId == paisId);
+    }
+
+    public async Task<bool> ExisteCiudadDuplicadaAsync(string nombre, int paisId, int id)
+    {
+        return await _context.Ciudades
+            .AnyAsync(c =>
+                c.Id != id &&
+                c.Nombre == nombre &&
+                c.PaisId == paisId
+            );
+    }
 }

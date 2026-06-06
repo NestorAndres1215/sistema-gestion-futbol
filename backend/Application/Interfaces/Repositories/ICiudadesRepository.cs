@@ -16,4 +16,6 @@ public interface ICiudadesRepository
     Task<Ciudades> UpdateAsync(Ciudades ciudad);
 
     Task<Ciudades?> DeleteAsync(Ciudades ciudad);
+    Task<bool> ExisteCiudadEnPaisAsync(string nombre, int paisId);
+    Task<bool> ExisteCiudadDuplicadaAsync(string nombre, int paisId, int id);
 }

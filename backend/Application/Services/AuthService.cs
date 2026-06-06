@@ -71,7 +71,7 @@ public class AuthService : IAuthService
         var user = await _repo.GetByEmailAsync(dto.Email);
 
         if (user == null)
-            throw new NotFoundException("Usuario no existe");
+            throw new NotFoundException("Correo no existe");
 
         if (!_hasher.Verify(dto.Password, user.Password))
             throw new BadRequestException("Password incorrecta");

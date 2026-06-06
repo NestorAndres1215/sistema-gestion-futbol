@@ -7,10 +7,14 @@ namespace Application.Services;
 public class CiudadesService : ICiudadesService
 {
     private readonly ICiudadesRepository _repository;
+    private readonly IPaisesRepository _paisRepository;
 
-    public CiudadesService(ICiudadesRepository repository)
+    public CiudadesService(
+        IPaisesRepository paisRepository,
+        ICiudadesRepository repository)
     {
         _repository = repository;
+        _paisRepository = paisRepository;
     }
 
     public async Task<IEnumerable<Ciudades>> GetAllAsync()
@@ -30,7 +34,18 @@ public class CiudadesService : ICiudadesService
 
     public async Task<Ciudades> AddAsync(Ciudades ciudad)
     {
-       return  await _repository.AddAsync(ciudad);
+        var paisExiste = await _paisRepository.GetByIdAsync(ciudad.PaisId);
+
+        if (paisExiste == null)
+            throw new BadRequestException("El país no existe");
+
+        var existe = await _repository
+            .ExisteCiudadEnPaisAsync(ciudad.Nombre, ciudad.PaisId);
+
+        if (existe)
+            throw new BadRequestException("Ya existe una ciudad con ese nombre en ese país");
+
+        return await _repository.AddAsync(ciudad);
     }
 
     public async Task<Ciudades> UpdateAsync(int id, Ciudades ciudad)
@@ -39,6 +54,18 @@ public class CiudadesService : ICiudadesService
 
         if (existing == null)
             throw new BadRequestException("La ciudad no existe");
+
+        var paisExiste = await _paisRepository.GetByIdAsync(ciudad.PaisId);
+
+        if (paisExiste == null)
+            throw new BadRequestException("El país no existe");
+
+
+        var existe = await _repository
+            .ExisteCiudadDuplicadaAsync(ciudad.Nombre, ciudad.PaisId, id);
+
+        if (existe)
+            throw new BadRequestException("Ya existe una ciudad con ese nombre en ese país");
 
         existing.Nombre = ciudad.Nombre;
         existing.PaisId = ciudad.PaisId;
