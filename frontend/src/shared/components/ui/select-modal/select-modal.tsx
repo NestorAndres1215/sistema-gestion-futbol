@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import styles from "./select-modal.module.css";
 import SearchBar from "@/shared/components/ui/search-bar/search-bar";
 import Pagination from "@/shared/components/ui/pagination/pagination";
@@ -28,20 +28,32 @@ export default function SelectModal<T extends { id: string | number }>({
     onSelect,
     onClose,
 }: SelectModalProps<T>) {
+
     const [query, setQuery] = useState({ search: "" });
     const [page, setPage] = useState(1);
     const [selected, setSelected] = useState<string | number | null>(null);
 
     const itemsPerPage = 4;
 
-    const filtered = useMemo(
-        () => data.filter((item) =>
-            getLabel(item).toLowerCase().includes(query.search.toLowerCase())
-        ),
-        [data, query.search]
-    );
+    // 🔥 RESET CUANDO ABRE
+    useEffect(() => {
+        if (open) {
+            setSelected(null);
+            setQuery({ search: "" });
+            setPage(1);
+        }
+    }, [open]);
 
-    const totalPages = Math.ceil(filtered.length / itemsPerPage);
+    // 🔥 FILTRO
+    const filtered = useMemo(() => {
+        return data.filter((item) =>
+            getLabel(item).toLowerCase().includes(query.search.toLowerCase())
+        );
+    }, [data, query.search]);
+
+    // 🔥 PAGINACIÓN
+    const totalPages = Math.max(1, Math.ceil(filtered.length / itemsPerPage));
+
     const paginatedData = useMemo(() => {
         const start = (page - 1) * itemsPerPage;
         return filtered.slice(start, start + itemsPerPage);
@@ -54,26 +66,17 @@ export default function SelectModal<T extends { id: string | number }>({
         setPage(1);
     };
 
-    const selectedLabel = selected !== null
-        ? getLabel(data.find((d) => d.id === selected)!)
+    // 🔥 ITEM SELECCIONADO (SAFE)
+    const selectedItem = data.find((d) => d.id === selected);
+
+    const selectedLabel = selectedItem
+        ? getLabel(selectedItem)
         : "Ninguno";
 
     const columns = [
         {
-            header: "Nombre",
+            header: "Datos",
             accessor: (row: T) => getLabel(row),
-        },
-        {
-            header: "",
-            accessor: (row: T) => (
-                <button
-                    type="button"
-                    onClick={() => setSelected(row.id)}
-                    className={`${styles.radio} ${selected === row.id ? styles.radioActive : ""}`}
-                >
-                    {selected === row.id && <span className={styles.radioDot} />}
-                </button>
-            ),
         },
     ];
 
@@ -81,20 +84,26 @@ export default function SelectModal<T extends { id: string | number }>({
         <div className={styles.overlay} onClick={onClose}>
             <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.card}>
-                    {/* HEAD */}
+
                     <div className={styles.cardHead}>
-                        <h3 className={styles.cardName}>{title}</h3>
+                        <h3 className={styles.cardName}>
+                            <i className={icon}></i> {title}
+                        </h3>
                     </div>
 
-                    {/* BODY */}
                     <div className="p-3 d-flex flex-column" style={{ height: "100%" }}>
+
                         <SearchBar value={query.search} onSearch={handleSearch} />
 
+                   
                         <div className={styles.tableWrap}>
                             <Table
                                 data={paginatedData}
                                 columns={columns}
                                 showActions={false}
+                                selectable
+                                selectedRow={selected}
+                                onSelectRow={(row) => setSelected(row.id)}
                             />
                         </div>
 
@@ -104,19 +113,20 @@ export default function SelectModal<T extends { id: string | number }>({
                             onPageChange={setPage}
                         />
 
-
-                        {/* FOOTER */}
                         <div className="mb-3">
                             <div className={styles.selInfo}>
                                 <i className="fa-solid fa-circle-check" />
                                 <span>
                                     Seleccionado:{" "}
-                                    <span className={styles.selName}>{selectedLabel}</span>
+                                    <span className={styles.selName}>
+                                        {selectedLabel}
+                                    </span>
                                 </span>
                             </div>
                         </div>
 
                         <div className="row g-2 mt-3">
+
                             <div className="col-12 col-md-4">
                                 <ActionButton
                                     mode="clear"
@@ -127,7 +137,7 @@ export default function SelectModal<T extends { id: string | number }>({
                             <div className="col-12 col-md-4">
                                 <ActionButton
                                     mode="cerrar"
-                                    onClick={() => onClose()}
+                                    onClick={onClose}
                                 />
                             </div>
 
@@ -143,8 +153,6 @@ export default function SelectModal<T extends { id: string | number }>({
                                 />
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>

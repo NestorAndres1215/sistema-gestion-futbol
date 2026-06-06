@@ -1,7 +1,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,7 @@
 }
 
 .modal {
-    width: 820px;
+  width: 820px;
   max-width: 805vw;
   background: #13161e;
   padding: 16px;
@@ -32,6 +32,7 @@
   background: #0f1117;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
+
 .cardName {
   font-family: 'Syne', sans-serif;
   font-weight: 700;
@@ -41,37 +42,6 @@
   letter-spacing: -0.01em;
 }
 
-.radio {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.12);
-  background: transparent;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.15s ease;
-  flex-shrink: 0;
-  padding: 0;
-}
-
-.radio:hover {
-  border-color: rgba(110, 231, 183, 0.5);
-}
-
-.radioActive {
-  border-color: #6ee7b7;
-  background: rgba(110, 231, 183, 0.08);
-}
-
-.radioDot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #6ee7b7;
-}
- 
 .selInfo {
   display: flex;
   align-items: center;
@@ -80,11 +50,11 @@
   font-size: 11px;
   color: #4a5568;
 }
- 
+
 .selInfo i {
   font-size: 10px;
 }
- 
+
 .selName {
   color: #6ee7b7;
 }

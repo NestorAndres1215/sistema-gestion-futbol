@@ -1,13 +1,26 @@
 import styles from "./table.module.css";
-export default function TableActions<T>(props: any) {
-  const { row, actions } = props;
 
+type Props<T> = {
+  row: T;
+  actions: {
+    onView?: (row: T) => void;
+    onEdit?: (row: T) => void;
+    onDelete?: (row: T) => void;
+    onFire?: (row: T) => void;
+  };
+};
+
+export default function TableActions<T>({ row, actions }: Props<T>) {
   return (
     <div className={styles.actionGroup}>
+
       {actions.onView && (
         <button
           className={`${styles.actionBtn} ${styles.actionView}`}
-          onClick={() => actions.onView(row)}
+          onClick={(e) => {
+            e.stopPropagation();
+            actions.onView?.(row);
+          }}
         >
           <i className="fa-regular fa-eye" />
         </button>
@@ -16,7 +29,10 @@ export default function TableActions<T>(props: any) {
       {actions.onEdit && (
         <button
           className={`${styles.actionBtn} ${styles.actionEdit}`}
-          onClick={() => actions.onEdit(row)}
+          onClick={(e) => {
+            e.stopPropagation();
+            actions.onEdit?.(row);
+          }}
         >
           <i className="fa-regular fa-pen-to-square" />
         </button>
@@ -25,19 +41,27 @@ export default function TableActions<T>(props: any) {
       {actions.onDelete && (
         <button
           className={`${styles.actionBtn} ${styles.actionDelete}`}
-          onClick={() => actions.onDelete(row)}
+          onClick={(e) => {
+            e.stopPropagation();
+            actions.onDelete?.(row);
+          }}
         >
           <i className="fa-regular fa-trash-can" />
         </button>
       )}
-      {actions.onFire && row.estado === "Activo" && (
+
+      {actions.onFire && (row as any).estado === "Activo" && (
         <button
           className={`${styles.actionBtn} ${styles.actionDelete}`}
-          onClick={() => actions.onFire(row)}
+          onClick={(e) => {
+            e.stopPropagation();
+            actions.onFire?.(row);
+          }}
         >
           <i className="fa-solid fa-gavel" />
         </button>
       )}
+
     </div>
   );
 }
