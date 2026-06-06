@@ -53,6 +53,6 @@ export const getSeleccionesByNombre = async (nombre: string) => {
 };
 
 export const updateDespido = async (id: number | string) => {
-    const response = await api.put(`/seleccion-estadio/despedir/${id}`, {});
+    const response = await api.put(`/entrenador-seleccion/despedir/${id}`, {});
     return response.data;
 };

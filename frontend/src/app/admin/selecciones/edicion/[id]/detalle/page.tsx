@@ -2,17 +2,13 @@
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import styles from "./detalle.module.css";
-import { useEffect, useState } from "react";
-import { getEstadioByPais } from "@/features/estadio/services/estadio.service";
+import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import ActionButton from "@/shared/components/ui/button/button";
-import { addSeleccionEstadio, getSeleccionEstadioByEstadio, getSeleccionEstadiosBySeleccion, updateSeleccionEstadio } from "@/features/selecciones-estadio/services/seleccionEstadio.service";
-import { SwalService } from "@/shared/lib/swal/swal.service";
 import Pagination from "@/shared/components/ui/pagination/pagination";
 import useSeleccionEstadioDetalle from "@/features/selecciones-estadio/hooks/useSeleccionEstadioDetalle";
 import Table from "@/shared/components/ui/table/table";
 import useSeleccionEntrenadorDetalle from "@/features/selecciones-estadio/hooks/useSeleccionEntrenadorDetalle";
-import { fechaHoy, fechaManana } from "@/shared/utils/date.utils";
 import SelectModal from "@/shared/components/ui/select-modal/select-modal";
 
 export default function DetalleSeleccionPage() {
@@ -29,7 +25,7 @@ export default function DetalleSeleccionPage() {
     } = useSeleccionEstadioDetalle(seleccionId);
 
     const {
-        entrenadores, formEntrenador, seleccionEntrenadores, entrenadorColumns,
+        entrenadores, formEntrenador, seleccionEntrenadores, entrenadorColumns,existeEntrenadorActivo,
         entrenadorActions, totalPagesEntrenador, pageEntrenador, setFormEntrenador,
         handleChangeEntrenador, registrarEntrenador, setPageEntrenador
     } = useSeleccionEntrenadorDetalle(seleccionId);
@@ -261,7 +257,7 @@ export default function DetalleSeleccionPage() {
                             <Table
                                 data={seleccionEntrenadores}
                                 columns={entrenadorColumns}
-                                showActions
+                                   showActions={existeEntrenadorActivo}
                                 actions={entrenadorActions}
                             />
                             <Pagination

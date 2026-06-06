@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { getEntrenadorByCombo } from "@/features/entrenador/services/entrenador.service";
-import { addSeleccionEntrenador, getEntrenadores, getSeleccionEntrenadorBySeleccion, updateDespido } from "../services/seleccionEntrenador.service";
+import {
+    addSeleccionEntrenador,
+    getEntrenadores,
+    getSeleccionEntrenadorBySeleccion,
+    updateDespido
+} from "../services/seleccionEntrenador.service";
 import { SwalService } from "@/shared/lib/swal/swal.service";
 import { formatDate } from "@/shared/utils/date.utils";
 
@@ -8,6 +13,7 @@ interface Entrenador {
     id: string;
     nombreCompleto: string;
 }
+
 type FormEntrenador = {
     entrenador: number | "";
     fechaInicio: string;
@@ -18,9 +24,11 @@ export default function useSeleccionEntrenadorDetalle(seleccionId: string) {
     const [entrenadores, setEntrenadores] = useState<Entrenador[]>([]);
     const [pageEntrenador, setPageEntrenador] = useState(1);
     const [pageSizeEntrenador] = useState(5);
+
     const [seleccionEntrenadores, setSeleccionEntrenadores] = useState<any[]>([]);
     const [totalPagesEntrenador, setTotalPagesEntrenador] = useState(1);
     const [existeEntrenadorActivo, setExisteEntrenadorActivo] = useState(false);
+
     const [formEntrenador, setFormEntrenador] = useState<FormEntrenador>({
         entrenador: "",
         fechaInicio: "",
@@ -37,103 +45,137 @@ export default function useSeleccionEntrenadorDetalle(seleccionId: string) {
     };
 
     const recargarSeleccionEntrenador = async () => {
-        const response = await getSeleccionEntrenadorBySeleccion({
-            page: pageEntrenador,
-            pageSize: pageSizeEntrenador,
-            seleccion: seleccionId
-        });
-        console.log(response)
-        setSeleccionEntrenadores(response.items);
-        setExisteEntrenadorActivo(
-            response.items.some((x: any) => x.estado === "Activo")
-        );
-        setTotalPagesEntrenador(response.totalPages);
-    };
+        try {
+            const response = await getSeleccionEntrenadorBySeleccion({
+                page: pageEntrenador,
+                pageSize: pageSizeEntrenador,
+                seleccion: seleccionId
+            });
 
-    const entrenadorActions = {
-        onFire: (u: any) => handleDespido(u)
+            setSeleccionEntrenadores(response.items);
+
+            setExisteEntrenadorActivo(
+                response.items.some((x: any) => x.estado === "Activo")
+            );
+
+            setTotalPagesEntrenador(response.totalPages);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     useEffect(() => {
-        if (seleccionId) {
-            fetchData();
-            recargarSeleccionEntrenador();
-        }
+        if (!seleccionId) return;
+
+        fetchData();
     }, [seleccionId]);
 
     useEffect(() => {
         if (!seleccionId) return;
 
-        const cargar = async () => {
+        recargarSeleccionEntrenador();
+    }, [seleccionId, pageEntrenador]);
 
-            const estadios = await getEntrenadores();
-            console.log(estadios)
+    useEffect(() => {
+        if (!seleccionId) return;
+
+        const cargar = async () => {
+            await getEntrenadores();
         };
 
         cargar();
     }, [seleccionId]);
+
     const handleChangeEntrenador = (name: string, value: string) => {
         setFormEntrenador(prev => ({
             ...prev,
             [name]: value
         }));
     };
-    const limpiarFormulario = async () => {
+
+    const limpiarFormulario = () => {
         setFormEntrenador({
             entrenador: "",
             fechaInicio: "",
             fechaFin: ""
         });
-    }
+    };
 
     const handleDespido = async (item: any) => {
         try {
-            await SwalService.confirm("¿Confirma que desea despedir a este entrenador?");
+            await SwalService.confirm(
+                "¿Confirma que desea despedir a este entrenador?"
+            );
+
             await updateDespido(item.id);
+
             await recargarSeleccionEntrenador();
             await fetchData();
-            SwalService.success("Entrenador despedido correctamente");
 
-        }
-        catch (error: any) {
+            SwalService.success("Entrenador despedido correctamente");
+        } catch (error: any) {
             SwalService.error(error.message);
         }
+    };
 
-    }
     const registrarEntrenador = async () => {
-        console.log(formEntrenador)
         try {
             const payload = {
-                Seleccion: seleccionId, Entrenador: formEntrenador.entrenador,
-                FechaInicio: formEntrenador.fechaInicio, FechaFin: formEntrenador.fechaFin
+                Seleccion: seleccionId,
+                Entrenador: formEntrenador.entrenador,
+                FechaInicio: formEntrenador.fechaInicio,
+                FechaFin: formEntrenador.fechaFin
             };
 
             await addSeleccionEntrenador(payload);
 
-            await limpiarFormulario();
+            limpiarFormulario();
+
             await recargarSeleccionEntrenador();
             await fetchData();
-            SwalService.success("Registrado correctamente");
-        }
 
-        catch (error: any) {
+            SwalService.success("Registrado correctamente");
+        } catch (error: any) {
             SwalService.error(error.message);
         }
-    }
+    };
+
+    const entrenadorActions = {
+        onFire: (u: any) => handleDespido(u)
+    };
 
     const entrenadorColumns = [
-        { header: "ID", accessor: (row: any) => row.id, },
-        { header: "Entrenador", accessor: (row: any) => row.entrenadorNombre + " " + row.entrenadorApellido, },
-        { header: "Fecha de Inicio", accessor: (row: any) => formatDate(row.fechaInicio), },
-        { header: "Fecha de Fin", accessor: (row: any) => formatDate(row.fechaFin), },
+        {
+            header: "ID",
+            accessor: (row: any) => row.id
+        },
+        {
+            header: "Entrenador",
+            accessor: (row: any) =>
+                `${row.entrenadorNombre} ${row.entrenadorApellido}`
+        },
+        {
+            header: "Fecha de Inicio",
+            accessor: (row: any) => formatDate(row.fechaInicio)
+        },
+        {
+            header: "Fecha de Fin",
+            accessor: (row: any) => formatDate(row.fechaFin)
+        }
     ];
 
     return {
-        entrenadores, existeEntrenadorActivo,
-        formEntrenador, handleChangeEntrenador, seleccionEntrenadores, totalPagesEntrenador, pageEntrenador, setPageEntrenador,
-        setFormEntrenador, registrarEntrenador, entrenadorColumns, entrenadorActions
+        entrenadores,
+        existeEntrenadorActivo,
+        formEntrenador,
+        handleChangeEntrenador,
+        seleccionEntrenadores,
+        totalPagesEntrenador,
+        pageEntrenador,
+        setPageEntrenador,
+        setFormEntrenador,
+        registrarEntrenador,
+        entrenadorColumns,
+        entrenadorActions
     };
 }
-
-
-

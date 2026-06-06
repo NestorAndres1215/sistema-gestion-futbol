@@ -91,6 +91,7 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
             })
             .ToListAsync();
 
+
         return new PagedResult<SeleccionEntrenadorResponse>
         {
             Items = items,
