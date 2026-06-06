@@ -1,3 +1,15 @@
+/* ═══════════════════════════════════════════════
+   card-list.module.css — Nexus Admin
+═══════════════════════════════════════════════ */
+
+/* ── Grid ───────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+/* ── Card ───────────────────────────────────── */
 .card {
   background: #13161e;
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -13,40 +25,59 @@
   background: #14181f;
 }
 
-.imageStadium {
+/* ── Wrap imagen ────────────────────────────── */
+.imgWrap {
   width: 100%;
-  height: 175px;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
-.imagePerfil {
-  width: 100%;
-  height: 350px;
-  overflow: hidden;
-}
-
+/* variantes de altura */
+.imageStadium   { height: 160px; background: #0f1117; }
+.imagePerfil    { height: 320px; background: #0f1117; }
 .imageSeleccion {
-  width: 100%;
-  height: 320px;
-  overflow: hidden;
+  height: 300px;
+  background: #0d0f17;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
 }
 
-.image {
+/* ── Foto de persona ────────────────────────── */
+.imagePhoto {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: top center;
   display: block;
   transition: transform 0.3s ease;
 }
 
-.card:hover .image {
+.card:hover .imagePhoto {
   transform: scale(1.05);
 }
 
+/* ── Logo / escudo ──────────────────────────── */
+.imageLogo {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease;
+
+}
+
+.card:hover .imageLogo {
+  transform: scale(1.05);
+}
+
+/* ── Fallback ───────────────────────────────── */
 .imageFallback {
   width: 100%;
   height: 100%;
+  min-height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,8 +86,19 @@
   font-size: 28px;
 }
 
-.card:hover .image {
-  transform: scale(1.03);
+.body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
 }
 
 .title {
@@ -64,7 +106,7 @@
   font-weight: 700;
   font-size: 14px;
   color: #f0f4f8;
-  margin: 0 0 4px;
+  margin: 0;
   letter-spacing: -0.01em;
 }
 
@@ -76,43 +118,49 @@
   line-height: 1.5;
 }
 
-.empty {
+
+.emptyWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 48px 0;
+}
+
+.emptyIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2d3748;
+  font-size: 18px;
+}
+
+.emptyText {
   font-family: 'DM Mono', monospace;
-  font-size: 12px;
-  color: #4a5568;
-  text-align: center;
-  padding: 32px 0;
+  font-size: 11px;
+  color: #2d3748;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
 }
 
-
-@media (max-width: 768px) {
-
-  .imageStadium {
-    height: 140px;
-  }
-
-  .imagePerfil {
-    height: 320px;
-  }
-
-  .title {
-    font-size: 13px;
-  }
-
+@media (max-width: 1200px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 900px) {
+  .grid          { grid-template-columns: repeat(2, 1fr); }
+  .imageStadium  { height: 140px; }
+  .imagePerfil   { height: 260px; }
+}
 
-  .imageStadium {
-    height: 160px;
-  }
-
-  .imagePerfil {
-    height: 400px;
-    
-  }
-  .imageSeleccion {
-    height: 300px;
-  }
-
+@media (max-width: 500px) {
+  .grid           { grid-template-columns: 1fr; }
+  .imagePerfil    { height: 340px; }
+  .imageSeleccion { height: 200px; }
 }

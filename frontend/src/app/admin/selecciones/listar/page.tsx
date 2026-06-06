@@ -31,6 +31,7 @@ export default function SeleccionListarPage() {
                     getTitle={(e) => e.nombre}
                     getSubtitle={(e) => `${e.confederacion} `}
                     getImage={(e) => e.escudoUrl ? `https://localhost:7269${e.escudoUrl}` : null}
+                    imageVariant="logo"
                     imageClassName={styles.imageSeleccion}
                     onDetail={(e) => router.push(`/admin/selecciones/listar/${e.nombre}`)}
                 />

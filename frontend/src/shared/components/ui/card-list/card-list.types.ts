@@ -5,5 +5,5 @@ export type CardListProps<T> = {
   getImage?: (item: T) => string | null;
   onDetail?: (item: T) => void;
   imageClassName?: string;
+  imageVariant?: "logo" | "perfil";
 };
-

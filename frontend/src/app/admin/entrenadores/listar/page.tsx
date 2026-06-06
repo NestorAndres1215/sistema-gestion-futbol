@@ -51,6 +51,7 @@ export default function EntrenadorListaPage() {
                             ? `https://localhost:7269${e.persona.fotoUrl}`
                             : null
                     }
+                    imageVariant="perfil"
                     imageClassName={styles.imagePerfil}
                     onDetail={(e) => router.push(`/admin/entrenadores/listar/${e.id}`)}
                 />

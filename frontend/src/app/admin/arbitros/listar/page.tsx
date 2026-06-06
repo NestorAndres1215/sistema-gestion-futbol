@@ -49,6 +49,7 @@ export default function ArbitrosListarPage() {
                             ? `https://localhost:7269${e.persona.fotoUrl}`
                             : null
                     }
+                     imageVariant="perfil"
                     imageClassName={styles.imagePerfil}
                     onDetail={(e) => router.push(`/admin/arbitros/listar/${e.id}`)}
                 />
