@@ -77,6 +77,16 @@ public class SeleccionesService : ISelecionesService
 
         await ValidarDuplicadosAsync( seleccionesdto,id);
 
+        if (seleccionesdto.Bandera != null && seleccionesdto.Bandera.Length > 0)
+        {
+            EliminarArchivo(seleccion.BanderaUrl);
+        }
+
+        if (seleccionesdto.Escudo != null && seleccionesdto.Escudo.Length > 0)
+        {
+            EliminarArchivo(seleccion.EscudoUrl);
+        }
+
         var archivos = await GuardarArchivosAsync(seleccionesdto);
 
         seleccion.Nombre = seleccionesdto.Nombre;
@@ -178,4 +188,19 @@ public class SeleccionesService : ISelecionesService
         return (banderaPath, escudoPath);
     }
 
+
+    private void EliminarArchivo(string? archivoUrl)
+    {
+        if (string.IsNullOrWhiteSpace(archivoUrl))
+            return;
+
+        var rutaFisica = Path.Combine(
+            Directory.GetCurrentDirectory(),
+            "wwwroot",
+            archivoUrl.TrimStart('/')
+        );
+
+        if (File.Exists(rutaFisica))
+            File.Delete(rutaFisica);
+    }
 }

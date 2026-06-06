@@ -183,9 +183,17 @@ public class EntrenadoresService : IEntrenadoresService
         var ciudad = await _ciudadRepo.GetByNombreAsync(dto.CiudadNacimiento)
             ?? throw new NotFoundException("La ciudad no existe");
 
-        if (dto.Foto != null)
-            persona.FotoUrl = await GuardarFotoAsync(dto); 
-        
+
+
+        if (dto.Foto != null && dto.Foto.Length > 0)
+        {
+            if (!string.IsNullOrEmpty(persona.FotoUrl))
+                EliminarFoto(persona.FotoUrl);
+
+            persona.FotoUrl = await GuardarFotoAsync(dto);
+        }
+
+
         persona.Nombre = dto.Nombre;
         persona.Apellido = dto.Apellido;
         persona.FechaNacimiento = dto.FechaNacimiento;
@@ -216,4 +224,18 @@ public class EntrenadoresService : IEntrenadoresService
         return await _repository.GetComboAsync();
     }
 
+    private void EliminarFoto(string fotoUrl)
+    {
+        if (string.IsNullOrEmpty(fotoUrl))
+            return;
+
+        var rutaFisica = Path.Combine(
+            Directory.GetCurrentDirectory(),
+            "wwwroot",
+            fotoUrl.TrimStart('/')
+        );
+
+        if (File.Exists(rutaFisica))
+            File.Delete(rutaFisica);
+    }
 }
