@@ -15,7 +15,8 @@ export default function EntrenadorDetallePage() {
     const params = useParams();
     const seleccionPais = params.id as string;
     const { items, seleccion, estadioColumns, estadio, setPageEstadio,
-        pageEstadio, totalPagesEstadio } = useSeleccionesDetail(seleccionPais);
+        pageEstadio, totalPagesEstadio, entrenadorColumns, entrenador, setPageEntrenador,
+        pageEntrenador, totalPagesEntrenador } = useSeleccionesDetail(seleccionPais);
 
     const JUGADORES_ACTUALES: any[] = [];
     const [page, setPage] = useState(1);
@@ -157,6 +158,19 @@ export default function EntrenadorDetallePage() {
                             <p className={styles.cardName}>
                                 Historial de Entrenadores
                             </p>
+                        </div>
+                         <div className="container my-4 ">
+                            <Table
+                                data={entrenador}
+                                columns={entrenadorColumns}
+                                showActions
+
+                            />
+                            <Pagination
+                                currentPage={pageEntrenador}
+                                totalPages={totalPagesEntrenador}
+                                onPageChange={(p) => setPageEntrenador(p)}
+                            />
                         </div>
                     </div>
                 </div>

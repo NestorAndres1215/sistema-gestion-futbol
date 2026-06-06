@@ -49,7 +49,6 @@ export default function SelectModal<T extends { id: string | number }>({
 
     const itemsPerPage = 4;
 
-    // 🔥 reset al abrir
     useEffect(() => {
         if (open) {
             setSearch("");
@@ -58,7 +57,6 @@ export default function SelectModal<T extends { id: string | number }>({
         }
     }, [open]);
 
-    // 🔥 FILTRO (con debounce)
     const filtered = useMemo(() => {
         return data.filter((item) =>
             getLabel(item)
@@ -67,7 +65,6 @@ export default function SelectModal<T extends { id: string | number }>({
         );
     }, [data, debouncedSearch]);
 
-    // 🔥 PAGINACIÓN CORRECTA
     const totalPages = Math.max(1, Math.ceil(filtered.length / itemsPerPage));
 
     const paginatedData = useMemo(() => {
@@ -75,7 +72,6 @@ export default function SelectModal<T extends { id: string | number }>({
         return filtered.slice(start, start + itemsPerPage);
     }, [filtered, page]);
 
-    // 🔥 highlight search
     const highlightText = (text: string) => {
         if (!debouncedSearch) return text;
 

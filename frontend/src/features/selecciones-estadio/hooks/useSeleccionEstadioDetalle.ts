@@ -150,7 +150,8 @@ export default function useSeleccionEstadioDetalle(seleccionId: string) {
 
             const estadios = await getEstadioByPais(seleccionId);
             const registrados = await getSeleccionEstadioByEstadio(seleccionId);
-
+            console.log(registrados)
+            console.log(estadios.filter((e: any) => !registrados.includes(e.nombre)))
             setEstadio(estadios.filter((e: any) => !registrados.includes(e.nombre)));
 
             await cargarTiposDisponibles();
@@ -177,7 +178,8 @@ export default function useSeleccionEstadioDetalle(seleccionId: string) {
         { header: "Capacidad", accessor: (row: any) => row.capacidad.toLocaleString() },
     ];
 
-    return {setFormEstadio,
+    return {
+        setFormEstadio,
         formEstadio, estadio, editando, page, totalPages, seleccionEstadios, tipoSeleccionEstadio, seleccionColumns,
         handleChange, registrar, actualizar, limpiarFormulario, setPage, seleccionActions
     };

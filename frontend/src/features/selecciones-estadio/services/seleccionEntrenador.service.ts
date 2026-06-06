@@ -24,13 +24,21 @@ export const getSeleccionEntrenadorById = async (id: number) => {
     return response.data;
 };
 
-export const getSeleccionEntrenadorBySeleccion = async ({ page = 1, pageSize = 10, seleccion = "", }: {
-    page?: number; pageSize?: number; seleccion?: string;
+
+
+export const getSeleccionEntrenadorBySeleccion = async ({
+    page = 1, pageSize = 10, seleccion = "",
+}: {
+    page?: number; pageSize?: number;
+    seleccion?: string;
 }) => {
-    const response = await api.get("/entrenador-seleccion", {
-        params: { page, pageSize, seleccion, },
+
+    const params = new URLSearchParams({
+        page: page.toString(), pageSize: pageSize.toString(),
+        seleccion,
     });
 
+    const response = await api.get(`/entrenador-seleccion?${params.toString()}`);
     return response;
 };
 

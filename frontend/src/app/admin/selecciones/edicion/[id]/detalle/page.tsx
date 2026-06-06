@@ -19,9 +19,10 @@ export default function DetalleSeleccionPage() {
     const params = useParams();
     const seleccionId = params.id as string;
 
-    const [openModal, setOpenModal] = useState(false);
+    const [openModalEntrenadores, setOpenModalEntrenadores] = useState(false);
+    const [openModalEstadios, setOpenModalEstadios] = useState(false);
     const {
-        formEstadio, estadio, editando, page,
+        formEstadio, estadio, editando, page, setFormEstadio,
         totalPages, seleccionEstadios, tipoSeleccionEstadio,
         seleccionActions, seleccionColumns,
         handleChange, registrar, actualizar, limpiarFormulario, setPage
@@ -33,10 +34,13 @@ export default function DetalleSeleccionPage() {
         handleChangeEntrenador, registrarEntrenador, setPageEntrenador
     } = useSeleccionEntrenadorDetalle(seleccionId);
 
-    const selected = entrenadores.find(
+    const selectedEntrenador = entrenadores.find(
         (e: any) => e.id === formEntrenador.entrenador
     );
 
+    const selectedEstadio = estadio.find(
+        (e: any) => e.id === formEstadio.estadio
+    );
 
     return (
         <AdminLayout>
@@ -63,24 +67,51 @@ export default function DetalleSeleccionPage() {
                                     Estadios
                                 </label>
 
-                                <div className={styles.inputWrap}>
-                                    <select
-                                        className={styles.input}
-                                        value={formEstadio.estadio}
-                                        onChange={(e) => handleChange("estadio", e.target.value)}
-                                    >
-                                        <option value="">
-                                            Seleccione un estadio
-                                        </option>
+                                {!editando ? (
+                                    <>
+                                        <div className={styles.inputWrap}>
+                                            <button
+                                                type="button"
+                                                className={styles.input}
+                                                onClick={() => setOpenModalEstadios(true)}
+                                            >
+                                                {selectedEstadio?.nombreCompleto || "Seleccione un estadio"}
+                                            </button>
+                                        </div>
+                                        {/* MODAL */}
+                                        <SelectModal
+                                            open={openModalEstadios}
+                                            title="Seleccionar estadio"
+                                            data={estadio}
+                                            getLabel={(e: any) => e?.nombreCompleto ?? e?.nombre ?? ""}
+                                            getValue={(e: any) => e.id}
+                                            onClose={() => setOpenModalEstadios(false)}
+                                            onSelect={(estadio) => {
+                                                setFormEstadio((prev) => ({ ...prev, estadio: String(estadio) }));
+                                                setOpenModalEstadios(false);
+                                            }}
+                                        />
+                                    </>
+                                ) : (
+                                    <>
+                                        <div className={styles.inputWrap}>
+                                            <select
+                                                className={styles.input}
+                                                value={formEstadio.estadio}
+                                                onChange={(e) => handleChange("estadio", e.target.value)}
+                                            >
+                                                <option value="">
+                                                    Seleccione un estadio
+                                                </option>
 
-                                        {estadio.map((item) => (
-                                            <option key={item.id} value={item.nombre}   >
-                                                {item.nombre}
-                                            </option>
-                                        ))}
-                                    </select>
+                                                {estadio.map((item) => (
+                                                    <option key={item.id} value={item.nombre}   >
+                                                        {item.nombre}
+                                                    </option>
+                                                ))}
+                                            </select>
 
-                                </div>
+                                        </div></>)}
 
                                 <label className={styles.label}>
                                     Confederacion
@@ -160,22 +191,22 @@ export default function DetalleSeleccionPage() {
                                     <button
                                         type="button"
                                         className={styles.input}
-                                        onClick={() => setOpenModal(true)}
+                                        onClick={() => setOpenModalEntrenadores(true)}
                                     >
-                                        {selected?.nombreCompleto || "Seleccione un entrenador"}
+                                        {selectedEntrenador?.nombreCompleto || "Seleccione un entrenador"}
                                     </button>
                                 </div>
                                 {/* MODAL */}
                                 <SelectModal
-                                    open={openModal}
+                                    open={openModalEntrenadores}
                                     title="Seleccionar entrenador"
                                     data={entrenadores}
                                     getLabel={(e: any) => e.nombreCompleto}
                                     getValue={(e: any) => e.id}
-                                    onClose={() => setOpenModal(false)}
+                                    onClose={() => setOpenModalEntrenadores(false)}
                                     onSelect={(id) => {
                                         setFormEntrenador((prev) => ({ ...prev, entrenador: Number(id) }));
-                                        setOpenModal(false);
+                                        setOpenModalEntrenadores(false);
                                     }}
                                 />
 
