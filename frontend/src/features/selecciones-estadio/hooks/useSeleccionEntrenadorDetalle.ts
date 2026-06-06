@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import { getEntrenadorByCombo } from "@/features/entrenador/services/entrenador.service";
-import {
-    addSeleccionEntrenador,
-    getEntrenadores,
-    getSeleccionEntrenadorBySeleccion,
-    updateDespido
-} from "../services/seleccionEntrenador.service";
+import { addSeleccionEntrenador, getEntrenadores, getSeleccionEntrenadorBySeleccion, updateDespido } from "../services/seleccionEntrenador.service";
 import { SwalService } from "@/shared/lib/swal/swal.service";
 import { formatDate } from "@/shared/utils/date.utils";
 
@@ -103,9 +98,7 @@ export default function useSeleccionEntrenadorDetalle(seleccionId: string) {
 
     const handleDespido = async (item: any) => {
         try {
-            await SwalService.confirm(
-                "¿Confirma que desea despedir a este entrenador?"
-            );
+            await SwalService.confirm("¿Confirma que desea despedir a este entrenador?");
 
             await updateDespido(item.id);
 
@@ -145,37 +138,15 @@ export default function useSeleccionEntrenadorDetalle(seleccionId: string) {
     };
 
     const entrenadorColumns = [
-        {
-            header: "ID",
-            accessor: (row: any) => row.id
-        },
-        {
-            header: "Entrenador",
-            accessor: (row: any) =>
-                `${row.entrenadorNombre} ${row.entrenadorApellido}`
-        },
-        {
-            header: "Fecha de Inicio",
-            accessor: (row: any) => formatDate(row.fechaInicio)
-        },
-        {
-            header: "Fecha de Fin",
-            accessor: (row: any) => formatDate(row.fechaFin)
-        }
+        { header: "ID", accessor: (row: any) => row.id },
+        { header: "Entrenador", accessor: (row: any) => `${row.entrenadorNombre} ${row.entrenadorApellido}` },
+        { header: "Fecha de Inicio", accessor: (row: any) => formatDate(row.fechaInicio) },
+        { header: "Fecha de Fin", accessor: (row: any) => formatDate(row.fechaFin) }
     ];
 
     return {
-        entrenadores,
-        existeEntrenadorActivo,
-        formEntrenador,
-        handleChangeEntrenador,
-        seleccionEntrenadores,
-        totalPagesEntrenador,
-        pageEntrenador,
-        setPageEntrenador,
-        setFormEntrenador,
-        registrarEntrenador,
-        entrenadorColumns,
-        entrenadorActions
+        entrenadores, existeEntrenadorActivo, seleccionEntrenadores, formEntrenador,
+        totalPagesEntrenador, pageEntrenador, entrenadorColumns, entrenadorActions,
+        handleChangeEntrenador, setPageEntrenador, setFormEntrenador, registrarEntrenador,
     };
 }

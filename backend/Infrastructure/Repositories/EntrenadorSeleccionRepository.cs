@@ -33,9 +33,6 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
             .AsNoTracking()
             .SingleOrDefaultAsync(x => x.Id == id);
     }
-
-
-
     public async Task<List<EntrenadorSelectResponse>> GetEntrenadoresAsync()
     {
         return await _context.EntrenadorSeleccion
@@ -70,7 +67,7 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
             query = query.Where(x => x.Seleccion.Nombre == seleccion);
         }
 
-        // 🔥 ORDEN DESCENDENTE POR FECHA INICIO
+ 
         query = query.OrderByDescending(x => x.FechaInicio);
 
         var totalCount = await query.CountAsync();

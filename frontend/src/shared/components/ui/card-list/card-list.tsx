@@ -31,19 +31,18 @@ export default function CardList<T>({
             <div key={i} className={styles.card}>
 
               {/* IMAGEN */}
-              <div className={imageClassName}>
-                {img ? (
-                  <CardImage
-                    src={img}
-                    alt={title}
-                    imageClassName={imageClassName}
-                  />
-                ) : (
-                  <div className={styles.imageFallback}>
-                    <i className="fas fa-photo-alt" />
-                  </div>
-                )}
-              </div>
+             <div className={imageClassName}>
+  {img ? (
+    <CardImage
+      src={img}
+      alt={title}
+    />
+  ) : (
+    <div className={styles.imageFallback}>
+      <i className="fas fa-photo-alt" />
+    </div>
+  )}
+</div>
 
               {/* BODY */}
               <div className="d-flex flex-column justify-content-between gap-3 p-3 flex-grow-1">

@@ -1,18 +1,18 @@
 import { useState } from "react";
 import styles from "./card-list.module.css";
 
+interface CardImageProps {
+  src: string;
+  alt: string;
+}
+
 export default function CardImage({
   src,
   alt,
-  imageClassName,
-}: {
-  src: string;
-  alt: string;
-  imageClassName?: string;
-}) {
+}: CardImageProps) {
   const [error, setError] = useState(false);
 
-  if (error) {
+  if (error || !src) {
     return (
       <div className={styles.imageFallback}>
         <i className="fas fa-photo-alt" />
@@ -24,9 +24,10 @@ export default function CardImage({
     <img
       src={src}
       alt={alt}
-      className={`${styles.image} ${imageClassName || ""}`}
-      onError={() => setError(true)}
+      className={styles.image}
       loading="lazy"
+      draggable={false}
+      onError={() => setError(true)}
     />
   );
 }
