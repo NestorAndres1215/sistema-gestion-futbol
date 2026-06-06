@@ -18,6 +18,18 @@ type SelectModalProps<T> = {
     onClose: () => void;
 };
 
+// 🔥 debounce hook simple
+function useDebounce(value: string, delay = 300) {
+    const [debounced, setDebounced] = useState(value);
+
+    useEffect(() => {
+        const handler = setTimeout(() => setDebounced(value), delay);
+        return () => clearTimeout(handler);
+    }, [value, delay]);
+
+    return debounced;
+}
+
 export default function SelectModal<T extends { id: string | number }>({
     open,
     title = "Seleccionar",
@@ -29,29 +41,33 @@ export default function SelectModal<T extends { id: string | number }>({
     onClose,
 }: SelectModalProps<T>) {
 
-    const [query, setQuery] = useState({ search: "" });
+    const [search, setSearch] = useState("");
+    const debouncedSearch = useDebounce(search, 300);
+
     const [page, setPage] = useState(1);
     const [selected, setSelected] = useState<string | number | null>(null);
 
     const itemsPerPage = 4;
 
-    // 🔥 RESET CUANDO ABRE
+    // 🔥 reset al abrir
     useEffect(() => {
         if (open) {
-            setSelected(null);
-            setQuery({ search: "" });
+            setSearch("");
             setPage(1);
+            setSelected(null);
         }
     }, [open]);
 
-    // 🔥 FILTRO
+    // 🔥 FILTRO (con debounce)
     const filtered = useMemo(() => {
         return data.filter((item) =>
-            getLabel(item).toLowerCase().includes(query.search.toLowerCase())
+            getLabel(item)
+                .toLowerCase()
+                .includes(debouncedSearch.toLowerCase())
         );
-    }, [data, query.search]);
+    }, [data, debouncedSearch]);
 
-    // 🔥 PAGINACIÓN
+    // 🔥 PAGINACIÓN CORRECTA
     const totalPages = Math.max(1, Math.ceil(filtered.length / itemsPerPage));
 
     const paginatedData = useMemo(() => {
@@ -59,32 +75,38 @@ export default function SelectModal<T extends { id: string | number }>({
         return filtered.slice(start, start + itemsPerPage);
     }, [filtered, page]);
 
-    if (!open) return null;
+    // 🔥 highlight search
+    const highlightText = (text: string) => {
+        if (!debouncedSearch) return text;
 
-    const handleSearch = (value: string) => {
-        setQuery({ search: value });
-        setPage(1);
+        const regex = new RegExp(`(${debouncedSearch})`, "gi");
+        return text.split(regex).map((part, i) =>
+            part.toLowerCase() === debouncedSearch.toLowerCase()
+                ? <mark key={i}>{part}</mark>
+                : part
+        );
     };
 
-    // 🔥 ITEM SELECCIONADO (SAFE)
-    const selectedItem = data.find((d) => d.id === selected);
-
-    const selectedLabel = selectedItem
-        ? getLabel(selectedItem)
-        : "Ninguno";
+    if (!open) return null;
 
     const columns = [
         {
             header: "Datos",
-            accessor: (row: T) => getLabel(row),
+            accessor: (row: T) => (
+                <div>
+                    {highlightText(getLabel(row))}
+                </div>
+            ),
         },
     ];
+
+    const selectedItem = data.find((d) => d.id === selected);
+    const selectedLabel = selectedItem ? getLabel(selectedItem) : "Ninguno";
 
     return (
         <div className={styles.overlay} onClick={onClose}>
             <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.card}>
-
                     <div className={styles.cardHead}>
                         <h3 className={styles.cardName}>
                             <i className={icon}></i> {title}
@@ -93,27 +115,37 @@ export default function SelectModal<T extends { id: string | number }>({
 
                     <div className="p-3 d-flex flex-column" style={{ height: "100%" }}>
 
-                        <SearchBar value={query.search} onSearch={handleSearch} />
+                        {/* SEARCH */}
+                        <SearchBar
+                            value={search}
+                            onSearch={(val) => {
+                                setSearch(val);
+                                setPage(1);
+                            }}
+                        />
 
-                   
+                        {/* TABLE */}
                         <div className={styles.tableWrap}>
                             <Table
                                 data={paginatedData}
                                 columns={columns}
-                                showActions={false}
-                                selectable
-                                selectedRow={selected}
-                                onSelectRow={(row) => setSelected(row.id)}
+                                showActions
+                                actions={{
+                                    onSelect: (row: any) => setSelected(row.id),
+                                    selectedRow: selected,
+                                }}
                             />
                         </div>
 
+                        {/* PAGINATION */}
                         <Pagination
                             currentPage={page}
                             totalPages={totalPages}
                             onPageChange={setPage}
                         />
 
-                        <div className="mb-3">
+                        {/* SELECTED INFO */}
+                        <div className="mb-1">
                             <div className={styles.selInfo}>
                                 <i className="fa-solid fa-circle-check" />
                                 <span>
@@ -125,6 +157,7 @@ export default function SelectModal<T extends { id: string | number }>({
                             </div>
                         </div>
 
+                        {/* ACTIONS */}
                         <div className="row g-2 mt-3">
 
                             <div className="col-12 col-md-4">
@@ -152,6 +185,7 @@ export default function SelectModal<T extends { id: string | number }>({
                                     }}
                                 />
                             </div>
+
                         </div>
                     </div>
                 </div>

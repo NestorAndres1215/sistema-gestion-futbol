@@ -7,13 +7,39 @@ type Props<T> = {
     onEdit?: (row: T) => void;
     onDelete?: (row: T) => void;
     onFire?: (row: T) => void;
+
+    // 🔥 SELECT
+    onSelect?: (row: T) => void;
+    selectedRow?: string | number | null;
   };
 };
 
-export default function TableActions<T>({ row, actions }: Props<T>) {
+export default function TableActions<T>({
+  row,
+  actions,
+}: Props<T>) {
+
+  const isSelected = actions.selectedRow === (row as any).id;
+  const isActive = (row as any).estado === "Activo";
+
   return (
     <div className={styles.actionGroup}>
 
+
+      {actions.onSelect && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            actions.onSelect?.(row);
+          }}
+          className={styles.radio}
+        >
+          {isSelected && <span className={styles.radioDot} />}
+        </button>
+      )}
+
+      {/* VIEW */}
       {actions.onView && (
         <button
           className={`${styles.actionBtn} ${styles.actionView}`}
@@ -26,6 +52,7 @@ export default function TableActions<T>({ row, actions }: Props<T>) {
         </button>
       )}
 
+      {/* EDIT */}
       {actions.onEdit && (
         <button
           className={`${styles.actionBtn} ${styles.actionEdit}`}
@@ -38,6 +65,7 @@ export default function TableActions<T>({ row, actions }: Props<T>) {
         </button>
       )}
 
+      {/* DELETE */}
       {actions.onDelete && (
         <button
           className={`${styles.actionBtn} ${styles.actionDelete}`}
@@ -50,13 +78,13 @@ export default function TableActions<T>({ row, actions }: Props<T>) {
         </button>
       )}
 
-      {actions.onFire && (row as any).estado === "Activo" && (
+      {/* FIRE */}
+      {actions.onFire && isActive && (
         <button
           className={`${styles.actionBtn} ${styles.actionDelete}`}
-          onClick={(e) => {
-            e.stopPropagation();
-            actions.onFire?.(row);
-          }}
+          onClick={(e) => { 
+            e.stopPropagation(); 
+            actions.onFire?.(row); }}
         >
           <i className="fa-solid fa-gavel" />
         </button>

@@ -14,13 +14,12 @@ export type TableProps<T> = {
     onEdit?: (row: T) => void;
     onDelete?: (row: T) => void;
     onFire?: (row: T) => void;
+
+    // 🔥 SELECCIÓN (dentro de actions)
+    onSelect?: (row: T) => void;
+    selectedRow?: string | number | null;
   };
 
   showActions?: boolean;
   emptyMessage?: string;
-
-  // 🔥 SELECCIÓN
-  selectable?: boolean;
-  selectedRow?: string | number | null;
-  onSelectRow?: (row: T) => void;
 };

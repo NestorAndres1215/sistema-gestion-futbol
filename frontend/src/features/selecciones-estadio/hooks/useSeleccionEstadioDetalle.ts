@@ -3,15 +3,19 @@ import { getEstadioByPais } from "@/features/estadio/services/estadio.service";
 import { SwalService } from "@/shared/lib/swal/swal.service";
 import { addSeleccionEstadio, getSeleccionEstadioByEstadio, getSeleccionEstadiosBySeleccion, updateSeleccionEstadio } from "../services/seleccionEstadio.service";
 
+type FormEstadio = {
+    estadio: string;
+    tipo: string
+};
 export default function useSeleccionEstadioDetalle(seleccionId: string) {
 
-    const [formEstadio, setFormEstadio] = useState({
+    const [formEstadio, setFormEstadio] = useState<FormEstadio>({
         estadio: "",
         tipo: ""
     });
 
 
-    
+
     const [editando, setEditando] = useState(false);
     const [idEditar, setIdEditar] = useState<number | null>(null);
     const [seleccionEstadios, setSeleccionEstadios] = useState<any[]>([]);
@@ -173,7 +177,7 @@ export default function useSeleccionEstadioDetalle(seleccionId: string) {
         { header: "Capacidad", accessor: (row: any) => row.capacidad.toLocaleString() },
     ];
 
-    return {
+    return {setFormEstadio,
         formEstadio, estadio, editando, page, totalPages, seleccionEstadios, tipoSeleccionEstadio, seleccionColumns,
         handleChange, registrar, actualizar, limpiarFormulario, setPage, seleccionActions
     };

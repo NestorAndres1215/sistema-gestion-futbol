@@ -10,44 +10,19 @@ export default function Table<T extends { id: string | number }>({
   actions,
   showActions = false,
   emptyMessage = "Sin resultados",
-  selectable = false,
-  selectedRow,
-  onSelectRow,
 }: TableProps<T>) {
 
-  let finalColumns = [...columns];
+  const finalColumns = [...columns];
 
-  // 🔥 RADIO COLUMN AUTOMÁTICA
-  if (selectable) {
-    finalColumns = [
-      {
-        header: "",
-        accessor: (row: T) => (
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onSelectRow?.(row);
-            }}
-            className={`${styles.radio} ${
-              selectedRow === row.id ? styles.radioActive : ""
-            }`}
-          >
-            {selectedRow === row.id && (
-              <span className={styles.radioDot} />
-            )}
-          </button>
-        ),
-      },
-      ...finalColumns,
-    ];
-  }
-
+  // 🔥 ACTIONS COLUMN
   if (showActions && actions) {
     finalColumns.push({
       header: "Acciones",
       accessor: (row: T) => (
-        <TableActions row={row} actions={actions} />
+        <TableActions
+          row={row}
+          actions={actions}
+        />
       ),
     });
   }
@@ -76,13 +51,7 @@ export default function Table<T extends { id: string | number }>({
             </tr>
           ) : (
             data.map((row) => (
-              <tr
-                key={row.id}
-                className={`${styles.tr} ${
-                  selectedRow === row.id ? styles.activeRow : ""
-                }`}
-                onClick={() => onSelectRow?.(row)}
-              >
+              <tr key={row.id} className={styles.tr}>
                 {finalColumns.map((col, i) => (
                   <td key={i} className={styles.td}>
                     {typeof col.accessor === "function"
