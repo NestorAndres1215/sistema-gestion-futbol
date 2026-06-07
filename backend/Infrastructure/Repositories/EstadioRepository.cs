@@ -1,4 +1,5 @@
 ﻿using Application.Dto.config;
+using Application.Dto.estadio;
 using Application.Dto.estadisticas;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
@@ -26,7 +27,7 @@ public class EstadioRepository : IEstadioRepository
         return estadio;
     }
 
-    public async Task<PagedResult<Estadio>> GetAllAsync(
+    public async Task<PagedResult<EstadioResponse>> GetAllAsync(
         int page, int pageSize,
         string? search, string? tipoCesped, string? pais,
         int? anio, string? estado)
@@ -85,9 +86,20 @@ public class EstadioRepository : IEstadioRepository
             .OrderBy(x => x.Id)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
+            .Select(x => new EstadioResponse
+            {
+                Id = x.Id,
+                Nombre = x.Nombre,
+                FechaApertura = x.FechaApertura,
+                Ciudad = x.Ciudad,
+                Pais = x.Pais,
+                Capacidad = x.Capacidad,
+                FotoUrl = x.FotoUrl
+            })
             .ToListAsync();
 
-        return new PagedResult<Estadio>
+
+        return new PagedResult<EstadioResponse>
         {
             Items = items,
             TotalCount = total,

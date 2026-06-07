@@ -1,7 +1,7 @@
 ﻿using Application.Common.Exceptions;
 using Application.Dto.config;
+using Application.Dto.estadio;
 using Application.Dto.estadisticas;
-using Application.Dto.personas;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
@@ -110,7 +110,7 @@ public class EstadioService : IEstadioService
         }
     }
 
-    public async  Task<PagedResult<Estadio>> GetAllAsync(int page, int pageSize, string? search, string? tipoCesped, string? pais, int? anio, string? estado)
+    public async  Task<PagedResult<EstadioResponse>> GetAllAsync(int page, int pageSize, string? search, string? tipoCesped, string? pais, int? anio, string? estado)
     {
         return await _repository.GetAllAsync(page, pageSize, search, tipoCesped, pais, anio, estado);
     }

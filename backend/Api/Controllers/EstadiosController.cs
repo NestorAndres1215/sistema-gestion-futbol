@@ -1,4 +1,4 @@
-﻿using Application.Dto.personas;
+﻿using Application.Dto.estadio;
 using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 

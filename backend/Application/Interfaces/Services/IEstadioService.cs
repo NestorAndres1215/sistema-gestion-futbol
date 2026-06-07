@@ -1,6 +1,6 @@
 ﻿using Application.Dto.config;
+using Application.Dto.estadio;
 using Application.Dto.estadisticas;
-using Application.Dto.personas;
 using Domain.Entities;
 
 
@@ -10,7 +10,7 @@ public interface IEstadioService
 {
     Task<Estadio> AddAsync(EstadioRequest estadioDTo);
     Task<Estadio> UpdateAsync(int id,EstadioRequest estadioDTo);
-    Task<PagedResult<Estadio>> GetAllAsync(int page,int pageSize,string? search,string? tipoCesped,string? pais,int? anio, string? estado);
+    Task<PagedResult<EstadioResponse>> GetAllAsync(int page,int pageSize,string? search,string? tipoCesped,string? pais,int? anio, string? estado);
     Task<Estadio?> GetByIdAsync(int id);
     Task<List<Estadio>> GetByPaisAsync(string pais);
     Task<Estadio?> GetByNombreAsync(string nombre);
