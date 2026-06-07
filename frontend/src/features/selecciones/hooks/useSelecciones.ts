@@ -50,6 +50,7 @@ export default function useSelecciones() {
             });
 
             const lista = res?.items ?? res?.data ?? res;
+            console.log(lista)
             setData(Array.isArray(lista) ? lista : []);
             setTotalPages(res?.totalPages ?? 1);
 
@@ -61,7 +62,7 @@ export default function useSelecciones() {
 
     const seleccionColumns = [
         { header: "ID", accessor: (row: any) => row.id, },
-        { header: "Nombre", accessor: (row: any) => row.nombre, },
+        { header: "Nombre", accessor: (row: any) => row.seleccion, },
         { header: "Codigo FIFA", accessor: (row: any) => row.codigoFIFA, },
         { header: "Confederacion", accessor: (row: any) => row.confederacion, },
     ];
@@ -70,9 +71,9 @@ export default function useSelecciones() {
     const seleccionActions = {
 
         onEdit: (u: any) =>
-            router.push(`/admin/selecciones/edicion/${u.nombre}/editar`),
+            router.push(`/admin/selecciones/edicion/${u.seleccion}/editar`),
         onView: (u: any) =>
-            router.push(`/admin/selecciones/edicion/${u.nombre}/detalle`),
+            router.push(`/admin/selecciones/edicion/${u.seleccion}/detalle`),
 
     };
     return {

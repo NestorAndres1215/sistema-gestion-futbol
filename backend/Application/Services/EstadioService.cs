@@ -13,10 +13,12 @@ public class EstadioService : IEstadioService
 {
 
     private readonly IEstadioRepository _repository;
+    private readonly IFotoService _fotoService;
 
-    public EstadioService(IEstadioRepository repository)
+    public EstadioService(IEstadioRepository repository, IFotoService fotoService)
     {
         _repository = repository;
+        _fotoService = fotoService;
     }
 
 
@@ -146,7 +148,6 @@ public class EstadioService : IEstadioService
 
         ValidarDto(estadioDTo);
 
-        // duplicado nombre
         if (!string.Equals(estadio.Nombre, estadioDTo.Nombre, StringComparison.OrdinalIgnoreCase))
         {
             var existente = await _repository.GetByNombreAsync(estadioDTo.Nombre);
@@ -155,25 +156,15 @@ public class EstadioService : IEstadioService
                 throw new BadRequestException("Ya existe un estadio con ese nombre");
         }
 
-        // foto
-        if (estadioDTo.Foto != null)
+
+        if (estadioDTo.Foto != null && estadioDTo.Foto.Length > 0)
         {
             if (!string.IsNullOrEmpty(estadio.FotoUrl))
-            {
-                var rutaAnterior = Path.Combine(
-                    Directory.GetCurrentDirectory(),
-                    "wwwroot",
-                    estadio.FotoUrl.TrimStart('/')
-                );
-
-                if (File.Exists(rutaAnterior))
-                    File.Delete(rutaAnterior);
-            }
+                _fotoService.EliminarFoto(estadio.FotoUrl);
 
             estadio.FotoUrl = await GuardarFotoAsync(estadioDTo);
         }
 
-        // update fields
         estadio.Nombre = estadioDTo.Nombre;
         estadio.Descripcion = estadioDTo.Descripcion ?? "";
         estadio.FechaApertura = estadioDTo.FechaApertura;
@@ -201,7 +192,6 @@ public class EstadioService : IEstadioService
             Total = total
         };
     }
-
     public async Task<AverageResponse> ObtenerPromedioCapacidadAsync()
     {
         var promedio = await _repository.ObtenerPromedioCapacidadAsync();
@@ -211,7 +201,6 @@ public class EstadioService : IEstadioService
             Promedio = promedio
         };
     }
-
     public async Task<TotalCountResponse> ObtenerTotalPaisesConEstadiosAsync()
     {
         var total = await _repository.ObtenerTotalPaisesConEstadiosAsync();

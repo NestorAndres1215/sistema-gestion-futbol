@@ -8,7 +8,7 @@ namespace Application.Interfaces.Repositories;
 
 public interface IParametrosSistemaRepository
 {
-    Task<PagedResult<ParametrosSistema>> GetAllAsync(int page,
+    Task<PagedResult<ParametroResponse>> GetAllAsync(int page,
      int pageSize,
      string? search,
      string? categoria,

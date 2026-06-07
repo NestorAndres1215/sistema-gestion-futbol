@@ -74,6 +74,7 @@ builder.Services.AddScoped<IParametrosSistemaService, ParametrosSistemaService>(
 builder.Services.AddScoped<ISelecionesService,SeleccionesService>();
 builder.Services.AddScoped<ISeleccionEstadioService, SeleccionEstadioService>();
 builder.Services.AddScoped<IEntrenadorSeleccionService,EntrenadorSeleccionService>();
+builder.Services.AddScoped<IFotoService, FotoService>();
 builder.Services.AddScoped<IClubesService, ClubesService>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();

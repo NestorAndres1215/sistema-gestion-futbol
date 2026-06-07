@@ -65,7 +65,7 @@ export function useUsers() {
     { header: "ID", accessor: (row: any) => row.id, },
     { header: "Usuario", accessor: (row: any) => row.username, },
     { header: "Email", accessor: (row: any) => row.email, },
-    { header: "Rol", accessor: (u: any) => u.rol.nombre, },
+    { header: "Rol", accessor: (u: any) => u.role, },
   ];
 
   const userActions = {

@@ -7,7 +7,7 @@ namespace Application.Interfaces.Services;
 public interface IParametrosSistemaService
 {
 
-    Task<PagedResult<ParametrosSistema>> GetAllAsync(
+    Task<PagedResult<ParametroResponse>> GetAllAsync(
         int page,
         int pageSize,
         string? search,
@@ -16,7 +16,7 @@ public interface IParametrosSistemaService
         string? estado);
     Task<ParametrosSistema?> GetByIdAsync(int id);
     Task<ParametrosSistema?> GetByClaveAsync(string clave);
-    Task<ParametrosSistema> AddAsync(ParametrosSistemaRequest parametro);
-    Task<ParametrosSistema> UpdateAsync(int id,ParametrosSistemaRequest parametro);
+    Task<ParametrosSistema> AddAsync(ParametrosRequest parametro);
+    Task<ParametrosSistema> UpdateAsync(int id,ParametrosRequest parametro);
 
 }

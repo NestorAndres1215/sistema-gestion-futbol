@@ -16,7 +16,7 @@ public class ParametrosSistemaService : IParametrosSistemaService
         _repository = repository;
     }
 
-    public async Task<ParametrosSistema> AddAsync(ParametrosSistemaRequest parametro )
+    public async Task<ParametrosSistema> AddAsync(ParametrosRequest parametro )
     {
         await ValidarParametro(parametro);
 
@@ -36,7 +36,7 @@ public class ParametrosSistemaService : IParametrosSistemaService
         return await _repository.AddAsync(entity);
     }
 
-    public async  Task<PagedResult<ParametrosSistema>> GetAllAsync(int page, int pageSize, string? search, string? categoria, string? tipoDato, string? estado)
+    public async  Task<PagedResult<ParametroResponse>> GetAllAsync(int page, int pageSize, string? search, string? categoria, string? tipoDato, string? estado)
     {
         return await _repository.GetAllAsync(page,pageSize,search,categoria,tipoDato,estado);
     }
@@ -53,7 +53,7 @@ public class ParametrosSistemaService : IParametrosSistemaService
             ?? throw new NotFoundException("Parametro no encontrado");
     }
 
-    public async Task<ParametrosSistema> UpdateAsync(int id, ParametrosSistemaRequest parametro)
+    public async Task<ParametrosSistema> UpdateAsync(int id, ParametrosRequest parametro)
     {
         var entity = await _repository.GetByIdAsync(id);
 
@@ -76,7 +76,7 @@ public class ParametrosSistemaService : IParametrosSistemaService
     }
 
 
-    private async Task ValidarParametro( ParametrosSistemaRequest parametro,int? idExcluir = null)
+    private async Task ValidarParametro( ParametrosRequest parametro,int? idExcluir = null)
     {
         if (string.IsNullOrWhiteSpace(parametro.Clave))
             throw new Exception("La clave es obligatoria");

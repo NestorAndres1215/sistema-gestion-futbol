@@ -28,9 +28,9 @@ export default function SeleccionListarPage() {
 
                 <CardList
                     data={data}
-                    getTitle={(e) => e.nombre}
+                    getTitle={(e) => e.seleccion}
                     getSubtitle={(e) => `${e.confederacion} `}
-                    getImage={(e) => e.escudoUrl ? `https://localhost:7269${e.escudoUrl}` : null}
+                    getImage={(e) => e.escudo ? `https://localhost:7269${e.escudo}` : null}
                     imageVariant="logo"
                     imageClassName={styles.imageSeleccion}
                     onDetail={(e) => router.push(`/admin/selecciones/listar/${e.nombre}`)}

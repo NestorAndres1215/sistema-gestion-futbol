@@ -5,7 +5,6 @@ using Application.Dto.entrenadores;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
-using Domain.Enums;
 using Domain.Interfaces;
 
 namespace Application.Services;
@@ -17,8 +16,10 @@ public class EntrenadoresService : IEntrenadoresService
     private readonly IPersonasService _personasService;
     private readonly IPaisesRepository _paisRepo;
     private readonly ICiudadesRepository _ciudadRepo;
+    private readonly IFotoService _fotoService;
 
     public EntrenadoresService(
+        IFotoService fotoService,
         IEntrenadoresRepository repository,
         IPersonasService service,
         IPaisesRepository paisRepo,
@@ -27,6 +28,7 @@ public class EntrenadoresService : IEntrenadoresService
         _repository = repository;
         _personasService = service;
         _paisRepo = paisRepo;
+        _fotoService = fotoService;
         _ciudadRepo = ciudadRepo;
     }
 
@@ -45,7 +47,7 @@ public class EntrenadoresService : IEntrenadoresService
             throw new NotFoundException("La ciudad no existe.");
 
 
-        string fotoUrl = await GuardarFotoAsync(entrenadores);
+        string fotoUrl = await _fotoService.GuardarFotoAsync(entrenadores.Foto, "entrenadores", $"{entrenadores.Nombre}_{entrenadores.Apellido}");
 
         var persona = new Personas
         {
@@ -103,41 +105,6 @@ public class EntrenadoresService : IEntrenadoresService
         if (dto.FechaDebut != null && dto.FechaDebut < dto.FechaNacimiento)
             throw new BadRequestException("La fecha de debut no puede ser menor a la fecha de nacimiento");
     }
-    private async Task<string> GuardarFotoAsync(EntrenadoresRequest entrenadoresDto)
-    {
-        if (entrenadoresDto.Foto == null)
-            return "";
-
-        var carpeta = Path.Combine(
-            Directory.GetCurrentDirectory(),
-            "wwwroot/uploads/entrenadores"
-        );
-
-        if (!Directory.Exists(carpeta))
-            Directory.CreateDirectory(carpeta);
-
-        var extension = Path.GetExtension(entrenadoresDto.Foto.FileName);
-
-        var nombreBase =
-            $"{entrenadoresDto.Nombre}_{entrenadoresDto.PaisNacimiento}_{entrenadoresDto.CiudadNacimiento}"
-            .Replace(" ", "_")
-            .Replace("/", "")
-            .Replace("\\", "")
-            .ToLower();
-
-        var nombreArchivo =
-            $"{nombreBase}_{Guid.NewGuid()}{extension}";
-
-        var rutaCompleta = Path.Combine(carpeta, nombreArchivo);
-
-        using (var stream = new FileStream(rutaCompleta, FileMode.Create))
-        {
-            await entrenadoresDto.Foto.CopyToAsync(stream);
-        }
-
-        return $"/uploads/entrenadores/{nombreArchivo}";
-
-    }
     private int CalcularAnosExperiencia(DateTime? fechaDebut)
     {
         if (!fechaDebut.HasValue)
@@ -188,9 +155,9 @@ public class EntrenadoresService : IEntrenadoresService
         if (dto.Foto != null && dto.Foto.Length > 0)
         {
             if (!string.IsNullOrEmpty(persona.FotoUrl))
-                EliminarFoto(persona.FotoUrl);
+                _fotoService.EliminarFoto(persona.FotoUrl);
 
-            persona.FotoUrl = await GuardarFotoAsync(dto);
+            persona.FotoUrl = await _fotoService.GuardarFotoAsync(dto.Foto, "entrenadores", $"{dto.Nombre}_{dto.Apellido}");
         }
 
 
@@ -224,18 +191,4 @@ public class EntrenadoresService : IEntrenadoresService
         return await _repository.GetComboAsync();
     }
 
-    private void EliminarFoto(string fotoUrl)
-    {
-        if (string.IsNullOrEmpty(fotoUrl))
-            return;
-
-        var rutaFisica = Path.Combine(
-            Directory.GetCurrentDirectory(),
-            "wwwroot",
-            fotoUrl.TrimStart('/')
-        );
-
-        if (File.Exists(rutaFisica))
-            File.Delete(rutaFisica);
-    }
 }

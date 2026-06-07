@@ -73,7 +73,9 @@ public class SeleccionRepository:ISeleccionRepository
                 Confederacion = x.Confederacion ?? "",
                 CodigoFIFA = x.CodigoFIFA ?? "",
                 Seudonimo = x.Seudonimo ?? "",
-                FotoUrl=x.EscudoUrl
+                Bandera=x.BanderaUrl,
+                Escudo=x.EscudoUrl,
+                
             })
             .ToListAsync();
 

@@ -38,14 +38,14 @@ public class ParametrosSistemaController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register([FromBody] ParametrosSistemaRequest dto)
+    public async Task<IActionResult> Register([FromBody] ParametrosRequest dto)
     {
         var result = await _service.AddAsync(dto);
         return Ok(result);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdatePassword( int id, [FromBody] ParametrosSistemaRequest dto)
+    public async Task<IActionResult> UpdatePassword( int id, [FromBody] ParametrosRequest dto)
     {
         var result = await _service.UpdateAsync(id, dto);
 

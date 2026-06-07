@@ -12,11 +12,14 @@ namespace Application.Services;
 public class ArbitrosService : IArbitrosService
 {
     private readonly IArbitroRepository _repository;
+    private readonly IFotoService _fotoService;
     private readonly IPersonasService _personasService;
     private readonly IPaisesRepository _paisRepo;
     private readonly ICiudadesRepository _ciudadRepo;
+    
 
     public ArbitrosService(
+        IFotoService fotoService,
         IArbitroRepository repository,
         IPersonasService service,
         IPaisesRepository paisRepo,
@@ -26,6 +29,7 @@ public class ArbitrosService : IArbitrosService
         _personasService = service;
         _paisRepo = paisRepo;
         _ciudadRepo = ciudadRepo;
+        _fotoService = fotoService;
     }
 
 
@@ -33,7 +37,7 @@ public class ArbitrosService : IArbitrosService
     {
         ValidarDto(arbitros);
     
-        string fotoUrl = await GuardarFotoAsync(arbitros);
+        string fotoUrl = await _fotoService.GuardarFotoAsync(arbitros.Foto, "arbitros", $"{arbitros.Nombre}_{arbitros.Apellido}");
 
         var pais = await _paisRepo.GetByNombreAsync(arbitros.PaisNacimiento)
             ?? throw new NotFoundException("El país no existe.");
@@ -114,9 +118,9 @@ public class ArbitrosService : IArbitrosService
         if (dto.Foto != null && dto.Foto.Length > 0)
         {
             if (!string.IsNullOrEmpty(persona.FotoUrl))
-                EliminarFoto(persona.FotoUrl);
+                _fotoService.EliminarFoto(persona.FotoUrl);
 
-            persona.FotoUrl = await GuardarFotoAsync(dto);
+            persona.FotoUrl = await _fotoService.GuardarFotoAsync(dto.Foto, "arbitros", $"{dto.Nombre}_{dto.Apellido}");
         }
 
 
@@ -145,20 +149,7 @@ public class ArbitrosService : IArbitrosService
 
         return arbitro;
     }
-    private void EliminarFoto(string fotoUrl)
-    {
-        if (string.IsNullOrEmpty(fotoUrl))
-            return;
 
-        var rutaFisica = Path.Combine(
-            Directory.GetCurrentDirectory(),
-            "wwwroot",
-            fotoUrl.TrimStart('/')
-        );
-
-        if (File.Exists(rutaFisica))
-            File.Delete(rutaFisica);
-    }
     private int CalcularAnosExperiencia(DateTime? fechaDebut)
     {
         if (!fechaDebut.HasValue)
@@ -174,39 +165,7 @@ public class ArbitrosService : IArbitrosService
 
         return Math.Max(0, anos);
     }
-    private async Task<string> GuardarFotoAsync(ArbitrosRequest arbitros)
-    {
-        if (arbitros.Foto == null || arbitros.Foto.Length == 0)
-            return "";
-
-        var carpeta = Path.Combine(
-            Directory.GetCurrentDirectory(),
-            "wwwroot/uploads/arbitros"
-        );
-
-        if (!Directory.Exists(carpeta))
-            Directory.CreateDirectory(carpeta);
-
-        var extension = Path.GetExtension(arbitros.Foto.FileName);
-
-        var nombreBase =
-            $"{arbitros.Nombre}_{arbitros.PaisNacimiento}_{arbitros.CiudadNacimiento}"
-            .Replace(" ", "_")
-            .Replace("/", "")
-            .Replace("\\", "")
-            .ToLower();
-
-        var nombreArchivo = $"{nombreBase}_{Guid.NewGuid()}{extension}";
-
-        var rutaCompleta = Path.Combine(carpeta, nombreArchivo);
-
-        using (var stream = new FileStream(rutaCompleta, FileMode.Create))
-        {
-            await arbitros.Foto.CopyToAsync(stream);
-        }
-
-        return $"/uploads/arbitros/{nombreArchivo}";
-    }
+   
 
     private void ValidarDto(ArbitrosRequest dto)
     {
@@ -269,7 +228,7 @@ public class ArbitrosService : IArbitrosService
             Promedio = await _repository.ObtenerReputacionPromedioAsync()
         };
     }
-    // Service
+
 
     public async Task<List<ItemResponse>> ObtenerArbitrosPorPaisAsync()
     {

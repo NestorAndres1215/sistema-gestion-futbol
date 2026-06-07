@@ -10,7 +10,8 @@ public class SeleccionesResponse
     public string Confederacion { get; set; } = string.Empty;
     public string CodigoFIFA { get; set; } = string.Empty;
     public string Seudonimo { get; set; } = string.Empty;
-    public string? FotoUrl { get; set; } = string.Empty;
+    public string? Escudo { get; set; } = string.Empty;
+    public string? Bandera {  get; set; } = string.Empty;
 
 
 }

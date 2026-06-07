@@ -10,9 +10,5 @@ public interface IPersonasService
     Task<Personas> UpdateAsync(Personas personas);
     Task<Personas?> GetByIdAsync(int id);
     Task<Personas?> GetByNombreAsync(string nombre);
-
-    Task<Personas?> GetByNombreCompletoAsync(
-        string nombre,
-        string apellido
-    );
+    Task<Personas?> GetByNombreCompletoAsync( string nombre, string apellido);
 }

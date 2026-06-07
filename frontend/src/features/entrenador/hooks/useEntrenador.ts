@@ -102,12 +102,11 @@ export default function useEntrenador() {
 
     const entrenadorColumns = [
         { header: "ID", accessor: (row: any) => row.id, },
-        { header: "Nombre", accessor: (row: any) => row.persona?.nombre, },
-        { header: "Apellido", accessor: (row: any) => row.persona?.apellido, },
+        { header: "Nombre", accessor: (row: any) => row.nombre, },
+        { header: "Apellido", accessor: (row: any) => row.apellido, },
         { header: "Estilo de Juego", accessor: (row: any) => row.estiloJuego, },
-        { header: "País", accessor: (row: any) => row.persona?.paisNacimiento?.nombre, },
+        { header: "País", accessor: (row: any) => row.pais, },
         { header: "Fecha de Debut", accessor: (row: any) => formatDate(row.fechaDebut), },
-        { header: "Estado", accessor: (row: any) => row.estado, },
     ];
 
     return {

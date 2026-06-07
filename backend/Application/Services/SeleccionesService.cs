@@ -11,10 +11,12 @@ namespace Application.Services;
 public class SeleccionesService : ISelecionesService
 {
     private readonly ISeleccionRepository _repo;
+    private readonly IFotoService _fotoService;
 
-    public SeleccionesService(ISeleccionRepository repo)
+    public SeleccionesService(ISeleccionRepository repo, IFotoService fotoService)
     {
         _repo = repo;
+        _fotoService = fotoService;
     }
 
     public async Task<Selecciones> AddAsync(SeleccionesRequest seleccionesdto)
@@ -22,8 +24,8 @@ public class SeleccionesService : ISelecionesService
       
         await ValidarDuplicadosAsync(seleccionesdto);
 
-        var archivos = await GuardarArchivosAsync(seleccionesdto);
-
+        var bandera = await _fotoService.GuardarFotoAsync(seleccionesdto.Bandera, "selecciones/banderas", $"{seleccionesdto.Nombre}"); ;
+        var escudo = await _fotoService.GuardarFotoAsync(seleccionesdto.Escudo, "selecciones/escudos", $"{seleccionesdto.Nombre}");
         var selecciones = new Selecciones
         {
             Nombre = seleccionesdto.Nombre,
@@ -32,8 +34,8 @@ public class SeleccionesService : ISelecionesService
             Seudonimo = seleccionesdto.Seudonimo,
             CodigoFIFA = seleccionesdto.CodigoFIFA,
             Pais = seleccionesdto.Nombre,
-            BanderaUrl = archivos.banderaUrl,
-            EscudoUrl = archivos.escudoUrl,
+            BanderaUrl = bandera,
+            EscudoUrl = escudo,
             FechaCreacion= DateTime.Now,
             Estado = Estado.Activo
         };
@@ -79,15 +81,22 @@ public class SeleccionesService : ISelecionesService
 
         if (seleccionesdto.Bandera != null && seleccionesdto.Bandera.Length > 0)
         {
-            EliminarArchivo(seleccion.BanderaUrl);
+            if (!string.IsNullOrEmpty(seleccion.BanderaUrl))
+                _fotoService.EliminarFoto(seleccion.BanderaUrl);
+
+            seleccion.BanderaUrl = await _fotoService.GuardarFotoAsync(seleccionesdto.Bandera, "selecciones/banderas", $"{seleccionesdto.Nombre}");
         }
 
         if (seleccionesdto.Escudo != null && seleccionesdto.Escudo.Length > 0)
         {
-            EliminarArchivo(seleccion.EscudoUrl);
+            if (!string.IsNullOrEmpty(seleccion.EscudoUrl))
+                _fotoService.EliminarFoto(seleccion.EscudoUrl);
+
+            seleccion.EscudoUrl = await _fotoService.GuardarFotoAsync(seleccionesdto.Escudo, "selecciones/escudos", $"{seleccionesdto.Nombre}");
+
         }
 
-        var archivos = await GuardarArchivosAsync(seleccionesdto);
+       
 
         seleccion.Nombre = seleccionesdto.Nombre;
         seleccion.Confederacion = seleccionesdto.Confederacion;
@@ -95,12 +104,6 @@ public class SeleccionesService : ISelecionesService
         seleccion.Seudonimo = seleccionesdto.Seudonimo;
         seleccion.CodigoFIFA = seleccionesdto.CodigoFIFA;
         seleccion.Pais = seleccionesdto.Pais;
-
-        if (!string.IsNullOrEmpty(archivos.banderaUrl))
-            seleccion.BanderaUrl = archivos.banderaUrl;
-
-        if (!string.IsNullOrEmpty(archivos.escudoUrl))
-            seleccion.EscudoUrl = archivos.escudoUrl;
 
         return await _repo.UpdateAsync(seleccion);
     }
@@ -124,83 +127,5 @@ public class SeleccionesService : ISelecionesService
             throw new BadRequestException("El país ya tiene una selección registrada");
     }
 
-    private async Task<(string banderaUrl, string escudoUrl)> GuardarArchivosAsync(SeleccionesRequest seleccionesDto)
-    {
-        var carpetaBase = Path.Combine(
-            Directory.GetCurrentDirectory(),
-            "wwwroot/uploads/selecciones"
-        );
-
-        var carpetaBanderas = Path.Combine(carpetaBase, "banderas");
-        var carpetaEscudos = Path.Combine(carpetaBase, "escudos");
-
-        if (!Directory.Exists(carpetaBanderas))
-            Directory.CreateDirectory(carpetaBanderas);
-
-        if (!Directory.Exists(carpetaEscudos))
-            Directory.CreateDirectory(carpetaEscudos);
-
-        string banderaPath = "";
-        string escudoPath = "";
-
-        if (seleccionesDto.Bandera != null && seleccionesDto.Bandera.Length > 0)
-        {
-            var extensionBandera = Path.GetExtension(seleccionesDto.Bandera.FileName);
-
-            var nombreBandera =
-                $"{seleccionesDto.Nombre}_bandera_{Guid.NewGuid()}{extensionBandera}"
-                .Replace(" ", "_")
-                .Replace("/", "")
-                .Replace("\\", "")
-                .ToLower();
-
-            var rutaBandera = Path.Combine(carpetaBanderas, nombreBandera);
-
-            using (var stream = new FileStream(rutaBandera, FileMode.Create))
-            {
-                await seleccionesDto.Bandera.CopyToAsync(stream);
-            }
-
-            banderaPath = $"/uploads/selecciones/banderas/{nombreBandera}";
-        }
-
-        if (seleccionesDto.Escudo != null && seleccionesDto.Escudo.Length > 0)
-        {
-            var extensionEscudo = Path.GetExtension(seleccionesDto.Escudo.FileName);
-
-            var nombreEscudo =
-                $"{seleccionesDto.Nombre}_escudo_{Guid.NewGuid()}{extensionEscudo}"
-                .Replace(" ", "_")
-                .Replace("/", "")
-                .Replace("\\", "")
-                .ToLower();
-
-            var rutaEscudo = Path.Combine(carpetaEscudos, nombreEscudo);
-
-            using (var stream = new FileStream(rutaEscudo, FileMode.Create))
-            {
-                await seleccionesDto.Escudo.CopyToAsync(stream);
-            }
-
-            escudoPath = $"/uploads/selecciones/escudos/{nombreEscudo}";
-        }
-
-        return (banderaPath, escudoPath);
-    }
-
-
-    private void EliminarArchivo(string? archivoUrl)
-    {
-        if (string.IsNullOrWhiteSpace(archivoUrl))
-            return;
-
-        var rutaFisica = Path.Combine(
-            Directory.GetCurrentDirectory(),
-            "wwwroot",
-            archivoUrl.TrimStart('/')
-        );
-
-        if (File.Exists(rutaFisica))
-            File.Delete(rutaFisica);
-    }
+  
 }

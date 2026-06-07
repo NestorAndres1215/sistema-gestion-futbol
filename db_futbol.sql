@@ -226,6 +226,8 @@ CREATE TABLE ParametrosSistema (
 );
 
 
+
+
 INSERT INTO Ciudades (Nombre, PaisId)
 VALUES
 ('Avellaneda', (SELECT Id FROM Paises WHERE Nombre = 'Argentina')),
@@ -456,9 +458,71 @@ VALUES
 ('Zambia', 'ZMB'),
 ('Zimbabue', 'ZWE');
 
-CREATE TABLE Selecciones (
+CREATE TABLE Clubes (
     Id INT PRIMARY KEY IDENTITY,
 
+    Nombre NVARCHAR(100) NOT NULL UNIQUE,
+    Clave NVARCHAR(100) NOT NULL UNIQUE,
+
+    Seudonimo NVARCHAR(100) NULL,
+
+    Confederacion NVARCHAR(50) NOT NULL,
+
+    Pais NVARCHAR(100) NOT NULL,
+    Ciudad NVARCHAR(100) NULL,
+
+    FechaFundacion DATE NULL,
+
+    EscudoUrl NVARCHAR(500) NULL,
+
+    Estado VARCHAR(20) NOT NULL;
+
+    FechaCreacion DATETIME NOT NULL DEFAULT GETDATE(),
+    FechaActualizacion DATETIME NULL
+);
+
+
+CREATE TABLE ClubEstadio (
+    Id INT PRIMARY KEY IDENTITY,
+
+    ClubId INT NOT NULL,
+    EstadioId INT NOT NULL,
+
+    Tipo VARCHAR(20) NOT NULL DEFAULT 'Principal',
+
+    FechaInicio DATE NOT NULL,
+    FechaFin DATE NULL,
+
+    FOREIGN KEY (ClubId)
+        REFERENCES Clubes(Id),
+
+    FOREIGN KEY (EstadioId)
+        REFERENCES Estadios(Id)
+);
+
+CREATE TABLE ClubEntrenador (
+    Id INT PRIMARY KEY IDENTITY,
+
+    ClubId INT NOT NULL,
+    EntrenadorId INT NOT NULL,
+
+    Cargo NVARCHAR(50) NOT NULL ,
+
+    FechaInicio DATE NOT NULL,
+    FechaFin DATE NULL,
+
+    FechaCreacion DATETIME NOT NULL DEFAULT GETDATE(),
+    FechaActualizacion DATETIME NULL,
+
+    FOREIGN KEY (ClubId)
+        REFERENCES Clubes(Id),
+
+    FOREIGN KEY (EntrenadorId)
+        REFERENCES Entrenadores(Id)
+);
+
+CREATE TABLE Selecciones (
+    Id INT PRIMARY KEY IDENTITY,
     Nombre NVARCHAR(100) NOT NULL,
     Confederacion NVARCHAR(50) NOT NULL,
     Clave NVARCHAR(100) UNIQUE,

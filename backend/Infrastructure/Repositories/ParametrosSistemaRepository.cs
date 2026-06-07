@@ -25,8 +25,8 @@ public class ParametrosSistemaRepository:IParametrosSistemaRepository
         return parametro;
     }
 
-    public async Task<PagedResult<ParametrosSistema>> GetAllAsync(
-        int page, int pageSize, string? search, 
+    public async Task<PagedResult<ParametroResponse>> GetAllAsync(
+        int page, int pageSize, string? search,
         string? categoria, string? tipoDato, string? estado)
     {
         var query = _context.ParametrosSistema
@@ -38,8 +38,7 @@ public class ParametrosSistemaRepository:IParametrosSistemaRepository
             search = search.Trim();
 
             query = query.Where(x =>
-                x.Nombre.Contains(search)
-            );
+                x.Nombre.Contains(search));
         }
 
         if (!string.IsNullOrWhiteSpace(categoria))
@@ -48,8 +47,7 @@ public class ParametrosSistemaRepository:IParametrosSistemaRepository
 
             query = query.Where(x =>
                 x.Categoria != null &&
-                x.Categoria.ToUpper() == categoria
-            );
+                x.Categoria.ToUpper() == categoria);
         }
 
         if (!string.IsNullOrWhiteSpace(tipoDato))
@@ -58,8 +56,7 @@ public class ParametrosSistemaRepository:IParametrosSistemaRepository
 
             query = query.Where(x =>
                 x.TipoDato != null &&
-                x.TipoDato.ToUpper() == tipoDato
-            );
+                x.TipoDato.ToUpper() == tipoDato);
         }
 
         if (!string.IsNullOrWhiteSpace(estado))
@@ -68,8 +65,7 @@ public class ParametrosSistemaRepository:IParametrosSistemaRepository
 
             query = query.Where(x =>
                 x.Estado != null &&
-                x.Estado.ToUpper() == estado
-            );
+                x.Estado.ToUpper() == estado);
         }
 
         var total = await query.CountAsync();
@@ -78,9 +74,19 @@ public class ParametrosSistemaRepository:IParametrosSistemaRepository
             .OrderBy(x => x.Id)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
+            .Select(x => new ParametroResponse
+            {
+                Id = x.Id,
+                Clave = x.Clave ?? "",
+                Valor = x.Valor ?? "",
+                Nombre = x.Nombre ?? "",
+                Descripcion = x.Descripcion,
+                Categoria = x.Categoria,
+                TipoDato = x.TipoDato ?? ""
+            })
             .ToListAsync();
 
-        return new PagedResult<ParametrosSistema>
+        return new PagedResult<ParametroResponse>
         {
             Items = items,
             TotalCount = total,
