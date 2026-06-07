@@ -9,6 +9,6 @@ public class EntrenadoresResponse
     public string CiudadNacimiento { get; set; } = string.Empty;
     public DateTime? FechaNacimiento { get; set; }
     public string EstiloJuego { get; set; } = string.Empty;
-    public string FechaDebut { get; set; } = string.Empty;
+    public DateTime? FechaDebut { get; set; }
     public string? FotoUrl { get; set; } = string.Empty;
 }

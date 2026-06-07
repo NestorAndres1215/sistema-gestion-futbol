@@ -100,7 +100,7 @@ public class EntrenadoresRepository : IEntrenadoresRepository
                     : "",
                 FechaNacimiento = e.Persona != null ? e.Persona.FechaNacimiento : null,
                 EstiloJuego = e.EstiloJuego ?? "",
-                FechaDebut = e.FechaDebut.ToString(),
+                FechaDebut = e.FechaDebut,
                 FotoUrl = e.Persona != null ? e.Persona.FotoUrl : null
             })
             .ToListAsync();
@@ -128,12 +128,12 @@ public class EntrenadoresRepository : IEntrenadoresRepository
     public async Task<Entrenadores?> GetByNombreAsync(string nombre)
     {
         return await _context.Entrenadores
-            .Include(x => x.Persona)
+            .Include(x => x.Persona!)
                 .ThenInclude(p => p.CiudadNacimiento)
-            .Include(x => x.Persona)
+            .Include(x => x.Persona!)
                 .ThenInclude(p => p.PaisNacimiento)
             .AsNoTracking()
-            .SingleOrDefaultAsync(x => x.Persona.Nombre== nombre);
+            .SingleOrDefaultAsync(x => x.Persona != null && x.Persona.Nombre == nombre);
     }
 
     public async Task<List<EntrenadorComboRequest>> GetComboAsync()

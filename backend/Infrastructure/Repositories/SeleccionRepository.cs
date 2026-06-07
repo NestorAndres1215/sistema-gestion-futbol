@@ -4,7 +4,6 @@ using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Infrastructure.Repositories;
 
@@ -34,7 +33,6 @@ public class SeleccionRepository:ISeleccionRepository
             .AsNoTracking()
             .AsQueryable();
 
-        // 🔎 SEARCH
         if (!string.IsNullOrWhiteSpace(search))
         {
             var s = search.Trim();
@@ -43,7 +41,6 @@ public class SeleccionRepository:ISeleccionRepository
                 x.Nombre.Contains(s));
         }
 
-        // 🌍 CONFEDERACIÓN
         if (!string.IsNullOrWhiteSpace(confederacion))
         {
             var c = confederacion.Trim();
@@ -53,7 +50,6 @@ public class SeleccionRepository:ISeleccionRepository
                 x.Confederacion == c);
         }
 
-        // 📌 ESTADO
         if (!string.IsNullOrWhiteSpace(estado))
         {
             var e = estado.Trim();

@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application.Dto.clubes;
 
-public class ClubesRequest
+public class ClubesResponse
 {
-
+    public int Id { get; set; }
     public string Nombre { get; set; } = string.Empty;
     public string Seudonimo { get; set; } = string.Empty;
     public string Confederacion { get; set; } = string.Empty;
@@ -14,5 +14,5 @@ public class ClubesRequest
     public string Pais { get; set; } = string.Empty;
     public string Ciudad { get; set; } = string.Empty;
     public DateTime? FechaFundacion { get; set; }
-    public IFormFile? EscudoUrl { get; set; }
+    public string EscudoUrl { get; set; } = string.Empty;
 }
