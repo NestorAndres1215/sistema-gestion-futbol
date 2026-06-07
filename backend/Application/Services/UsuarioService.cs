@@ -23,7 +23,7 @@ public class UsuarioService : IUsuarioService
             ?? throw new NotFoundException("Usuario no encontrado");
     }
 
-    public async Task<PagedResult<Usuario>> GetAllAsync( int page,int pageSize,string? search, string? estado,string? rol)
+    public async Task<PagedResult<UsuarioReponse>> GetAllAsync( int page,int pageSize,string? search, string? estado,string? rol)
     {
 
         return await _repo.GetAllAsync(page, pageSize, search, estado,rol);

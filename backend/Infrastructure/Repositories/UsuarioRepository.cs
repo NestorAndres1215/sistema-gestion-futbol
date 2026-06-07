@@ -1,4 +1,5 @@
 ﻿using Application.Common.Exceptions;
+using Application.Dto.auth;
 using Application.Dto.config;
 using Application.Interfaces.Repositories;
 using Infrastructure.Data;
@@ -30,7 +31,7 @@ public class UsuarioRepository : IUsuarioRepository
                  .SingleOrDefaultAsync(x => x.Email == email);
     }
 
-    public async Task<PagedResult<Usuario>> GetAllAsync(int page,int pageSize,string? search,string? estado,string? rol)
+    public async Task<PagedResult<UsuarioReponse>> GetAllAsync(int page,int pageSize,string? search,string? estado,string? rol)
     {
         var query = _context.Usuarios
             .Include(x => x.Rol)
@@ -70,12 +71,19 @@ public class UsuarioRepository : IUsuarioRepository
         var total = await query.CountAsync();
 
         var items = await query
-            .OrderBy(x => x.Id)
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+               .OrderBy(x => x.Id)
+               .Skip((page - 1) * pageSize)
+               .Take(pageSize)
+               .Select(x => new UsuarioReponse
+               {
+                   Id = x.Id,
+                   UserName = x.Username,
+                   Email = x.Email,
+                   Role = x.Rol != null ? x.Rol.Nombre : ""
+               })
+               .ToListAsync();
 
-        return new PagedResult<Usuario>
+        return new PagedResult<UsuarioReponse>
         {
             Items = items,
             TotalCount = total,
