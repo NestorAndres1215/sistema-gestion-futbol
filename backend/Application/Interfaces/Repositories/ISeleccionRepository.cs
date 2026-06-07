@@ -1,4 +1,5 @@
 ﻿using Application.Dto.config;
+using Application.Dto.selecciones;
 using Domain.Entities;
 
 namespace Application.Interfaces.Repositories;
@@ -6,7 +7,7 @@ namespace Application.Interfaces.Repositories;
 public interface ISeleccionRepository
 {
 
-    Task<PagedResult<Selecciones>> GetAllAsync(int page,
+    Task<PagedResult<SeleccionesResponse>> GetAllAsync(int page,
         int pageSize,
         string? search,
         string? confederacion,

@@ -1,4 +1,5 @@
 ﻿using Application.Dto.config;
+using Application.Dto.selecciones;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;
@@ -22,40 +23,44 @@ public class SeleccionRepository:ISeleccionRepository
         return selecciones;
     }
 
-    public async Task<PagedResult<Selecciones>> GetAllAsync(int page, int pageSize, string? search, string? confederacion, string? estado)
+    public async Task<PagedResult<SeleccionesResponse>> GetAllAsync(
+      int page,
+      int pageSize,
+      string? search,
+      string? confederacion,
+      string? estado)
     {
-
         var query = _context.Selecciones
-           .AsNoTracking()
-           .AsQueryable();
+            .AsNoTracking()
+            .AsQueryable();
 
+        // 🔎 SEARCH
         if (!string.IsNullOrWhiteSpace(search))
         {
-            search = search.Trim();
+            var s = search.Trim();
 
             query = query.Where(x =>
-                x.Nombre.Contains(search)
-            );
+                x.Nombre.Contains(s));
         }
 
+        // 🌍 CONFEDERACIÓN
         if (!string.IsNullOrWhiteSpace(confederacion))
         {
-            confederacion = confederacion.Trim().ToUpper();
+            var c = confederacion.Trim();
 
             query = query.Where(x =>
                 x.Confederacion != null &&
-                x.Confederacion.ToUpper() == confederacion
-            );
+                x.Confederacion == c);
         }
 
+        // 📌 ESTADO
         if (!string.IsNullOrWhiteSpace(estado))
         {
-            estado = estado.Trim().ToUpper();
+            var e = estado.Trim();
 
             query = query.Where(x =>
                 x.Estado != null &&
-                x.Estado.ToUpper() == estado
-            );
+                x.Estado == e);
         }
 
         var total = await query.CountAsync();
@@ -64,9 +69,19 @@ public class SeleccionRepository:ISeleccionRepository
             .OrderBy(x => x.Nombre)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
+            .Select(x => new SeleccionesResponse
+            {
+                Id = x.Id,
+                Clave = x.Clave,
+                Seleccion = x.Nombre,
+                Confederacion = x.Confederacion ?? "",
+                CodigoFIFA = x.CodigoFIFA ?? "",
+                Seudonimo = x.Seudonimo ?? "",
+                FotoUrl=x.EscudoUrl
+            })
             .ToListAsync();
 
-        return new PagedResult<Selecciones>
+        return new PagedResult<SeleccionesResponse>
         {
             Items = items,
             TotalCount = total,

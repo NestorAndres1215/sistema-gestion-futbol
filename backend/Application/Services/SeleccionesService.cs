@@ -41,7 +41,7 @@ public class SeleccionesService : ISelecionesService
         return await _repo.AddAsync(selecciones);
     }
 
-    public async  Task<PagedResult<Selecciones>> GetAllAsync(int page, int pageSize, string? search, string? confederacion, string? estado)
+    public async  Task<PagedResult<SeleccionesResponse>> GetAllAsync(int page, int pageSize, string? search, string? confederacion, string? estado)
     {
         return await _repo.GetAllAsync(page,pageSize,search,confederacion,estado);
     }

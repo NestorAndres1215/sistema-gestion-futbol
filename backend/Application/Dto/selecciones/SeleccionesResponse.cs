@@ -4,13 +4,13 @@ namespace Application.Dto.selecciones;
 
 public class SeleccionesResponse
 {
+    public int Id { get; set; }
     public string Clave { get; set; } = string.Empty;
-    private string Seleccion { get; set; } = string.Empty;
-    private string Confederacion { get; set; } = string.Empty;
-    private string CodigoFIFA { get; set; } = string.Empty;
-    private string Seudonimo { get; set; } = string.Empty;
-    private string Estadio { get; set; } = string.Empty;
-    private string Entrenador { get; set; } = string.Empty;
-    private string Capitan { get; set; } = string.Empty;
+    public string Seleccion { get; set; } = string.Empty;
+    public string Confederacion { get; set; } = string.Empty;
+    public string CodigoFIFA { get; set; } = string.Empty;
+    public string Seudonimo { get; set; } = string.Empty;
+    public string? FotoUrl { get; set; } = string.Empty;
+
 
 }

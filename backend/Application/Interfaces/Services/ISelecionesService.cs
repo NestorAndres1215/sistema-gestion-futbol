@@ -6,7 +6,7 @@ namespace Application.Interfaces.Services;
 
 public interface ISelecionesService
 {
-    Task<PagedResult<Selecciones>> GetAllAsync(int page,
+    Task<PagedResult<SeleccionesResponse>> GetAllAsync(int page,
         int pageSize,
         string? search,
         string? confederacion,
