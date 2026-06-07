@@ -50,22 +50,20 @@ public class UsuarioRepository : IUsuarioRepository
 
         if (!string.IsNullOrWhiteSpace(estado))
         {
-            estado = estado.Trim().ToUpper();
+            var e = estado.Trim();
 
             query = query.Where(x =>
                 x.Estado != null &&
-                x.Estado.ToUpper() == estado
-            );
+                x.Estado == e);
         }
 
         if (!string.IsNullOrWhiteSpace(rol))
         {
-            rol = rol.Trim().ToUpper();
+            var r = rol.Trim();
 
             query = query.Where(x =>
                 x.Rol != null &&
-                x.Rol.Nombre.ToUpper() == rol
-            );
+                x.Rol.Nombre == r);
         }
 
         var total = await query.CountAsync();

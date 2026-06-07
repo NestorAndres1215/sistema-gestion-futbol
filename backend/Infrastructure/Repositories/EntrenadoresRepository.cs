@@ -23,7 +23,7 @@ public class EntrenadoresRepository : IEntrenadoresRepository
         return entrenadores;
     }
 
-    public async Task<PagedResult<Entrenadores>> GetAllAsync(
+    public async Task<PagedResult<EntrenadoresResponse>> GetAllAsync(
         int page,
         int pageSize,
         string? search,
@@ -36,39 +36,49 @@ public class EntrenadoresRepository : IEntrenadoresRepository
                 .ThenInclude(p => p.PaisNacimiento)
             .Include(e => e.Persona)
                 .ThenInclude(p => p.CiudadNacimiento)
+            .AsNoTracking()
             .AsQueryable();
 
+        // 🔎 SEARCH
         if (!string.IsNullOrWhiteSpace(search))
         {
+            var s = search.Trim();
+
             query = query.Where(e =>
                 e.Persona != null &&
                 (
-                    e.Persona.Nombre.Contains(search) ||
-                    e.Persona.Apellido.Contains(search) 
-                )
-            );
+                    e.Persona.Nombre.Contains(s) ||
+                    e.Persona.Apellido.Contains(s)
+                ));
         }
 
+        // ⚽ ESTILO JUEGO
         if (!string.IsNullOrWhiteSpace(estiloJuego))
         {
+            var est = estiloJuego.Trim();
+
             query = query.Where(e =>
                 e.EstiloJuego != null &&
-                e.EstiloJuego.Contains(estiloJuego)
-            );
+                e.EstiloJuego.Contains(est));
         }
 
+        // 🌍 PAÍS
         if (!string.IsNullOrWhiteSpace(pais))
         {
+            var p = pais.Trim();
+
             query = query.Where(e =>
                 e.Persona != null &&
                 e.Persona.PaisNacimiento != null &&
-                e.Persona.PaisNacimiento.Nombre.Contains(pais)
-            );
+                e.Persona.PaisNacimiento.Nombre.Contains(p));
         }
 
+        // 📌 ESTADO
         if (!string.IsNullOrWhiteSpace(estado))
         {
-            query = query.Where(e => e.Estado == estado);
+            var est = estado.Trim();
+
+            query = query.Where(e => e.Estado == est);
         }
 
         var total = await query.CountAsync();
@@ -77,9 +87,25 @@ public class EntrenadoresRepository : IEntrenadoresRepository
             .OrderByDescending(e => e.Nivel)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
+            .Select(e => new EntrenadoresResponse
+            {
+                Id = e.Id,
+                Nombre = e.Persona != null ? e.Persona.Nombre : "",
+                Apellido = e.Persona != null ? e.Persona.Apellido : "",
+                PaisNacimiento = e.Persona != null && e.Persona.PaisNacimiento != null
+                    ? e.Persona.PaisNacimiento.Nombre
+                    : "",
+                CiudadNacimiento = e.Persona != null && e.Persona.CiudadNacimiento != null
+                    ? e.Persona.CiudadNacimiento.Nombre
+                    : "",
+                FechaNacimiento = e.Persona != null ? e.Persona.FechaNacimiento : null,
+                EstiloJuego = e.EstiloJuego ?? "",
+                FechaDebut = e.FechaDebut.ToString(),
+                FotoUrl = e.Persona != null ? e.Persona.FotoUrl : null
+            })
             .ToListAsync();
 
-        return new PagedResult<Entrenadores>
+        return new PagedResult<EntrenadoresResponse>
         {
             Items = data,
             TotalCount = total,

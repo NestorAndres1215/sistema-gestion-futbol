@@ -6,7 +6,7 @@ namespace Application.Interfaces.Repositories;
 
 public interface IEntrenadoresRepository
 {
-    Task<PagedResult<Entrenadores>> GetAllAsync(int page,
+    Task<PagedResult<EntrenadoresResponse>> GetAllAsync(int page,
          int pageSize,
          string? search,
          string? estiloJuego,

@@ -9,7 +9,7 @@ namespace Application.Interfaces.Services;
 
 public interface IEntrenadoresService
 {
-    Task<PagedResult<Entrenadores>> GetAllAsync(
+    Task<PagedResult<EntrenadoresResponse>> GetAllAsync(
       int page, int pageSize, string? search,
       string? estiloJuego, string? pais, string? estado);
 

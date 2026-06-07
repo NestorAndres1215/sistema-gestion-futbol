@@ -153,7 +153,7 @@ public class EntrenadoresService : IEntrenadoresService
 
         return Math.Max(0, anos);
     }
-    public async Task<PagedResult<Entrenadores>> GetAllAsync(int page, int pageSize, string? search, string? estiloJuego, string? pais, string? estado)
+    public async Task<PagedResult<EntrenadoresResponse>> GetAllAsync(int page, int pageSize, string? search, string? estiloJuego, string? pais, string? estado)
     {
         return await _repository.GetAllAsync(page, pageSize, search, estiloJuego, pais, estado);
     }
