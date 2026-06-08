@@ -1,6 +1,6 @@
 ﻿
 
-namespace Application.Dto.estadisticas;
+namespace Application.Dto.Estadisticas;
 
 public class CompareResponse
 {

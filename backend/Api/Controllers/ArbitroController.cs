@@ -1,5 +1,5 @@
-﻿using Application.Dto.arbitros;
-using Application.Dto.estadisticas;
+﻿using Application.Dto.Arbitros;
+using Application.Dto.Estadisticas;
 using Application.Interfaces.Services;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;

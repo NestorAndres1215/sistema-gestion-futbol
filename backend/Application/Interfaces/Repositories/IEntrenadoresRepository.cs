@@ -1,5 +1,5 @@
-﻿using Application.Dto.config;
-using Application.Dto.entrenadores;
+﻿using Application.Dto.Config;
+using Application.Dto.Entrenadores;
 using Domain.Entities;
 
 namespace Application.Interfaces.Repositories;

@@ -1,8 +1,6 @@
-﻿using Application.Dto.arbitros;
-using Application.Dto.config;
-using Application.Dto.estadisticas;
-using Domain.Entities;
-
+﻿using Application.Dto.Arbitros;
+using Application.Dto.Config;
+using Application.Dto.Estadisticas;
 namespace Application.Interfaces.Repositories;
 
 public interface IArbitroRepository

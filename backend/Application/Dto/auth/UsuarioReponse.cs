@@ -1,5 +1,4 @@
-﻿
-namespace Application.Dto.auth;
+﻿namespace Application.Dto.Auth;
 
 public class UsuarioReponse
 {

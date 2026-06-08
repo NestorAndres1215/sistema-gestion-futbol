@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
+using Microsoft.AspNetCore.Http;
 
-namespace Application.Dto.entrenadores;
+namespace Application.Dto.Entrenadores;
 
 public class EntrenadoresRequest
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Application.Dto.selecciones;
+namespace Application.Dto.Selecciones;
 
 public class SeleccionesRequest
 {

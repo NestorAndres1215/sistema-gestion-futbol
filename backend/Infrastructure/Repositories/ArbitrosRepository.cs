@@ -1,12 +1,12 @@
-﻿using Application.Dto.arbitros;
-using Application.Dto.config;
-using Application.Dto.estadisticas;
+﻿
+using Application.Dto.Arbitros;
+using Application.Dto.Config;
+using Application.Dto.Estadisticas;
 using Application.Interfaces.Repositories;
-using Domain.Entities;
+
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Collections;
-using System.Linq;
+
 
 namespace Infrastructure.Repositories;
 
@@ -25,7 +25,7 @@ public class ArbitrosRepository : IArbitroRepository
         return arbitros;
     }
 
-    public async Task<PagedResult<ArbitrosResponse>> GetAllAsync(
+    public async Task<Application.Dto.Config.PagedResult<ArbitrosResponse>> GetAllAsync(
         int page,
         int pageSize,
         string? search,

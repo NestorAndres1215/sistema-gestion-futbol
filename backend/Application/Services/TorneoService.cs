@@ -1,6 +1,6 @@
 ﻿using Application.Common.Exceptions;
-using Application.Dto.config;
-using Application.Dto.torneo;
+using Application.Dto.Config;
+using Application.Dto.Torneo;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;

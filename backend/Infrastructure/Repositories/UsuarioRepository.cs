@@ -1,6 +1,6 @@
 ﻿using Application.Common.Exceptions;
-using Application.Dto.auth;
-using Application.Dto.config;
+using Application.Dto.Auth;
+using Application.Dto.Config;
 using Application.Interfaces.Repositories;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;

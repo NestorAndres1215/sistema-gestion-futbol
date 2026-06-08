@@ -1,6 +1,6 @@
 ﻿
 
-namespace Application.Dto.config;
+namespace Application.Dto.Config;
 
 public class ParametroResponse
 {

@@ -1,4 +1,4 @@
-﻿using Application.Dto.estadio;
+﻿using Application.Dto.Estadio;
 using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 

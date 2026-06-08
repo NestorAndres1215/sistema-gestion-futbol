@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Application.Dto.estadio;
+namespace Application.Dto.Estadio;
 
 public  class EstadioRequest
 {

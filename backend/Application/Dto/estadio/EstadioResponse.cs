@@ -1,6 +1,6 @@
 ﻿
 
-namespace Application.Dto.estadio;
+namespace Application.Dto.Estadio;
 
 public class EstadioResponse
 {

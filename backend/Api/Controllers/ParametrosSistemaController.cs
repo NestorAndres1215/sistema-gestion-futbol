@@ -1,6 +1,5 @@
-﻿using Application.Dto.config;
+﻿using Application.Dto.Config;
 using Application.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;

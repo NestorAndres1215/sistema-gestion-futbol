@@ -1,15 +1,12 @@
 ﻿using Application.Common.Exceptions;
-using Application.Dto.clubes;
-using Application.Dto.config;
-using Application.Dto.estadio;
-using Application.Dto.selecciones;
+
+using Application.Dto.Clubes;
+using Application.Dto.Config;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
 using Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace Application.Services;
 

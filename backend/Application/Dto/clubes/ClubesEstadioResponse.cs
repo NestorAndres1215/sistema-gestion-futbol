@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Application.Dto.clubes;
+﻿namespace Application.Dto.Clubes;
 
 public class ClubesEstadioResponse
 {

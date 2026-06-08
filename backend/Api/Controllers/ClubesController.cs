@@ -1,4 +1,4 @@
-﻿using Application.Dto.clubes;
+﻿using Application.Dto.Clubes;
 using Application.Interfaces.Services;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;

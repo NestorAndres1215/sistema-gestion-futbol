@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Application.Dto.personas;
+namespace Application.Dto.Jugadores;
 
 public class JugadoresRequest
 {

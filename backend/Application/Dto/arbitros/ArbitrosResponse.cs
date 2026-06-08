@@ -1,5 +1,5 @@
 ﻿
-namespace Application.Dto.arbitros;
+namespace Application.Dto.Arbitros;
 
 public class ArbitrosResponse
 {

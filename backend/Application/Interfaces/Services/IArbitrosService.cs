@@ -1,10 +1,8 @@
-﻿using Application.Dto.arbitros;
-using Application.Dto.config;
-using Application.Dto.estadisticas;
-using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
+using Application.Dto.Arbitros;
+using Application.Dto.Config;
+using Application.Dto.Estadisticas;
+
 
 namespace Application.Interfaces.Services;
 

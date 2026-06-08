@@ -1,4 +1,4 @@
-﻿using Application.Dto.torneo;
+﻿using Application.Dto.Torneo;
 using Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

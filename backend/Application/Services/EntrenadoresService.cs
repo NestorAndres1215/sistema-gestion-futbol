@@ -1,7 +1,8 @@
 ﻿
 using Application.Common.Exceptions;
 using Application.Dto.config;
-using Application.Dto.entrenadores;
+using Application.Dto.Config;
+using Application.Dto.Entrenadores;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;

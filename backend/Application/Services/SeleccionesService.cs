@@ -1,6 +1,6 @@
 ﻿using Application.Common.Exceptions;
-using Application.Dto.config;
-using Application.Dto.selecciones;
+using Application.Dto.Config;
+using Application.Dto.Selecciones;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;

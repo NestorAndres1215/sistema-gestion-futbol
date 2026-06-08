@@ -1,10 +1,7 @@
-﻿using Application.Dto.clubes;
-using Application.Dto.config;
-using Application.Dto.selecciones;
+﻿using Application.Dto.Clubes;
+using Application.Dto.Config;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace Application.Interfaces.Services;
 

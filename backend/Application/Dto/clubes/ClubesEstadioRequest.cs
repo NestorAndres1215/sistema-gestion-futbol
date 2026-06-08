@@ -1,5 +1,4 @@
-﻿
-namespace Application.Dto.clubes;
+﻿namespace Application.Dto.Clubes;
 
 public class ClubesEstadioRequest
 {

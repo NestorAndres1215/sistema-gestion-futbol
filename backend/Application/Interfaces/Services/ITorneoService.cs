@@ -1,5 +1,5 @@
-﻿using Application.Dto.config;
-using Application.Dto.torneo;
+﻿using Application.Dto.Config;
+using Application.Dto.Torneo;
 using Domain.Entities;
 
 namespace Application.Interfaces.Services;

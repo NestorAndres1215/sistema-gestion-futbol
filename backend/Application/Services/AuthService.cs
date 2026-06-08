@@ -1,5 +1,5 @@
 ﻿using Application.Common.Exceptions;
-using Application.Dto.auth;
+using Application.Dto.Auth;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;

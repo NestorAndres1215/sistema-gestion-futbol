@@ -1,8 +1,6 @@
-﻿
+﻿using Microsoft.AspNetCore.Http;
 
-using Microsoft.AspNetCore.Http;
-
-namespace Application.Dto.clubes;
+namespace Application.Dto.Clubes;
 
 public class ClubesRequest
 {

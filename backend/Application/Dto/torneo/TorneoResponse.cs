@@ -1,5 +1,5 @@
 ﻿
-namespace Application.Dto.torneo;
+namespace Application.Dto.Torneo;
 
 public class TorneoResponse
 {

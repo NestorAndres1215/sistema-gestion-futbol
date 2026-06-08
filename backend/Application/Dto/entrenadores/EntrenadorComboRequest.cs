@@ -1,5 +1,5 @@
 ﻿
-namespace Application.Dto.entrenadores;
+namespace Application.Dto.Entrenadores;
 
 public class EntrenadorComboRequest
 {

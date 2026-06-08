@@ -1,5 +1,5 @@
-﻿using Application.Dto.auth;
-using Application.Dto.config;
+﻿using Application.Dto.Auth;
+using Application.Dto.Config;
 using Domain.Entities;
 using Domain.Enums;
 
