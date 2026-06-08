@@ -24,7 +24,7 @@ public class EntrenadorSeleccionService : IEntrenadorSeleccionService
         _seleccionRepository = seleccionRepository;
     }
 
-    public async Task<EntrenadorSeleccion> AddAsync(SeleccioEntrenadorRequest seleccioEntrenadorRequest)
+    public async Task<EntrenadorSeleccion> AddAsync(SeleccionEntrenadorRequest seleccioEntrenadorRequest)
     {
         var seleccion = await _seleccionRepository.GetByNombreAsync(seleccioEntrenadorRequest.Seleccion)
             ?? throw new NotFoundException("La Selección no existe.");
@@ -91,7 +91,7 @@ public class EntrenadorSeleccionService : IEntrenadorSeleccionService
 
     public async Task<EntrenadorSeleccion> UpdateAsync(
         int id,
-        SeleccioEntrenadorRequest seleccioEntrenadorRequest)
+        SeleccionEntrenadorRequest seleccioEntrenadorRequest)
     {
         var entrenadorSeleccion = await _repository.GetByIdAsync(id)
             ?? throw new NotFoundException("La relación entrenador-selección no existe.");

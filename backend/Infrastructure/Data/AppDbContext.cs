@@ -23,5 +23,7 @@ public class AppDbContext : DbContext
     public DbSet<SeleccionEstadio> SeleccionEstadio { get; set; }
     public DbSet<EntrenadorSeleccion> EntrenadorSeleccion { get; set; }
     public DbSet<Clubes> Clubes { get; set; }
+    public DbSet<ClubEntrenador> ClubEntrenador { get; set; }
+    public DbSet<ClubEstadio> ClubEstadio { get; set; }
 
 }

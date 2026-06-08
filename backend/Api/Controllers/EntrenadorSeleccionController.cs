@@ -17,13 +17,13 @@ public class EntrenadorSeleccionController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add([FromBody] SeleccioEntrenadorRequest request)
+    public async Task<IActionResult> Add([FromBody] SeleccionEntrenadorRequest request)
     {
         return Ok(await _service.AddAsync(request));
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] SeleccioEntrenadorRequest request)
+    public async Task<IActionResult> Update(int id, [FromBody] SeleccionEntrenadorRequest request)
     {
         return Ok(await _service.UpdateAsync(id, request));
     }

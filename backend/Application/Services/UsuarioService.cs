@@ -25,7 +25,6 @@ public class UsuarioService : IUsuarioService
 
     public async Task<PagedResult<UsuarioReponse>> GetAllAsync( int page,int pageSize,string? search, string? estado,string? rol)
     {
-
         return await _repo.GetAllAsync(page, pageSize, search, estado,rol);
     }
 

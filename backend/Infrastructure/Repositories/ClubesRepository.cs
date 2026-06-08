@@ -1,12 +1,9 @@
-﻿
-using Application.Dto.clubes;
+﻿using Application.Dto.clubes;
 using Application.Dto.config;
-using Application.Dto.selecciones;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Infrastructure.Repositories;
 

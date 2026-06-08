@@ -42,7 +42,7 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
             .Select(x => new EntrenadorSelectResponse
             {
                 Id = x.Id,
-                NombreCompleto = x.Entrenador.Persona.Nombre + " " + x.Entrenador.Persona.Apellido
+                NombreCompleto = (x.Entrenador.Persona.Nombre) + " " + (x.Entrenador.Persona.Apellido)
             })
             .Distinct()
             .OrderBy(x => x.NombreCompleto)
