@@ -6,7 +6,7 @@ namespace Application.Interfaces.Services;
 
 public interface ITorneoService
 {
-    Task<PagedResult<Torneo>> GetAllAsync(int page,
+    Task<PagedResult<TorneoResponse>> GetAllAsync(int page,
         int pageSize,
         string? search,
         string? tipo,

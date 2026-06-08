@@ -1,4 +1,5 @@
-﻿using Application.Dto.config;
+﻿using Application.Dto.arbitros;
+using Application.Dto.config;
 using Application.Dto.estadisticas;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
@@ -24,7 +25,7 @@ public class ArbitrosRepository : IArbitroRepository
         return arbitros;
     }
 
-    public async Task<PagedResult<Arbitros>> GetAllAsync(
+    public async Task<PagedResult<ArbitrosResponse>> GetAllAsync(
         int page,
         int pageSize,
         string? search,
@@ -71,10 +72,26 @@ public class ArbitrosRepository : IArbitroRepository
             .OrderByDescending(a => a.Nivel)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
+            .Select(a => new ArbitrosResponse
+            {
+                Id = a.Id,
+                Nombre = a.Persona != null ? a.Persona.Nombre : "",
+                Apellido = a.Persona != null ? a.Persona.Apellido : "",
+                Categoria = a.Categoria,
+                Pais = a.Persona != null && a.Persona.PaisNacimiento != null
+                    ? a.Persona.PaisNacimiento.Nombre
+                    : "",
+                Ciudad = a.Persona != null && a.Persona.CiudadNacimiento != null
+                    ? a.Persona.CiudadNacimiento.Nombre
+                    : "",
+                Foto = a.Persona != null ? a.Persona.FotoUrl : null,
+                FechaDebut = a.FechaDebut,
+                Estado = a.Estado
+            })
             .ToListAsync();
 
- 
-        return new PagedResult<Arbitros>
+
+        return new PagedResult<ArbitrosResponse>
         {
             Items = data,
             TotalCount = total,

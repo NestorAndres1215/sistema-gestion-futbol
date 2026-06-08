@@ -1,4 +1,5 @@
 ﻿using Application.Dto.config;
+using Application.Dto.selecciones;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;
@@ -77,17 +78,16 @@ public class SeleccionEstadioRepository:ISeleccionEstadioRepository
         return seleccionEstadio;
     }
 
-    public async Task<PagedResult<SeleccionEstadio>> ListarPorSeleccion(
+    public async Task<PagedResult<SeleccionEstadioResponse>> ListarPorSeleccion(
         int page,
         int pageSize,
         string? seleccion)
     {
         var query = _context.SeleccionEstadio
-            .Include(x => x.Seleccion)
-            .Include(x => x.Estadio)
+            .AsNoTracking()
             .AsQueryable();
 
-        if (!string.IsNullOrEmpty(seleccion))
+        if (!string.IsNullOrWhiteSpace(seleccion))
         {
             query = query.Where(x => x.Seleccion.Nombre == seleccion);
         }
@@ -97,9 +97,18 @@ public class SeleccionEstadioRepository:ISeleccionEstadioRepository
         var items = await query
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
+            .Select(x => new SeleccionEstadioResponse
+            {
+                Id = x.Id,
+                Seleccion = x.Seleccion.Nombre,
+                Estadio = x.Estadio.Nombre,
+                Ciudad = x.Estadio.Ciudad,
+                Capacidad = x.Estadio.Capacidad,
+                Tipo = x.Tipo
+            })
             .ToListAsync();
 
-        return new PagedResult<SeleccionEstadio>
+        return new PagedResult<SeleccionEstadioResponse>
         {
             Items = items,
             TotalCount = totalCount,

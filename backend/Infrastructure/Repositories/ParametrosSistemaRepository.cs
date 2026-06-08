@@ -82,7 +82,8 @@ public class ParametrosSistemaRepository:IParametrosSistemaRepository
                 Nombre = x.Nombre ?? "",
                 Descripcion = x.Descripcion,
                 Categoria = x.Categoria,
-                TipoDato = x.TipoDato ?? ""
+                TipoDato = x.TipoDato ?? "",
+                Estado=x.Estado ?? ""
             })
             .ToListAsync();
 

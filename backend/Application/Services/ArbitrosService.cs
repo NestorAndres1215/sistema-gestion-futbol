@@ -1,7 +1,7 @@
 ﻿using Application.Common.Exceptions;
+using Application.Dto.arbitros;
 using Application.Dto.config;
 using Application.Dto.estadisticas;
-using Application.Dto.personas;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
 using Domain.Entities;
@@ -37,7 +37,7 @@ public class ArbitrosService : IArbitrosService
     {
         ValidarDto(arbitros);
     
-        string fotoUrl = await _fotoService.GuardarFotoAsync(arbitros.Foto, "arbitros", $"{arbitros.Nombre}_{arbitros.Apellido}");
+        string fotoUrl = await _fotoService.GuardarFotoAsync(arbitros.Foto!, "arbitros", $"{arbitros.Nombre}_{arbitros.Apellido}");
 
         var pais = await _paisRepo.GetByNombreAsync(arbitros.PaisNacimiento)
             ?? throw new NotFoundException("El país no existe.");
@@ -82,9 +82,7 @@ public class ArbitrosService : IArbitrosService
         return arbitro;
     }
 
-
-
-    public async Task<PagedResult<Arbitros>> GetAllAsync(int page, int pageSize, string? search, string? categoria, string? pais, string? estado)
+    public async Task<PagedResult<ArbitrosResponse>> GetAllAsync(int page, int pageSize, string? search, string? categoria, string? pais, string? estado)
     {
         return await _repository.GetAllAsync(page, pageSize, search, categoria, pais, estado);
     }

@@ -47,7 +47,7 @@ public class EntrenadoresService : IEntrenadoresService
             throw new NotFoundException("La ciudad no existe.");
 
 
-        string fotoUrl = await _fotoService.GuardarFotoAsync(entrenadores.Foto, "entrenadores", $"{entrenadores.Nombre}_{entrenadores.Apellido}");
+        string fotoUrl = await _fotoService.GuardarFotoAsync(entrenadores.Foto!, "entrenadores", $"{entrenadores.Nombre}_{entrenadores.Apellido}");
 
         var persona = new Personas
         {

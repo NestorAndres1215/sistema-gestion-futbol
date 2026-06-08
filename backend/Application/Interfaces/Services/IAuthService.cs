@@ -10,7 +10,7 @@ public interface IAuthService
     Task<Usuario> RegisterAdmin(RegisterUsuarioRequest dto);
     Task<Usuario> UpsatePassword(int id,PasswordRequest dto);
     Task<AuthResponse> Login(LoginRequest dto);
-    Task<Usuario?> GetCurrentUserFromClaims(ClaimsPrincipal user);
+    Task<UsuarioReponse?> GetCurrentUserFromClaims(ClaimsPrincipal user);
 
 }
 

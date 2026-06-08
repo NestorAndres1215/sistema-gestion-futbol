@@ -1,11 +1,12 @@
 ﻿using Application.Dto.config;
+using Application.Dto.selecciones;
 using Domain.Entities;
 
 namespace Application.Interfaces.Repositories;
 
 public interface ISeleccionEstadioRepository
 {
-    Task<PagedResult<SeleccionEstadio>> ListarPorSeleccion(
+    Task<PagedResult<SeleccionEstadioResponse>> ListarPorSeleccion(
         int page,
         int pageSize,
         string? seleccion);

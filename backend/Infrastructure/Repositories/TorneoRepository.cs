@@ -1,5 +1,6 @@
 ﻿using Application.Common.Exceptions;
 using Application.Dto.config;
+using Application.Dto.torneo;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;
@@ -23,7 +24,7 @@ public class TorneoRepository : ITorneoRepository
         return torneo;
     }
 
-    public async Task<PagedResult<Torneo>> GetAllAsync(
+    public async Task<PagedResult<TorneoResponse>> GetAllAsync(
         int page,
         int pageSize,
         string? search,
@@ -76,14 +77,22 @@ public class TorneoRepository : ITorneoRepository
         }
 
         var total = await query.CountAsync();
-
         var items = await query
-            .OrderBy(x => x.Id)
-            .Skip((page - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
+               .OrderBy(x => x.Id)
+               .Skip((page - 1) * pageSize)
+               .Take(pageSize)
+               .Select(x => new TorneoResponse
+               {
+                   Id = x.Id,
+                   Nombre = x.Nombre ?? "",
+                   Tipo = x.Tipo ?? "",
+                   TipoParticipante = x.TipoParticipante ?? "",
+                   Estado = x.Estado ?? ""
+               })
+               .ToListAsync();
 
-        return new PagedResult<Torneo>
+
+        return new PagedResult<TorneoResponse>
         {
             Items = items,
             TotalCount = total,

@@ -1,4 +1,5 @@
 ﻿using Application.Dto.config;
+using Application.Dto.torneo;
 using Domain.Entities;
 
 
@@ -6,7 +7,7 @@ namespace Application.Interfaces.Repositories;
 
 public interface ITorneoRepository
 {
-    Task<PagedResult<Torneo>> GetAllAsync(int page,
+    Task<PagedResult<TorneoResponse>> GetAllAsync(int page,
         int pageSize,
         string? search,
         string? tipo,

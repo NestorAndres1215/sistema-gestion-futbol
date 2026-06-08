@@ -1,6 +1,6 @@
-﻿using Application.Dto.config;
+﻿using Application.Dto.arbitros;
+using Application.Dto.config;
 using Application.Dto.estadisticas;
-using Application.Dto.personas;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ namespace Application.Interfaces.Services;
 
 public interface IArbitrosService
 {
-    Task<PagedResult<Arbitros>> GetAllAsync(int page,int pageSize, string? search,string? categoria, string? pais,string? estado);
+    Task<PagedResult<ArbitrosResponse>> GetAllAsync(int page,int pageSize, string? search,string? categoria, string? pais,string? estado);
     Task<Arbitros> AddAsync(ArbitrosRequest arbitros);
     Task<Arbitros> UpdateAsync(int id,ArbitrosRequest arbitros);
     Task<Arbitros> GetByIdAsync(int id);

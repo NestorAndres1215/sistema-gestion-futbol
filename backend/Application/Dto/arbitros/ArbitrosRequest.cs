@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Application.Dto.personas;
+namespace Application.Dto.arbitros;
 
 public class ArbitrosRequest
 {

@@ -82,8 +82,12 @@ public class AuthService : IAuthService
         return new AuthResponse
         {
             Username = user.Username,
-            Token = _jwt.GenerateToken(user.Id, user.Email, user.Rol.Nombre),
-            Rol= user.Rol.Nombre
+            Token = _jwt.GenerateToken(
+                user.Id,
+                user.Email,
+                user.Rol?.Nombre ?? ""
+            ),
+            Rol = user.Rol?.Nombre ?? ""
         };
     }
 
@@ -116,7 +120,7 @@ public class AuthService : IAuthService
         return user;
     }
 
-    public async Task<Usuario?> GetCurrentUserFromClaims(ClaimsPrincipal user)
+    public async Task<UsuarioReponse?> GetCurrentUserFromClaims(ClaimsPrincipal user)
     {
         var userIdClaim = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
@@ -125,7 +129,18 @@ public class AuthService : IAuthService
 
         var userId = int.Parse(userIdClaim);
 
-        return await _repo.GetByIdAsync(userId);
+        var usuario = await _repo.GetByIdAsync(userId);
+
+        if (usuario == null)
+            return null;
+
+        return new UsuarioReponse
+        {
+            Id = usuario.Id,
+            UserName = usuario.Username ?? "",
+            Email = usuario.Email ?? "",
+            Role = usuario.Rol?.Nombre ?? ""
+        };
     }
 
     public async Task<Usuario> UpsatePassword(int id, PasswordRequest dto)
@@ -152,4 +167,6 @@ public class AuthService : IAuthService
 
         return entity;
     }
+
+ 
 }

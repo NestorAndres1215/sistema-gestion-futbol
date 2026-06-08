@@ -78,28 +78,13 @@ public class SeleccionEstadioService:ISeleccionEstadioService
         int pageSize,
         string? seleccion)
     {
-        var result = await _repository.ListarPorSeleccion(
+        return  await _repository.ListarPorSeleccion(
             page,
             pageSize,
             seleccion
         );
 
-        return new PagedResult<SeleccionEstadioResponse>
-        {
-            Items = result.Items.Select(x => new SeleccionEstadioResponse
-            {
-                Id = x.Id,
-                Seleccion = x.Seleccion.Nombre,
-                Estadio = x.Estadio.Nombre,
-                Ciudad = x.Estadio.Ciudad,
-                Capacidad = x.Estadio.Capacidad,
-                Tipo = x.Tipo
-            }).ToList(),
 
-            TotalCount = result.TotalCount,
-            Page = result.Page,
-            PageSize = result.PageSize
-        };
     }
 
 

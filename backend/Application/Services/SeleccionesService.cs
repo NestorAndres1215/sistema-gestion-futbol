@@ -24,8 +24,8 @@ public class SeleccionesService : ISelecionesService
       
         await ValidarDuplicadosAsync(seleccionesdto);
 
-        var bandera = await _fotoService.GuardarFotoAsync(seleccionesdto.Bandera, "selecciones/banderas", $"{seleccionesdto.Nombre}"); ;
-        var escudo = await _fotoService.GuardarFotoAsync(seleccionesdto.Escudo, "selecciones/escudos", $"{seleccionesdto.Nombre}");
+        var bandera = await _fotoService.GuardarFotoAsync(seleccionesdto.Bandera!, "selecciones/banderas", $"{seleccionesdto.Nombre}"); ;
+        var escudo = await _fotoService.GuardarFotoAsync(seleccionesdto.Escudo!, "selecciones/escudos", $"{seleccionesdto.Nombre}");
         var selecciones = new Selecciones
         {
             Nombre = seleccionesdto.Nombre,

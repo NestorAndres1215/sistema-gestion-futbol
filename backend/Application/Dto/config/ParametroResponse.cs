@@ -11,4 +11,5 @@ public class ParametroResponse
     public string? Descripcion { get; set; }
     public string? Categoria { get; set; }
     public string TipoDato { get; set; } = string.Empty;
+    public string Estado {  get; set; } = string.Empty;
 }

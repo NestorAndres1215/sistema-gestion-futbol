@@ -70,7 +70,7 @@ public class TorneoService : ITorneoService
             throw new BadRequestException("El torneo ya existe");
     }
 
-    public async Task<PagedResult<Torneo>> GetAllAsync(int page,
+    public async Task<PagedResult<TorneoResponse>> GetAllAsync(int page,
         int pageSize,
         string? search,
         string? tipo,

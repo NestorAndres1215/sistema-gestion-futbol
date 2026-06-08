@@ -16,7 +16,6 @@ public class AuthController : ControllerBase
     {
         _auth = auth;
     }
-
     [Authorize]
     [HttpGet("me")]
     public async Task<IActionResult> Me()
@@ -26,14 +25,7 @@ public class AuthController : ControllerBase
         if (user == null)
             return Unauthorized();
 
-        return Ok(new
-        {
-            id = user.Id,
-            email = user.Email,
-            role = user.Rol,
-            nombre = user.Username,
-            password=user.Password
-        });
+        return Ok(user);
     }
 
     [HttpPost("register")]
