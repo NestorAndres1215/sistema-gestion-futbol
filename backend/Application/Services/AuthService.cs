@@ -2,8 +2,7 @@
 using Application.Dto.Auth;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
-using Domain.Entities;
-using Domain.Enums;
+using Domain.Contants;
 using System.Security.Claims;
 
 namespace Application.Services;

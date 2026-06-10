@@ -1,4 +1,5 @@
-﻿using Application.Dto.config;
+﻿using Application.Common.Models;
+using Application.Dto.config;
 using Application.Dto.Config;
 using Domain.Entities;
 

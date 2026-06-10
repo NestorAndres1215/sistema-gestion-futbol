@@ -1,5 +1,5 @@
-﻿using Application.Dto.Auth;
-using Application.Dto.Config;
+﻿using Application.Common.Models;
+using Application.Dto.Auth;
 namespace Application.Interfaces.Services;
 
 public interface IUsuarioService

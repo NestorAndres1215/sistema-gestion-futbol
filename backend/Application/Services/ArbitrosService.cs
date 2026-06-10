@@ -1,7 +1,7 @@
 ﻿using Application.Common.Exceptions;
+using Application.Common.Models;
 using Application.Dto.Arbitros;
 using Application.Dto.config;
-using Application.Dto.Config;
 using Application.Dto.Estadisticas;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
@@ -45,6 +45,8 @@ public class ArbitrosService : IArbitrosService
 
         var ciudad = await _ciudadRepo.GetByNombreAsync(arbitros.CiudadNacimiento)
             ?? throw new NotFoundException("La ciudad no existe.");
+
+    
 
         var persona = new Personas
         {

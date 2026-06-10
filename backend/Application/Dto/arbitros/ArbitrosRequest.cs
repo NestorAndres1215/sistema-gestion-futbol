@@ -20,6 +20,7 @@ public class ArbitrosRequest
     public int PrecisionDecisiones { get; set; }
     public int TarjetasAmarillas { get; set; }
     public int TarjetasRojas { get; set; }
+    public string Genero { get; set; } = string.Empty;
     public string? EstadoFisico { get; set; }
     public int PersonasId {get; set; }
 }

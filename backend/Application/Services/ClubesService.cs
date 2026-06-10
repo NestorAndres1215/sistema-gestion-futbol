@@ -1,11 +1,11 @@
 ﻿using Application.Common.Exceptions;
-
+using Application.Common.Models;
 using Application.Dto.Clubes;
-using Application.Dto.Config;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
+using Domain.Contants;
 using Domain.Entities;
-using Domain.Enums;
+
 
 
 namespace Application.Services;

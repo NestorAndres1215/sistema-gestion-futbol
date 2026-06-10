@@ -1,4 +1,4 @@
-﻿namespace Application.Dto.Config;
+﻿namespace Application.Common.Models;
 
 public class PagedResult<T>
 {

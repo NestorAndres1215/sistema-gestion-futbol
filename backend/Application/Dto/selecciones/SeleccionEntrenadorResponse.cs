@@ -1,5 +1,4 @@
-﻿using Domain.Enums;
-
+﻿
 namespace Application.Dto.Selecciones;
 
 public class SeleccionEntrenadorResponse

@@ -1,5 +1,5 @@
 ﻿using Application.Common.Exceptions;
-using Application.Dto.Config;
+using Application.Common.Models;
 using Application.Dto.Torneo;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;

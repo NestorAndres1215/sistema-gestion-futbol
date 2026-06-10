@@ -1,5 +1,6 @@
-﻿using Application.Dto.Clubes;
-using Application.Dto.Config;
+﻿
+using Application.Common.Models;
+using Application.Dto.Clubes;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;

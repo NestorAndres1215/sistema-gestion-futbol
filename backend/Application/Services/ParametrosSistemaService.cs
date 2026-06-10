@@ -1,4 +1,5 @@
 ﻿using Application.Common.Exceptions;
+using Application.Common.Models;
 using Application.Dto.Config;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;

@@ -1,7 +1,7 @@
 ﻿
 
+using Application.Common.Models;
 using Application.Dto.Clubes;
-using Application.Dto.Config;
 using Domain.Entities;
 
 namespace Application.Interfaces.Repositories;

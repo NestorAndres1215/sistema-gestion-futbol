@@ -1,4 +1,4 @@
-﻿namespace Application.Dto.Config;
+﻿namespace Application.Common.Models;
 
 /// <summary>
 /// Estructura estándar para respuestas de error.

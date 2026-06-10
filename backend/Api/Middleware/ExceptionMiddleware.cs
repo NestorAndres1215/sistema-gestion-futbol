@@ -4,7 +4,8 @@
 using Application.Common.Exceptions;
 using System.Text.Json;
 
-using Application.Dto.Config;
+
+using Application.Common.Models;
 
 namespace API.Middleware;
 

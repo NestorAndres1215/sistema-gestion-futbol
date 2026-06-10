@@ -1,5 +1,5 @@
 ﻿
-using Application.Dto.Config;
+using Application.Common.Models;
 using Application.Dto.Entrenadores;
 using Application.Dto.Selecciones;
 using Domain.Entities;

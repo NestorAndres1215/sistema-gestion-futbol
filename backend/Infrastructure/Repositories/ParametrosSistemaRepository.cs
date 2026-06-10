@@ -1,4 +1,7 @@
-﻿using Application.Dto.Config;
+﻿
+
+using Application.Common.Models;
+using Application.Dto.Config;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;

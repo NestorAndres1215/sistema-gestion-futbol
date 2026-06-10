@@ -1,10 +1,10 @@
 ﻿using Application.Common.Exceptions;
-using Application.Dto.Config;
+using Application.Common.Models;
 using Application.Dto.Selecciones;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
+using Domain.Contants;
 using Domain.Entities;
-using Domain.Enums;
 
 namespace Application.Services;
 
