@@ -27,7 +27,7 @@ public class EstadioService : IEstadioService
     {
 
         ValidarDto(dto);
-        string fotoUrl = await GuardarFotoAsync(dto);
+        string fotoUrl = await _fotoService.GuardarFotoAsync(dto.Foto!, "estadios", $"{dto.Nombre}");
 
         var estadio = new Estadio
         {
@@ -49,41 +49,6 @@ public class EstadioService : IEstadioService
  
     }
 
-    private async Task<string> GuardarFotoAsync(EstadioRequest dto)
-    {
-        if (dto.Foto == null)
-            return "";
-
-        var carpeta = Path.Combine(
-            Directory.GetCurrentDirectory(),
-            "wwwroot/uploads/estadios"
-        );
-
-        if (!Directory.Exists(carpeta))
-            Directory.CreateDirectory(carpeta);
-
-        var extension = Path.GetExtension(dto.Foto.FileName);
-
-        var nombreBase =
-            $"{dto.Nombre}_{dto.Pais}_{dto.Ciudad}"
-            .Replace(" ", "_")
-            .Replace("/", "")
-            .Replace("\\", "")
-            .ToLower();
-
-        var nombreArchivo =
-            $"{nombreBase}_{Guid.NewGuid()}{extension}";
-
-        var rutaCompleta = Path.Combine(carpeta, nombreArchivo);
-
-        using (var stream = new FileStream(rutaCompleta, FileMode.Create))
-        {
-            await dto.Foto.CopyToAsync(stream);
-        }
-
-       return  $"/uploads/estadios/{nombreArchivo}";
-
-    }
 
     private void ValidarDto(EstadioRequest dto)
     {
@@ -163,7 +128,7 @@ public class EstadioService : IEstadioService
             if (!string.IsNullOrEmpty(estadio.FotoUrl))
                 _fotoService.EliminarFoto(estadio.FotoUrl);
 
-            estadio.FotoUrl = await GuardarFotoAsync(estadioDTo);
+            estadio.FotoUrl = await _fotoService.GuardarFotoAsync(estadioDTo.Foto!, "estadios", $"{estadioDTo.Nombre}"); ;
         }
 
         estadio.Nombre = estadioDTo.Nombre;

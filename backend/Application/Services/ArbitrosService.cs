@@ -1,12 +1,17 @@
 ﻿using Application.Common.Exceptions;
+using Application.Common.Helpers;
 using Application.Common.Models;
+using Application.Common.Validators;
 using Application.Dto.Arbitros;
 using Application.Dto.config;
 using Application.Dto.Estadisticas;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
+using Domain.Constants;
+using Domain.Contants;
 using Domain.Entities;
 using Domain.Interfaces;
+using FluentValidation;
 
 namespace Application.Services;
 
@@ -34,6 +39,8 @@ public class ArbitrosService : IArbitrosService
     }
 
 
+   
+
     public async Task<Arbitros> AddAsync(ArbitrosRequest arbitros)
     {
         ValidarDto(arbitros);
@@ -47,7 +54,6 @@ public class ArbitrosService : IArbitrosService
             ?? throw new NotFoundException("La ciudad no existe.");
 
     
-
         var persona = new Personas
         {
             Nombre = arbitros.Nombre,
@@ -56,8 +62,9 @@ public class ArbitrosService : IArbitrosService
             PaisNacimientoId = pais.Id,
             CiudadNacimientoId = ciudad.Id,
             FotoUrl = fotoUrl,
+            Genero = GeneroValidator.Validar(arbitros.Genero),
             FechaCreacion = DateTime.Now,
-            Estado = "Activo"
+            Estado = Estado.Activo
         };
 
         var personaCreada = await _personasService.AddAsync(persona);
@@ -69,15 +76,15 @@ public class ArbitrosService : IArbitrosService
             RolArbitral = arbitros.RolArbitral,
             FechaDebut = arbitros.FechaDebut,
             FechaRetiro = arbitros.FechaRetiro,
-            AnosExperiencia = CalcularAnosExperiencia(arbitros.FechaDebut),
+            AnosExperiencia = ExperienciaHelper.Calcular(arbitros.FechaDebut),
             Nivel = arbitros.Nivel,
             Reputacion = arbitros.Reputacion,
             PartidosDirigidos=0,
             PrecisionDecisiones=0,
             TarjetasAmarillas=0,
             TarjetasRojas=0,
-            EstadoFisico="Activo",
-            Estado = "Activo"
+            EstadoFisico=Estado.Activo,
+            Estado = Estado.Activo
         };
 
         await _repository.AddAsync(arbitro);
@@ -138,7 +145,7 @@ public class ArbitrosService : IArbitrosService
         arbitro.RolArbitral = dto.RolArbitral;
         arbitro.FechaDebut = dto.FechaDebut;
         arbitro.FechaRetiro = dto.FechaRetiro;
-        arbitro.AnosExperiencia = CalcularAnosExperiencia(dto.FechaDebut);
+        arbitro.AnosExperiencia = ExperienciaHelper.Calcular(dto.FechaDebut);
         arbitro.Nivel = dto.Nivel;
         arbitro.Reputacion = dto.Reputacion;
         arbitro.PartidosDirigidos= dto.PartidosDirigidos;
@@ -151,21 +158,7 @@ public class ArbitrosService : IArbitrosService
         return arbitro;
     }
 
-    private int CalcularAnosExperiencia(DateTime? fechaDebut)
-    {
-        if (!fechaDebut.HasValue)
-            return 0;
-
-        var hoy = DateTime.Today;
-        var fecha = fechaDebut.Value;
-
-        var anos = hoy.Year - fecha.Year;
-
-        if (fecha.Date > hoy.AddYears(-anos))
-            anos--;
-
-        return Math.Max(0, anos);
-    }
+    
    
 
     private void ValidarDto(ArbitrosRequest dto)

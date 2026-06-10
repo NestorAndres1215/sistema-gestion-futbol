@@ -1,10 +1,13 @@
 ﻿
 using Application.Common.Exceptions;
+using Application.Common.Helpers;
 using Application.Common.Models;
+using Application.Common.Validators;
 using Application.Dto.config;
 using Application.Dto.Entrenadores;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
+using Domain.Contants;
 using Domain.Entities;
 using Domain.Interfaces;
 
@@ -58,8 +61,9 @@ public class EntrenadoresService : IEntrenadoresService
             PaisNacimientoId = pais.Id,
             CiudadNacimientoId = ciudad.Id,
             FotoUrl = fotoUrl,
+            Genero= GeneroValidator.Validar(entrenadores.Genero),
             FechaCreacion = DateTime.Now,
-            Estado = "Activo"
+            Estado = Estado.Activo
         };
 
         var personaCreada = await _personasService.AddAsync(persona);
@@ -71,14 +75,14 @@ public class EntrenadoresService : IEntrenadoresService
             Licencia = entrenadores.Licencia,
             FechaDebut = entrenadores.FechaDebut,
             FechaRetiro = entrenadores.FechaRetiro,
-            AnosExperiencia = CalcularAnosExperiencia(entrenadores.FechaDebut),
+            AnosExperiencia = ExperienciaHelper.Calcular(entrenadores.FechaDebut),
             Nivel = entrenadores.Nivel,
             Reputacion = entrenadores.Reputacion,
             ManejoEquipo = 0,
             Motivacion = 0,
             Disciplina = 0,
             Adaptabilidad = 0,
-            Estado = "Activo"
+            Estado = Estado.Activo
         };
 
         await _repository.AddAsync(entrenador);
@@ -106,21 +110,7 @@ public class EntrenadoresService : IEntrenadoresService
         if (dto.FechaDebut != null && dto.FechaDebut < dto.FechaNacimiento)
             throw new BadRequestException("La fecha de debut no puede ser menor a la fecha de nacimiento");
     }
-    private int CalcularAnosExperiencia(DateTime? fechaDebut)
-    {
-        if (!fechaDebut.HasValue)
-            return 0;
 
-        var hoy = DateTime.Today;
-        var fecha = fechaDebut.Value;
-
-        var anos = hoy.Year - fecha.Year;
-
-        if (fecha.Date > hoy.AddYears(-anos))
-            anos--;
-
-        return Math.Max(0, anos);
-    }
     public async Task<PagedResult<EntrenadoresResponse>> GetAllAsync(int page, int pageSize, string? search, string? estiloJuego, string? pais, string? estado)
     {
         return await _repository.GetAllAsync(page, pageSize, search, estiloJuego, pais, estado);
@@ -175,7 +165,7 @@ public class EntrenadoresService : IEntrenadoresService
         entrenador.Licencia = dto.Licencia;
         entrenador.FechaDebut = dto.FechaDebut;
         entrenador.FechaRetiro = dto.FechaRetiro;
-        entrenador.AnosExperiencia = CalcularAnosExperiencia(dto.FechaDebut);
+        entrenador.AnosExperiencia = ExperienciaHelper.Calcular(dto.FechaDebut);
         entrenador.Nivel = dto.Nivel;
         entrenador.Reputacion = dto.Reputacion;
         entrenador.Adaptabilidad = dto.Adaptabilidad;
