@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Dto.Config;
+using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -29,11 +30,17 @@ public class CiudadesRepository : ICiudadesRepository
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<IEnumerable<Ciudades>> GetByPaisNombreAsync(string nombrePais)
+    public async Task<IEnumerable<CiudadResponse>> GetByPaisNombreAsync(string nombrePais)
     {
         return await _context.Ciudades
             .Where(x => x.Pais.Nombre == nombrePais)
             .OrderBy(x => x.Nombre)
+            .Select(x => new CiudadResponse
+            {
+                Id = x.Id.ToString(),
+                Ciudad = x.Nombre,
+                Pais = x.Pais.Nombre
+            })
             .ToListAsync();
     }
 

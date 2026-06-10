@@ -1,4 +1,5 @@
 ﻿using Application.Common.Exceptions;
+using Application.Dto.Config;
 using Domain.Entities;
 using Domain.Interfaces;
 
@@ -27,7 +28,7 @@ public class CiudadesService : ICiudadesService
         return await _repository.GetByIdAsync(id);
     }
 
-    public async Task<IEnumerable<Ciudades>> GetByPaisNombreAsync(string nombrePais)
+    public async Task<IEnumerable<CiudadResponse>> GetByPaisNombreAsync(string nombrePais)
     {
         return await _repository.GetByPaisNombreAsync(nombrePais);
     }

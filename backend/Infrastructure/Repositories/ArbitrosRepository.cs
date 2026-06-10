@@ -25,7 +25,7 @@ public class ArbitrosRepository : IArbitroRepository
         return arbitros;
     }
 
-    public async Task<Application.Dto.Config.PagedResult<ArbitrosResponse>> GetAllAsync(
+    public async Task<PagedResult<ArbitrosResponse>> GetAllAsync(
         int page,
         int pageSize,
         string? search,

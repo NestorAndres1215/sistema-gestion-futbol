@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Dto.Config;
+using Domain.Entities;
 
 namespace Domain.Interfaces;
 
@@ -9,7 +10,7 @@ public interface ICiudadesRepository
     Task<Ciudades?> GetByIdAsync(int id);
     Task<Ciudades?> GetByNombreAsync(string nombre);
 
-    Task<IEnumerable<Ciudades>> GetByPaisNombreAsync(string nombrePais);
+    Task<IEnumerable<CiudadResponse>> GetByPaisNombreAsync(string nombrePais);
 
     Task<Ciudades> AddAsync(Ciudades ciudad);
 

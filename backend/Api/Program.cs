@@ -41,6 +41,38 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             Encoding.UTF8.GetBytes(config["Key"])
         )
     };
+
+    // 🔥 AQUÍ ESTÁ LO QUE TE FALTA
+    options.Events = new JwtBearerEvents
+    {
+        OnChallenge = async context =>
+        {
+            context.HandleResponse(); // evita el 401 vacío
+
+            context.Response.StatusCode = 401;
+            context.Response.ContentType = "application/json";
+
+            await context.Response.WriteAsync(System.Text.Json.JsonSerializer.Serialize(new
+            {
+                status = 401,
+                message = "No autenticado. Token faltante o inválido.",
+                type = "Unauthorized"
+            }));
+        },
+
+        OnForbidden = async context =>
+        {
+            context.Response.StatusCode = 403;
+            context.Response.ContentType = "application/json";
+
+            await context.Response.WriteAsync(System.Text.Json.JsonSerializer.Serialize(new
+            {
+                status = 403,
+                message = "No tienes permisos para acceder a este recurso.",
+                type = "Forbidden"
+            }));
+        }
+    };
 });
 
 builder.Services.AddAuthorization();

@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Application.Dto.Config;
+using Domain.Entities;
 
 namespace Application.Services;
 
@@ -8,7 +9,7 @@ public interface ICiudadesService
 
     Task<Ciudades?> GetByIdAsync(int id);
 
-    Task<IEnumerable<Ciudades>> GetByPaisNombreAsync(string nombrePais);
+    Task<IEnumerable<CiudadResponse>> GetByPaisNombreAsync(string nombrePais);
 
     Task<Ciudades> AddAsync(Ciudades ciudad);
 

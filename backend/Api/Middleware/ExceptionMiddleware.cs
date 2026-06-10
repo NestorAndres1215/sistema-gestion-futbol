@@ -1,17 +1,28 @@
 ﻿using Microsoft.AspNetCore.Http;
+
+
 using Application.Common.Exceptions;
-using Application.Common.Models;
 using System.Text.Json;
+
+using Application.Dto.Config;
 
 namespace API.Middleware;
 
+/// <summary>
+/// Middleware global para manejo de excepciones.
+/// Convierte excepciones de la aplicación en respuestas HTTP limpias.
+/// </summary>
 public class ExceptionMiddleware
 {
     private readonly RequestDelegate _next;
+    private readonly ILogger<ExceptionMiddleware> _logger;
 
-    public ExceptionMiddleware(RequestDelegate next)
+    public ExceptionMiddleware(
+        RequestDelegate next,
+        ILogger<ExceptionMiddleware> logger)
     {
         _next = next;
+        _logger = logger;
     }
 
     public async Task Invoke(HttpContext context)
@@ -22,6 +33,8 @@ public class ExceptionMiddleware
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Unhandled exception occurred");
+
             await HandleExceptionAsync(context, ex);
         }
     }
@@ -35,6 +48,9 @@ public class ExceptionMiddleware
             BadRequestException => StatusCodes.Status400BadRequest,
             NotFoundException => StatusCodes.Status404NotFound,
             UnauthorizedException => StatusCodes.Status401Unauthorized,
+            ForbiddenException => StatusCodes.Status403Forbidden,
+            ConflictException => StatusCodes.Status409Conflict,
+
             _ => StatusCodes.Status500InternalServerError
         };
 
@@ -42,11 +58,16 @@ public class ExceptionMiddleware
 
         var response = new ApiErrorResponse
         {
-            Message = ex.Message,
             Status = statusCode,
-            Date = DateTime.UtcNow
+            Message = statusCode == StatusCodes.Status500InternalServerError
+                ? "Error interno del servidor"
+                : ex.Message,
+            Date = DateTime.UtcNow,
+            ErrorType = ex.GetType().Name
         };
 
-        return context.Response.WriteAsync(JsonSerializer.Serialize(response));
+        var json = JsonSerializer.Serialize(response);
+
+        return context.Response.WriteAsync(json);
     }
 }
