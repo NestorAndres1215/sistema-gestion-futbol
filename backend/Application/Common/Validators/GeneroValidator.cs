@@ -1,4 +1,4 @@
-﻿using Domain.Constants;
+﻿using Domain.Catalogs;
 using FluentValidation;
 
 namespace Application.Common.Validators;
@@ -7,9 +7,9 @@ public static class GeneroValidator
 {
     private static readonly HashSet<string> GenerosValidos = new()
     {
-        Genero.Masculino,
-        Genero.Femenino,
-        Genero.Mixto
+        Generos.Masculino,
+        Generos.Femenino,
+        Generos.Mixto
     };
 
     public static string Validar(string genero)

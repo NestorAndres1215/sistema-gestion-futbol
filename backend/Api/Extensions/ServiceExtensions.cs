@@ -24,6 +24,7 @@ public static class ServiceExtensions
         services.AddScoped<IEntrenadorSeleccionService, EntrenadorSeleccionService>();
         services.AddScoped<IClubesService, ClubesService>();
         services.AddScoped<IFotoService, FotoService>();
+        services.AddScoped<ICatalogService, CatalogService>();
 
         return services;
     }
