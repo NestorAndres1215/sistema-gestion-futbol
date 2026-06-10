@@ -2,7 +2,7 @@
 using Application.Dto.Auth;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
-using Domain.Contants;
+using Domain.Catalogs;
 using System.Security.Claims;
 
 namespace Application.Services;

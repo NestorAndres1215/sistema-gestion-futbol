@@ -7,7 +7,7 @@ using Application.Dto.config;
 using Application.Dto.Entrenadores;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
-using Domain.Contants;
+using Domain.Catalogs;
 using Domain.Entities;
 using Domain.Interfaces;
 

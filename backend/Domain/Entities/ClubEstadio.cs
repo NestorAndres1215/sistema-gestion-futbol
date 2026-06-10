@@ -10,7 +10,7 @@ public class ClubEstadio
     public string Tipo { get; set; } = "Principal";
     public DateTime? FechaIncio { get; set; }
     public DateTime? FechaFin {  get; set; }
-    public Clubes Club {  get; set; }
-    public Estadio Estadio { get; set; }
+    public Clubes? Club {  get; set; }
+    public Estadio? Estadio { get; set; }
 
 }

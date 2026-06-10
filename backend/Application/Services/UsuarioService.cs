@@ -3,7 +3,7 @@ using Application.Common.Models;
 using Application.Dto.Auth;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
-using Domain.Contants;
+using Domain.Catalogs;
 
 
 namespace Application.Services;

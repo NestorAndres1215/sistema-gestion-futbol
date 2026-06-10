@@ -3,7 +3,8 @@ using Application.Common.Models;
 using Application.Dto.Clubes;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
-using Domain.Contants;
+using Domain.Catalogs;
+
 using Domain.Entities;
 
 
@@ -50,7 +51,7 @@ public class ClubesService : IClubesService
         {
             Nombre = clubesdto.Nombre,
             Confederacion = clubesdto.Confederacion,
-           
+
             Seudonimo = clubesdto.Seudonimo,
             CodigoFifa = clubesdto.CodigoFifa,
             Pais = clubesdto.Pais,

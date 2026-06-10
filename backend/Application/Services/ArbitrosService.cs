@@ -7,8 +7,8 @@ using Application.Dto.config;
 using Application.Dto.Estadisticas;
 using Application.Interfaces.Repositories;
 using Application.Interfaces.Services;
-using Domain.Constants;
-using Domain.Contants;
+using Domain.Catalogs;
+
 using Domain.Entities;
 using Domain.Interfaces;
 using FluentValidation;
