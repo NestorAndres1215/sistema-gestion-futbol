@@ -1,6 +1,6 @@
 ﻿
 using Application.Common.Models;
-using Application.Dto.Auth;
+using Application.Features.Usuarios.Dto;
 using Application.Interfaces.Repositories;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;

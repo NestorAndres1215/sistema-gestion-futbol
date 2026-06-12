@@ -1,6 +1,6 @@
-﻿using Application.Common.Models;
-using Application.Dto.Estadio;
-using Application.Dto.Estadisticas;
+﻿using Application.Common.Estadisticas;
+using Application.Common.Models;
+using Application.Features.Estadios.Dto;
 using Domain.Entities;
 
 namespace Application.Interfaces.Repositories;

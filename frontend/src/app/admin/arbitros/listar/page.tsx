@@ -39,14 +39,14 @@ export default function ArbitrosListarPage() {
                 <CardList
                     data={data}
                     getTitle={(e) =>
-                        `${e.persona.nombre} ${e.persona.apellido}`
+                        `${e.nombre} ${e.apellido}`
                     }
                     getSubtitle={(e) =>
-                        `${e.persona.ciudadNacimiento?.nombre ?? "Sin ciudad"} - ${e.persona.paisNacimiento?.nombre ?? "Sin país"}`
+                        `${e.ciudad ?? "Sin ciudad"} - ${e.pais ?? "Sin país"}`
                     }
                     getImage={(e) =>
-                        e.persona.fotoUrl
-                            ? `https://localhost:7269${e.persona.fotoUrl}`
+                        e.foto
+                            ? `https://localhost:7269${e.foto}`
                             : null
                     }
                      imageVariant="perfil"

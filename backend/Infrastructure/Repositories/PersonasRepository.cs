@@ -14,28 +14,28 @@ public class PersonasRepository : IPersonasRepository
         _context = context;
     }
 
-    public async  Task<Personas> AddAsync(Personas personas)
+    public async  Task<Persona> AddAsync(Persona personas)
     {
         await _context.Personas.AddAsync(personas);
         await _context.SaveChangesAsync();
         return personas;
     }
 
-    public async Task<Personas?> GetByIdAsync(int id)
+    public async Task<Persona?> GetByIdAsync(int id)
     {
         return await _context.Personas
             .AsNoTracking()
             .SingleOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<Personas?> GetByNombreAsync(string nombre)
+    public async Task<Persona?> GetByNombreAsync(string nombre)
     {
         return await _context.Personas
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Nombre == nombre);
     }
 
-    public async Task<Personas?> GetByNombreCompletoAsync(
+    public async Task<Persona?> GetByNombreCompletoAsync(
        string nombre,
        string apellido
        
@@ -48,7 +48,7 @@ public class PersonasRepository : IPersonasRepository
             );
     }
 
-    public async Task<Personas> UpdateAsync(Personas personas)
+    public async Task<Persona> UpdateAsync(Persona personas)
     {
         _context.Personas.Update(personas);
         await _context.SaveChangesAsync();

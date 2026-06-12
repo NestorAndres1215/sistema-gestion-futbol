@@ -8,8 +8,8 @@ import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 export default function PerfilUsuario() {
   const { user } = useMe();
 
-  const initials = user?.nombre
-    ? user.nombre.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()
+  const initials = user?.userName
+    ? user.userName.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()
     : "?";
 
   return (
@@ -35,7 +35,7 @@ export default function PerfilUsuario() {
             <div className="d-flex align-items-center gap-3">
               <div className={styles.avatar}>{initials}</div>
               <div>
-                <h2 className={styles.name}>{user.nombre}</h2>
+                <h2 className={styles.name}>{user.userName}</h2>
                 <p className={styles.email}>{user.email}</p>
               </div>
             </div>
@@ -45,7 +45,7 @@ export default function PerfilUsuario() {
             <div className={styles.infoGrid}>
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Nombre</span>
-                <span className={styles.infoValue}>{user.nombre}</span>
+                <span className={styles.infoValue}>{user.userName}</span>
               </div>
 
               <div className={styles.infoItem}>
@@ -55,7 +55,7 @@ export default function PerfilUsuario() {
 
               <div className={styles.infoItem}>
                 <span className={styles.infoLabel}>Rol</span>
-                <span className={styles.badge}>{user.role?.nombre ?? "—"}</span>
+                <span className={styles.badge}>{user.role?? "—"}</span>
               </div>
             </div>
           </div>

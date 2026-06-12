@@ -1,6 +1,6 @@
-﻿using Application.Dto.Arbitros;
-using Application.Dto.Estadisticas;
-using Application.Interfaces.Services;
+﻿using Application.Common.Estadisticas;
+using Application.Features.Arbitros.Dto;
+using Application.Features.Arbitros.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,9 +10,9 @@ namespace Api.Controllers;
 [Route("api/arbitros")]
 public class ArbitroController : ControllerBase
 {
-    private readonly IArbitrosService _service;
+    private readonly IArbitroService _service;
 
-    public ArbitroController(IArbitrosService service)
+    public ArbitroController(IArbitroService service)
     {
         _service = service;
     }

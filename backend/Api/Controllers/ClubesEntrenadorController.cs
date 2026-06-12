@@ -1,6 +1,6 @@
-﻿using Application.Dto.Clubes;
-using Application.Dto.Selecciones;
-using Application.Interfaces.Services;
+﻿
+using Application.Features.ClubesEntrenadores.Dto;
+using Application.Features.ClubesEntrenadores.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,21 +10,21 @@ namespace Api.Controllers;
 [ApiController]
 public class ClubesEntrenadorController : ControllerBase
 {
-    private readonly IClubesEntrenadorService _service;
+    private readonly IClubEntrenadorService _service;
 
-    public ClubesEntrenadorController(IClubesEntrenadorService service)
+    public ClubesEntrenadorController(IClubEntrenadorService service)
     {
         _service = service;
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add([FromBody] ClubesEntrenadorRequest request)
+    public async Task<IActionResult> Add([FromBody] ClubEntrenadorRequest request)
     {
         return Ok(await _service.AddAsync(request));
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] ClubesEntrenadorRequest request)
+    public async Task<IActionResult> Update(int id, [FromBody] ClubEntrenadorRequest request)
     {
         return Ok(await _service.UpdateAsync(id, request));
     }

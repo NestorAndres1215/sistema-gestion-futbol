@@ -1,4 +1,4 @@
-﻿using Application.Dto.Config;
+﻿using Application.Features.Ciudades.Dto;
 using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure.Data;
@@ -15,7 +15,7 @@ public class CiudadesRepository : ICiudadesRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Ciudades>> GetAllAsync()
+    public async Task<IEnumerable<Ciudad>> GetAllAsync()
     {
         return await _context.Ciudades
             .Include(x => x.Pais)
@@ -23,7 +23,7 @@ public class CiudadesRepository : ICiudadesRepository
             .ToListAsync();
     }
 
-    public async Task<Ciudades?> GetByIdAsync(int id)
+    public async Task<Ciudad?> GetByIdAsync(int id)
     {
         return await _context.Ciudades
             .Include(x => x.Pais)
@@ -44,28 +44,28 @@ public class CiudadesRepository : ICiudadesRepository
             .ToListAsync();
     }
 
-    public async Task<Ciudades> AddAsync(Ciudades ciudad)
+    public async Task<Ciudad> AddAsync(Ciudad ciudad)
     {
         await _context.Ciudades.AddAsync(ciudad);
         await _context.SaveChangesAsync();
         return ciudad;
     }
 
-    public async Task<Ciudades> UpdateAsync(Ciudades ciudad)
+    public async Task<Ciudad> UpdateAsync(Ciudad ciudad)
     {
         _context.Ciudades.Update(ciudad);
         await _context.SaveChangesAsync();
         return ciudad;
     }
 
-    public async Task<Ciudades?> DeleteAsync(Ciudades ciudad)
+    public async Task<Ciudad?> DeleteAsync(Ciudad ciudad)
     {
         _context.Ciudades.Remove(ciudad);
         await _context.SaveChangesAsync();
         return ciudad;
     }
 
-    public async Task<Ciudades?> GetByNombreAsync(string nombre)
+    public async Task<Ciudad?> GetByNombreAsync(string nombre)
     {
         return await _context.Ciudades
             .AsNoTracking()

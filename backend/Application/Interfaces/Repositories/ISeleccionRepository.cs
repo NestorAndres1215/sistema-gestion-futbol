@@ -1,5 +1,5 @@
 ﻿using Application.Common.Models;
-using Application.Dto.Selecciones;
+using Application.Features.Selecciones.Dto;
 using Domain.Entities;
 
 namespace Application.Interfaces.Repositories;
@@ -12,12 +12,12 @@ public interface ISeleccionRepository
         string? search,
         string? confederacion,
         string? estado);
-    Task<Selecciones> AddAsync(Selecciones selecciones);
-    Task<Selecciones> UpdateAsync(Selecciones selecciones);
-    Task<Selecciones?> GetByIdAsync(int id);
-    Task<Selecciones?> GetByNombreAsync(string nombre);
-    Task<Selecciones?> GetByClaveAsync(string clave);
-    Task<Selecciones?> GetByPaisAsync(string pais);
-    Task<Selecciones?> GetByCodigoFifaAsync(string codigoFifa);
-    Task<Selecciones?> GetByConfederacionAsync(string confederacion);
+    Task<Seleccion> AddAsync(Seleccion selecciones);
+    Task<Seleccion> UpdateAsync(Seleccion selecciones);
+    Task<Seleccion?> GetByIdAsync(int id);
+    Task<Seleccion?> GetByNombreAsync(string nombre);
+    Task<Seleccion?> GetByClaveAsync(string clave);
+    Task<Seleccion?> GetByPaisAsync(string pais);
+    Task<Seleccion?> GetByCodigoFifaAsync(string codigoFifa);
+    Task<Seleccion?> GetByConfederacionAsync(string confederacion);
 }

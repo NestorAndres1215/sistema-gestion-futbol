@@ -1,5 +1,5 @@
 ﻿using Application.Common.Models;
-using Application.Dto.Entrenadores;
+using Application.Features.Entrenadores.Dto;
 using Domain.Entities;
 
 namespace Application.Interfaces.Repositories;
@@ -13,9 +13,9 @@ public interface IEntrenadoresRepository
          string? pais,
          string? estado);
 
-    Task<Entrenadores> AddAsync(Entrenadores entrenadores);
-    Task<Entrenadores> UpdateAsync(Entrenadores entrenadores);
-    Task<Entrenadores?> GetByIdAsync(int id);
-    Task<Entrenadores?> GetByNombreAsync(string nombre);
+    Task<Entrenador> AddAsync(Entrenador entrenadores);
+    Task<Entrenador> UpdateAsync(Entrenador entrenadores);
+    Task<Entrenador?> GetByIdAsync(int id);
+    Task<Entrenador?> GetByNombreAsync(string nombre);
     Task<List<EntrenadorComboRequest>> GetComboAsync();
 }

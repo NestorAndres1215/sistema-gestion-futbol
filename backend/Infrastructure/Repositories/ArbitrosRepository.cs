@@ -1,7 +1,7 @@
 ﻿
+using Application.Common.Estadisticas;
 using Application.Common.Models;
-using Application.Dto.Arbitros;
-using Application.Dto.Estadisticas;
+using Application.Features.Arbitros.Dto;
 using Application.Interfaces.Repositories;
 
 using Infrastructure.Data;
@@ -18,7 +18,7 @@ public class ArbitrosRepository : IArbitroRepository
         _context = context;
     }
 
-    public async Task<Arbitros> AddAsync(Arbitros arbitros)
+    public async Task<Arbitro> AddAsync(Arbitro arbitros)
     {
         _context.Arbitros.Add(arbitros);
         await _context.SaveChangesAsync();
@@ -100,7 +100,7 @@ public class ArbitrosRepository : IArbitroRepository
         };
     }
 
-    public async Task<Arbitros?> GetByIdAsync(int id)
+    public async Task<Arbitro?> GetByIdAsync(int id)
     {
         return await _context.Arbitros
             .Include(x => x.Persona)
@@ -111,7 +111,7 @@ public class ArbitrosRepository : IArbitroRepository
             .SingleOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<Arbitros> UpdateAsync(Arbitros arbitros)
+    public async Task<Arbitro> UpdateAsync(Arbitro arbitros)
     {
         _context.Arbitros.Update(arbitros);
         await _context.SaveChangesAsync();

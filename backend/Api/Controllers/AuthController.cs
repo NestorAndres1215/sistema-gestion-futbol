@@ -1,5 +1,6 @@
-﻿using Application.Dto.Auth;
-using Application.Interfaces.Services;
+﻿using Application.Features.Auth.Dto;
+using Application.Features.Auth.Interfaces;
+using Application.Features.Usuarios.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

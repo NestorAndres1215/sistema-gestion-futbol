@@ -1,4 +1,4 @@
-﻿using Application.Interfaces.Services;
+﻿using Application.Common.Services;
 using Infrastructure.Auth;
 
 namespace Api.Extensions;

@@ -63,7 +63,7 @@ export function useUsers() {
 
   const userColumns = [
     { header: "ID", accessor: (row: any) => row.id, },
-    { header: "Usuario", accessor: (row: any) => row.username, },
+    { header: "Usuario", accessor: (row: any) => row.userName, },
     { header: "Email", accessor: (row: any) => row.email, },
     { header: "Rol", accessor: (u: any) => u.role, },
   ];

@@ -43,7 +43,7 @@ export default function CambiarContraseniaPage() {
                                 <div className={styles.inputWrap}>
 
                                     <input
-                                        value={user?.nombre ?? ""}
+                                        value={user?.userName ?? ""}
                                         disabled
                                         className={styles.input}
                                     />

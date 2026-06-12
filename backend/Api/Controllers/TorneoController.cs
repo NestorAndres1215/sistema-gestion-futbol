@@ -1,5 +1,5 @@
-﻿using Application.Dto.Torneo;
-using Application.Interfaces.Services;
+﻿using Application.Features.Torneos.Dto;
+using Application.Features.Torneos.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

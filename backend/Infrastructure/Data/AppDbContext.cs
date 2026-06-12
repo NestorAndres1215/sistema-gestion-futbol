@@ -8,23 +8,32 @@ public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    public DbSet<Usuario> Usuarios { get; set; }
-    public DbSet<Categoria> Categorias { get; set; }
-    public DbSet<Rol> Roles { get; set; }
-    public DbSet<Torneo> Torneos { get; set; }
-    public DbSet<Estadio> Estadios { get; set; }
-    public DbSet<Ciudades> Ciudades { get; set; }
-    public DbSet<Paises> Paises { get; set; }
-    public DbSet<Personas> Personas { get; set; }
-    public DbSet<Arbitros> Arbitros { get; set; }
-    public DbSet<Jugadores> Jugadores { get; set; }
-    public DbSet<Entrenadores> Entrenadores { get; set; }
-    public DbSet<ParametrosSistema> ParametrosSistema { get; set; }
-    public DbSet<Selecciones> Selecciones { get; set; }
-    public DbSet<SeleccionEstadio> SeleccionEstadio { get; set; }
-    public DbSet<EntrenadorSeleccion> EntrenadorSeleccion { get; set; }
-    public DbSet<Clubes> Clubes { get; set; }
-    public DbSet<ClubEntrenador> ClubEntrenador { get; set; }
-    public DbSet<ClubEstadio> ClubEstadio { get; set; }
+    public DbSet<Usuario> Usuarios => Set<Usuario>();
+    public DbSet<Categoria> Categorias => Set<Categoria>();
+    public DbSet<Rol> Roles => Set<Rol>();
+    public DbSet<Torneo> Torneos => Set<Torneo>();
+    public DbSet<Estadio> Estadios => Set<Estadio>(); 
+    public DbSet<Ciudad> Ciudades => Set<Ciudad>();
+    public DbSet<Pais> Paises => Set<Pais>();
+    public DbSet<Persona> Personas => Set<Persona>();
+    public DbSet<Arbitro> Arbitros => Set<Arbitro>();
+    public DbSet<Jugador> Jugadores => Set<Jugador>();
+    public DbSet<Entrenador> Entrenadores => Set<Entrenador>();
+    public DbSet<ParametroSistema> ParametrosSistema => Set<ParametroSistema>();
+    public DbSet<Seleccion> Selecciones => Set<Seleccion>();
+    public DbSet<SeleccionEstadio> SeleccionEstadio => Set<SeleccionEstadio>();
+    public DbSet<SeleccionEntrenador> EntrenadorSeleccion => Set<SeleccionEntrenador>();
+    public DbSet<Club> Clubes => Set<Club>();
+    public DbSet<ClubEntrenador> ClubEntrenador => Set<ClubEntrenador>();
+    public DbSet<ClubEstadio> ClubEstadio => Set<ClubEstadio>();
+
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(
+            typeof(AppDbContext).Assembly);
+
+        base.OnModelCreating(modelBuilder);
+    }
 
 }

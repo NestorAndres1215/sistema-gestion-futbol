@@ -1,6 +1,6 @@
 ﻿
 using Application.Common.Models;
-using Application.Dto.Clubes;
+using Application.Features.Clubes.Dto;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;
@@ -16,7 +16,7 @@ public class ClubesRepository: IClubesRepository
         _context = context;
     }
 
-    public async Task<Clubes> AddAsync(Clubes clubes)
+    public async Task<Club> AddAsync(Club clubes)
     {
         _context.Clubes.Add(clubes);
         await _context.SaveChangesAsync();
@@ -86,42 +86,42 @@ public class ClubesRepository: IClubesRepository
 
 
 
-    public async Task<Clubes?> GetByCodigoFifaAsync(string codigoFifa)
+    public async Task<Club?> GetByCodigoFifaAsync(string codigoFifa)
     {
         return await _context.Clubes
            .AsNoTracking()
            .FirstOrDefaultAsync(x => x.CodigoFifa == codigoFifa);
     }
 
-    public async Task<Clubes?> GetByConfederacionAsync(string confederacion)
+    public async Task<Club?> GetByConfederacionAsync(string confederacion)
     {
         return await _context.Clubes
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Confederacion == confederacion);
     }
 
-    public async Task<Clubes?> GetByIdAsync(int id)
+    public async Task<Club?> GetByIdAsync(int id)
     {
         return await _context.Clubes
             .AsNoTracking()
             .SingleOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<Clubes?> GetByNombreAsync(string nombre)
+    public async Task<Club?> GetByNombreAsync(string nombre)
     {
         return await _context.Clubes
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Nombre == nombre);
     }
 
-    public async Task<Clubes?> GetByPaisAsync(string pais)
+    public async Task<Club?> GetByPaisAsync(string pais)
     {
         return await _context.Clubes
           .AsNoTracking()
           .FirstOrDefaultAsync(x => x.Pais == pais);
     }
 
-    public async Task<Clubes> UpdateAsync(Clubes clubes)
+    public async Task<Club> UpdateAsync(Club clubes)
     {
         _context.Clubes.Update(clubes);
         await _context.SaveChangesAsync();

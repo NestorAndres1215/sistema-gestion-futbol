@@ -1,7 +1,7 @@
 ﻿
 
 using Application.Common.Models;
-using Application.Dto.Config;
+using Application.Features.ParamatrosSistemas.Dto;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;
@@ -19,7 +19,7 @@ public class ParametrosSistemaRepository:IParametrosSistemaRepository
         _context = context;
     }
 
-    public async Task<ParametrosSistema> AddAsync(ParametrosSistema parametro)
+    public async Task<ParametroSistema> AddAsync(ParametroSistema parametro)
     {
         _context.ParametrosSistema.Add(parametro);
 
@@ -99,21 +99,21 @@ public class ParametrosSistemaRepository:IParametrosSistemaRepository
         };
     }
 
-    public async Task<ParametrosSistema?> GetByClaveAsync(string clave)
+    public async Task<ParametroSistema?> GetByClaveAsync(string clave)
     {
         return await _context.ParametrosSistema
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Clave == clave);
     }
 
-    public async Task<ParametrosSistema?> GetByIdAsync(int id)
+    public async Task<ParametroSistema?> GetByIdAsync(int id)
     {
         return await _context.ParametrosSistema
             .AsNoTracking()
             .SingleOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<ParametrosSistema> UpdateAsync( ParametrosSistema parametro)
+    public async Task<ParametroSistema> UpdateAsync( ParametroSistema parametro)
     {
          _context.ParametrosSistema.Update(parametro);
 

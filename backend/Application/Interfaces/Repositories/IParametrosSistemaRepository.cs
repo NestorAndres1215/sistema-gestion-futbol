@@ -1,5 +1,5 @@
 ﻿using Application.Common.Models;
-using Application.Dto.Config;
+using Application.Features.ParamatrosSistemas.Dto;
 using Domain.Entities;
 
 
@@ -14,11 +14,11 @@ public interface IParametrosSistemaRepository
      string? tipoDato,
      string? estado);
 
-    Task<ParametrosSistema?> GetByIdAsync(int id);
+    Task<ParametroSistema?> GetByIdAsync(int id);
 
-    Task<ParametrosSistema?> GetByClaveAsync(string clave);
+    Task<ParametroSistema?> GetByClaveAsync(string clave);
 
-    Task<ParametrosSistema> AddAsync(ParametrosSistema parametro);
+    Task<ParametroSistema> AddAsync(ParametroSistema parametro);
 
-    Task<ParametrosSistema> UpdateAsync(ParametrosSistema parametro);
+    Task<ParametroSistema> UpdateAsync(ParametroSistema parametro);
 }

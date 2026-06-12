@@ -1,4 +1,4 @@
-﻿using Application.Services;
+﻿using Application.Features.Paises.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +8,9 @@ namespace Api.Controllers;
 [Route("api/paises")]
 public class PaisesController : ControllerBase
 {
-    private readonly IPaisesService _service;
+    private readonly IPaisService _service;
 
-    public PaisesController(IPaisesService service)
+    public PaisesController(IPaisService service)
     {
         _service = service;
     }
@@ -35,13 +35,13 @@ public class PaisesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] Paises pais)
+    public async Task<IActionResult> Create([FromBody] Pais pais)
     {
         return Ok(await _service.AddAsync(pais));
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] Paises pais)
+    public async Task<IActionResult> Update(int id, [FromBody] Pais pais)
     {
         return Ok(await _service.UpdateAsync(pais));
     }

@@ -1,5 +1,6 @@
-﻿using Application.Dto.config;
-using Application.Interfaces.Services;
+﻿using Application.Features.Categorias;
+using Application.Features.Categorias.Dto;
+using Application.Features.Categorias.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

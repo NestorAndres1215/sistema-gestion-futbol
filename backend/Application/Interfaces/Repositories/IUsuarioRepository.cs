@@ -1,5 +1,5 @@
 ﻿using Application.Common.Models;
-using Application.Dto.Auth;
+using Application.Features.Usuarios.Dto;
 using Domain.Entities;
 
 namespace Application.Interfaces.Repositories;

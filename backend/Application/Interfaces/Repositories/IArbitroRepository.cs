@@ -1,14 +1,14 @@
-﻿using Application.Common.Models;
-using Application.Dto.Arbitros;
-using Application.Dto.Estadisticas;
+﻿using Application.Common.Estadisticas;
+using Application.Common.Models;
+using Application.Features.Arbitros.Dto;
 namespace Application.Interfaces.Repositories;
 
 public interface IArbitroRepository
 {
     Task<PagedResult<ArbitrosResponse>> GetAllAsync(int page,int pageSize,string? search,string? categoria,string? pais,string? estado);
-    Task<Arbitros> AddAsync(Arbitros arbitros);
-    Task<Arbitros> UpdateAsync(Arbitros arbitros);
-    Task<Arbitros?> GetByIdAsync(int id);
+    Task<Arbitro> AddAsync(Arbitro arbitros);
+    Task<Arbitro> UpdateAsync(Arbitro arbitros);
+    Task<Arbitro?> GetByIdAsync(int id);
     Task<int> ObtenerTotalArbitrosAsync();
     Task<int> ObtenerArbitrosActivosAsync();
     Task<double> ObtenerPrecisionPromedioAsync();

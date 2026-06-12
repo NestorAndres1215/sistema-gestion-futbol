@@ -11,6 +11,6 @@ public class ClubEntrenador
     public string Estado { get; set; } = "Activo";
     public DateTime FechaInicio { get; set; }
     public DateTime? FechaFin { get; set; }
-    public Entrenadores? Entrenador { get; set; }
-    public Clubes? Club { get; set; }
+    public Entrenador? Entrenador { get; set; }
+    public Club? Club { get; set; }
 }

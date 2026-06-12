@@ -1,6 +1,6 @@
 ﻿
 using Application.Common.Models;
-using Application.Dto.Selecciones;
+using Application.Features.Selecciones.Dto;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;
@@ -16,7 +16,7 @@ public class SeleccionRepository:ISeleccionRepository
         _context = context;
     }
 
-    public async  Task<Selecciones> AddAsync(Selecciones selecciones)
+    public async  Task<Seleccion> AddAsync(Seleccion selecciones)
     {
         _context.Selecciones.Add(selecciones);
         await _context.SaveChangesAsync();
@@ -89,49 +89,49 @@ public class SeleccionRepository:ISeleccionRepository
         };
     }
 
-    public async Task<Selecciones?> GetByClaveAsync(string clave)
+    public async Task<Seleccion?> GetByClaveAsync(string clave)
     {
         return await _context.Selecciones
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Clave == clave);
     }
 
-    public async Task<Selecciones?> GetByCodigoFifaAsync(string codigoFifa)
+    public async Task<Seleccion?> GetByCodigoFifaAsync(string codigoFifa)
     {
         return await _context.Selecciones
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.CodigoFIFA == codigoFifa);
     }
 
-    public async  Task<Selecciones?> GetByConfederacionAsync(string confederacion)
+    public async  Task<Seleccion?> GetByConfederacionAsync(string confederacion)
     {
         return await _context.Selecciones
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Confederacion == confederacion);
     }
 
-    public async Task<Selecciones?> GetByIdAsync(int id)
+    public async Task<Seleccion?> GetByIdAsync(int id)
     {
         return await _context.Selecciones
             .AsNoTracking()
             .SingleOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<Selecciones?> GetByNombreAsync(string nombre)
+    public async Task<Seleccion?> GetByNombreAsync(string nombre)
     {
         return await _context.Selecciones
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Nombre == nombre);
     }
 
-    public async Task<Selecciones?> GetByPaisAsync(string pais)
+    public async Task<Seleccion?> GetByPaisAsync(string pais)
     {
         return await _context.Selecciones
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Pais == pais);
     }
 
-    public async Task<Selecciones> UpdateAsync(Selecciones selecciones)
+    public async Task<Seleccion> UpdateAsync(Seleccion selecciones)
     {
         _context.Selecciones.Update(selecciones);
         await _context.SaveChangesAsync();

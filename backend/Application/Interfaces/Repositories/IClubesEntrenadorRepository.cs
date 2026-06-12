@@ -1,7 +1,7 @@
 ﻿using Application.Common.Models;
-using Application.Dto.Clubes;
-using Application.Dto.Entrenadores;
-using Application.Dto.Selecciones;
+
+using Application.Features.ClubesEntrenadores.Dto;
+using Application.Features.Entrenadores.Dto;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace Application.Interfaces.Repositories;
 
 public interface IClubesEntrenadorRepository
 {
-    Task<PagedResult<ClubesEntrenadorResponse>> ListarPorSeleccion( int page, int pageSize, string? club);
+    Task<PagedResult<ClubEntrenadorResponse>> ListarPorSeleccion( int page, int pageSize, string? club);
     Task<ClubEntrenador> AddAsync(ClubEntrenador clubEntrenador);
     Task<ClubEntrenador> UpdateAsync(ClubEntrenador clubEntrenador);
     Task<ClubEntrenador?> GetByIdAsync(int id);

@@ -8,11 +8,11 @@ namespace Application.Interfaces.Repositories;
 public interface IPersonasRepository
 {
 
-    Task<Personas> AddAsync(Personas personas);
-    Task<Personas> UpdateAsync(Personas personas);
-    Task<Personas?> GetByIdAsync(int id);
-    Task<Personas?> GetByNombreAsync(string nombre);
-    Task<Personas?> GetByNombreCompletoAsync(
+    Task<Persona> AddAsync(Persona personas);
+    Task<Persona> UpdateAsync(Persona personas);
+    Task<Persona?> GetByIdAsync(int id);
+    Task<Persona?> GetByNombreAsync(string nombre);
+    Task<Persona?> GetByNombreCompletoAsync(
         string nombre,
         string apellido
     );

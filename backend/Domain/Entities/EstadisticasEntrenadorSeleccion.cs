@@ -12,6 +12,6 @@ public class EstadisticasEntrenadorSeleccion
     public int GolesFavor {  get; set; }
     public int GolesContra { get; set; }
     public int TitulosGanados {  get; set; }
-    public EntrenadorSeleccion? entrenadorSeleccion { get; set; }
+    public SeleccionEntrenador? entrenadorSeleccion { get; set; }
 
 }

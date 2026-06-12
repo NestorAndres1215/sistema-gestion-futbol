@@ -1,0 +1,221 @@
+﻿using Application.Common.Estadisticas;
+using Application.Common.Exceptions;
+using Application.Common.Models;
+using Application.Features.Estadios.Dto;
+using Application.Features.Estadios.Interfaces;
+using Application.Features.Fotos.Interfaces;
+using Application.Interfaces.Repositories;
+using Domain.Entities;
+
+
+namespace Application.Features.Estadios.Services;
+
+public class EstadioService : IEstadioService
+{
+
+    private readonly IEstadioRepository _repository;
+    private readonly IFotoService _fotoService;
+
+    public EstadioService(IEstadioRepository repository, IFotoService fotoService)
+    {
+        _repository = repository;
+        _fotoService = fotoService;
+    }
+
+
+    public async Task<Estadio> AddAsync(EstadioRequest dto)
+    {
+
+        ValidarDto(dto);
+        string fotoUrl = await _fotoService.GuardarFotoAsync(dto.Foto!, "estadios", $"{dto.Nombre}");
+
+        var estadio = new Estadio
+        {
+            Nombre = dto.Nombre,
+            Descripcion = dto.Descripcion ?? "",
+            FechaApertura = dto.FechaApertura,
+            Anio = dto.Anio,
+            Ciudad = dto.Ciudad,
+            Pais = dto.Pais,
+            Latitud = dto.Latitud,
+            Longitud = dto.Longitud,
+            Capacidad = dto.Capacidad,
+            TipoCesped = dto.TipoCesped,
+            FotoUrl = fotoUrl,
+            Estado = "Disponible",
+            FechaCreacion = DateTime.Now
+        };
+            return await _repository.AddAsync(estadio);
+ 
+    }
+
+
+    private void ValidarDto(EstadioRequest dto)
+    {
+        if (dto == null)
+            throw new BadRequestException(nameof(dto));
+
+        if (string.IsNullOrWhiteSpace(dto.Nombre))
+            throw new BadRequestException("El nombre es obligatorio");
+
+        if (string.IsNullOrWhiteSpace(dto.Pais))
+            throw new BadRequestException("El país es obligatorio");
+
+        if (string.IsNullOrWhiteSpace(dto.Ciudad))
+            throw new BadRequestException("La ciudad es obligatoria");
+
+        if (dto.Capacidad <= 0)
+            throw new BadRequestException("La capacidad debe ser mayor a 0");
+
+        if (dto.FechaApertura > DateTime.Now)
+            throw new BadRequestException(
+                "La fecha de apertura no puede ser mayor a la fecha actual"
+            );
+
+        if ( dto.Anio <= 0 || dto.Anio > DateTime.Now.Year)
+        {
+            throw new BadRequestException( "El año no es válido");
+        }
+    }
+
+    public async  Task<PagedResult<EstadioResponse>> GetAllAsync(int page, int pageSize, string? search, string? tipoCesped, string? pais, int? anio, string? estado)
+    {
+        return await _repository.GetAllAsync(page, pageSize, search, tipoCesped, pais, anio, estado);
+    }
+
+    public async Task<List<int>> GetAniosAsync()
+    {
+        return await _repository.GetAniosAsync()
+            ?? throw new NotFoundException("Anios no encontrado");
+    }
+
+    public async  Task<Estadio?> GetByIdAsync(int id)
+    {
+        return await _repository.GetByIdAsync(id)
+            ?? throw new NotFoundException("Estadio no encontrado");
+    }
+
+    public async Task<Estadio?> GetByNombreAsync(string nombre)
+    {
+        return await _repository.GetByNombreAsync(nombre)
+            ?? throw new NotFoundException("Estadio no encontrado");
+    }
+    public async Task<List<Estadio>> GetByPaisAsync(string pais)
+    {
+        return await _repository.GetByPaisAsync(pais);
+    }
+
+    public async Task<Estadio> UpdateAsync(int id, EstadioRequest estadioDTo)
+    {
+        var estadio = await _repository.GetByIdAsync(id);
+
+        if (estadio == null)
+            throw new NotFoundException($"No se encontró el estadio con id {id}");
+
+        ValidarDto(estadioDTo);
+
+        if (!string.Equals(estadio.Nombre, estadioDTo.Nombre, StringComparison.OrdinalIgnoreCase))
+        {
+            var existente = await _repository.GetByNombreAsync(estadioDTo.Nombre);
+
+            if (existente != null && existente.Id != id)
+                throw new BadRequestException("Ya existe un estadio con ese nombre");
+        }
+
+
+        if (estadioDTo.Foto != null && estadioDTo.Foto.Length > 0)
+        {
+            if (!string.IsNullOrEmpty(estadio.FotoUrl))
+                _fotoService.EliminarFoto(estadio.FotoUrl);
+
+            estadio.FotoUrl = await _fotoService.GuardarFotoAsync(estadioDTo.Foto!, "estadios", $"{estadioDTo.Nombre}"); ;
+        }
+
+        estadio.Nombre = estadioDTo.Nombre;
+        estadio.Descripcion = estadioDTo.Descripcion ?? "";
+        estadio.FechaApertura = estadioDTo.FechaApertura;
+        estadio.Anio = estadioDTo.Anio;
+        estadio.Ciudad = estadioDTo.Ciudad;
+        estadio.Pais = estadioDTo.Pais;
+        estadio.Latitud = estadioDTo.Latitud;
+        estadio.Longitud = estadioDTo.Longitud;
+        estadio.Capacidad = estadioDTo.Capacidad;
+        estadio.TipoCesped = estadioDTo.TipoCesped;
+
+        estadio.FechaActualizacion = DateTime.Now;
+
+        await _repository.UpdateAsync(estadio);
+
+        return estadio;
+    }
+
+    public async Task<TotalCountResponse> ObtenerTotalEstadiosAsync()
+    {
+        var total = await _repository.ObtenerTotalEstadiosAsync();
+
+        return new TotalCountResponse
+        {
+            Total = total
+        };
+    }
+    public async Task<AverageResponse> ObtenerPromedioCapacidadAsync()
+    {
+        var promedio = await _repository.ObtenerPromedioCapacidadAsync();
+
+        return new AverageResponse
+        {
+            Promedio = promedio
+        };
+    }
+    public async Task<TotalCountResponse> ObtenerTotalPaisesConEstadiosAsync()
+    {
+        var total = await _repository.ObtenerTotalPaisesConEstadiosAsync();
+
+        return new TotalCountResponse
+        {
+            Total = total
+        };
+    }
+    public async Task<List<ItemResponse>> ObtenerPaisesConMasEstadiosAsync(int cantidad)
+    {
+        return await _repository.ObtenerPaisesConMasEstadiosAsync(cantidad);
+    }
+    public async Task<List<ItemResponse>> ObtenerPaisesConMenosEstadiosAsync(int cantidad)
+    {
+        return await _repository.ObtenerPaisesConMenosEstadiosAsync(cantidad);
+    }
+    public async Task<List<ItemResponse>> ObtenerCiudadesConMasEstadiosAsync(int cantidad)
+    {
+        return await _repository.ObtenerCiudadesConMasEstadiosAsync(cantidad);
+    }
+    public async Task<List<ItemResponse>> ObtenerCiudadesConMenosEstadiosAsync(int cantidad)
+    {
+        return await _repository.ObtenerCiudadesConMenosEstadiosAsync(cantidad);
+    }
+    public async Task<List<ItemResponse>> ObtenerDistribucionPorEstadoAsync()
+    {
+        return await _repository.ObtenerDistribucionPorEstadoAsync();
+    }
+    public async Task<List<ItemResponse>> ObtenerDistribucionTipoCespedAsync()
+    {
+        return await _repository.ObtenerDistribucionTipoCespedAsync();
+    }
+    public async Task<List<ItemResponse>> ObtenerMayorCapacidadAsync(int cantidad)
+    {
+        return await _repository.ObtenerMayorCapacidadAsync(cantidad);
+    }
+    public async Task<List<ItemResponse>> ObtenerMenorCapacidadAsync(int cantidad)
+    {
+        return await _repository.ObtenerMenorCapacidadAsync(cantidad);
+    }
+    public async Task<List<ItemResponse>> ObtenerEstadiosMasAntiguosAsync(int cantidad)
+    {
+        return await _repository.ObtenerEstadiosMasAntiguosAsync(cantidad);
+    }
+    public async Task<List<ItemResponse>> ObtenerEstadiosMasNuevosAsync(int cantidad)
+    {
+        return await _repository.ObtenerEstadiosMasNuevosAsync(cantidad);
+    }
+
+}
+

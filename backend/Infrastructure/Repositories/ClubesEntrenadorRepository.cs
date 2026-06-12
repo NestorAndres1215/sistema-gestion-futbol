@@ -1,10 +1,8 @@
 ﻿
 using Application.Common.Models;
-using Application.Dto.Clubes;
-using Application.Dto.Entrenadores;
-using Application.Dto.Selecciones;
+using Application.Features.ClubesEntrenadores.Dto;
+using Application.Features.Entrenadores.Dto;
 using Application.Interfaces.Repositories;
-using Azure;
 using Domain.Entities;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -74,7 +72,7 @@ public class ClubesEntrenadorRepository:IClubesEntrenadorRepository
             .ToListAsync();
     }
 
-    public async Task<PagedResult<ClubesEntrenadorResponse>> ListarPorSeleccion(int page, int pageSize, string? club)
+    public async Task<PagedResult<ClubEntrenadorResponse>> ListarPorSeleccion(int page, int pageSize, string? club)
     {
         var query = _context.ClubEntrenador
             .Include(x => x.Club)
@@ -95,7 +93,7 @@ public class ClubesEntrenadorRepository:IClubesEntrenadorRepository
         var items = await query
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
-            .Select(x => new ClubesEntrenadorResponse
+            .Select(x => new ClubEntrenadorResponse
             {
                 Id = x.Id,
                 Clubes = x.Club.Nombre,
@@ -109,7 +107,7 @@ public class ClubesEntrenadorRepository:IClubesEntrenadorRepository
             .ToListAsync();
 
 
-        return new PagedResult<ClubesEntrenadorResponse>
+        return new PagedResult<ClubEntrenadorResponse>
         {
             Items = items,
             TotalCount = totalCount,

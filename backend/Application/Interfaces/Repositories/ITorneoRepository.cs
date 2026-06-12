@@ -1,6 +1,6 @@
 ﻿
 using Application.Common.Models;
-using Application.Dto.Torneo;
+using Application.Features.Torneos.Dto;
 using Domain.Entities;
 
 

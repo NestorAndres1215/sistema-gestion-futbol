@@ -14,41 +14,41 @@ public class PaisesRepository : IPaisesRepository
         _context = context;
     }
 
-    public async Task<IEnumerable<Paises>> GetAllAsync()
+    public async Task<IEnumerable<Pais>> GetAllAsync()
     {
         return await _context.Paises
             .OrderBy(x => x.Nombre)
             .ToListAsync();
     }
 
-    public async Task<Paises?> GetByIdAsync(int id)
+    public async Task<Pais?> GetByIdAsync(int id)
     {
         return await _context.Paises
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<Paises> AddAsync(Paises pais)
+    public async Task<Pais> AddAsync(Pais pais)
     {
         await _context.Paises.AddAsync(pais);
         await _context.SaveChangesAsync();
         return pais;
     }
 
-    public async Task<Paises> UpdateAsync(Paises pais)
+    public async Task<Pais> UpdateAsync(Pais pais)
     {
         _context.Paises.Update(pais);
         await _context.SaveChangesAsync();
         return pais;
     }
 
-    public async Task<Paises> DeleteAsync(Paises pais)
+    public async Task<Pais> DeleteAsync(Pais pais)
     {
         _context.Paises.Remove(pais);
         await _context.SaveChangesAsync();
         return pais;
     }
 
-    public async  Task<Paises?> GetByNombreAsync(string nombre)
+    public async  Task<Pais?> GetByNombreAsync(string nombre)
     {
         return await _context.Paises
             .AsNoTracking()

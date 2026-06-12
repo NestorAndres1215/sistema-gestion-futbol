@@ -1,6 +1,6 @@
 ﻿
 using Application.Common.Models;
-using Application.Dto.Selecciones;
+using Application.Features.SeleccionesEstadios.Dto;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;

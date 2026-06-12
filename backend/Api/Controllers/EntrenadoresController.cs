@@ -1,6 +1,5 @@
-﻿using Application.Dto.Entrenadores;
-using Application.Interfaces.Services;
-
+﻿using Application.Features.Entrenadores.Dto;
+using Application.Features.Entrenadores.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -9,9 +8,9 @@ namespace Api.Controllers;
 [ApiController]
 public class EntrenadoresController : ControllerBase
 {
-    private readonly IEntrenadoresService _service;
+    private readonly IEntrenadorService _service;
 
-    public EntrenadoresController(IEntrenadoresService service)
+    public EntrenadoresController(IEntrenadorService service)
     {
         _service = service;
     }

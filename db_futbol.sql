@@ -474,8 +474,8 @@ CREATE TABLE Clubes (
     FechaFundacion DATE NULL,
 
     EscudoUrl NVARCHAR(500) NULL,
-
-    Estado VARCHAR(20) NOT NULL;
+CodigoFifa NVARCHAR(10) NULL,
+    Estado VARCHAR(20) NOT NULL,
 
     FechaCreacion DATETIME NOT NULL DEFAULT GETDATE(),
     FechaActualizacion DATETIME NULL
@@ -510,10 +510,7 @@ CREATE TABLE ClubEntrenador (
 
     FechaInicio DATE NOT NULL,
     FechaFin DATE NULL,
-
-    FechaCreacion DATETIME NOT NULL DEFAULT GETDATE(),
-    FechaActualizacion DATETIME NULL,
-
+	Estado VARCHAR(20) DEFAULT 'Activo',
     FOREIGN KEY (ClubId)
         REFERENCES Clubes(Id),
 

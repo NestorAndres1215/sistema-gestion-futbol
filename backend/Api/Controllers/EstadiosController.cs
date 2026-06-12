@@ -1,5 +1,5 @@
-﻿using Application.Dto.Estadio;
-using Application.Interfaces.Services;
+﻿using Application.Features.Estadios.Dto;
+using Application.Features.Estadios.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;

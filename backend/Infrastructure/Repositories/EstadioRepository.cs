@@ -1,7 +1,7 @@
 ﻿
+using Application.Common.Estadisticas;
 using Application.Common.Models;
-using Application.Dto.Estadio;
-using Application.Dto.Estadisticas;
+using Application.Features.Estadios.Dto;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;

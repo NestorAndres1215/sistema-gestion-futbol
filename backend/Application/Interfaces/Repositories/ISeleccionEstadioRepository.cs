@@ -2,7 +2,7 @@
 
 
 using Application.Common.Models;
-using Application.Dto.Selecciones;
+using Application.Features.SeleccionesEstadios.Dto;
 using Domain.Entities;
 
 namespace Application.Interfaces.Repositories;

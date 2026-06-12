@@ -1,5 +1,5 @@
-﻿using Application.Dto.Selecciones;
-using Application.Interfaces.Services;
+﻿using Application.Features.Selecciones.Dto;
+using Application.Features.Selecciones.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -9,9 +9,9 @@ namespace Api.Controllers;
 public class SeleccionesController : ControllerBase
 {
 
-    private readonly ISelecionesService _service;
+    private readonly ISelecionService _service;
 
-    public SeleccionesController(ISelecionesService service)
+    public SeleccionesController(ISelecionService service)
     {
         _service = service;
     }

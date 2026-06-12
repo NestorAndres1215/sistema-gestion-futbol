@@ -105,7 +105,7 @@ export default function useEntrenador() {
         { header: "Nombre", accessor: (row: any) => row.nombre, },
         { header: "Apellido", accessor: (row: any) => row.apellido, },
         { header: "Estilo de Juego", accessor: (row: any) => row.estiloJuego, },
-        { header: "País", accessor: (row: any) => row.pais, },
+        { header: "País", accessor: (row: any) => row.paisNacimiento, },
         { header: "Fecha de Debut", accessor: (row: any) => formatDate(row.fechaDebut), },
     ];
 

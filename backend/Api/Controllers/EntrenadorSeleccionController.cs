@@ -1,6 +1,5 @@
-﻿using Application.Dto.Selecciones;
-using Application.Interfaces.Services;
-using Microsoft.AspNetCore.Http;
+﻿using Application.Features.SeleccionesEntrenadores.Dto;
+using Application.Features.SeleccionesEntrenadores.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -9,9 +8,9 @@ namespace Api.Controllers;
 [ApiController]
 public class EntrenadorSeleccionController : ControllerBase
 {
-    private readonly IEntrenadorSeleccionService _service;
+    private readonly ISeleccionEntrenadorService _service;
 
-    public EntrenadorSeleccionController(IEntrenadorSeleccionService service)
+    public EntrenadorSeleccionController(ISeleccionEntrenadorService service)
     {
         _service = service;
     }

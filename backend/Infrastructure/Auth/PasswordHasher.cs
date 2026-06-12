@@ -1,4 +1,4 @@
-﻿using Application.Interfaces.Services;
+﻿using Application.Common.Services;
 
 namespace Infrastructure.Auth;
 

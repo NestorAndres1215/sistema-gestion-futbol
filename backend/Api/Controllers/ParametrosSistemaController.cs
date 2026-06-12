@@ -1,5 +1,5 @@
-﻿using Application.Dto.Config;
-using Application.Interfaces.Services;
+﻿using Application.Features.ParamatrosSistemas.Dto;
+using Application.Features.ParamatrosSistemas.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -8,9 +8,9 @@ namespace Api.Controllers;
 [ApiController]
 public class ParametrosSistemaController : ControllerBase
 {
-    private readonly IParametrosSistemaService _service;
+    private readonly IParametroSistemaService _service;
 
-    public ParametrosSistemaController(IParametrosSistemaService service)
+    public ParametrosSistemaController(IParametroSistemaService service)
     {
         _service = service;
     }
@@ -37,14 +37,14 @@ public class ParametrosSistemaController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register([FromBody] ParametrosRequest dto)
+    public async Task<IActionResult> Register([FromBody] ParametroRequest dto)
     {
         var result = await _service.AddAsync(dto);
         return Ok(result);
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdatePassword( int id, [FromBody] ParametrosRequest dto)
+    public async Task<IActionResult> UpdatePassword( int id, [FromBody] ParametroRequest dto)
     {
         var result = await _service.UpdateAsync(id, dto);
 

@@ -1,4 +1,4 @@
-﻿using Application.Services;
+﻿using Application.Features.Ciudades.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +8,9 @@ namespace Api.Controllers;
 [Route("api/ciudades")]
 public class CiudadesController : ControllerBase
 {
-    private readonly ICiudadesService _service;
+    private readonly ICiudadService _service;
 
-    public CiudadesController(ICiudadesService service)
+    public CiudadesController(ICiudadService service)
     {
         _service = service;
     }
@@ -35,13 +35,13 @@ public class CiudadesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] Ciudades ciudad)
+    public async Task<IActionResult> Create([FromBody] Ciudad ciudad)
     {
         return Ok(await _service.AddAsync(ciudad));
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] Ciudades ciudad)
+    public async Task<IActionResult> Update(int id, [FromBody] Ciudad ciudad)
     {
         return Ok(await _service.UpdateAsync(id, ciudad));
     }

@@ -123,11 +123,11 @@ export default function useArbitro() {
         },
         {
             header: "Nombre",
-            accessor: (row: any) => row.persona?.nombre,
+            accessor: (row: any) => row.nombre,
         },
         {
             header: "Apellido",
-            accessor: (row: any) => row.persona?.apellido,
+            accessor: (row: any) => row.apellido,
         },
         {
             header: "Categoria",
@@ -135,7 +135,7 @@ export default function useArbitro() {
         },
         {
             header: "País",
-            accessor: (row: any) => row.persona?.paisNacimiento?.nombre,
+            accessor: (row: any) => row.paisNacimiento,
         },
         {
             header: "Fecha de Debut",

@@ -1,8 +1,8 @@
 ﻿
 
 using Application.Common.Models;
-using Application.Dto.Entrenadores;
-using Application.Dto.Selecciones;
+using Application.Features.Entrenadores.Dto;
+using Application.Features.SeleccionesEntrenadores.Dto;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;
@@ -19,7 +19,7 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
         _context = context;
     }
 
-    public async Task<EntrenadorSeleccion> AddAsync(EntrenadorSeleccion entrenadorSeleccion)
+    public async Task<SeleccionEntrenador> AddAsync(SeleccionEntrenador entrenadorSeleccion)
     {
         _context.EntrenadorSeleccion.Add(entrenadorSeleccion);
         await _context.SaveChangesAsync();
@@ -27,7 +27,7 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
     }
 
 
-    public async Task<EntrenadorSeleccion?> GetByIdAsync(int id)
+    public async Task<SeleccionEntrenador?> GetByIdAsync(int id)
     {
         return await _context.EntrenadorSeleccion
             .Include(x => x.Seleccion)
@@ -50,8 +50,6 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
             .OrderBy(x => x.NombreCompleto)
             .ToListAsync();
     }
-
-
 
     public async Task<PagedResult<SeleccionEntrenadorResponse>> ListarPorSeleccion(
         int page,
@@ -100,7 +98,7 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
         };
     }
 
-    public async Task<List<EntrenadorSeleccion>> ListarPorSeleccionNombre(string nombre)
+    public async Task<List<SeleccionEntrenador>> ListarPorSeleccionNombre(string nombre)
     {
         return await _context.EntrenadorSeleccion
             .Include(x => x.Seleccion)
@@ -109,7 +107,7 @@ public class EntrenadorSeleccionRepository : IEntrenadorSeleccionRepository
             .ToListAsync();
     }
 
-    public async Task<EntrenadorSeleccion> UpdateAsync(EntrenadorSeleccion entrenadorSeleccion)
+    public async Task<SeleccionEntrenador> UpdateAsync(SeleccionEntrenador entrenadorSeleccion)
     {
         _context.EntrenadorSeleccion.Update(entrenadorSeleccion);
         await _context.SaveChangesAsync();

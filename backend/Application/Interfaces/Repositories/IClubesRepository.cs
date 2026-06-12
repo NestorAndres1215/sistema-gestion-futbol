@@ -1,7 +1,7 @@
 ﻿
 
 using Application.Common.Models;
-using Application.Dto.Clubes;
+using Application.Features.Clubes.Dto;
 using Domain.Entities;
 
 namespace Application.Interfaces.Repositories;
@@ -14,12 +14,12 @@ public interface IClubesRepository
     string? confederacion,
     string? estado);
 
-    Task<Clubes> AddAsync(Clubes clubes);
-    Task<Clubes> UpdateAsync(Clubes clubes);
-    Task<Clubes?> GetByIdAsync(int id);
-    Task<Clubes?> GetByNombreAsync(string nombre);
-    Task<Clubes?> GetByPaisAsync(string pais);
-    Task<Clubes?> GetByCodigoFifaAsync(string codigoFifa);
-    Task<Clubes?> GetByConfederacionAsync(string confederacion);
+    Task<Club> AddAsync(Club clubes);
+    Task<Club> UpdateAsync(Club clubes);
+    Task<Club?> GetByIdAsync(int id);
+    Task<Club?> GetByNombreAsync(string nombre);
+    Task<Club?> GetByPaisAsync(string pais);
+    Task<Club?> GetByCodigoFifaAsync(string codigoFifa);
+    Task<Club?> GetByConfederacionAsync(string confederacion);
 
 }

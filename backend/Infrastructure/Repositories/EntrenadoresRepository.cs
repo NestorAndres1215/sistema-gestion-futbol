@@ -1,7 +1,7 @@
 ﻿
 
 using Application.Common.Models;
-using Application.Dto.Entrenadores;
+using Application.Features.Entrenadores.Dto;
 using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Infrastructure.Data;
@@ -18,7 +18,7 @@ public class EntrenadoresRepository : IEntrenadoresRepository
         _context = context;
     }
 
-    public async Task<Entrenadores> AddAsync(Entrenadores entrenadores)
+    public async Task<Entrenador> AddAsync(Entrenador entrenadores)
     {
         _context.Entrenadores.Add(entrenadores);
         await _context.SaveChangesAsync();
@@ -116,7 +116,7 @@ public class EntrenadoresRepository : IEntrenadoresRepository
         };
     }
 
-    public async Task<Entrenadores?> GetByIdAsync(int id)
+    public async Task<Entrenador?> GetByIdAsync(int id)
     {
         return await _context.Entrenadores
             .Include(x => x.Persona)
@@ -127,7 +127,7 @@ public class EntrenadoresRepository : IEntrenadoresRepository
             .SingleOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<Entrenadores?> GetByNombreAsync(string nombre)
+    public async Task<Entrenador?> GetByNombreAsync(string nombre)
     {
         return await _context.Entrenadores
             .Include(x => x.Persona!)
@@ -157,7 +157,7 @@ public class EntrenadoresRepository : IEntrenadoresRepository
            .ToListAsync();
     }
 
-    public async Task<Entrenadores> UpdateAsync(Entrenadores entrenadores)
+    public async Task<Entrenador> UpdateAsync(Entrenador entrenadores)
     {
         _context.Entrenadores.Update(entrenadores);
         await _context.SaveChangesAsync();

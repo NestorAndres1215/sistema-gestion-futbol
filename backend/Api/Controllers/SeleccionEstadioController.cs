@@ -1,6 +1,5 @@
-﻿using Application.Dto.Selecciones;
-using Application.Interfaces.Services;
-using Domain.Entities;
+﻿using Application.Features.SeleccionesEstadios.Dto;
+using Application.Features.SeleccionesEstadios.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;

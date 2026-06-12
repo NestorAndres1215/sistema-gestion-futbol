@@ -1,6 +1,5 @@
-﻿using Application.Dto.Clubes;
-using Application.Interfaces.Services;
-using Domain.Entities;
+﻿using Application.Features.Clubes.Dto;
+using Application.Features.Clubes.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;

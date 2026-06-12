@@ -1,7 +1,7 @@
 ﻿
 using Application.Common.Models;
-using Application.Dto.Entrenadores;
-using Application.Dto.Selecciones;
+using Application.Features.Entrenadores.Dto;
+using Application.Features.SeleccionesEntrenadores.Dto;
 using Domain.Entities;
 
 namespace Application.Interfaces.Repositories;
@@ -12,11 +12,11 @@ public interface IEntrenadorSeleccionRepository
            int page,
            int pageSize,
            string? seleccion);
-    Task<EntrenadorSeleccion> AddAsync(EntrenadorSeleccion entrenadorSeleccion);
-    Task<EntrenadorSeleccion> UpdateAsync(EntrenadorSeleccion entrenadorSeleccion);
-    Task<EntrenadorSeleccion?> GetByIdAsync(int id);
+    Task<SeleccionEntrenador> AddAsync(SeleccionEntrenador entrenadorSeleccion);
+    Task<SeleccionEntrenador> UpdateAsync(SeleccionEntrenador entrenadorSeleccion);
+    Task<SeleccionEntrenador?> GetByIdAsync(int id);
     Task<List<EntrenadorSelectResponse>> GetEntrenadoresAsync();
-    Task<List<EntrenadorSeleccion>> ListarPorSeleccionNombre(string nombre);
+    Task<List<SeleccionEntrenador>> ListarPorSeleccionNombre(string nombre);
     Task<bool> ExisteCruceFechasAsync(
         int seleccionId,
         DateTime fechaInicio,

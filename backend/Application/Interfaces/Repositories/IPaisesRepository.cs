@@ -4,10 +4,10 @@ namespace Domain.Interfaces;
 
 public interface IPaisesRepository
 {
-    Task<IEnumerable<Paises>> GetAllAsync();
-    Task<Paises?> GetByIdAsync(int id);
-    Task<Paises?> GetByNombreAsync(string nombre);
-    Task<Paises> AddAsync(Paises pais);
-    Task<Paises> UpdateAsync(Paises pais);
-    Task<Paises> DeleteAsync(Paises pais);
+    Task<IEnumerable<Pais>> GetAllAsync();
+    Task<Pais?> GetByIdAsync(int id);
+    Task<Pais?> GetByNombreAsync(string nombre);
+    Task<Pais> AddAsync(Pais pais);
+    Task<Pais> UpdateAsync(Pais pais);
+    Task<Pais> DeleteAsync(Pais pais);
 }

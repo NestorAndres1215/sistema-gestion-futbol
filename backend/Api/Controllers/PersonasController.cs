@@ -1,4 +1,4 @@
-﻿using Application.Interfaces.Services;
+﻿using Application.Features.Personas.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

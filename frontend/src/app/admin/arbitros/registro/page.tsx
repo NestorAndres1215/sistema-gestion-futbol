@@ -136,8 +136,8 @@ export default function ArbitroRegistro() {
                                         </option>
 
                                         {ciudades.map((ciudad) => (
-                                            <option key={ciudad.id} value={ciudad.nombre}   >
-                                                {ciudad.nombre}
+                                            <option key={ciudad.id} value={ciudad.ciudad}   >
+                                                {ciudad.ciudad}
                                             </option>
                                         ))}
 
