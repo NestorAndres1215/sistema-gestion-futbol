@@ -5,6 +5,7 @@ using Application.Common.Models;
 using Application.Common.Validators;
 using Application.Features.Arbitros.Dto;
 using Application.Features.Arbitros.Interfaces;
+using Application.Features.Arbitros.Validators;
 using Application.Features.Fotos.Interfaces;
 using Application.Features.Personas.Interfaces;
 using Application.Interfaces.Repositories;
@@ -61,7 +62,7 @@ public class ArbitroService : IArbitroService
             PaisNacimientoId = pais.Id,
             CiudadNacimientoId = ciudad.Id,
             FotoUrl = fotoUrl,
-            Genero = GeneroValidator.Validar(arbitros.Genero),
+            Genero = arbitros.Genero,
             FechaCreacion = DateTime.Now,
             Estado = Estado.Activo
         };
@@ -75,7 +76,7 @@ public class ArbitroService : IArbitroService
             RolArbitral = arbitros.RolArbitral,
             FechaDebut = arbitros.FechaDebut,
             FechaRetiro = arbitros.FechaRetiro,
-            AnosExperiencia = ExperienciaHelper.Calcular(arbitros.FechaDebut),
+            AnosExperiencia =0,
             Nivel = arbitros.Nivel,
             Reputacion = arbitros.Reputacion,
             PartidosDirigidos=0,
@@ -85,27 +86,15 @@ public class ArbitroService : IArbitroService
             EstadoFisico=Estado.Activo,
             Estado = Estado.Activo
         };
-
+        
         await _repository.AddAsync(arbitro);
 
         return arbitro;
     }
 
-    public async Task<PagedResult<ArbitrosResponse>> GetAllAsync(int page, int pageSize, string? search, string? categoria, string? pais, string? estado)
-    {
-        return await _repository.GetAllAsync(page, pageSize, search, categoria, pais, estado);
-    }
-
-    public async Task<Arbitro> GetByIdAsync(int id)
-    {
-       return await _repository.GetByIdAsync(id)
-         ?? throw new NotFoundException("Árbitro no encontrado");
-    }
 
     public async  Task<Arbitro> UpdateAsync(int id, ArbitrosRequest dto)
     {
-        if (dto == null)
-            throw new BadRequestException("Datos inválidos");
 
         ValidarDto(dto);
 
@@ -157,30 +146,24 @@ public class ArbitroService : IArbitroService
         return arbitro;
     }
 
-    
-   
-
     private void ValidarDto(ArbitrosRequest dto)
     {
-        if (dto is null)
-            throw new BadRequestException("El cuerpo de la solicitud es obligatorio");
+        var validator = new ArbitrosValidator();
+        var result = validator.Validate(dto);
 
-        if (string.IsNullOrWhiteSpace(dto.Nombre))
-            throw new BadRequestException("El nombre es obligatorio");
+        if (!result.IsValid)
+            throw new BadRequestException(result.Errors.First().ErrorMessage);
+    }
 
-        if (string.IsNullOrWhiteSpace(dto.PaisNacimiento))
-            throw new BadRequestException("El país es obligatorio");
+    public async Task<PagedResult<ArbitrosResponse>> GetAllAsync(int page, int pageSize, string? search, string? categoria, string? pais, string? estado)
+    {
+        return await _repository.GetAllAsync(page, pageSize, search, categoria, pais, estado);
+    }
 
-        if (string.IsNullOrWhiteSpace(dto.CiudadNacimiento))
-            throw new BadRequestException("La ciudad es obligatoria");
-
-        if (dto.FechaNacimiento > DateTime.Today)
-            throw new BadRequestException("La fecha de nacimiento no es válida");
-
-        if (dto.FechaRetiro.HasValue &&
-            dto.FechaDebut.HasValue &&
-            dto.FechaRetiro < dto.FechaDebut)
-            throw new BadRequestException("La fecha de retiro no puede ser menor al debut");
+    public async Task<Arbitro> GetByIdAsync(int id)
+    {
+       return await _repository.GetByIdAsync(id)
+         ?? throw new NotFoundException("Árbitro no encontrado");
     }
 
 

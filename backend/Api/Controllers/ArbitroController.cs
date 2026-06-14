@@ -21,6 +21,12 @@ public class ArbitroController : ControllerBase
     [Consumes("multipart/form-data")]
     public async Task<IActionResult> Registrar([FromForm] ArbitrosRequest dto)
     {
+        Console.WriteLine("===== DTO RECIBIDO =====");
+        Console.WriteLine($"Nombre: {dto.Nombre}");
+        Console.WriteLine($"Apellido: {dto.Apellido}");
+        Console.WriteLine($"Genero: {dto.Genero}");
+        Console.WriteLine($"Pais: {dto.PaisNacimiento}");
+        Console.WriteLine($"Nivel: {dto.Nivel}");
         return Ok(await _service.AddAsync(dto));
     }
 

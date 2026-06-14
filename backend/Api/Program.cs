@@ -1,5 +1,6 @@
 using Api.Extensions;
 using API.Middleware;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,8 @@ builder.Services.AddApplicationServices();
 
 // Infrastructure
 builder.Services.AddInfrastructureServices();
-
+// Validaciones
+builder.Services.AddFluentValidationAutoValidation();
 // Controllers
 builder.Services.AddApiControllers();
 

@@ -6,7 +6,7 @@ public class ArbitrosRequest
 {
     public required string Nombre { get; set; } = string.Empty;
     public required string Apellido { get; set; } = string.Empty;
-    public DateTime? FechaNacimiento { get; set; }
+    public DateTime FechaNacimiento { get; set; }
     public required string PaisNacimiento { get; set; }=string.Empty;
     public required string CiudadNacimiento { get; set; }= string.Empty;
     public IFormFile? Foto { get; set; }

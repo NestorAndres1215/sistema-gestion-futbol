@@ -29,10 +29,10 @@ public class ArbitroConfiguration : IEntityTypeConfiguration<Arbitro>
             .HasDefaultValue(0);
 
         builder.Property(a => a.Nivel)
-            .HasDefaultValue(1);
+            .HasDefaultValue(0);
 
         builder.Property(a => a.Reputacion)
-            .HasDefaultValue(1);
+            .HasDefaultValue(0);
 
         builder.Property(a => a.PartidosDirigidos)
             .HasDefaultValue(0);
@@ -53,20 +53,6 @@ public class ArbitroConfiguration : IEntityTypeConfiguration<Arbitro>
 
         builder.HasIndex(a => a.PersonaId)
             .IsUnique();
-
-        builder.ToTable(t =>
-        {
-            t.HasCheckConstraint(
-                "CK_Arbitro_Nivel",
-                "[Nivel] >= 0 AND [Nivel] <= 100 AND [Nivel] % 5 = 0");
-
-            t.HasCheckConstraint(
-                "CK_Arbitro_Reputacion",
-                "[Reputacion] >= 0 AND [Reputacion] <= 100 AND [Reputacion] % 5 = 0");
-
-            t.HasCheckConstraint(
-                "CK_Arbitro_PrecisionDecisiones",
-                "[PrecisionDecisiones] >= 0 AND [PrecisionDecisiones] <= 100 AND [PrecisionDecisiones] % 5 = 0");
-        });
+   
     }
 }

@@ -18,6 +18,7 @@ export default function useArbitroRegistro() {
         fechaDebut: "",
         nivel: "",
         reputacion: "",
+        genero:""
     });
 
     const [paises, setPaises] = useState<any[]>([]);
@@ -78,12 +79,14 @@ export default function useArbitroRegistro() {
             fechaDebut: "",
             nivel: "",
             reputacion: "",
+            genero:""
         });
 
         setFoto(null);
     }
 
     const arbitroToFormData = (form: any, foto: File | null) => {
+        console.log(form)
         const formData = new FormData();
         Object.entries(form).forEach(
             ([key, value]) => {
@@ -101,7 +104,9 @@ export default function useArbitroRegistro() {
 
     const registrarArbitro = async () => {
         try {
+            form.genero="Masculi"
             const fd = arbitroToFormData(form, foto);
+           
             await addArbitro(fd);
 
             SwalService.success("Árbitro registrado exitosamente");

@@ -1,18 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
-
-
 using Application.Common.Exceptions;
 using System.Text.Json;
-
-
 using Application.Common.Models;
 
 namespace API.Middleware;
 
-/// <summary>
-/// Middleware global para manejo de excepciones.
-/// Convierte excepciones de la aplicación en respuestas HTTP limpias.
-/// </summary>
 public class ExceptionMiddleware
 {
     private readonly RequestDelegate _next;
@@ -34,7 +26,23 @@ public class ExceptionMiddleware
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Unhandled exception occurred");
+            switch (ex)
+            {
+                case BadRequestException:
+                case NotFoundException:
+                case ConflictException:
+                    _logger.LogInformation(ex.Message);
+                    break;
+
+                case UnauthorizedException:
+                case ForbiddenException:
+                    _logger.LogWarning(ex.Message);
+                    break;
+
+                default:
+                    _logger.LogError(ex, "Unhandled exception occurred");
+                    break;
+            }
 
             await HandleExceptionAsync(context, ex);
         }
@@ -51,7 +59,6 @@ public class ExceptionMiddleware
             UnauthorizedException => StatusCodes.Status401Unauthorized,
             ForbiddenException => StatusCodes.Status403Forbidden,
             ConflictException => StatusCodes.Status409Conflict,
-
             _ => StatusCodes.Status500InternalServerError
         };
 

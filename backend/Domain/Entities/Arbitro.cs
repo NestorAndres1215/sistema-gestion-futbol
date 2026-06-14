@@ -29,9 +29,9 @@ public class Arbitro
     public int TarjetasAmarillas { get; set; }
 
     public int TarjetasRojas { get; set; }
-
-    public string? EstadoFisico { get; set; }
     // Activo / Fatigado / Lesionado
+    public string? EstadoFisico { get; set; }
+    
     // ACTIVO Y RETIRO
     public string Estado { get; set; } = "Activo";
 

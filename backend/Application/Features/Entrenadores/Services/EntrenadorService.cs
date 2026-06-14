@@ -61,7 +61,7 @@ public class EntrenadorService : IEntrenadorService
             PaisNacimientoId = pais.Id,
             CiudadNacimientoId = ciudad.Id,
             FotoUrl = fotoUrl,
-            Genero= GeneroValidator.Validar(entrenadores.Genero),
+            Genero= entrenadores.Genero,
             FechaCreacion = DateTime.Now,
             Estado = Estado.Activo
         };
