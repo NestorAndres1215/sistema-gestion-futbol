@@ -13,8 +13,8 @@ public class EntrenadoresRequest
     public IFormFile? Foto { get; set; }
     public string? EstiloJuego { get; set; }
     public string? Licencia { get; set; }
-    public DateTime? FechaDebut { get; set; }
-    public DateTime? FechaRetiro { get; set; }
+    public DateTime FechaDebut { get; set; }
+    public DateTime FechaRetiro { get; set; }
     public int AnosExperiencia { get; set; } = 0;
     public int Nivel { get; set; }
     public int Reputacion { get; set; }

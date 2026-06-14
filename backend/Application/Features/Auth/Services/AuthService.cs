@@ -1,10 +1,13 @@
 ﻿using Application.Common.Exceptions;
+using Application.Common.Helpers;
 using Application.Common.Services;
 using Application.Features.Auth.Dto;
 using Application.Features.Auth.Interfaces;
+using Application.Features.Auth.Validators;
 using Application.Features.Usuarios.Dto;
 using Application.Interfaces.Repositories;
 using Domain.Catalogs;
+using FluentValidation;
 using System.Security.Claims;
 
 namespace Application.Features.Auth.Services;
@@ -24,51 +27,66 @@ public class AuthService : IAuthService
         _hasher = hasher;
         _jwt = jwt;
     }
+    // REGISTRO DE USUARIOS
 
     public async Task<Usuario> Register(RegisterUsuarioRequest dto)
     {
-        var existingEmail = await _repo.GetByEmailAsync(dto.Email);
+        Validar(dto, new RegistroUsuarioValidators());
 
+        var existingEmail = await _repo.GetByEmailAsync(dto.Email);
         if (existingEmail != null)
-            throw new BadRequestException("El email ya está registrado");
+            throw new ConflictException("El email ya está registrado");
 
         var existingUser = await _repo.GetByUsernameAsync(dto.Username);
-
         if (existingUser != null)
-            throw new BadRequestException("El nombre de usuario ya existe");
+            throw new ConflictException("El nombre de usuario ya existe");
 
-        ValidatePassword(dto.Password);
-
+        var password = _hasher.Hash(dto.Password);
 
         var user = new Usuario
         {
             Username = dto.Username,
             Email = dto.Email,
-            Password = _hasher.Hash(dto.Password),
+            Password = password,
             RolId = 2,
             Estado = Estado.Activo
         };
 
-        await _repo.AddAsync(user);
-
-        return user;
+        return  await _repo.AddAsync(user);
     }
 
-    private void ValidatePassword(string password)
+    public async Task<Usuario> RegisterAdmin(RegisterUsuarioRequest dto)
     {
-        if (string.IsNullOrWhiteSpace(password) ||
-            password.Length < 8 ||
-            !password.Any(char.IsLetter) ||
-            !password.Any(char.IsDigit))
+        Validar(dto, new RegistroUsuarioValidators());
+
+        var existingEmail = await _repo.GetByEmailAsync(dto.Email);
+        if (existingEmail != null)
+            throw new ConflictException("El email ya está registrado");
+
+        var existingUser = await _repo.GetByUsernameAsync(dto.Username);
+        if (existingUser != null)
+            throw new ConflictException("El nombre de usuario ya existe");
+
+        var password = _hasher.Hash(dto.Password);
+
+        var user = new Usuario
         {
-            throw new BadRequestException(
-                "La contraseña debe tener al menos 8 caracteres e incluir letras y números"
-            );
-        }
+            Username = dto.Username,
+            Email = dto.Email,
+            Password = password,
+            RolId = 1,
+            Estado = Estado.Activo
+        };
+
+
+        return await _repo.AddAsync(user);
     }
 
+    // LOGIN
     public async Task<AuthResponse> Login(LoginRequest dto)
     {
+        Validar(dto, new AuthValidators());
+
         var user = await _repo.GetByEmailAsync(dto.Email);
 
         if (user == null)
@@ -80,60 +98,33 @@ public class AuthService : IAuthService
         if (user.Estado != Estado.Activo)
             throw new UnauthorizedException("Usuario bloqueado o Inactivo");
 
+        var token = _jwt.GenerateToken(
+            user.Id,
+            user.Email,
+            user.Rol?.Nombre ?? "");
+
         return new AuthResponse
         {
             Username = user.Username,
-            Token = _jwt.GenerateToken(
-                user.Id,
-                user.Email,
-                user.Rol?.Nombre ?? ""
-            ),
+            Token = token,
             Rol = user.Rol?.Nombre ?? ""
         };
     }
 
-    public async Task<Usuario> RegisterAdmin(RegisterUsuarioRequest dto)
-    {
-        var existingEmail = await _repo.GetByEmailAsync(dto.Email);
-
-        if (existingEmail != null)
-            throw new BadRequestException("El email ya está registrado");
-
-        var existingUser = await _repo.GetByUsernameAsync(dto.Username);
-
-        if (existingUser != null)
-            throw new BadRequestException("El nombre de usuario ya existe");
-
-        ValidatePassword(dto.Password);
-
-
-        var user = new Usuario
-        {
-            Username = dto.Username,
-            Email = dto.Email,
-            Password = _hasher.Hash(dto.Password),
-            RolId = 1,
-            Estado = Estado.Activo
-        };
-
-        await _repo.AddAsync(user);
-
-        return user;
-    }
-
+    // USUARIO ACTUAL LOGUEADO
     public async Task<UsuarioReponse?> GetCurrentUserFromClaims(ClaimsPrincipal user)
     {
         var userIdClaim = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-        if (userIdClaim == null)
-            return null;
+        if (string.IsNullOrWhiteSpace(userIdClaim))
+            throw new UnauthorizedException("Token inválido.");
 
         var userId = int.Parse(userIdClaim);
 
         var usuario = await _repo.GetByIdAsync(userId);
 
         if (usuario == null)
-            return null;
+            throw new NotFoundException("Usuario no encontrado.");
 
         return new UsuarioReponse
         {
@@ -144,30 +135,30 @@ public class AuthService : IAuthService
         };
     }
 
-    public async Task<Usuario> UpsatePassword(int id, PasswordRequest dto)
+   // ACTUALIZAR CONTRASEÑA
+    public async Task<Usuario> UpdatePassword(int id, PasswordRequest dto)
     {
         var entity = await _repo.GetByIdAsync(id)
             ?? throw new NotFoundException("Usuario no encontrado");
 
-        var passwordActualCorrecta = _hasher.Verify(dto.PasswordActual, entity.Password);
+        if (!_hasher.Verify(dto.PasswordActual, entity.Password))
+            throw new UnauthorizedException("Credenciales inválidas");
 
-        if (!passwordActualCorrecta)
-            throw new BadRequestException( "La contraseña actual es incorrecta");
 
-        if (dto.PasswordActual == dto.PasswordNueva)
-            throw new BadRequestException("La nueva contraseña no puede ser igual a la actual");
-
-        if (dto.PasswordNueva != dto.PasswordConfirmacion)
-            throw new BadRequestException("La confirmación de contraseña no coincide");
-
-        ValidatePassword(dto.PasswordNueva);
+        ValidationHelper.Validar(dto, new PasswordValidators());
 
         entity.Password = _hasher.Hash(dto.PasswordNueva);
 
-        await _repo.UpdateAsync(entity);
 
-        return entity;
+        return await _repo.UpdateAsync(entity);
     }
 
- 
+    private void Validar<T>(T dto, IValidator<T> validator)
+    {
+        var result = validator.Validate(dto);
+
+        if (!result.IsValid)
+            throw new BadRequestException(result.Errors.First().ErrorMessage);
+    }
+
 }

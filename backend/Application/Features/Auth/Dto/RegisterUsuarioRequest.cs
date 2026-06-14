@@ -1,4 +1,4 @@
-﻿namespace Application.Features.Usuarios.Dto;
+﻿namespace Application.Features.Auth.Dto;
 
 public class RegisterUsuarioRequest
 {

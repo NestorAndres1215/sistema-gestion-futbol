@@ -1,6 +1,5 @@
 ﻿using Application.Features.Auth.Dto;
 using Application.Features.Auth.Interfaces;
-using Application.Features.Usuarios.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -57,7 +56,7 @@ public class AuthController : ControllerBase
         int id,
         [FromBody] PasswordRequest dto)
     {
-        var result = await _auth.UpsatePassword(id, dto);
+        var result = await _auth.UpdatePassword(id, dto);
 
         return Ok(result);
     }

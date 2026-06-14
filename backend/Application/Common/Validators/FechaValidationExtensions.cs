@@ -4,18 +4,22 @@ namespace Application.Common.Validators;
 
 public static class FechaValidationExtensions
 {
-    public static IRuleBuilderOptions<T, DateTime?> SerMayorOIgualQue<T>(
-        this IRuleBuilder<T, DateTime?> ruleBuilder,
+    // ----------------------------
+    // Mayor o igual (DateTime)
+    // ----------------------------
+    public static IRuleBuilderOptions<T, DateTime> SerMayorOIgualQue<T>(
+        this IRuleBuilder<T, DateTime> ruleBuilder,
         Func<T, DateTime> fechaComparacion,
         string mensaje)
     {
         return ruleBuilder
-            .Must((model, fecha) =>
-                !fecha.HasValue ||
-                fecha.Value >= fechaComparacion(model))
+            .Must((model, fecha) => fecha >= fechaComparacion(model))
             .WithMessage(mensaje);
     }
 
+    // ----------------------------
+    // Mayor o igual (DateTime?)
+    // ----------------------------
     public static IRuleBuilderOptions<T, DateTime?> SerMayorOIgualQue<T>(
         this IRuleBuilder<T, DateTime?> ruleBuilder,
         Func<T, DateTime?> fechaComparacion,
@@ -29,6 +33,9 @@ public static class FechaValidationExtensions
             .WithMessage(mensaje);
     }
 
+    // ----------------------------
+    // Menor o igual (DateTime?)
+    // ----------------------------
     public static IRuleBuilderOptions<T, DateTime?> SerMenorOIgualQue<T>(
         this IRuleBuilder<T, DateTime?> ruleBuilder,
         Func<T, DateTime?> fechaComparacion,
@@ -41,17 +48,36 @@ public static class FechaValidationExtensions
                 fecha.Value <= fechaComparacion(model)!.Value)
             .WithMessage(mensaje);
     }
-
-    public static IRuleBuilderOptions<T, DateTime?> TenerEdadMinima<T>(
-        this IRuleBuilder<T, DateTime?> ruleBuilder,
+    public static IRuleBuilderOptions<T, DateTime> SerMenorOIgualQue<T>(
+    this IRuleBuilder<T, DateTime> ruleBuilder,
+    Func<T, DateTime> fechaComparacion,
+    string mensaje)
+    {
+        return ruleBuilder
+            .Must((model, fecha) => fecha <= fechaComparacion(model))
+            .WithMessage(mensaje);
+    }
+    // ----------------------------
+    // Edad mínima (DateTime)
+    // ----------------------------
+    public static IRuleBuilderOptions<T, DateTime> TenerEdadMinima<T>(
+        this IRuleBuilder<T, DateTime> ruleBuilder,
         Func<T, DateTime> fechaNacimiento,
         int edadMinima,
         string mensaje)
     {
         return ruleBuilder
-            .Must((model, fecha) =>
-                !fecha.HasValue ||
-                fecha.Value >= fechaNacimiento(model).AddYears(edadMinima))
+            .Must((model, fechaEvento) =>
+            {
+                var nacimiento = fechaNacimiento(model);
+
+                var edad = fechaEvento.Year - nacimiento.Year;
+
+                if (fechaEvento < nacimiento.AddYears(edad))
+                    edad--;
+
+                return edad >= edadMinima;
+            })
             .WithMessage(mensaje);
     }
 }

@@ -43,8 +43,8 @@ public class ArbitroService : IArbitroService
 
     public async Task<Arbitro> AddAsync(ArbitrosRequest arbitros)
     {
-        ValidarDto(arbitros);
-    
+        ValidationHelper.Validar(arbitros, new ArbitrosValidator());
+
         string fotoUrl = await _fotoService.GuardarFotoAsync(arbitros.Foto!, "arbitros", $"{arbitros.Nombre}_{arbitros.Apellido}");
 
         var pais = await _paisRepo.GetByNombreAsync(arbitros.PaisNacimiento)
@@ -53,7 +53,8 @@ public class ArbitroService : IArbitroService
         var ciudad = await _ciudadRepo.GetByNombreAsync(arbitros.CiudadNacimiento)
             ?? throw new NotFoundException("La ciudad no existe.");
 
-    
+        var anosExperiencia = ExperienciaHelper.Calcular( arbitros.FechaDebut, arbitros.FechaRetiro);
+
         var persona = new Persona
         {
             Nombre = arbitros.Nombre,
@@ -68,7 +69,7 @@ public class ArbitroService : IArbitroService
         };
 
         var personaCreada = await _personasService.AddAsync(persona);
-
+  
         var arbitro = new Arbitro
         {
             PersonaId = personaCreada.Id,
@@ -76,7 +77,7 @@ public class ArbitroService : IArbitroService
             RolArbitral = arbitros.RolArbitral,
             FechaDebut = arbitros.FechaDebut,
             FechaRetiro = arbitros.FechaRetiro,
-            AnosExperiencia =0,
+            AnosExperiencia =anosExperiencia,
             Nivel = arbitros.Nivel,
             Reputacion = arbitros.Reputacion,
             PartidosDirigidos=0,
@@ -96,7 +97,7 @@ public class ArbitroService : IArbitroService
     public async  Task<Arbitro> UpdateAsync(int id, ArbitrosRequest dto)
     {
 
-        ValidarDto(dto);
+        ValidationHelper.Validar(dto, new ArbitrosValidator());
 
         var arbitro = await _repository.GetByIdAsync(id)
             ?? throw new NotFoundException($"No se encontró el árbitro con id {id}");
@@ -110,6 +111,7 @@ public class ArbitroService : IArbitroService
         var ciudad = await _ciudadRepo.GetByNombreAsync(dto.CiudadNacimiento)
             ?? throw new NotFoundException("La ciudad no existe");
 
+        var anosExperiencia = ExperienciaHelper.Calcular(dto.FechaDebut, dto.FechaRetiro);
 
         if (dto.Foto != null && dto.Foto.Length > 0)
         {
@@ -133,7 +135,7 @@ public class ArbitroService : IArbitroService
         arbitro.RolArbitral = dto.RolArbitral;
         arbitro.FechaDebut = dto.FechaDebut;
         arbitro.FechaRetiro = dto.FechaRetiro;
-        arbitro.AnosExperiencia = ExperienciaHelper.Calcular(dto.FechaDebut);
+        arbitro.AnosExperiencia = anosExperiencia;
         arbitro.Nivel = dto.Nivel;
         arbitro.Reputacion = dto.Reputacion;
         arbitro.PartidosDirigidos= dto.PartidosDirigidos;
@@ -146,14 +148,6 @@ public class ArbitroService : IArbitroService
         return arbitro;
     }
 
-    private void ValidarDto(ArbitrosRequest dto)
-    {
-        var validator = new ArbitrosValidator();
-        var result = validator.Validate(dto);
-
-        if (!result.IsValid)
-            throw new BadRequestException(result.Errors.First().ErrorMessage);
-    }
 
     public async Task<PagedResult<ArbitrosResponse>> GetAllAsync(int page, int pageSize, string? search, string? categoria, string? pais, string? estado)
     {

@@ -50,7 +50,7 @@ public class EntrenadorService : IEntrenadorService
         if (ciudad == null)
             throw new NotFoundException("La ciudad no existe.");
 
-
+        var anosExperiencia = ExperienciaHelper.Calcular(entrenadores.FechaDebut, entrenadores.FechaRetiro);
         string fotoUrl = await _fotoService.GuardarFotoAsync(entrenadores.Foto!, "entrenadores", $"{entrenadores.Nombre}_{entrenadores.Apellido}");
 
         var persona = new Persona
@@ -75,7 +75,7 @@ public class EntrenadorService : IEntrenadorService
             Licencia = entrenadores.Licencia,
             FechaDebut = entrenadores.FechaDebut,
             FechaRetiro = entrenadores.FechaRetiro,
-            AnosExperiencia = ExperienciaHelper.Calcular(entrenadores.FechaDebut),
+            AnosExperiencia = anosExperiencia,
             Nivel = entrenadores.Nivel,
             Reputacion = entrenadores.Reputacion,
             ManejoEquipo = 0,

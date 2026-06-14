@@ -12,8 +12,8 @@ public class ArbitrosRequest
     public IFormFile? Foto { get; set; }
     public string? Categoria { get; set; }
     public string? RolArbitral { get; set; }
-    public DateTime? FechaDebut { get; set; }
-    public DateTime? FechaRetiro { get; set; }
+    public DateTime FechaDebut { get; set; }
+    public DateTime FechaRetiro { get; set; }
     public int Nivel { get; set; }
     public int Reputacion { get; set; }
     public int PartidosDirigidos { get; set; }
