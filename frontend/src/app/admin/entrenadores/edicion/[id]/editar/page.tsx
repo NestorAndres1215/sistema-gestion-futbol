@@ -4,7 +4,7 @@ import AdminLayout from "@/shared/components/layout/admin/layout";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import ActionButton from "@/shared/components/ui/button/button";
 import { LICENCIAS_ENTRENADOR_OPTIONS } from "@/shared/constants/arbitro.options";
-import { ESTILO_JUEGO_OPTIONS } from "@/shared/constants/estilo-juego.options";
+
 
 import styles from "@/shared/styles/editar.module.css";
 import { useRouter } from "next/navigation";
@@ -14,7 +14,7 @@ export default function EntrenadorEditar() {
 
     const {
         form,
-        fotoPreview,
+        fotoPreview,estiloJuego,
         handleChange,
         handleFotoChange, paises, ciudades,
         actualizarEntrenador
@@ -227,7 +227,7 @@ export default function EntrenadorEditar() {
                                             <option value="">
                                                 Seleccione estilo de juego
                                             </option>
-                                            {ESTILO_JUEGO_OPTIONS.map((item) => (
+                                            {estiloJuego.map((item) => (
                                                 <option key={item.value} value={item.value}>
                                                     {item.label}
                                                 </option>

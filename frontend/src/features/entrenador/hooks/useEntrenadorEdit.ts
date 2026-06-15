@@ -5,9 +5,10 @@ import { SwalService } from "@/shared/lib/swal/swal.service";
 import { formatDateInput } from "@/shared/utils/date.utils";
 import { getCiudadesByPais } from "@/shared/services/ciudad.service";
 import { getPaises } from "@/shared/services/paises.service";
+import { getEstiloJuego } from "@/shared/services/catalogs.service";
 
 export default function useEntrenadorEdit() {
-
+  const [estiloJuego, setEstiloJuego] = useState<any[]>([]);
   const params = useParams();
   const router = useRouter();
 
@@ -48,7 +49,17 @@ export default function useEntrenadorEdit() {
       }
 
     };
+    const loadEstiloJuego = async () => {
 
+      try {
+        const data = await getEstiloJuego();
+        setEstiloJuego(Array.isArray(data) ? data : []);
+
+      } catch (error) {
+        setEstiloJuego([]);
+      }
+    };
+    loadEstiloJuego();
     loadPaises();
 
   }, []);
@@ -161,7 +172,7 @@ export default function useEntrenadorEdit() {
   };
 
   return {
-    form, foto, fotoPreview, paises, ciudades,
+    form, foto, fotoPreview, paises, ciudades, estiloJuego,
     handleChange, handleFotoChange, actualizarEntrenador
   };
 }

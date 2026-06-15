@@ -5,11 +5,12 @@ import { addEntrenador } from "../services/entrenador.service";
 import { SwalService } from "@/shared/lib/swal/swal.service";
 import { getCiudadesByPais } from "@/shared/services/ciudad.service";
 import { getPaises } from "@/shared/services/paises.service";
+import { getEstiloJuego } from "@/shared/services/catalogs.service";
 
 export default function useEntrenadorRegistro() {
 
     const router = useRouter();
-
+ const [estiloJuego, setEstiloJuego] = useState<any[]>([]);
     const [form, setForm] = useState({
         nombre: "",
         apellido: "",
@@ -47,7 +48,17 @@ export default function useEntrenadorRegistro() {
             }
 
         };
-
+        const loadEstiloJuego = async () => {
+        
+                    try {
+                        const data = await getEstiloJuego();
+                        setEstiloJuego(Array.isArray(data) ? data : []);
+        
+                    } catch (error) {
+                        setEstiloJuego([]);
+                    }
+                };
+loadEstiloJuego();
         loadPaises();
 
     }, []);
@@ -120,7 +131,7 @@ export default function useEntrenadorRegistro() {
     };
 
     return {
-        form, foto, paises, ciudades,
+        form, foto, paises, ciudades,estiloJuego,
         setFoto, handleChange, limpiarFormulario, registrarEntrenador,
     };
 }

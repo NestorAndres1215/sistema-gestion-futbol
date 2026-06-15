@@ -5,8 +5,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/shared/utils/date.utils";
 import { getPaises } from "@/shared/services/paises.service";
-import { ESTILO_JUEGO_OPTIONS } from "@/shared/constants/estilo-juego.options";
+
 import { ESTADO_SISTEMA_OPTIONS } from "@/shared/constants/estado.options";
+import { getEstiloJuego } from "@/shared/services/catalogs.service";
 
 
 export default function useEntrenador() {
@@ -23,6 +24,7 @@ export default function useEntrenador() {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [paises, setPaises] = useState<any[]>([]);
+    const [estiloJuego, setEstiloJuego] = useState<any[]>([]);
     const pageSize = 15;
 
     const fetchData = async (q: EntrenadorQueryState, currentPage: number) => {
@@ -69,16 +71,27 @@ export default function useEntrenador() {
                 setPaises([]);
             }
         };
+        const loadEstiloJuego = async () => {
+
+            try {
+                const data = await getEstiloJuego();
+                setEstiloJuego(Array.isArray(data) ? data : []);
+
+            } catch (error) {
+                setEstiloJuego([]);
+            }
+        };
+
 
         loadPaises();
-
+loadEstiloJuego();
     }, []);
 
     const entrenadorFilters = [
         {
             key: "estiloJuego",
             placeholder: "Selecciona Estilo de Juego",
-            options: ESTILO_JUEGO_OPTIONS,
+            options: estiloJuego.map((p: any) => ({ value: p.value, label: p.label, })),
         },
         {
             key: "pais",

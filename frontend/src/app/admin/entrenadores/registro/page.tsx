@@ -4,14 +4,14 @@ import AdminLayout from "../../../../shared/components/layout/admin/layout";
 import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useEntrenadorRegistro from "@/features/entrenador/hooks/useEntrenadorRegistro";
-import { ESTILO_JUEGO_OPTIONS } from "@/shared/constants/estilo-juego.options";
+
 
 import { maxFechaNacimiento } from "@/shared/utils/date.utils";
 import { LICENCIAS_ENTRENADOR_OPTIONS } from "@/shared/constants/arbitro.options";
 export default function EntrenadorRegistroPage() {
 
     const {
-        form, paises, ciudades,
+        form, paises, ciudades,estiloJuego,
         setFoto, handleChange, limpiarFormulario, registrarEntrenador,
     } = useEntrenadorRegistro();
 
@@ -176,7 +176,7 @@ export default function EntrenadorRegistroPage() {
                                         <option value="">
                                             Seleccione estilo de juego
                                         </option>
-                                        {ESTILO_JUEGO_OPTIONS.map((item) => (
+                                        {estiloJuego.map((item) => (
                                             <option key={item.value} value={item.value}>
                                                 {item.label}
                                             </option>

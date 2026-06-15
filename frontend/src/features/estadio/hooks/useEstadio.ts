@@ -4,14 +4,17 @@ import { useRouter } from "next/navigation";
 import { EstadioQueryState } from "../types/estadioQueryState.types";
 
 import { getPaises } from "@/shared/services/paises.service";
-import { ESTADO_ESTADIO_OPTIONS } from "@/shared/constants/estado.options";
-import { TIPO_CESPED_OPTIONS } from "@/shared/constants/estadio.options";
+
+
+import { getEstadoEstadio, getTipoCesped } from "@/shared/services/catalogs.service";
 
 export default function useEstadio() {
 
     const router = useRouter();
     const [data, setData] = useState<any[]>([]);
     const [anios, setAnios] = useState<number[]>([]);
+    const [tipoCesped, setTipoCesped] = useState<any[]>([]);
+    const [estadoEstadio, setEstadoEstadio] = useState<any[]>([]);
     const [page, setPage] = useState(1);
     const [paises, setPaises] = useState<any[]>([]);
     const [totalPages, setTotalPages] = useState(1);
@@ -58,7 +61,24 @@ export default function useEstadio() {
         }
     };
 
-
+    const fetchTipoCesped = async () => {
+        try {
+            const res = await getTipoCesped();
+            const lista = res?.data ?? res;
+            setTipoCesped(Array.isArray(lista) ? lista : []);
+        } catch (error) {
+            setTipoCesped([]);
+        }
+    };
+    const fetchEstadoEstadio = async () => {
+        try {
+            const res = await getEstadoEstadio();
+            const lista = res?.data ?? res;
+            setEstadoEstadio(Array.isArray(lista) ? lista : []);
+        } catch (error) {
+            setEstadoEstadio([]);
+        }
+    };
     useEffect(() => {
 
         const loadPaises = async () => {
@@ -72,8 +92,8 @@ export default function useEstadio() {
         loadPaises();
     }, []);
 
-    useEffect(() => { fetchAnios(); }, []);
-
+    useEffect(() => { fetchAnios();  fetchEstadoEstadio();}, []);
+    useEffect(() => { fetchTipoCesped(); }, [])
     useEffect(() => { fetchEstadios(query, page); }, [query, page]);
 
     const handleSearch = (value: string) => {
@@ -85,7 +105,7 @@ export default function useEstadio() {
         {
             key: "estado",
             placeholder: "Selecciona Estado",
-            options: ESTADO_ESTADIO_OPTIONS,
+            options:  estadoEstadio.map((p: any) => ({ value: p.value, label: p.label, })),
         },
         {
             key: "pais",
@@ -100,7 +120,7 @@ export default function useEstadio() {
         {
             key: "tipoCesped",
             placeholder: "Selecciona Tipo de césped",
-            options: TIPO_CESPED_OPTIONS,
+            options: tipoCesped.map((p: any) => ({ value: p.value, label: p.label, })),
         },
     ];
 

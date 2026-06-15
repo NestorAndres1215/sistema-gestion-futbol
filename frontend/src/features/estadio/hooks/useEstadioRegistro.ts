@@ -6,6 +6,7 @@ import { addEstadio } from "../services/estadio.service";
 import { SwalService } from "@/shared/lib/swal/swal.service";
 import { getCiudadesByPais } from "@/shared/services/ciudad.service";
 import { getPaises } from "@/shared/services/paises.service";
+import { getEstadoEstadio, getTipoCesped } from "@/shared/services/catalogs.service";
 
 export default function useEstadioRegistro() {
   const router = useRouter();
@@ -73,6 +74,9 @@ export default function useEstadioRegistro() {
 
   const [paises, setPaises] = useState<any[]>([]);
   const [ciudades, setCiudades] = useState<any[]>([]);
+  const [tipoCesped, setTipoCesped] = useState<any[]>([]);
+
+
   useEffect(() => {
 
     const loadPaises = async () => {
@@ -105,12 +109,24 @@ export default function useEstadioRegistro() {
         setCiudades([]);
       }
     };
+    const fetchEstadoEstadio = async () => {
+      try {
+        const res = await getTipoCesped();
+        const lista = res?.data ?? res;
+        setTipoCesped(Array.isArray(lista) ? lista : []);
+      } catch (error) {
+        setTipoCesped([]);
+      }
+    };
 
     loadCiudades();
+    fetchEstadoEstadio();
   }, [form.pais]);
 
+
+
   return {
-    paises, ciudades, form, foto,
+    paises, ciudades, form, foto, tipoCesped,
     setFoto, handleChange, limpiarFormulario, registrarEstadio,
   };
 }
