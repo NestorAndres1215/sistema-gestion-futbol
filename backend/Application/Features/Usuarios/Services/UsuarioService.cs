@@ -1,9 +1,13 @@
 ﻿using Application.Common.Exceptions;
+using Application.Common.Helpers;
 using Application.Common.Models;
+using Application.Features.Arbitros.Validators;
 using Application.Features.Usuarios.Dto;
 using Application.Features.Usuarios.Interfaces;
+using Application.Features.Usuarios.Validators;
 using Application.Interfaces.Repositories;
 using Domain.Catalogs;
+using FluentValidation;
 
 
 namespace Application.Features.Usuarios.Services;
@@ -11,11 +15,14 @@ namespace Application.Features.Usuarios.Services;
 public class UsuarioService : IUsuarioService
 {
     private readonly IUsuarioRepository _repo;
-  
+    private readonly IValidator<UsuarioRequest> _validator;
 
-    public UsuarioService(IUsuarioRepository repo)
+    public UsuarioService(
+        IUsuarioRepository repo,
+        IValidator<UsuarioRequest> validator)
     {
         _repo = repo;
+        _validator = validator;
     }
 
     public async Task<Usuario> GetByIdAsync(int id)
@@ -40,7 +47,15 @@ public class UsuarioService : IUsuarioService
         var entity = await _repo.GetByIdAsync(id)
             ?? throw new NotFoundException("Usuario no encontrado");
 
-        await ValidarDuplicadosAsync(id, user);
+        ValidationHelper.Validar(user, _validator);
+
+        var existeUsername = await _repo.GetByUsernameAsync(user.Username);
+        if (existeUsername != null && existeUsername.Id != id)
+            throw new ConflictException("El username ya está en uso");
+
+        var existeEmail = await _repo.GetByEmailAsync(user.Email);
+        if (existeEmail != null && existeEmail.Id != id)
+            throw new ConflictException("El email ya está en uso");
 
         entity.Username = user.Username;
         entity.Email = user.Email;
@@ -58,25 +73,6 @@ public class UsuarioService : IUsuarioService
             : Estado.Inactivo;
 
         return await _repo.UpdateAsync(entity);
-    }
-
-    private async Task ValidarDuplicadosAsync(int id, UsuarioRequest user)
-    {
-        if (string.IsNullOrWhiteSpace(user.Username))
-            throw new BadRequestException("Username requerido");
-
-        if (string.IsNullOrWhiteSpace(user.Email))
-            throw new BadRequestException("Email requerido");
-
-        var existeUsername = await _repo.GetByUsernameAsync(user.Username);
-
-        if (existeUsername != null && existeUsername.Id != id)
-            throw new BadRequestException("El username ya está en uso");
-
-        var existeEmail = await _repo.GetByEmailAsync(user.Email);
-
-        if (existeEmail != null && existeEmail.Id != id)
-            throw new BadRequestException("El email ya está en uso");
     }
 
 }   

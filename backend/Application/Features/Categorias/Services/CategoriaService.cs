@@ -21,7 +21,7 @@ public class CategoriaService : ICategoriaService
 
         var existe = await _repo.GetByNombreAsync(categoriaDto.nombre);
         if (existe != null)
-            throw new BadRequestException("La categoría ya existe");
+            throw new ConflictException("La categoría ya existe");
 
         var entity = new Categoria
         {

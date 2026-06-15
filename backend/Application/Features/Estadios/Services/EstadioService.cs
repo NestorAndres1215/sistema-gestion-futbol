@@ -1,11 +1,15 @@
 ﻿using Application.Common.Estadisticas;
 using Application.Common.Exceptions;
+using Application.Common.Helpers;
 using Application.Common.Models;
 using Application.Features.Estadios.Dto;
 using Application.Features.Estadios.Interfaces;
+using Application.Features.Estadios.Validators;
 using Application.Features.Fotos.Interfaces;
 using Application.Interfaces.Repositories;
+using Domain.Catalogs;
 using Domain.Entities;
+using FluentValidation;
 
 
 namespace Application.Features.Estadios.Services;
@@ -15,18 +19,24 @@ public class EstadioService : IEstadioService
 
     private readonly IEstadioRepository _repository;
     private readonly IFotoService _fotoService;
+    private readonly IValidator<EstadioRequest> _validator;
 
-    public EstadioService(IEstadioRepository repository, IFotoService fotoService)
+    public EstadioService(
+        IEstadioRepository repository,
+        IFotoService fotoService,
+        IValidator<EstadioRequest> validator)
     {
         _repository = repository;
         _fotoService = fotoService;
+        _validator= validator;  
     }
 
 
     public async Task<Estadio> AddAsync(EstadioRequest dto)
     {
 
-        ValidarDto(dto);
+        ValidationHelper.Validar(dto, _validator);
+
         string fotoUrl = await _fotoService.GuardarFotoAsync(dto.Foto!, "estadios", $"{dto.Nombre}");
 
         var estadio = new Estadio
@@ -42,41 +52,14 @@ public class EstadioService : IEstadioService
             Capacidad = dto.Capacidad,
             TipoCesped = dto.TipoCesped,
             FotoUrl = fotoUrl,
-            Estado = "Disponible",
+            Estado = EstadoEstadio.Disponible,
             FechaCreacion = DateTime.Now
         };
-            return await _repository.AddAsync(estadio);
+        
+        return await _repository.AddAsync(estadio);
  
     }
 
-
-    private void ValidarDto(EstadioRequest dto)
-    {
-        if (dto == null)
-            throw new BadRequestException(nameof(dto));
-
-        if (string.IsNullOrWhiteSpace(dto.Nombre))
-            throw new BadRequestException("El nombre es obligatorio");
-
-        if (string.IsNullOrWhiteSpace(dto.Pais))
-            throw new BadRequestException("El país es obligatorio");
-
-        if (string.IsNullOrWhiteSpace(dto.Ciudad))
-            throw new BadRequestException("La ciudad es obligatoria");
-
-        if (dto.Capacidad <= 0)
-            throw new BadRequestException("La capacidad debe ser mayor a 0");
-
-        if (dto.FechaApertura > DateTime.Now)
-            throw new BadRequestException(
-                "La fecha de apertura no puede ser mayor a la fecha actual"
-            );
-
-        if ( dto.Anio <= 0 || dto.Anio > DateTime.Now.Year)
-        {
-            throw new BadRequestException( "El año no es válido");
-        }
-    }
 
     public async  Task<PagedResult<EstadioResponse>> GetAllAsync(int page, int pageSize, string? search, string? tipoCesped, string? pais, int? anio, string? estado)
     {
@@ -112,15 +95,8 @@ public class EstadioService : IEstadioService
         if (estadio == null)
             throw new NotFoundException($"No se encontró el estadio con id {id}");
 
-        ValidarDto(estadioDTo);
 
-        if (!string.Equals(estadio.Nombre, estadioDTo.Nombre, StringComparison.OrdinalIgnoreCase))
-        {
-            var existente = await _repository.GetByNombreAsync(estadioDTo.Nombre);
-
-            if (existente != null && existente.Id != id)
-                throw new BadRequestException("Ya existe un estadio con ese nombre");
-        }
+        ValidationHelper.Validar(estadioDTo, _validator);
 
 
         if (estadioDTo.Foto != null && estadioDTo.Foto.Length > 0)
@@ -144,9 +120,7 @@ public class EstadioService : IEstadioService
 
         estadio.FechaActualizacion = DateTime.Now;
 
-        await _repository.UpdateAsync(estadio);
-
-        return estadio;
+        return await _repository.UpdateAsync(estadio);
     }
 
     public async Task<TotalCountResponse> ObtenerTotalEstadiosAsync()

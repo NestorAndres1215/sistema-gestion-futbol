@@ -78,13 +78,7 @@ public class SeleccionEstadioService:ISeleccionEstadioService
         int pageSize,
         string? seleccion)
     {
-        return  await _repository.ListarPorSeleccion(
-            page,
-            pageSize,
-            seleccion
-        );
-
-
+        return  await _repository.ListarPorSeleccion( page, pageSize, seleccion);
     }
 
 

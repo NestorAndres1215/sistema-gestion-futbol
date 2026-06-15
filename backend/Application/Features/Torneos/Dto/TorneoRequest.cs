@@ -2,13 +2,16 @@
 
 public class TorneoRequest
 {
-    public required string nombre { get; set; }
-    public required string tipo { get; set; }
-    public string tipoParticipante { get; set; } = string.Empty;
-    public string descricpcion { get; set; } = string.Empty;
-    public required string creado { get; set; }
-    public string modificado { get; set; }= string.Empty;
-    public string estado {  get; set; } = string.Empty;
+    public required string Nombre { get; set; }
+    public required string Tipo { get; set; }
+    public string TipoParticipante { get; set; } = string.Empty;
 
-    public string categoria { get; set; } = string.Empty;
+    public string Descripcion { get; set; } = string.Empty;
+
+    public required string Creado { get; set; } 
+
+    public string Modificado { get; set; } = string.Empty;
+
+    public string Estado { get; set; } = string.Empty;
+
 }

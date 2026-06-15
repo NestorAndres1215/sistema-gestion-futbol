@@ -39,13 +39,13 @@ public class CiudadService : ICiudadService
         var paisExiste = await _paisRepository.GetByIdAsync(ciudad.PaisId);
 
         if (paisExiste == null)
-            throw new BadRequestException("El país no existe");
+            throw new NotFoundException("El país no existe");
 
         var existe = await _repository
             .ExisteCiudadEnPaisAsync(ciudad.Nombre, ciudad.PaisId);
 
         if (existe)
-            throw new BadRequestException("Ya existe una ciudad con ese nombre en ese país");
+            throw new  ConflictException("Ya existe una ciudad con ese nombre en ese país");
 
         return await _repository.AddAsync(ciudad);
     }
@@ -55,19 +55,19 @@ public class CiudadService : ICiudadService
         var existing = await _repository.GetByIdAsync(id);
 
         if (existing == null)
-            throw new BadRequestException("La ciudad no existe");
+            throw new NotFoundException("La ciudad no existe");
 
         var paisExiste = await _paisRepository.GetByIdAsync(ciudad.PaisId);
 
         if (paisExiste == null)
-            throw new BadRequestException("El país no existe");
+            throw new NotFoundException("El país no existe");
 
 
         var existe = await _repository
             .ExisteCiudadDuplicadaAsync(ciudad.Nombre, ciudad.PaisId, id);
 
         if (existe)
-            throw new BadRequestException("Ya existe una ciudad con ese nombre en ese país");
+            throw new ConflictException("Ya existe una ciudad con ese nombre en ese país");
 
         existing.Nombre = ciudad.Nombre;
         existing.PaisId = ciudad.PaisId;
@@ -80,7 +80,7 @@ public class CiudadService : ICiudadService
         var ciudad = await _repository.GetByIdAsync(id);
 
         if (ciudad == null)
-            throw new BadRequestException("La ciudad no existe");
+            throw new NotFoundException("La ciudad no existe");
 
         return await _repository.DeleteAsync(ciudad);
     }

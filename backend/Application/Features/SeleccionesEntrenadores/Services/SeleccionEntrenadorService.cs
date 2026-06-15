@@ -45,7 +45,7 @@ public class SeleccionEntrenadorService : ISeleccionEntrenadorService
 
         if (existeContrato)
         {
-            throw new BadRequestException("Ya existe un entrenador registrado para ese período.");
+            throw new ConflictException("Ya existe un entrenador registrado para ese período.");
         }
 
         string estado = "Activo";

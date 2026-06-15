@@ -27,8 +27,6 @@ public class PaisService : IPaisService
 
     public async Task<Pais> AddAsync(Pais pais)
     {
-        ValidatePais(pais);
-
         var existing = await _repository.GetByNombreAsync(pais.Nombre);
 
         if (existing != null)
@@ -39,7 +37,7 @@ public class PaisService : IPaisService
 
     public async Task<Pais> UpdateAsync(Pais pais)
     {
-        ValidatePais(pais);
+
 
         var existing = await _repository.GetByIdAsync(pais.Id);
 
@@ -49,7 +47,7 @@ public class PaisService : IPaisService
         var duplicate = await _repository.GetByNombreAsync(pais.Nombre);
 
         if (duplicate != null && duplicate.Id != pais.Id)
-            throw new BadRequestException("Ya existe otro país con ese nombre");
+            throw new ConflictException("Ya existe otro país con ese nombre");
 
         return await _repository.UpdateAsync(pais);
     }
@@ -71,15 +69,5 @@ public class PaisService : IPaisService
             ?? throw new NotFoundException("Pais no encontrado");
     }
 
-    private void ValidatePais(Pais pais)
-    {
-        if (pais == null)
-            throw new BadRequestException("País inválido");
-
-        if (string.IsNullOrWhiteSpace(pais.Nombre))
-            throw new BadRequestException("El nombre del país es obligatorio");
-
-        if (pais.Nombre.Length < 2)
-            throw new BadRequestException("El nombre del país es muy corto");
-    }
+   
 }
