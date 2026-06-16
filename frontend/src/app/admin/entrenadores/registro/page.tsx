@@ -4,14 +4,12 @@ import AdminLayout from "../../../../shared/components/layout/admin/layout";
 import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useEntrenadorRegistro from "@/features/entrenador/hooks/useEntrenadorRegistro";
-
-
 import { maxFechaNacimiento } from "@/shared/utils/date.utils";
-import { LICENCIAS_ENTRENADOR_OPTIONS } from "@/shared/constants/arbitro.options";
+
 export default function EntrenadorRegistroPage() {
 
     const {
-        form, paises, ciudades,estiloJuego,
+        form, paises, ciudades,estiloJuego,licenciaEntrenador,
         setFoto, handleChange, limpiarFormulario, registrarEntrenador,
     } = useEntrenadorRegistro();
 
@@ -198,7 +196,7 @@ export default function EntrenadorRegistroPage() {
                                         <option value="">
                                             Seleccione Licencia
                                         </option>
-                                        {LICENCIAS_ENTRENADOR_OPTIONS.map((item) => (
+                                        {licenciaEntrenador.map((item) => (
                                             <option key={item.value} value={item.value}>
                                                 {item.label}
                                             </option>

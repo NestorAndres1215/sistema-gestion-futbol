@@ -4,6 +4,7 @@ import { SwalService } from "@/shared/lib/swal/swal.service";
 import { useRouter } from "next/navigation";
 import { getPaises } from "@/shared/services/paises.service";
 import { getCiudadesByPais } from "@/shared/services/ciudad.service";
+import { getEspecialidadArbitro } from "@/shared/services/catalogs.service";
 
 export default function useArbitroRegistro() {
     const router = useRouter();
@@ -66,7 +67,22 @@ export default function useArbitroRegistro() {
     const handleChange = (key: string, value: any) => {
         setForm((prev) => ({ ...prev, [key]: value }));
     };
+ const [especialidadArbitro, setEspecialidadArbitro] = useState<any[]>([]);
+	useEffect(() => {
 
+        const loadConfederacion = async () => {
+
+            try {
+                const data = await getEspecialidadArbitro();
+                setEspecialidadArbitro(Array.isArray(data) ? data : []);
+
+            } catch (error) {
+                setEspecialidadArbitro([]);
+            }
+        };
+
+        loadConfederacion();
+    }, []);
     const limpiarFormulario = () => {
         setForm({
             nombre: "",
@@ -129,7 +145,7 @@ export default function useArbitroRegistro() {
         handleChange,
         setForm,
         foto,
-        setFoto,
+        setFoto,especialidadArbitro,
     }
 
 }

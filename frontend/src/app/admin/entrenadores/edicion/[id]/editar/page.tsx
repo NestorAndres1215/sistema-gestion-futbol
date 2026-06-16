@@ -3,7 +3,6 @@ import useEntrenadorEdit from "@/features/entrenador/hooks/useEntrenadorEdit";
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import ActionButton from "@/shared/components/ui/button/button";
-import { LICENCIAS_ENTRENADOR_OPTIONS } from "@/shared/constants/arbitro.options";
 
 
 import styles from "@/shared/styles/editar.module.css";
@@ -14,7 +13,7 @@ export default function EntrenadorEditar() {
 
     const {
         form,
-        fotoPreview,estiloJuego,
+        fotoPreview,estiloJuego,licenciaEntrenador,
         handleChange,
         handleFotoChange, paises, ciudades,
         actualizarEntrenador
@@ -205,7 +204,7 @@ export default function EntrenadorEditar() {
                                             <option value="">
                                                 Seleccione Licencia
                                             </option>
-                                            {LICENCIAS_ENTRENADOR_OPTIONS.map((item) => (
+                                            {licenciaEntrenador.map((item) => (
                                                 <option key={item.value} value={item.value}>
                                                     {item.label}
                                                 </option>

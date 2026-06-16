@@ -5,7 +5,7 @@ import { addEntrenador } from "../services/entrenador.service";
 import { SwalService } from "@/shared/lib/swal/swal.service";
 import { getCiudadesByPais } from "@/shared/services/ciudad.service";
 import { getPaises } from "@/shared/services/paises.service";
-import { getEstiloJuego } from "@/shared/services/catalogs.service";
+import { getEstiloJuego, getLicenciasEntrenador } from "@/shared/services/catalogs.service";
 
 export default function useEntrenadorRegistro() {
 
@@ -33,7 +33,22 @@ export default function useEntrenadorRegistro() {
 
     const [paises, setPaises] = useState<any[]>([]);
     const [ciudades, setCiudades] = useState<any[]>([]);
+ const [licenciaEntrenador, setLicenciaEntrenador] = useState<any[]>([]);
+    useEffect(() => {
 
+        const loadLicenciaEntrenador = async () => {
+
+            try {
+                const data = await getLicenciasEntrenador();
+                setLicenciaEntrenador(Array.isArray(data) ? data : []);
+
+            } catch (error) {
+                setLicenciaEntrenador([]);
+            }
+        };
+
+        loadLicenciaEntrenador();
+    }, []);
     useEffect(() => {
 
         const loadPaises = async () => {
@@ -131,7 +146,7 @@ loadEstiloJuego();
     };
 
     return {
-        form, foto, paises, ciudades,estiloJuego,
+        form, foto, paises, ciudades,estiloJuego,licenciaEntrenador,
         setFoto, handleChange, limpiarFormulario, registrarEntrenador,
     };
 }

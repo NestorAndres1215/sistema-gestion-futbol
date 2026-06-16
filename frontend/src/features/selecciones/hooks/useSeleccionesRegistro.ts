@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { addSelecciones, getSeleccionByNombre } from "../services/selecciones.service";
 import { SwalService } from "@/shared/lib/swal/swal.service";
+import { getConfederaciones } from "@/shared/services/catalogs.service";
 
 export default function useEntrenadorRegistro() {
     const router = useRouter();
@@ -13,14 +14,28 @@ export default function useEntrenadorRegistro() {
         seudonimo: "",
         codigoFIFA: "",
     });
-
+    const [confederacion, setConfederacion] = useState<any[]>([]);
     const [bandera, setBandera] = useState<File | null>(null);
     const [escudo, setEscudo] = useState<File | null>(null);
 
     const handleChange = (key: string, value: any) => {
         setForm((prev) => ({ ...prev, [key]: value, }));
     };
+    useEffect(() => {
 
+        const loadConfederacion = async () => {
+
+            try {
+                const data = await getConfederaciones();
+                setConfederacion(Array.isArray(data) ? data : []);
+
+            } catch (error) {
+                setConfederacion([]);
+            }
+        };
+
+        loadConfederacion();
+    }, []);
     const limpiarFormulario = () => {
 
         setForm({
@@ -112,8 +127,7 @@ export default function useEntrenadorRegistro() {
 
     };
     return {
-        registrarSeleccion, setBandera, setEscudo,
-        handleChange, limpiarFormulario,
-        paises, form
+        registrarSeleccion, setBandera, setEscudo, handleChange, limpiarFormulario,
+        paises, form, confederacion
     }
 }

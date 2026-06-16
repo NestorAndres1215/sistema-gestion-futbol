@@ -3,12 +3,14 @@ import { Categoria } from "@/features/categoria/types/categoria.types";
 import { getCategories } from "@/features/categoria/services/categoria.service";
 import { useEffect, useRef, useState } from "react";
 import { addTorneo } from "../services/torneo.service";
+import { getGeneros } from "@/shared/services/catalogs.service";
 
 export default function useTorneoRegistro(tipo: string) {
 
     const router = useRouter();
 
     const [categorias, setCategorias] = useState<Categoria[]>([]);
+    const [genero, setGenero] = useState<any[]>([]);
     const formRef = useRef<HTMLFormElement>(null);
 
     useEffect(() => {
@@ -21,7 +23,16 @@ export default function useTorneoRegistro(tipo: string) {
                 setCategorias([]);
             }
         };
-
+        const loadGenero = async () => {
+            try {
+                const data = await getGeneros();
+                setGenero(Array.isArray(data) ? data : []);
+            } catch (error) {
+                console.error(error);
+                setGenero([]);
+            }
+        };
+        loadGenero();
         loadCategories();
     }, []);
 
@@ -60,7 +71,7 @@ export default function useTorneoRegistro(tipo: string) {
     };
 
     return {
-        categorias, formRef,
+        categorias, formRef,genero,
         limpiarFormulario, registrarTorneo
     };
 }

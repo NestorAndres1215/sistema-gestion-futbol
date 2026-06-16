@@ -4,12 +4,12 @@ import { getSeleccionByNombre } from "@/features/selecciones/services/seleccione
 import AdminLayout from "@/shared/components/layout/admin/layout";
 import Breadcrumb from "@/shared/components/ui/bread-crumb/bread-cumb";
 import ActionButton from "@/shared/components/ui/button/button";
-import { CONFEDERACION_OPTIONS } from "@/shared/constants/confederacion.options";
+
 import styles from "@/shared/styles/form.module.css";
 
 export default function SeleccionRegistro() {
 
-    const { paises, setBandera, setEscudo, registrarSeleccion,
+    const { paises, setBandera, setEscudo, registrarSeleccion,confederacion,
         form, handleChange, limpiarFormulario,
     } = useSeleccionesRegistro();
 
@@ -101,7 +101,7 @@ export default function SeleccionRegistro() {
                                         <option value="">
                                             Seleccione un país
                                         </option>
-                                        {CONFEDERACION_OPTIONS.map((item) => (
+                                        {confederacion.map((item) => (
                                             <option key={item.value} value={item.value}>
                                                 {item.label}
                                             </option>

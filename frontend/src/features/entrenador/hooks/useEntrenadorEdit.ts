@@ -5,7 +5,7 @@ import { SwalService } from "@/shared/lib/swal/swal.service";
 import { formatDateInput } from "@/shared/utils/date.utils";
 import { getCiudadesByPais } from "@/shared/services/ciudad.service";
 import { getPaises } from "@/shared/services/paises.service";
-import { getEstiloJuego } from "@/shared/services/catalogs.service";
+import { getEstiloJuego, getLicenciasEntrenador } from "@/shared/services/catalogs.service";
 
 export default function useEntrenadorEdit() {
   const [estiloJuego, setEstiloJuego] = useState<any[]>([]);
@@ -34,7 +34,22 @@ export default function useEntrenadorEdit() {
   const [fotoPreview, setFotoPreview] = useState<string | null>(null);
   const [paises, setPaises] = useState<any[]>([]);
   const [ciudades, setCiudades] = useState<any[]>([]);
+ const [licenciaEntrenador, setLicenciaEntrenador] = useState<any[]>([]);
+	useEffect(() => {
 
+        const loadLicenciaEntrenador = async () => {
+
+            try {
+                const data = await getLicenciasEntrenador();
+                setLicenciaEntrenador(Array.isArray(data) ? data : []);
+
+            } catch (error) {
+                setLicenciaEntrenador([]);
+            }
+        };
+
+        loadLicenciaEntrenador();
+    }, []);
   useEffect(() => {
 
     const loadPaises = async () => {
@@ -172,7 +187,7 @@ export default function useEntrenadorEdit() {
   };
 
   return {
-    form, foto, fotoPreview, paises, ciudades, estiloJuego,
+    form, foto, fotoPreview, paises, ciudades, estiloJuego,licenciaEntrenador,
     handleChange, handleFotoChange, actualizarEntrenador
   };
 }

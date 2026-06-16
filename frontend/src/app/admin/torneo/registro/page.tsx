@@ -6,7 +6,8 @@ import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useTorneoRegistro from "@/features/torneo/hooks/useTorneoRegistro";
 import { useEffect, useState } from "react";
-import { GENERO_OPTIONS } from "@/shared/constants/generos.options";
+import { TIPO_TORNEO_OPTIONS } from "@/shared/constants/torneo.options";
+
 
 export default function TorneoFormularioPage() {
 
@@ -20,7 +21,7 @@ export default function TorneoFormularioPage() {
 
     const {
         categorias,
-        formRef,
+        formRef,genero,
         limpiarFormulario,
         registrarTorneo
     } = useTorneoRegistro(tipo);
@@ -95,7 +96,7 @@ export default function TorneoFormularioPage() {
                                     >
                                         <option value="">Selecciona un género</option>
 
-                                        {GENERO_OPTIONS.map((g) => (
+                                        {genero.map((g) => (
                                             <option key={g.value} value={g.value}>
                                                 {g.label}
                                             </option>

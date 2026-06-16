@@ -6,14 +6,13 @@ import styles from "@/shared/styles/form.module.css";
 import ActionButton from "@/shared/components/ui/button/button";
 import useArbitroRegistro from "@/features/arbitro/hooks/useArbitroRegistro";
 import { CATEGORIA_ARBITRO_OPTIONS } from "@/shared/constants/categoria.options";
-import { ESPECIALIDAD_ARBITRO_OPTIONS } from "@/shared/constants/arbitro.options";
 import { maxFechaNacimiento } from "@/shared/utils/date.utils";
 
 export default function ArbitroRegistro() {
 
 
     const {
-        paises, ciudades, form,
+        paises, ciudades, form,especialidadArbitro,
         limpiarFormulario, registrarArbitro,
         handleChange, setFoto,
     } = useArbitroRegistro();
@@ -195,7 +194,7 @@ export default function ArbitroRegistro() {
                                         onChange={(e) => handleChange("rolArbitral", e.target.value)}
                                     >
                                         <option value="">Selecciona especialidad</option>
-                                        {ESPECIALIDAD_ARBITRO_OPTIONS.map((item) => (
+                                        {especialidadArbitro.map((item) => (
                                             <option key={item.value} value={item.value}>
                                                 {item.label}
                                             </option>
